@@ -1,5 +1,5 @@
 ---
-// EquipmentSection — 8 real equipment photos in unified visual style
+// EquipmentSection v2 — editorial grid, clean photo presentation
 const equipment = [
   {
     file: "/Huvitz.png",
@@ -44,33 +44,31 @@ const equipment = [
 ];
 ---
 
-<section class="equipment section" id="equipment">
+<section class="equipment section section--stone" id="equipment">
   <div class="container">
     <div class="section-header">
+      <span class="eyebrow eyebrow--amber">Технологическая база</span>
       <h2 data-i18n="equipment.title">Оснащение экспертного уровня</h2>
       <p data-i18n="equipment.subtitle">Профессиональные аппараты для точной диагностики и эффективного лечения</p>
     </div>
 
     <div class="equipment__grid">
       {equipment.map((item) => (
-        <article class="equip-card">
-          <div class="equip-card__img-wrap">
+        <article class="eq-card">
+          <div class="eq-card__image-container">
             <img
               src={item.file}
               alt={item.nameRu}
-              class="equip-card__img"
+              class="eq-card__img"
               loading="lazy"
               decoding="async"
               width="400"
               height="320"
             />
-            <div class="equip-card__overlay-desc" aria-hidden="true">
-              <p>{item.descRu}</p>
-            </div>
           </div>
-          <div class="equip-card__body">
-            <h3 class="equip-card__name">{item.nameRu}</h3>
-            <p class="equip-card__desc">{item.descRu}</p>
+          <div class="eq-card__body">
+            <h3 class="card-title">{item.nameRu}</h3>
+            <p class="eq-card__desc">{item.descRu}</p>
           </div>
         </article>
       ))}
@@ -85,106 +83,61 @@ const equipment = [
   gap: var(--s-4);
 }
 
-.equip-card {
-  border-radius: var(--r-md);
-  overflow: hidden;
+.eq-card {
   background: var(--c-white);
-  box-shadow: var(--shadow-card);
-  transition: transform var(--t-base), box-shadow var(--t-base);
-}
-
-.equip-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.equip-card__img-wrap {
-  position: relative;
+  border: 1px solid var(--c-border-lt);
+  border-radius: var(--r-lg);
   overflow: hidden;
-  background: #f5f8ff;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.eq-card:hover {
+  border-color: var(--c-border);
+  box-shadow: var(--shadow-card);
+}
+
+.eq-card__image-container {
   aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.equip-card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: var(--s-4);
-  filter: brightness(1.02) contrast(1.04) saturate(0.85);
-  transition: transform var(--t-slow), filter var(--t-base);
-}
-
-.equip-card:hover .equip-card__img {
-  transform: scale(1.05);
-  filter: brightness(1.05) contrast(1.06) saturate(0.9);
-}
-
-/* Hover overlay for description */
-.equip-card__overlay-desc {
-  position: absolute;
-  inset: 0;
-  background: rgba(11, 42, 107, 0.82);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--c-bg);
   padding: var(--s-5);
-  opacity: 0;
-  transition: opacity var(--t-base);
-  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--c-border-lt);
 }
 
-.equip-card__overlay-desc p {
-  color: var(--c-white);
-  text-align: center;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  font-weight: 500;
+.eq-card__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: contrast(1.02);
+  transition: transform var(--t-base);
 }
 
-.equip-card:hover .equip-card__overlay-desc {
-  opacity: 1;
+.eq-card:hover .eq-card__img {
+  transform: scale(1.03);
 }
 
-/* Bottom strip */
-.equip-card__body {
-  padding: var(--s-4) var(--s-4);
-  border-top: 2px solid var(--c-surface);
+.eq-card__body {
+  padding: var(--s-5);
   display: flex;
   flex-direction: column;
   gap: var(--s-1);
 }
 
-.equip-card__name {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--c-ink);
-  line-height: 1.3;
-}
-
-.equip-card__desc {
-  font-size: 0.78rem;
+.eq-card__desc {
+  font-size: 0.82rem;
   color: var(--c-muted);
   line-height: 1.5;
 }
 
-/* Left-border accent every 4th card */
-.equip-card:nth-child(4n+1) { border-left: 3px solid var(--c-sky); }
-.equip-card:nth-child(4n+2) { border-left: 3px solid var(--c-teal); }
-.equip-card:nth-child(4n+3) { border-left: 3px solid var(--c-sky-light); }
-.equip-card:nth-child(4n)   { border-left: 3px solid var(--c-teal-light); }
-
 @media (min-width: 768px) {
-  .equipment__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .equipment__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1100px) {
-  .equipment__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .equipment__grid { grid-template-columns: repeat(4, 1fr); }
 }
 </style>

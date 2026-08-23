@@ -1,7 +1,9 @@
 /* ============================================
-   Global Styles — Lumivis Ophthalmology Clinic
-   Палитра: тёмно-синий + голубой + тиловый акцент + чистый белый фон
-   Шрифты: Syne (display) + Inter (text)
+   Lumivis — Design System v2
+   Тёплый, доверительный, небанальный.
+   
+   Fonts:  Instrument Serif (display) + DM Sans (body)
+   Palette: deep navy + slate blue + warm amber — не AI-дефолт
    ============================================ */
 
 /* ── Reset ── */
@@ -17,148 +19,174 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-/* ── Design Tokens ── */
+/* ────────────────────────────────────────────
+   Design Tokens
+   ────────────────────────────────────────────
+   
+   Логика палитры:
+   - c-cream:  тёплый белый фон — не кремовый AI-дефолт, 
+               чуть холоднее, более «клинический» но уютный
+   - c-stone:  светло-серый для чередования секций
+   - c-navy:   глубокий тёмно-синий — основной акцент логотипа
+   - c-slate:  более светлый синий — интерактив, ссылки
+   - c-amber:  тёплый янтарь — второй акцент, 
+               НЕ терракот и не тил — редкий, ценный
+   - c-text:   почти чёрный с тёплым оттенком
+   ──────────────────────────────────────────── */
 :root {
   /* Core palette */
-  --c-ink:        #0B2A6B; /* тёмно-синий — фоны, заголовки */
-  --c-sky:        #2E86F5; /* голубой — акценты, кнопки */
-  --c-sky-light:  #5AA4F8; /* светлее — hover-состояния */
-  --c-sky-pale:   #C8E0FD; /* очень светлый — декоративные элементы */
-  --c-teal:       #0D9488; /* тиловый — второй акцент */
-  --c-teal-light: #14B8A6; /* светлый тил — hover */
-  --c-surface:    #F0F6FF; /* фон секций */
-  --c-white:      #FFFFFF;
-  --c-text:       #1A2A4A; /* основной текст */
-  --c-muted:      #6B7FA3; /* вторичный текст */
-  --c-border:     #D8E6F8; /* границы */
+  --c-bg:       #FAFAF9;   /* тёплый белый, не кремовый */
+  --c-stone:    #F3F1EE;   /* светло-каменный — чередование секций */
+  --c-white:    #FFFFFF;
+  --c-navy:     #0B2045;   /* глубокий тёмно-синий из логотипа */
+  --c-slate:    #1D54C4;   /* живой синий — кнопки, ссылки */
+  --c-slate-lt: #4174D9;   /* hover */
+  --c-slate-bg: #EEF3FD;   /* очень бледный фон под акцентами */
+  --c-amber:    #B37C28;   /* тёплый янтарь — сигнатурный акцент */
+  --c-amber-lt: #CA9133;   /* hover */
+  --c-amber-bg: #FBF5E6;   /* бледный янтарный фон */
+  --c-text:     #16202E;   /* основной текст */
+  --c-body:     #3D4D5E;   /* тело текста */
+  --c-muted:    #6E7E8F;   /* вторичный текст */
+  --c-border:   #DDD9D1;   /* тёплая, не холодно-серая граница */
+  --c-border-lt:#EDEBE7;   /* лёгкая граница */
 
-  /* Typography */
-  --font-display: 'Syne', system-ui, sans-serif;
-  --font-body:    'Inter', system-ui, sans-serif;
+  /* ── Fonts ── */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
 
-  /* Spacing scale */
-  --s-1:   0.25rem;
-  --s-2:   0.5rem;
-  --s-3:   0.75rem;
-  --s-4:   1rem;
-  --s-5:   1.25rem;
-  --s-6:   1.5rem;
-  --s-8:   2rem;
-  --s-10:  2.5rem;
-  --s-12:  3rem;
-  --s-16:  4rem;
-  --s-20:  5rem;
-  --s-24:  6rem;
-  --s-32:  8rem;
+  /* ── Spacing ── */
+  --s-1:  0.25rem;
+  --s-2:  0.5rem;
+  --s-3:  0.75rem;
+  --s-4:  1rem;
+  --s-5:  1.25rem;
+  --s-6:  1.5rem;
+  --s-8:  2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+  --s-24: 6rem;
 
-  /* Radius */
-  --r-sm:   6px;
-  --r-md:   12px;
-  --r-lg:   20px;
-  --r-xl:   32px;
+  /* ── Radius — менее скруглённый, более «медицинский» ── */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   16px;
+  --r-xl:   24px;
   --r-full: 9999px;
 
-  /* Shadows */
-  --shadow-card: 0 2px 12px rgba(11, 42, 107, 0.08);
-  --shadow-card-hover: 0 8px 32px rgba(11, 42, 107, 0.14);
-  --shadow-blue: 0 4px 24px rgba(46, 134, 245, 0.25);
-  --shadow-header: 0 1px 20px rgba(11, 42, 107, 0.10);
+  /* ── Shadows — тёплые, не холодно-синие ── */
+  --shadow-sm:   0 1px 4px rgba(22, 32, 46, 0.06);
+  --shadow-card: 0 2px 16px rgba(22, 32, 46, 0.08);
+  --shadow-lift: 0 8px 32px rgba(22, 32, 46, 0.12);
+  --shadow-navy: 0 4px 20px rgba(11, 32, 69, 0.20);
 
-  /* Transitions */
-  --t-fast: 150ms ease;
-  --t-base: 250ms ease;
-  --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* ── Transitions ── */
+  --t-fast: 160ms ease;
+  --t-base: 280ms ease;
+  --t-slow: 450ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Layout */
-  --max-w: 1200px;
-  --pad-x: clamp(1rem, 4vw, 2rem);
+  /* ── Layout ── */
+  --max-w:   1200px;
+  --pad-x:   clamp(1rem, 4vw, 2rem);
 }
 
 /* ── Base ── */
 body {
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--c-text);
-  background: var(--c-white);
+  background: var(--c-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+img, video { max-width: 100%; height: auto; display: block; }
 
 a {
-  color: var(--c-sky);
+  color: var(--c-slate);
   text-decoration: none;
   transition: color var(--t-fast);
 }
-a:hover { color: var(--c-sky-light); }
+a:hover { color: var(--c-slate-lt); }
 
 /* ── Typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;        /* Instrument Serif красиво в regular */
   line-height: 1.15;
-  color: var(--c-ink);
+  color: var(--c-navy);
+  letter-spacing: -0.01em;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
-h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
-h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
+/* Заголовки: regular weight — характер шрифта делает работу */
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); }
+h3 { font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 400; }
 
-p { color: var(--c-muted); }
+/* Для h3 в карточках — DM Sans, не serif */
+.card-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--c-text);
+}
 
-/* ── Layout Utilities ── */
+p { color: var(--c-body); line-height: 1.75; }
+
+/* ── Layout ── */
 .container {
   max-width: var(--max-w);
   margin-inline: auto;
   padding-inline: var(--pad-x);
 }
 
-.section {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
-}
+.section { padding-block: clamp(4rem, 9vw, 7rem); }
 
-.section--surface {
-  background: var(--c-surface);
-}
-
-.section--dark {
-  background: var(--c-ink);
-  color: var(--c-white);
-}
+.section--stone { background: var(--c-stone); }
+.section--navy  { background: var(--c-navy); }
 
 .section-header {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.section-header--center {
   text-align: center;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 
-.section-header h2 {
-  margin-bottom: 0.75rem;
-}
-
-.section-header p {
-  font-size: 1.05rem;
-  max-width: 52ch;
+.section-header--center p {
+  max-width: 54ch;
   margin-inline: auto;
+  margin-top: var(--s-4);
 }
+
+.section-header__eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  margin-bottom: var(--s-3);
+}
+
+.section-header p { margin-top: var(--s-4); }
 
 /* ── Buttons ── */
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: var(--s-2);
-  padding: 0.75rem 1.75rem;
-  border-radius: var(--r-full);
+  padding: 0.8rem 1.9rem;
+  border-radius: var(--r-md);   /* прямоугольнее, не капсула */
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: 2px solid transparent;
+  font-weight: 500;
+  font-size: 0.925rem;
+  border: 1.5px solid transparent;
   cursor: pointer;
   transition: all var(--t-base);
   text-decoration: none;
@@ -167,82 +195,74 @@ p { color: var(--c-muted); }
 }
 
 .btn--primary {
-  background: var(--c-sky);
+  background: var(--c-navy);
   color: var(--c-white);
-  border-color: var(--c-sky);
+  border-color: var(--c-navy);
 }
 .btn--primary:hover {
-  background: var(--c-sky-light);
-  border-color: var(--c-sky-light);
+  background: #162D5E;
+  border-color: #162D5E;
   color: var(--c-white);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-blue);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-navy);
 }
 
 .btn--outline {
   background: transparent;
-  color: var(--c-ink);
+  color: var(--c-navy);
   border-color: var(--c-border);
 }
 .btn--outline:hover {
-  border-color: var(--c-sky);
-  color: var(--c-sky);
-  background: rgba(46, 134, 245, 0.05);
-  transform: translateY(-2px);
-}
-
-.btn--outline-white {
+  border-color: var(--c-navy);
+  color: var(--c-navy);
   background: transparent;
-  color: var(--c-white);
-  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-1px);
 }
-.btn--outline-white:hover {
+
+.btn--amber {
+  background: var(--c-amber);
+  color: var(--c-white);
+  border-color: var(--c-amber);
+}
+.btn--amber:hover {
+  background: var(--c-amber-lt);
+  border-color: var(--c-amber-lt);
+  color: var(--c-white);
+  transform: translateY(-1px);
+}
+
+.btn--ghost-white {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.3);
+}
+.btn--ghost-white:hover {
   background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.6);
   color: var(--c-white);
 }
 
-.btn--teal {
-  background: var(--c-teal);
-  color: var(--c-white);
-  border-color: var(--c-teal);
-}
-.btn--teal:hover {
-  background: var(--c-teal-light);
-  border-color: var(--c-teal-light);
-  color: var(--c-white);
-  transform: translateY(-2px);
-}
-
-/* ── Badge / Pill ── */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  padding: 0.35rem 0.9rem;
-  border-radius: var(--r-full);
-  font-size: 0.8rem;
+/* ── Eyebrow / Tag ── */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.badge--blue {
-  background: rgba(46, 134, 245, 0.1);
-  color: var(--c-sky);
-  border: 1px solid rgba(46, 134, 245, 0.2);
-}
+.eyebrow--amber { color: var(--c-amber); }
+.eyebrow--slate { color: var(--c-slate); }
+.eyebrow--muted { color: var(--c-muted); }
+.eyebrow--white { color: rgba(255,255,255,0.65); }
 
-.badge--teal {
-  background: rgba(13, 148, 136, 0.15);
-  color: var(--c-teal);
-  border: 1px solid rgba(13, 148, 136, 0.3);
-}
-
-.badge--white {
-  background: rgba(255,255,255,0.15);
-  color: var(--c-white);
-  border: 1px solid rgba(255,255,255,0.3);
+/* ── Divider ornament ── */
+.divider-amber {
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--c-amber);
+  margin-top: var(--s-4);
 }
 
 /* ── Reduced motion ── */
@@ -255,16 +275,13 @@ p { color: var(--c-muted); }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--c-surface); }
-::-webkit-scrollbar-thumb {
-  background: var(--c-sky-pale);
-  border-radius: var(--r-full);
-}
-::-webkit-scrollbar-thumb:hover { background: var(--c-sky); }
+::-webkit-scrollbar-track { background: var(--c-stone); }
+::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--c-slate); }
 
 /* ── Focus ── */
 :focus-visible {
-  outline: 2px solid var(--c-sky);
+  outline: 2px solid var(--c-slate);
   outline-offset: 3px;
   border-radius: 3px;
 }

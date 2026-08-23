@@ -1,39 +1,18 @@
 ---
-// HeroSection — main hero block
+// HeroSection v2 — editorial, clean, warm
 ---
 
 <section class="hero" id="hero">
-  <!-- Background diaphragm SVG -->
-  <div class="hero__bg-pattern" aria-hidden="true">
-    <svg viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="400" cy="400" r="80" stroke="#2E86F5" stroke-width="1" opacity="0.08"/>
-      <circle cx="400" cy="400" r="150" stroke="#2E86F5" stroke-width="1" opacity="0.07"/>
-      <circle cx="400" cy="400" r="230" stroke="#2E86F5" stroke-width="1" opacity="0.055"/>
-      <circle cx="400" cy="400" r="320" stroke="#2E86F5" stroke-width="1" opacity="0.04"/>
-      <circle cx="400" cy="400" r="420" stroke="#2E86F5" stroke-width="0.8" opacity="0.03"/>
-      <!-- Diaphragm blades -->
-      <line x1="400" y1="0" x2="400" y2="800" stroke="#2E86F5" stroke-width="0.6" opacity="0.04"/>
-      <line x1="0" y1="400" x2="800" y2="400" stroke="#2E86F5" stroke-width="0.6" opacity="0.04"/>
-      <line x1="96" y1="96" x2="704" y2="704" stroke="#2E86F5" stroke-width="0.6" opacity="0.035"/>
-      <line x1="704" y1="96" x2="96" y2="704" stroke="#2E86F5" stroke-width="0.6" opacity="0.035"/>
-      <line x1="0" y1="200" x2="800" y2="600" stroke="#2E86F5" stroke-width="0.5" opacity="0.025"/>
-      <line x1="800" y1="200" x2="0" y2="600" stroke="#2E86F5" stroke-width="0.5" opacity="0.025"/>
-      <line x1="200" y1="0" x2="600" y2="800" stroke="#2E86F5" stroke-width="0.5" opacity="0.025"/>
-      <line x1="600" y1="0" x2="200" y2="800" stroke="#2E86F5" stroke-width="0.5" opacity="0.025"/>
-      <!-- Centre dot -->
-      <circle cx="400" cy="400" r="8" fill="#2E86F5" opacity="0.08"/>
-    </svg>
-  </div>
-
   <div class="container hero__inner">
-    <!-- Left: Text content -->
+
+    <!-- LEFT: Text -->
     <div class="hero__content">
-      <div class="badge badge--blue hero__badge" data-i18n="hero.badge">
+      <p class="eyebrow eyebrow--amber hero__eyebrow">
         Самарканд · Офтальмологическая клиника
-      </div>
+      </p>
 
       <h1 class="hero__h1" data-i18n="hero.h1">
-        Первый взгляд в жизни — под нашим наблюдением
+        Первый взгляд<br>в жизни —<br>под нашим<br>наблюдением
       </h1>
 
       <p class="hero__subtitle" data-i18n="hero.subtitle">
@@ -50,83 +29,66 @@
         </a>
       </div>
 
-      <!-- Stats -->
+      <!-- Stats — горизонтально, чисто -->
       <div class="hero__stats">
         <div class="hero__stat">
-          <span class="hero__stat-value" data-i18n="hero.stat1.value">10+</span>
+          <span class="hero__stat-val" data-i18n="hero.stat1.value">10+</span>
           <span class="hero__stat-label" data-i18n="hero.stat1.label">лет опыта</span>
         </div>
-        <div class="hero__stat-divider" aria-hidden="true"></div>
         <div class="hero__stat">
-          <span class="hero__stat-value" data-i18n="hero.stat2.value">3 000+</span>
+          <span class="hero__stat-val" data-i18n="hero.stat2.value">3 000+</span>
           <span class="hero__stat-label" data-i18n="hero.stat2.label">пациентов в год</span>
         </div>
-        <div class="hero__stat-divider" aria-hidden="true"></div>
         <div class="hero__stat">
-          <span class="hero__stat-value" data-i18n="hero.stat3.value">8</span>
+          <span class="hero__stat-val" data-i18n="hero.stat3.value">8</span>
           <span class="hero__stat-label" data-i18n="hero.stat3.label">аппаратов</span>
         </div>
       </div>
     </div>
 
-    <!-- Right: Doctor image -->
+    <!-- RIGHT: Photo -->
     <div class="hero__visual">
-      <!-- Decorative iris ring -->
-      <div class="hero__iris-ring" aria-hidden="true">
-        <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="210" cy="210" r="200" stroke="#2E86F5" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.3"/>
-          <circle cx="210" cy="210" r="185" stroke="#5AA4F8" stroke-width="0.8" opacity="0.2"/>
-          <!-- Small ticks -->
-          <circle cx="210" cy="12" r="4" fill="#2E86F5" opacity="0.4"/>
-          <circle cx="210" cy="408" r="4" fill="#2E86F5" opacity="0.4"/>
-          <circle cx="12" cy="210" r="4" fill="#2E86F5" opacity="0.4"/>
-          <circle cx="408" cy="210" r="4" fill="#2E86F5" opacity="0.4"/>
-          <circle cx="62" cy="62" r="3" fill="#2E86F5" opacity="0.3"/>
-          <circle cx="358" cy="62" r="3" fill="#2E86F5" opacity="0.3"/>
-          <circle cx="62" cy="358" r="3" fill="#2E86F5" opacity="0.3"/>
-          <circle cx="358" cy="358" r="3" fill="#2E86F5" opacity="0.3"/>
-        </svg>
-      </div>
-
-      <div class="hero__img-wrap">
+      <div class="hero__photo-wrap">
         <img
           src="/hero-doctor.png"
           alt="Врач-офтальмолог Lumivis"
           data-i18n-alt="hero.img.alt"
-          class="hero__img"
-          width="440"
-          height="520"
+          class="hero__photo"
+          width="480"
+          height="560"
+          fetchpriority="high"
         />
-        <!-- Floating badge: RN только здесь -->
-        <div class="hero__float-badge">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 2L14.09 8.26L20.66 9L15.96 13.74L17.18 20.27L12 17.27L6.82 20.27L8.04 13.74L3.34 9L9.91 8.26L12 2Z"
-              fill="#2E86F5" stroke="#2E86F5" stroke-width="0.5"/>
-          </svg>
-          <span>РН-скрининг</span>
+        <!-- Маленький floating badge — единственный декоративный элемент -->
+        <div class="hero__badge-float">
+          <span class="hero__badge-dot" aria-hidden="true"></span>
+          Единственная в Самарканде клиника РН-скрининга
         </div>
       </div>
     </div>
+
   </div>
+
+  <!-- Тонкая нижняя полоса янтаря — сигнатурный элемент -->
+  <div class="hero__amber-line" aria-hidden="true"></div>
 </section>
 
 <style>
 .hero {
+  background: var(--c-bg);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
   position: relative;
-  background: linear-gradient(135deg, #ffffff 0%, #f0f6ff 60%, #e5f0ff 100%);
   overflow: hidden;
-  padding-block: clamp(3rem, 8vw, 5.5rem);
 }
 
-.hero__bg-pattern {
+/* Очень тихий фоновый паттерн — почти невидимый */
+.hero::before {
+  content: '';
   position: absolute;
-  right: -10%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 700px;
-  height: 700px;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(29, 84, 196, 0.03) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(11, 32, 69, 0.03) 0%, transparent 60%);
   pointer-events: none;
-  opacity: 0.8;
 }
 
 .hero__inner {
@@ -139,23 +101,24 @@
 }
 
 /* Content */
-.hero__badge {
+.hero__eyebrow {
+  display: block;
   margin-bottom: var(--s-5);
 }
 
 .hero__h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 1.1;
-  margin-bottom: var(--s-5);
-  color: var(--c-ink);
-  max-width: 14ch;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-6);
+  color: var(--c-navy);
 }
 
 .hero__subtitle {
-  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-  color: var(--c-muted);
-  line-height: 1.7;
-  max-width: 48ch;
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: var(--c-body);
+  line-height: 1.75;
+  max-width: 46ch;
   margin-bottom: var(--s-8);
 }
 
@@ -169,111 +132,98 @@
 /* Stats */
 .hero__stats {
   display: flex;
-  align-items: center;
-  gap: var(--s-5);
+  gap: var(--s-8);
   flex-wrap: wrap;
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--c-border-lt);
 }
 
 .hero__stat {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--s-1);
 }
 
-.hero__stat-value {
+.hero__stat-val {
   font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--c-ink);
+  font-size: 2rem;
   line-height: 1;
+  color: var(--c-navy);
+  letter-spacing: -0.02em;
 }
 
 .hero__stat-label {
   font-size: 0.78rem;
   color: var(--c-muted);
-  font-weight: 500;
-}
-
-.hero__stat-divider {
-  width: 1px;
-  height: 36px;
-  background: var(--c-border);
-  flex-shrink: 0;
+  font-weight: 400;
 }
 
 /* Visual */
 .hero__visual {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.hero__iris-ring {
-  position: absolute;
-  width: 420px;
-  height: 420px;
-  pointer-events: none;
-  animation: iris-rotate 30s linear infinite;
-}
-
-@keyframes iris-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__iris-ring { animation: none; }
-}
-
-.hero__img-wrap {
+.hero__photo-wrap {
   position: relative;
-  z-index: 1;
-}
-
-.hero__img {
+  max-width: 440px;
   width: 100%;
-  max-width: 380px;
-  height: auto;
-  object-fit: cover;
-  border-radius: var(--r-xl);
-  filter: drop-shadow(0 20px 60px rgba(11, 42, 107, 0.15));
 }
 
-.hero__float-badge {
+.hero__photo {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+  object-fit: cover;
+  /* Очень тонкое обрамление — не тень-ореол а деликатная граница */
+  box-shadow:
+    0 0 0 1px var(--c-border),
+    0 24px 64px rgba(11, 32, 69, 0.12);
+}
+
+/* Floating badge — маленький, скромный */
+.hero__badge-float {
   position: absolute;
   bottom: 20px;
-  left: -20px;
+  left: -16px;
   background: var(--c-white);
   border: 1px solid var(--c-border);
-  border-radius: var(--r-full);
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--c-ink);
+  border-left: 3px solid var(--c-amber);
+  border-radius: var(--r-md);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--c-text);
   box-shadow: var(--shadow-card);
-  white-space: nowrap;
+  max-width: 200px;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+}
+
+.hero__badge-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--c-amber);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* Янтарная полоска внизу секции */
+.hero__amber-line {
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--c-amber) 30%, var(--c-amber) 70%, transparent 100%);
+  opacity: 0.35;
+  margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 /* Responsive */
 @media (min-width: 900px) {
   .hero__inner {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-8);
-  }
-
-  .hero__bg-pattern {
-    width: 800px;
-    height: 800px;
-  }
-}
-
-@media (min-width: 1100px) {
-  .hero__inner {
-    grid-template-columns: 55fr 45fr;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--s-16);
   }
 }
 </style>
