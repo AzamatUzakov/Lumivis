@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import HeroSection from "../components/HeroSection.astro";
+import WhyUsSection from "../components/WhyUsSection.astro";
+import DoctorsSection from "../components/DoctorsSection.astro";
+import EquipmentSection from "../components/EquipmentSection.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import RetinopathySection from "../components/RetinopathySection.astro";
+import GallerySection from "../components/GallerySection.astro";
+import ReviewsSection from "../components/ReviewsSection.astro";
+import MapSection from "../components/MapSection.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout
+  title="Lumivis — Офтальмологическая клиника в Самарканде"
+  description="Lumivis — офтальмологическая клиника в Самарканде. Единственная клиника, где проводят скрининг и лечение ретинопатии недоношенных детей. Диагностика, аппаратное и хирургическое лечение глаз."
+>
+  <SiteHeader />
+  <main id="main-content">
+    <HeroSection />
+    <WhyUsSection />
+    <DoctorsSection />
+    <EquipmentSection />
+    <ServicesSection />
+    <RetinopathySection />
+    <GallerySection />
+    <ReviewsSection />
+    <MapSection />
+  </main>
+  <SiteFooter />
+</BaseLayout>

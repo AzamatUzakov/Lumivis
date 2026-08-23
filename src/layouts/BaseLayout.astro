@@ -1,0 +1,430 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const {
+  title = "Lumivis — Офтальмологическая клиника в Самарканде",
+  description = "Lumivis — офтальмологическая клиника в Самарканде. Единственная клиника в городе, где проводят скрининг и лечение ретинопатии недоношенных детей. Диагностика и лечение глаз для взрослых и детей.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/png" href="/header-logo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_UZ" />
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Syne (display) + Inter (body) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <!-- i18n Script -->
+    <script>
+      // ── Translations ──────────────────────────────────────────────
+      const TRANSLATIONS: Record<string, Record<string, string>> = {
+        ru: {
+          "nav.doctors": "Врачи",
+          "nav.equipment": "Оборудование",
+          "nav.services": "Услуги",
+          "nav.retinopathy": "РН-скрининг",
+          "nav.contacts": "Контакты",
+          "nav.reviews": "Отзывы",
+          "header.hours": "Пн–Сб 09:00–17:00",
+          "header.cta": "Записаться",
+          "hero.badge": "Самарканд · Офтальмологическая клиника",
+          "hero.h1": "Первый взгляд в жизни — под нашим наблюдением",
+          "hero.subtitle": "Полный цикл офтальмологической помощи взрослым и детям: диагностика, аппаратное и хирургическое лечение косоглазия, ретинопатии и нарушений зрения.",
+          "hero.cta1": "Записаться на приём",
+          "hero.cta2": "Наши услуги",
+          "hero.stat1.value": "10+",
+          "hero.stat1.label": "лет опыта",
+          "hero.stat2.value": "3 000+",
+          "hero.stat2.label": "пациентов в год",
+          "hero.stat3.value": "8",
+          "hero.stat3.label": "аппаратов",
+          "hero.img.alt": "Врач-офтальмолог Lumivis",
+          "whyus.title": "Почему выбирают Lumivis",
+          "whyus.subtitle": "Мы не просто лечим зрение — мы берём на себя ответственность за его будущее",
+          "whyus.1.title": "Единственные в Самарканде",
+          "whyus.1.text": "Только в нашей клинике проводят скрининг и лечение ретинопатии недоношенных — по всему городу",
+          "whyus.2.title": "Экспертное оборудование",
+          "whyus.2.text": "8 профессиональных аппаратов ведущих производителей для точной диагностики и аппаратного лечения",
+          "whyus.3.title": "Детский приём без стресса",
+          "whyus.3.text": "Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной и спокойной обстановке",
+          "whyus.4.title": "Квалифицированные специалисты",
+          "whyus.4.text": "Врачи с подтверждёнными квалификациями, регулярно проходящие курсы повышения квалификации",
+          "whyus.5.title": "Полный цикл лечения",
+          "whyus.5.text": "От первой консультации до завершения курса — под наблюдением одного специалиста, без лишних перенаправлений",
+          "whyus.6.title": "Контроль результата",
+          "whyus.6.text": "Мы контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения",
+          "doctors.title": "Наша команда",
+          "doctors.subtitle": "Специалисты с многолетним опытом в офтальмологии взрослых и детей",
+          "doctor.1.name": "Врач-офтальмолог",
+          "doctor.1.spec": "Детская офтальмология, РН-скрининг",
+          "doctor.1.exp": "Стаж: уточняется",
+          "doctor.2.name": "Врач-офтальмолог",
+          "doctor.2.spec": "Хирургия косоглазия, аппаратное лечение",
+          "doctor.2.exp": "Стаж: уточняется",
+          "doctor.3.name": "Врач-офтальмолог",
+          "doctor.3.spec": "Диагностика и лечение взрослых",
+          "doctor.3.exp": "Стаж: уточняется",
+          "doctors.photo.soon": "Фото скоро",
+          "equipment.title": "Оснащение экспертного уровня",
+          "equipment.subtitle": "Профессиональные аппараты для точной диагностики и эффективного лечения",
+          "services.title": "Наши услуги",
+          "services.subtitle": "Полный спектр офтальмологической помощи взрослым и детям",
+          "services.cta": "Записаться",
+          "services.1.title": "Диагностика зрения",
+          "services.1.text": "Авторефрактометрия, биомикроскопия, тонометрия, периметрия — комплексное обследование",
+          "services.2.title": "Ретинопатия недоношенных",
+          "services.2.text": "Скрининг, наблюдение и лечение РН — единственная клиника в Самарканде",
+          "services.3.title": "Лечение косоглазия",
+          "services.3.text": "Аппаратное лечение и хирургическая коррекция косоглазия у детей и взрослых",
+          "services.4.title": "Лечение амблиопии",
+          "services.4.text": "Комплексное лечение «ленивого глаза» с применением аппаратных методик",
+          "services.5.title": "Детская офтальмология",
+          "services.5.text": "Диагностика и лечение нарушений зрения у детей с первых недель жизни",
+          "services.6.title": "Подбор очков и линз",
+          "services.6.text": "Точный подбор корректирующей оптики для взрослых и детей",
+          "services.7.title": "Синдром сухого глаза",
+          "services.7.text": "Диагностика и комплексное лечение синдрома сухого глаза",
+          "services.8.title": "Промывание слёзных путей",
+          "services.8.text": "Лечение непроходимости слёзных путей, в том числе у новорождённых",
+          "rn.badge": "Уникальная компетенция",
+          "rn.title": "Единственная клиника в Самарканде, где выявляют и ведут ретинопатию недоношенных",
+          "rn.text": "Ретинопатия недоношенных — опасное состояние, при котором недоразвитые сосуды сетчатки у недоношенного ребёнка могут привести к потере зрения. Раннее выявление — в первые 3–6 недель жизни — позволяет начать лечение до необратимых последствий.",
+          "rn.text2": "Мы работаем совместно с педиатрическими учреждениями Самарканда и принимаем детей с первых недель жизни. Всё необходимое оборудование и опыт — в одном месте.",
+          "rn.cta": "Записать ребёнка",
+          "gallery.title": "Как проходит приём",
+          "gallery.subtitle": "Тепло, спокойно и безболезненно — для маленьких и взрослых пациентов",
+          "reviews.title": "Отзывы пациентов",
+          "reviews.subtitle": "Нам доверяют семьи Самарканда",
+          "review.1.text": "Привела дочку на диагностику косоглазия — врач нашла подход к ребёнку с первой минуты. Лечение прошло отлично, через месяц уже видим результат.",
+          "review.1.author": "Мать пациентки, 4 года",
+          "review.2.text": "Обратились по поводу ретинопатии у новорождённого. Только здесь оказалось необходимое оборудование и специалист с опытом. Очень благодарны клинике Lumivis.",
+          "review.2.author": "Семья пациента из роддома",
+          "review.3.text": "Записывался на плановую проверку зрения — приятно удивлён профессионализмом и оснащением. Лучшая офтальмологическая клиника в Самарканде.",
+          "review.3.author": "Взрослый пациент",
+          "map.title": "Как нас найти",
+          "map.address.label": "Адрес",
+          "map.address": "г. Самарканд, Узбекистан",
+          "map.hours.label": "Режим работы",
+          "map.hours": "Понедельник–Суббота: 09:00–17:00",
+          "map.phone.label": "Телефон",
+          "map.route": "Построить маршрут",
+          "footer.tagline": "Офтальмологическая клиника в Самарканде",
+          "footer.nav.title": "Навигация",
+          "footer.contact.title": "Контакты",
+          "footer.booking.title": "Записаться на приём",
+          "footer.name.placeholder": "Ваше имя",
+          "footer.phone.placeholder": "Номер телефона",
+          "footer.submit": "Отправить заявку",
+          "footer.copyright": "© 2025 Lumivis. Все права защищены.",
+        },
+
+        en: {
+          "nav.doctors": "Doctors",
+          "nav.equipment": "Equipment",
+          "nav.services": "Services",
+          "nav.retinopathy": "ROP Screening",
+          "nav.contacts": "Contacts",
+          "nav.reviews": "Reviews",
+          "header.hours": "Mon–Sat 09:00–17:00",
+          "header.cta": "Book Now",
+          "hero.badge": "Samarkand · Ophthalmology Clinic",
+          "hero.h1": "The first glance in life — under our care",
+          "hero.subtitle": "Complete ophthalmic care for adults and children: diagnostics, device-based and surgical treatment of strabismus, retinopathy and vision disorders.",
+          "hero.cta1": "Book an Appointment",
+          "hero.cta2": "Our Services",
+          "hero.stat1.value": "10+",
+          "hero.stat1.label": "years of experience",
+          "hero.stat2.value": "3,000+",
+          "hero.stat2.label": "patients per year",
+          "hero.stat3.value": "8",
+          "hero.stat3.label": "devices",
+          "hero.img.alt": "Lumivis Ophthalmologist",
+          "whyus.title": "Why Choose Lumivis",
+          "whyus.subtitle": "We don't just treat vision — we take responsibility for its future",
+          "whyus.1.title": "Unique in Samarkand",
+          "whyus.1.text": "The only clinic in the city offering ROP screening and treatment for premature infants",
+          "whyus.2.title": "Expert Equipment",
+          "whyus.2.text": "8 professional devices from leading manufacturers for precise diagnostics and treatment",
+          "whyus.3.title": "Stress-free Pediatric Care",
+          "whyus.3.text": "Special approach to young patients: painless, gentle and in a comfortable atmosphere",
+          "whyus.4.title": "Qualified Specialists",
+          "whyus.4.text": "Doctors with verified qualifications who regularly undergo advanced training",
+          "whyus.5.title": "Full Treatment Cycle",
+          "whyus.5.text": "From the first consultation to the end of treatment — under one specialist's supervision",
+          "whyus.6.title": "Result Monitoring",
+          "whyus.6.text": "We monitor progress at every stage and take responsibility for each treatment outcome",
+          "doctors.title": "Our Team",
+          "doctors.subtitle": "Specialists with years of experience in adult and pediatric ophthalmology",
+          "doctor.1.name": "Ophthalmologist",
+          "doctor.1.spec": "Pediatric ophthalmology, ROP screening",
+          "doctor.1.exp": "Experience: to be confirmed",
+          "doctor.2.name": "Ophthalmologist",
+          "doctor.2.spec": "Strabismus surgery, device-based treatment",
+          "doctor.2.exp": "Experience: to be confirmed",
+          "doctor.3.name": "Ophthalmologist",
+          "doctor.3.spec": "Adult diagnostics and treatment",
+          "doctor.3.exp": "Experience: to be confirmed",
+          "doctors.photo.soon": "Photo coming soon",
+          "equipment.title": "Expert-Level Equipment",
+          "equipment.subtitle": "Professional devices for accurate diagnostics and effective treatment",
+          "services.title": "Our Services",
+          "services.subtitle": "Full spectrum of ophthalmic care for adults and children",
+          "services.cta": "Book",
+          "services.1.title": "Vision Diagnostics",
+          "services.1.text": "Autorefractometry, biomicroscopy, tonometry, perimetry — comprehensive examination",
+          "services.2.title": "Retinopathy of Prematurity",
+          "services.2.text": "ROP screening, monitoring and treatment — the only clinic in Samarkand",
+          "services.3.title": "Strabismus Treatment",
+          "services.3.text": "Device-based and surgical correction of strabismus in children and adults",
+          "services.4.title": "Amblyopia Treatment",
+          "services.4.text": "Comprehensive treatment of 'lazy eye' using device-based methods",
+          "services.5.title": "Pediatric Ophthalmology",
+          "services.5.text": "Diagnostics and treatment from the first weeks of life",
+          "services.6.title": "Glasses & Contact Lenses",
+          "services.6.text": "Precise selection of corrective optics for adults and children",
+          "services.7.title": "Dry Eye Syndrome",
+          "services.7.text": "Diagnostics and comprehensive treatment of dry eye syndrome",
+          "services.8.title": "Lacrimal Duct Flushing",
+          "services.8.text": "Treatment of lacrimal duct obstruction, including newborns",
+          "rn.badge": "Unique Expertise",
+          "rn.title": "The only clinic in Samarkand detecting and managing retinopathy of prematurity",
+          "rn.text": "Retinopathy of prematurity (ROP) is a dangerous condition where underdeveloped retinal vessels in premature babies can lead to vision loss. Early detection — in the first 3–6 weeks of life — allows treatment to begin before irreversible damage occurs.",
+          "rn.text2": "We collaborate with pediatric facilities in Samarkand and accept children from the first weeks of life. All necessary equipment and expertise — in one place.",
+          "rn.cta": "Book for a Child",
+          "gallery.title": "How an Appointment Works",
+          "gallery.subtitle": "Warm, calm and painless — for young and adult patients",
+          "reviews.title": "Patient Reviews",
+          "reviews.subtitle": "Trusted by families across Samarkand",
+          "review.1.text": "Brought my daughter for strabismus diagnostics — the doctor found an approach to the child from the very first minute. Treatment went great, results visible after a month.",
+          "review.1.author": "Mother of a 4-year-old patient",
+          "review.2.text": "We came because of ROP in a newborn. Only here was the necessary equipment and an experienced specialist. Very grateful to Lumivis clinic.",
+          "review.2.author": "Family of a newborn patient",
+          "review.3.text": "Came for a routine vision check — pleasantly surprised by the professionalism and equipment. Best ophthalmology clinic in Samarkand.",
+          "review.3.author": "Adult patient",
+          "map.title": "Find Us",
+          "map.address.label": "Address",
+          "map.address": "Samarkand, Uzbekistan",
+          "map.hours.label": "Working hours",
+          "map.hours": "Monday–Saturday: 09:00–17:00",
+          "map.phone.label": "Phone",
+          "map.route": "Get Directions",
+          "footer.tagline": "Ophthalmology clinic in Samarkand",
+          "footer.nav.title": "Navigation",
+          "footer.contact.title": "Contacts",
+          "footer.booking.title": "Book an Appointment",
+          "footer.name.placeholder": "Your name",
+          "footer.phone.placeholder": "Phone number",
+          "footer.submit": "Submit Request",
+          "footer.copyright": "© 2025 Lumivis. All rights reserved.",
+        },
+
+        uz: {
+          "nav.doctors": "Shifokorlar",
+          "nav.equipment": "Jihozlar",
+          "nav.services": "Xizmatlar",
+          "nav.retinopathy": "RN skrining",
+          "nav.contacts": "Aloqa",
+          "nav.reviews": "Sharhlar",
+          "header.hours": "Du–Shan 09:00–17:00",
+          "header.cta": "Yozilish",
+          "hero.badge": "Samarqand · Ko'z klinikasi",
+          "hero.h1": "Hayotdagi birinchi nazar — bizning nazoratimizda",
+          "hero.subtitle": "Kattalar va bolalar uchun to'liq oftalmologik yordam: diagnostika, apparatli va jarrohlik davolash.",
+          "hero.cta1": "Qabulga yozilish",
+          "hero.cta2": "Xizmatlarimiz",
+          "hero.stat1.value": "10+",
+          "hero.stat1.label": "yillik tajriba",
+          "hero.stat2.value": "3 000+",
+          "hero.stat2.label": "yilik bemorlar",
+          "hero.stat3.value": "8",
+          "hero.stat3.label": "apparat",
+          "hero.img.alt": "Lumivis ko'z shifokori",
+          "whyus.title": "Nima uchun Lumivis?",
+          "whyus.subtitle": "Biz faqat ko'rishni davolamaymiz — uning kelajagi uchun javobgarlik olamiz",
+          "whyus.1.title": "Samarqandda yagona",
+          "whyus.1.text": "Shaharda chaqaloqlarda retinopathiya skrining va davolashni amalga oshiradigan yagona klinika",
+          "whyus.2.title": "Zamonaviy jihozlar",
+          "whyus.2.text": "Aniq diagnostika va apparatli davolash uchun 8 ta professional apparat",
+          "whyus.3.title": "Bolalarda stresssiz qabul",
+          "whyus.3.text": "Kichik bemorlarga maxsus yondashuv: og'riqsiz, ehtiyotkorlik bilan va qulay muhitda",
+          "whyus.4.title": "Malakali mutaxassislar",
+          "whyus.4.text": "Tasdiqlangan malakaga ega va muntazam malaka oshirib boradigan shifokorlar",
+          "whyus.5.title": "To'liq davolash sikli",
+          "whyus.5.text": "Dastlabki maslahatlashuvdan kurs yakunigacha — bir mutaxassis nazoratida",
+          "whyus.6.title": "Natijani nazorat qilish",
+          "whyus.6.text": "Har bir bosqichda natijalarni nazorat qilamiz va davolash natijasi uchun javob beramiz",
+          "doctors.title": "Bizning jamoa",
+          "doctors.subtitle": "Ko'p yillik tajribaga ega oftalmologiya mutaxassislari",
+          "doctor.1.name": "Ko'z shifokori",
+          "doctor.1.spec": "Bolalar oftalmologiyasi, RN skrining",
+          "doctor.1.exp": "Tajriba: aniqlanmoqda",
+          "doctor.2.name": "Ko'z shifokori",
+          "doctor.2.spec": "Ko'zni qiyshayishi jarrohligi, apparatli davolash",
+          "doctor.2.exp": "Tajriba: aniqlanmoqda",
+          "doctor.3.name": "Ko'z shifokori",
+          "doctor.3.spec": "Kattalar diagnostikasi va davolash",
+          "doctor.3.exp": "Tajriba: aniqlanmoqda",
+          "doctors.photo.soon": "Rasm keyinroq",
+          "equipment.title": "Ekspert darajasidagi jihozlar",
+          "equipment.subtitle": "Aniq diagnostika va samarali davolash uchun professional apparatlar",
+          "services.title": "Bizning xizmatlar",
+          "services.subtitle": "Kattalar va bolalar uchun to'liq oftalmologik yordam",
+          "services.cta": "Yozilish",
+          "services.1.title": "Ko'rish diagnostikasi",
+          "services.1.text": "Avtorefraktometriya, biomikroskopiya, tonometriya — kompleks tekshiruv",
+          "services.2.title": "Chaqaloqlar retinopathiyasi",
+          "services.2.text": "RN skrining, kuzatish va davolash — Samarqandda yagona klinika",
+          "services.3.title": "Ko'zni qiyshayishini davolash",
+          "services.3.text": "Bolalar va kattalarda apparatli va jarrohlik usulida tuzatish",
+          "services.4.title": "Ambliopiyani davolash",
+          "services.4.text": "'Yalqov ko'z'ni kompleks davolash",
+          "services.5.title": "Bolalar oftalmologiyasi",
+          "services.5.text": "Hayotning birinchi haftalaridan boshlab diagnostika va davolash",
+          "services.6.title": "Ko'zoynak va linzalar",
+          "services.6.text": "Kattalar va bolalar uchun korrektsiya optikasini aniq tanlash",
+          "services.7.title": "Quruq ko'z sindromi",
+          "services.7.text": "Quruq ko'z sindromini diagnostika va kompleks davolash",
+          "services.8.title": "Ko'z yoshi yo'llarini yuvish",
+          "services.8.text": "Ko'z yoshi yo'llari o'tkazmasligini davolash, shu jumladan yangi tug'ilganlarda",
+          "rn.badge": "Noyob kompetensiya",
+          "rn.title": "Samarqandda chaqaloqlar retinopathiyasini aniqlaydigan va davolaydigan yagona klinika",
+          "rn.text": "Chaqaloqlar retinopathiyasi — muddatidan oldin tug'ilgan bolalarda to'r parda tomirlarining etarli rivojlanmasligi ko'rish yo'qolishiga olib kelishi mumkin. Erta aniqlash — hayotning birinchi 3-6 haftasida — qaytarilmas oqibatlar yuzaga kelishidan oldin davolashni boshlash imkonini beradi.",
+          "rn.text2": "Biz Samarqandning pediatrik muassasalari bilan hamkorlik qilamiz va bolalarni hayotining birinchi haftalaridan qabul qilamiz.",
+          "rn.cta": "Bolani yozish",
+          "gallery.title": "Qabul qanday o'tadi",
+          "gallery.subtitle": "Iliq, tinch va og'riqsiz — kichik va katta bemorlar uchun",
+          "reviews.title": "Bemorlar sharhlari",
+          "reviews.subtitle": "Samarqand oilalari ishonadi",
+          "review.1.text": "Qizimni ko'zni qiyshayishi diagnostikasiga olib keldim — shifokor birinchi daqiqadanoq bolaga yondashuv topdi. Davolash ajoyib o'tdi.",
+          "review.1.author": "4 yoshli bemor onasi",
+          "review.2.text": "Yangi tug'ilganda retinopathiya sababli murojaat qildik. Faqat shu yerda kerakli jihozlar va tajribali mutaxassis bor edi. Lumivis klinikasiga juda minnatdormiz.",
+          "review.2.author": "Yangi tug'ilgan bemor oilasi",
+          "review.3.text": "Ko'rishni rejali tekshirish uchun keldim — professionallik va jihozlar bilan yaxshi taassurot qoldirdim. Samarqanddagi eng yaxshi ko'z klinikasi.",
+          "review.3.author": "Katta yoshli bemor",
+          "map.title": "Bizni qanday topish mumkin",
+          "map.address.label": "Manzil",
+          "map.address": "Samarqand shahri, O'zbekiston",
+          "map.hours.label": "Ish vaqti",
+          "map.hours": "Dushanba–Shanba: 09:00–17:00",
+          "map.phone.label": "Telefon",
+          "map.route": "Marshrut qurish",
+          "footer.tagline": "Samarqanddagi ko'z klinikasi",
+          "footer.nav.title": "Navigatsiya",
+          "footer.contact.title": "Aloqa",
+          "footer.booking.title": "Qabulga yozilish",
+          "footer.name.placeholder": "Ismingiz",
+          "footer.phone.placeholder": "Telefon raqami",
+          "footer.submit": "Ariza yuborish",
+          "footer.copyright": "© 2025 Lumivis. Barcha huquqlar himoyalangan.",
+        },
+      };
+
+      type Lang = "ru" | "en" | "uz";
+
+      let currentLang: Lang = (localStorage.getItem("lumivis_lang") as Lang) || "ru";
+
+      function applyLang(lang: Lang) {
+        currentLang = lang;
+        localStorage.setItem("lumivis_lang", lang);
+        document.documentElement.lang = lang;
+
+        // Update all data-i18n elements
+        document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
+          const key = el.dataset.i18n!;
+          const val = TRANSLATIONS[lang]?.[key];
+          if (val !== undefined) el.textContent = val;
+        });
+
+        // Update placeholders
+        document.querySelectorAll<HTMLInputElement>("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.dataset.i18nPlaceholder!;
+          const val = TRANSLATIONS[lang]?.[key];
+          if (val !== undefined) el.placeholder = val;
+        });
+
+        // Update alt text on images
+        document.querySelectorAll<HTMLImageElement>("[data-i18n-alt]").forEach((el) => {
+          const key = el.dataset.i18nAlt!;
+          const val = TRANSLATIONS[lang]?.[key];
+          if (val !== undefined) el.alt = val;
+        });
+
+        // Highlight active lang button
+        document.querySelectorAll<HTMLButtonElement>(".lang-btn").forEach((btn) => {
+          btn.classList.toggle("lang-btn--active", btn.dataset.lang === lang);
+          btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
+        });
+      }
+
+      // Init
+      document.addEventListener("DOMContentLoaded", () => {
+        applyLang(currentLang);
+
+        // Attach click handlers to all lang buttons
+        document.querySelectorAll<HTMLButtonElement>(".lang-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.dataset.lang as Lang;
+            if (lang) applyLang(lang);
+          });
+        });
+
+        // Sticky header shadow
+        const header = document.getElementById("site-header");
+        if (header) {
+          const onScroll = () => {
+            header.classList.toggle("header--scrolled", window.scrollY > 20);
+          };
+          window.addEventListener("scroll", onScroll, { passive: true });
+        }
+
+        // Burger menu toggle
+        const burger = document.getElementById("burger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        if (burger && mobileMenu) {
+          burger.addEventListener("click", () => {
+            const open = mobileMenu.classList.toggle("mobile-menu--open");
+            burger.setAttribute("aria-expanded", String(open));
+            document.body.style.overflow = open ? "hidden" : "";
+          });
+
+          // Close on nav link click
+          mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              mobileMenu.classList.remove("mobile-menu--open");
+              burger.setAttribute("aria-expanded", "false");
+              document.body.style.overflow = "";
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

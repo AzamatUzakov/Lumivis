@@ -1,0 +1,222 @@
+---
+// DoctorsSection — team cards with slide-up reveal on hover
+---
+
+<section class="doctors section" id="doctors">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n="doctors.title">Наша команда</h2>
+      <p data-i18n="doctors.subtitle">Специалисты с многолетним опытом в офтальмологии взрослых и детей</p>
+    </div>
+
+    <div class="doctors__grid">
+
+      <!-- Doctor 1 -->
+      <article class="doctor-card">
+        <div class="doctor-card__photo">
+          <div class="doctor-card__placeholder" aria-hidden="true">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="12" cy="8" r="5"/>
+              <path d="M3 21c0-5 3.5-9 9-9s9 4 9 9"/>
+            </svg>
+          </div>
+          <div class="doctor-card__overlay">
+            <h3 class="doctor-card__name" data-i18n="doctor.1.name">Врач-офтальмолог</h3>
+            <p class="doctor-card__spec" data-i18n="doctor.1.spec">Детская офтальмология, РН-скрининг</p>
+            <p class="doctor-card__exp" data-i18n="doctor.1.exp">Стаж: уточняется</p>
+            <a href="#contacts" class="btn btn--outline-white doctor-card__cta" data-i18n="header.cta">Записаться</a>
+          </div>
+        </div>
+        <div class="doctor-card__info">
+          <h3 data-i18n="doctor.1.name">Врач-офтальмолог</h3>
+          <p data-i18n="doctor.1.spec">Детская офтальмология, РН-скрининг</p>
+        </div>
+      </article>
+
+      <!-- Doctor 2 -->
+      <article class="doctor-card">
+        <div class="doctor-card__photo">
+          <div class="doctor-card__placeholder doctor-card__placeholder--2" aria-hidden="true">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="12" cy="8" r="5"/>
+              <path d="M3 21c0-5 3.5-9 9-9s9 4 9 9"/>
+            </svg>
+          </div>
+          <div class="doctor-card__overlay">
+            <h3 class="doctor-card__name" data-i18n="doctor.2.name">Врач-офтальмолог</h3>
+            <p class="doctor-card__spec" data-i18n="doctor.2.spec">Хирургия косоглазия, аппаратное лечение</p>
+            <p class="doctor-card__exp" data-i18n="doctor.2.exp">Стаж: уточняется</p>
+            <a href="#contacts" class="btn btn--outline-white doctor-card__cta" data-i18n="header.cta">Записаться</a>
+          </div>
+        </div>
+        <div class="doctor-card__info">
+          <h3 data-i18n="doctor.2.name">Врач-офтальмолог</h3>
+          <p data-i18n="doctor.2.spec">Хирургия косоглазия, аппаратное лечение</p>
+        </div>
+      </article>
+
+      <!-- Doctor 3 -->
+      <article class="doctor-card">
+        <div class="doctor-card__photo">
+          <div class="doctor-card__placeholder doctor-card__placeholder--3" aria-hidden="true">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="12" cy="8" r="5"/>
+              <path d="M3 21c0-5 3.5-9 9-9s9 4 9 9"/>
+            </svg>
+          </div>
+          <div class="doctor-card__overlay">
+            <h3 class="doctor-card__name" data-i18n="doctor.3.name">Врач-офтальмолог</h3>
+            <p class="doctor-card__spec" data-i18n="doctor.3.spec">Диагностика и лечение взрослых</p>
+            <p class="doctor-card__exp" data-i18n="doctor.3.exp">Стаж: уточняется</p>
+            <a href="#contacts" class="btn btn--outline-white doctor-card__cta" data-i18n="header.cta">Записаться</a>
+          </div>
+        </div>
+        <div class="doctor-card__info">
+          <h3 data-i18n="doctor.3.name">Врач-офтальмолог</h3>
+          <p data-i18n="doctor.3.spec">Диагностика и лечение взрослых</p>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="doctors__note" data-i18n="doctors.photo.soon">* Фотографии врачей будут добавлены клиникой</p>
+  </div>
+</section>
+
+<style>
+.doctors__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-6);
+}
+
+.doctor-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.doctor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Photo area */
+.doctor-card__photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e8f1fe 0%, #c8e0fd 100%);
+}
+
+.doctor-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+  color: rgba(11, 42, 107, 0.35);
+}
+
+.doctor-card__placeholder--2 {
+  background: linear-gradient(160deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+}
+
+.doctor-card__placeholder--3 {
+  background: linear-gradient(160deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%);
+}
+
+/* Overlay */
+.doctor-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,42,107,0) 20%, rgba(11,42,107,0.85) 60%, rgba(11,42,107,0.95) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--s-5);
+  gap: var(--s-2);
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all var(--t-slow);
+}
+
+.doctor-card:hover .doctor-card__overlay,
+.doctor-card:focus-within .doctor-card__overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.doctor-card__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--c-white);
+}
+
+.doctor-card__spec {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.doctor-card__exp {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.doctor-card__cta {
+  margin-top: var(--s-3);
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  align-self: flex-start;
+}
+
+/* Bottom info strip */
+.doctor-card__info {
+  background: var(--c-white);
+  padding: var(--s-4) var(--s-5);
+  border-top: 3px solid var(--c-sky);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.doctor-card:nth-child(2) .doctor-card__info {
+  border-top-color: var(--c-teal);
+}
+
+.doctor-card:nth-child(3) .doctor-card__info {
+  border-top-color: var(--c-sky-light);
+}
+
+.doctor-card__info h3 {
+  font-size: 1rem;
+  color: var(--c-ink);
+}
+
+.doctor-card__info p {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+}
+
+.doctors__note {
+  text-align: center;
+  margin-top: var(--s-6);
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  font-style: italic;
+}
+
+@media (min-width: 640px) {
+  .doctors__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .doctors__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+</style>

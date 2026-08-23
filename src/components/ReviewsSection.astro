@@ -1,0 +1,153 @@
+---
+// ReviewsSection — patient reviews with placeholders
+---
+
+<section class="reviews section section--surface" id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2 data-i18n="reviews.title">Отзывы пациентов</h2>
+      <p data-i18n="reviews.subtitle">Нам доверяют семьи Самарканда</p>
+    </div>
+
+    <div class="reviews__grid">
+
+      <article class="review-card">
+        <div class="review-card__quote" aria-hidden="true">
+          <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+            <path d="M0 24V14.4C0 6.4 4.53333 1.6 13.6 0L15.2 2.8C11.2 3.73333 8.8 5.86667 8 9.2H13.6V24H0ZM18.4 24V14.4C18.4 6.4 22.9333 1.6 32 0L33.6 2.8C29.6 3.73333 27.2 5.86667 26.4 9.2H32V24H18.4Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <p class="review-card__text" data-i18n="review.1.text">
+          Привела дочку на диагностику косоглазия — врач нашла подход к ребёнку с первой минуты. Лечение прошло отлично, через месяц уже видим результат.
+        </p>
+        <div class="review-card__footer">
+          <div class="review-card__stars" aria-label="5 из 5 звёзд">
+            ★★★★★
+          </div>
+          <cite class="review-card__author" data-i18n="review.1.author">Мать пациентки, 4 года</cite>
+        </div>
+      </article>
+
+      <article class="review-card review-card--featured">
+        <div class="review-card__quote" aria-hidden="true">
+          <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+            <path d="M0 24V14.4C0 6.4 4.53333 1.6 13.6 0L15.2 2.8C11.2 3.73333 8.8 5.86667 8 9.2H13.6V24H0ZM18.4 24V14.4C18.4 6.4 22.9333 1.6 32 0L33.6 2.8C29.6 3.73333 27.2 5.86667 26.4 9.2H32V24H18.4Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <p class="review-card__text" data-i18n="review.2.text">
+          Обратились по поводу ретинопатии у новорождённого. Только здесь оказалось необходимое оборудование и специалист с опытом. Очень благодарны клинике Lumivis.
+        </p>
+        <div class="review-card__footer">
+          <div class="review-card__stars" aria-label="5 из 5 звёзд">
+            ★★★★★
+          </div>
+          <cite class="review-card__author" data-i18n="review.2.author">Семья пациента из роддома</cite>
+        </div>
+      </article>
+
+      <article class="review-card">
+        <div class="review-card__quote" aria-hidden="true">
+          <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
+            <path d="M0 24V14.4C0 6.4 4.53333 1.6 13.6 0L15.2 2.8C11.2 3.73333 8.8 5.86667 8 9.2H13.6V24H0ZM18.4 24V14.4C18.4 6.4 22.9333 1.6 32 0L33.6 2.8C29.6 3.73333 27.2 5.86667 26.4 9.2H32V24H18.4Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <p class="review-card__text" data-i18n="review.3.text">
+          Записывался на плановую проверку зрения — приятно удивлён профессионализмом и оснащением. Лучшая офтальмологическая клиника в Самарканде.
+        </p>
+        <div class="review-card__footer">
+          <div class="review-card__stars" aria-label="5 из 5 звёзд">
+            ★★★★★
+          </div>
+          <cite class="review-card__author" data-i18n="review.3.author">Взрослый пациент</cite>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.reviews__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-5);
+}
+
+.review-card {
+  background: var(--c-white);
+  border-radius: var(--r-md);
+  padding: var(--s-6) var(--s-6) var(--s-5);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  transition: transform var(--t-base), box-shadow var(--t-base);
+  border-top: 3px solid var(--c-border);
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.review-card--featured {
+  border-top-color: var(--c-sky);
+  background: linear-gradient(135deg, rgba(46,134,245,0.02) 0%, var(--c-white) 50%);
+}
+
+.review-card__quote {
+  color: var(--c-sky-pale);
+}
+
+.review-card--featured .review-card__quote {
+  color: rgba(46, 134, 245, 0.3);
+}
+
+.review-card__text {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--c-text);
+  flex: 1;
+  font-style: italic;
+}
+
+.review-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--c-border);
+}
+
+.review-card__stars {
+  color: #F59E0B;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.review-card__author {
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+
+@media (min-width: 640px) {
+  .reviews__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .review-card--featured {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviews__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .review-card--featured {
+    grid-column: span 1;
+  }
+}
+</style>

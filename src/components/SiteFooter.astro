@@ -1,0 +1,338 @@
+---
+// SiteFooter — footer with mini booking form, social links, copyright
+---
+
+<footer class="site-footer" id="footer">
+  <div class="footer-top">
+    <div class="container footer-top__inner">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Lumivis — на главную">
+          <img src="/header-logo.png" alt="Lumivis" width="100" height="36" />
+        </a>
+        <p class="footer-tagline" data-i18n="footer.tagline">Офтальмологическая клиника в Самарканде</p>
+        <div class="footer-social">
+          <a href="https://t.me/NKernel" target="_blank" rel="noopener" class="footer-social__link" aria-label="Telegram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/abduqayyum_ocularist/" target="_blank" rel="noopener" class="footer-social__link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="tel:+998995981010" class="footer-social__link" aria-label="Позвонить">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.67 10.37a19.79 19.79 0 01-3.07-8.67A2 2 0 012.58 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.53a16 16 0 006.56 6.56l.9-.9a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="footer-col">
+        <h4 class="footer-col__title" data-i18n="footer.nav.title">Навигация</h4>
+        <nav class="footer-nav">
+          <a href="#doctors" class="footer-nav__link" data-i18n="nav.doctors">Врачи</a>
+          <a href="#equipment" class="footer-nav__link" data-i18n="nav.equipment">Оборудование</a>
+          <a href="#services" class="footer-nav__link" data-i18n="nav.services">Услуги</a>
+          <a href="#retinopathy" class="footer-nav__link" data-i18n="nav.retinopathy">РН-скрининг</a>
+          <a href="#reviews" class="footer-nav__link" data-i18n="nav.reviews">Отзывы</a>
+          <a href="#contacts" class="footer-nav__link" data-i18n="nav.contacts">Контакты</a>
+        </nav>
+      </div>
+
+      <!-- Contacts -->
+      <div class="footer-col">
+        <h4 class="footer-col__title" data-i18n="footer.contact.title">Контакты</h4>
+        <div class="footer-contacts">
+          <a href="tel:+998995981010" class="footer-contacts__phone">+998 99 598 10 10</a>
+          <p class="footer-contacts__hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</p>
+          <p class="footer-contacts__address" data-i18n="map.address">г. Самарканд, Узбекистан</p>
+          <div class="footer-contacts__socials">
+            <a href="https://t.me/NKernel" target="_blank" rel="noopener" class="footer-contacts__social-link">
+              Telegram: @NKernel
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini Booking Form -->
+      <div class="footer-col footer-form-col">
+        <h4 class="footer-col__title" data-i18n="footer.booking.title">Записаться на приём</h4>
+        <form class="footer-form" id="booking-form" novalidate>
+          <input
+            type="text"
+            id="footer-name"
+            name="name"
+            class="footer-form__input"
+            placeholder="Ваше имя"
+            data-i18n-placeholder="footer.name.placeholder"
+            required
+            autocomplete="name"
+          />
+          <input
+            type="tel"
+            id="footer-phone"
+            name="phone"
+            class="footer-form__input"
+            placeholder="Номер телефона"
+            data-i18n-placeholder="footer.phone.placeholder"
+            required
+            autocomplete="tel"
+          />
+          <button type="submit" class="btn btn--primary footer-form__submit" data-i18n="footer.submit">
+            Отправить заявку
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom__inner">
+      <p class="footer-copyright" data-i18n="footer.copyright">© 2025 Lumivis. Все права защищены.</p>
+      <a href="#hero" class="footer-scroll-top" aria-label="Наверх">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
+        Наверх
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('booking-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = (form.querySelector('[name="name"]') as HTMLInputElement)?.value?.trim();
+      const phone = (form.querySelector('[name="phone"]') as HTMLInputElement)?.value?.trim();
+      if (!name || !phone) return;
+      // In production: send to CRM/Telegram bot/backend
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (btn) {
+        btn.textContent = '✓ Заявка отправлена!';
+        btn.style.background = 'var(--c-teal)';
+        btn.disabled = true;
+        form.reset();
+      }
+    });
+  }
+</script>
+
+<style>
+.site-footer {
+  background: var(--c-ink);
+  color: rgba(255,255,255,0.75);
+}
+
+.footer-top {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-top__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-8);
+}
+
+/* Brand */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.footer-logo img {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  height: 36px;
+  width: auto;
+}
+
+.footer-tagline {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+  max-width: 22ch;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--s-3);
+}
+
+.footer-social__link {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-full);
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.65);
+  transition: all var(--t-fast);
+}
+
+.footer-social__link:hover {
+  background: var(--c-sky);
+  color: var(--c-white);
+}
+
+/* Columns */
+.footer-col__title {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--c-white);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--s-4);
+}
+
+/* Nav */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.footer-nav__link {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  transition: color var(--t-fast), padding-left var(--t-fast);
+}
+
+.footer-nav__link:hover {
+  color: var(--c-sky-light);
+  padding-left: var(--s-2);
+}
+
+/* Contacts */
+.footer-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.footer-contacts__phone {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-white);
+  transition: color var(--t-fast);
+}
+
+.footer-contacts__phone:hover {
+  color: var(--c-sky-light);
+}
+
+.footer-contacts__hours,
+.footer-contacts__address {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.footer-contacts__socials {
+  margin-top: var(--s-2);
+}
+
+.footer-contacts__social-link {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  transition: color var(--t-fast);
+}
+
+.footer-contacts__social-link:hover {
+  color: var(--c-sky-light);
+}
+
+/* Form */
+.footer-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.footer-form__input {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: var(--r-md);
+  padding: 0.7rem 1rem;
+  color: var(--c-white);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color var(--t-fast), background var(--t-fast);
+  width: 100%;
+}
+
+.footer-form__input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.footer-form__input:focus {
+  outline: none;
+  border-color: var(--c-sky);
+  background: rgba(255,255,255,0.1);
+}
+
+.footer-form__submit {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Bottom bar */
+.footer-bottom {
+  padding-block: var(--s-4);
+}
+
+.footer-bottom__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+}
+
+.footer-copyright {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.35);
+}
+
+.footer-scroll-top {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  transition: color var(--t-fast);
+}
+
+.footer-scroll-top:hover {
+  color: var(--c-sky-light);
+}
+
+/* Responsive */
+@media (min-width: 640px) {
+  .footer-top__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-form-col {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-top__inner {
+    grid-template-columns: 1.5fr 1fr 1fr 1.4fr;
+  }
+  .footer-form-col {
+    grid-column: span 1;
+  }
+}
+</style>

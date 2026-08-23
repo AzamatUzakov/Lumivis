@@ -1,0 +1,206 @@
+---
+// RetinopathySection — dark accent block with key photo IMG_0345.JPG
+---
+
+<section class="rn section--dark" id="retinopathy">
+  <!-- Decorative arc -->
+  <div class="rn__arc" aria-hidden="true">
+    <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="300" r="250" stroke="white" stroke-width="1" opacity="0.05"/>
+      <circle cx="300" cy="300" r="180" stroke="white" stroke-width="0.8" opacity="0.04"/>
+      <circle cx="300" cy="300" r="110" stroke="white" stroke-width="0.6" opacity="0.03"/>
+      <line x1="300" y1="0" x2="300" y2="600" stroke="white" stroke-width="0.5" opacity="0.03"/>
+      <line x1="0" y1="300" x2="600" y2="300" stroke="white" stroke-width="0.5" opacity="0.03"/>
+    </svg>
+  </div>
+
+  <div class="container rn__inner">
+    <!-- Left: Text -->
+    <div class="rn__content">
+      <div class="badge badge--teal rn__badge" data-i18n="rn.badge">Уникальная компетенция</div>
+
+      <h2 class="rn__title" data-i18n="rn.title">
+        Единственная клиника в Самарканде, где выявляют и ведут ретинопатию недоношенных
+      </h2>
+
+      <p class="rn__text" data-i18n="rn.text">
+        Ретинопатия недоношенных — опасное состояние, при котором недоразвитые сосуды сетчатки
+        у недоношенного ребёнка могут привести к потере зрения. Раннее выявление — в первые 3–6 недель
+        жизни — позволяет начать лечение до необратимых последствий.
+      </p>
+
+      <p class="rn__text" data-i18n="rn.text2">
+        Мы работаем совместно с педиатрическими учреждениями Самарканда и принимаем детей
+        с первых недель жизни. Всё необходимое оборудование и опыт — в одном месте.
+      </p>
+
+      <!-- Supporting facts -->
+      <div class="rn__facts">
+        <div class="rn__fact">
+          <div class="rn__fact-num">3–6</div>
+          <div class="rn__fact-label">недель — оптимальный<br>срок первого осмотра</div>
+        </div>
+        <div class="rn__fact">
+          <div class="rn__fact-num">1</div>
+          <div class="rn__fact-label">клиника в городе<br>ведёт РН-скрининг</div>
+        </div>
+      </div>
+
+      <a href="#contacts" class="btn btn--teal rn__cta" data-i18n="rn.cta">
+        Записать ребёнка
+      </a>
+    </div>
+
+    <!-- Right: Key photo -->
+    <div class="rn__visual">
+      <div class="rn__img-frame">
+        <img
+          src="/IMG_0345.JPG"
+          alt="Врачи проводят офтальмоскопию новорождённому"
+          class="rn__img"
+          loading="lazy"
+          decoding="async"
+          width="600"
+          height="450"
+        />
+        <!-- Decorative corner accents -->
+        <div class="rn__img-corner rn__img-corner--tl" aria-hidden="true"></div>
+        <div class="rn__img-corner rn__img-corner--br" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.rn {
+  position: relative;
+  background: var(--c-ink);
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.rn__arc {
+  position: absolute;
+  left: -200px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  pointer-events: none;
+}
+
+.rn__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-12);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Content */
+.rn__badge {
+  margin-bottom: var(--s-5);
+}
+
+.rn__title {
+  color: var(--c-white);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  line-height: 1.2;
+  margin-bottom: var(--s-6);
+}
+
+.rn__text {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: var(--s-4);
+  max-width: 52ch;
+}
+
+.rn__facts {
+  display: flex;
+  gap: var(--s-8);
+  margin-block: var(--s-7);
+}
+
+.rn__fact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.rn__fact-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--c-teal-light);
+  line-height: 1;
+}
+
+.rn__fact-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+.rn__cta {
+  display: inline-flex;
+}
+
+/* Visual */
+.rn__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.rn__img-frame {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  max-width: 520px;
+  width: 100%;
+}
+
+.rn__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--r-lg);
+  object-fit: cover;
+  filter: brightness(0.95) contrast(1.02);
+}
+
+/* Corner accent brackets */
+.rn__img-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: var(--c-teal);
+  border-style: solid;
+  border-width: 0;
+}
+
+.rn__img-corner--tl {
+  top: 12px;
+  left: 12px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+  border-top-left-radius: 4px;
+}
+
+.rn__img-corner--br {
+  bottom: 12px;
+  right: 12px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+  border-bottom-right-radius: 4px;
+}
+
+@media (min-width: 900px) {
+  .rn__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-16);
+  }
+}
+</style>
