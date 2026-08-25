@@ -1,33 +1,43 @@
 ---
-// SiteHeader v2 — warm, clean, refined
+// SiteHeader — sticky, responsive, RU/EN/UZ switcher
 ---
 
 <header id="site-header" class="site-header">
   <div class="container header-inner">
+    <!-- Logo -->
     <a href="/" class="header-logo" aria-label="Lumivis — главная">
-      <img src="/header-logo.png" alt="Lumivis" width="120" height="44" />
+      <img src="/header-logo.png" alt="Lumivis" width="160" height="60" />
     </a>
 
+    <!-- Desktop Nav -->
     <nav class="header-nav" aria-label="Основная навигация">
-      <a href="#doctors"     class="header-nav__link" data-i18n="nav.doctors">Врачи</a>
-      <a href="#equipment"   class="header-nav__link" data-i18n="nav.equipment">Оборудование</a>
-      <a href="#services"    class="header-nav__link" data-i18n="nav.services">Услуги</a>
+      <a href="#doctors" class="header-nav__link" data-i18n="nav.doctors">Врачи</a>
+      <a href="#equipment" class="header-nav__link" data-i18n="nav.equipment">Оборудование</a>
+      <a href="#services" class="header-nav__link" data-i18n="nav.services">Услуги</a>
       <a href="#retinopathy" class="header-nav__link" data-i18n="nav.retinopathy">РН-скрининг</a>
-      <a href="#reviews"     class="header-nav__link" data-i18n="nav.reviews">Отзывы</a>
-      <a href="#contacts"    class="header-nav__link" data-i18n="nav.contacts">Контакты</a>
+      <a href="#reviews" class="header-nav__link" data-i18n="nav.reviews">Отзывы</a>
+      <a href="#contacts" class="header-nav__link" data-i18n="nav.contacts">Контакты</a>
     </nav>
 
+    <!-- Desktop Right -->
     <div class="header-right">
-      <div class="lang-switcher" role="group" aria-label="Язык">
+      <div class="lang-switcher" role="group" aria-label="Выбор языка">
         <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
         <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
       </div>
-      <a href="tel:+998995981010" class="header-phone">+998 99 598 10 10</a>
+      <span class="header-hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</span>
       <a href="#contacts" class="btn btn--primary header-cta" data-i18n="header.cta">Записаться</a>
     </div>
 
-    <button id="burger-btn" class="burger-btn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+    <!-- Burger -->
+    <button
+      id="burger-btn"
+      class="burger-btn"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
       <span class="burger-line"></span>
       <span class="burger-line"></span>
       <span class="burger-line"></span>
@@ -35,57 +45,70 @@
   </div>
 </header>
 
-<div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="Меню">
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="Мобильное меню">
   <div class="mobile-menu__inner">
-    <nav class="mobile-menu__nav">
-      <a href="#doctors"     class="mobile-menu__link" data-i18n="nav.doctors">Врачи</a>
-      <a href="#equipment"   class="mobile-menu__link" data-i18n="nav.equipment">Оборудование</a>
-      <a href="#services"    class="mobile-menu__link" data-i18n="nav.services">Услуги</a>
+    <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
+      <a href="#doctors" class="mobile-menu__link" data-i18n="nav.doctors">Врачи</a>
+      <a href="#equipment" class="mobile-menu__link" data-i18n="nav.equipment">Оборудование</a>
+      <a href="#services" class="mobile-menu__link" data-i18n="nav.services">Услуги</a>
       <a href="#retinopathy" class="mobile-menu__link" data-i18n="nav.retinopathy">РН-скрининг</a>
-      <a href="#reviews"     class="mobile-menu__link" data-i18n="nav.reviews">Отзывы</a>
-      <a href="#contacts"    class="mobile-menu__link" data-i18n="nav.contacts">Контакты</a>
+      <a href="#reviews" class="mobile-menu__link" data-i18n="nav.reviews">Отзывы</a>
+      <a href="#contacts" class="mobile-menu__link" data-i18n="nav.contacts">Контакты</a>
     </nav>
+
     <div class="mobile-menu__meta">
-      <a href="tel:+998995981010" class="mobile-menu__phone">+998 99 598 10 10</a>
       <p class="mobile-menu__hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</p>
+      <a href="tel:+998995981010" class="mobile-menu__phone">+998 99 598 10 10</a>
     </div>
-    <div class="lang-switcher lang-switcher--mobile" role="group">
+
+    <div class="lang-switcher lang-switcher--mobile" role="group" aria-label="Выбор языка">
       <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
       <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
       <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
     </div>
+
     <a href="#contacts" class="btn btn--primary mobile-menu__cta" data-i18n="header.cta">Записаться</a>
   </div>
 </div>
 
 <style>
+/* ── Header ── */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(250, 250, 249, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--c-border-lt);
-  transition: box-shadow var(--t-base), border-color var(--t-base);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--c-border);
+  transition: box-shadow var(--t-base);
 }
 
 .header--scrolled {
-  box-shadow: 0 1px 16px rgba(22, 32, 46, 0.08);
-  border-bottom-color: var(--c-border);
+  box-shadow: var(--shadow-header);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   gap: var(--s-6);
-  height: 66px;
+  height: 72px;
+}
+
+/* Logo */
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .header-logo img {
-  height: 38px;
+  height: 44px;
   width: auto;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 /* Desktop Nav */
@@ -98,12 +121,13 @@
 }
 
 .header-nav__link {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--c-body);
-  padding-block: var(--s-1);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--c-text);
   position: relative;
+  padding-block: var(--s-1);
   transition: color var(--t-fast);
+  white-space: nowrap;
 }
 
 .header-nav__link::after {
@@ -111,23 +135,22 @@
   position: absolute;
   bottom: -2px;
   left: 0;
-  right: 0;
-  height: 1.5px;
-  background: var(--c-amber);
-  transform: scaleX(0);
-  transition: transform var(--t-base);
-  transform-origin: left;
+  width: 0;
+  height: 2px;
+  background: var(--c-sky);
+  border-radius: var(--r-full);
+  transition: width var(--t-base);
 }
 
 .header-nav__link:hover {
-  color: var(--c-navy);
+  color: var(--c-sky);
 }
 
 .header-nav__link:hover::after {
-  transform: scaleX(1);
+  width: 100%;
 }
 
-/* Right */
+/* Right section */
 .header-right {
   display: none;
   align-items: center;
@@ -135,54 +158,49 @@
   margin-left: auto;
 }
 
-.header-phone {
-  font-size: 0.825rem;
-  font-weight: 500;
-  color: var(--c-body);
+.header-hours {
+  font-size: 0.8rem;
+  color: var(--c-muted);
   white-space: nowrap;
-  transition: color var(--t-fast);
 }
-
-.header-phone:hover { color: var(--c-navy); }
 
 .header-cta {
   padding: 0.55rem 1.25rem;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
 }
 
-/* Lang switcher */
+/* Lang Switcher */
 .lang-switcher {
   display: flex;
-  gap: 1px;
-  background: var(--c-border-lt);
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-sm);
-  overflow: hidden;
-  padding: 2px;
+  align-items: center;
+  gap: 2px;
+  background: var(--c-surface);
+  border-radius: var(--r-full);
+  padding: 3px;
 }
 
 .lang-btn {
-  padding: 0.22rem 0.55rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--r-full);
   border: none;
   background: transparent;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   font-family: var(--font-body);
   color: var(--c-muted);
   cursor: pointer;
-  letter-spacing: 0.04em;
-  border-radius: 2px;
   transition: all var(--t-fast);
+  letter-spacing: 0.03em;
 }
 
 .lang-btn--active {
   background: var(--c-white);
-  color: var(--c-navy);
-  box-shadow: var(--shadow-sm);
+  color: var(--c-sky);
+  box-shadow: 0 1px 4px rgba(11,42,107,0.12);
 }
 
 .lang-btn:hover:not(.lang-btn--active) {
-  color: var(--c-text);
+  color: var(--c-ink);
 }
 
 /* Burger */
@@ -196,29 +214,36 @@
   padding: var(--s-2);
   margin-left: auto;
   border-radius: var(--r-sm);
+  transition: background var(--t-fast);
+}
+
+.burger-btn:hover {
+  background: var(--c-surface);
 }
 
 .burger-line {
   display: block;
   width: 22px;
-  height: 1.5px;
-  background: var(--c-navy);
+  height: 2px;
+  background: var(--c-ink);
   border-radius: var(--r-full);
   transition: all var(--t-base);
 }
 
-/* Mobile menu */
+/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: var(--c-bg);
+  background: var(--c-white);
   transform: translateX(100%);
   transition: transform var(--t-slow);
   overflow-y: auto;
 }
 
-.mobile-menu--open { transform: translateX(0); }
+.mobile-menu--open {
+  transform: translateX(0);
+}
 
 .mobile-menu__inner {
   display: flex;
@@ -228,44 +253,74 @@
   gap: var(--s-6);
 }
 
-.mobile-menu__nav { display: flex; flex-direction: column; }
+.mobile-menu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
 
 .mobile-menu__link {
   font-family: var(--font-display);
-  font-size: 1.75rem;
-  color: var(--c-navy);
-  padding: var(--s-3) 0;
-  border-bottom: 1px solid var(--c-border-lt);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c-ink);
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--c-border);
   transition: color var(--t-fast), padding-left var(--t-fast);
 }
 
 .mobile-menu__link:hover {
-  color: var(--c-amber);
-  padding-left: var(--s-2);
+  color: var(--c-sky);
+  padding-left: var(--s-3);
 }
 
-.mobile-menu__meta { display: flex; flex-direction: column; gap: var(--s-2); margin-top: auto; }
+.mobile-menu__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin-top: auto;
+}
+
+.mobile-menu__hours {
+  font-size: 0.875rem;
+  color: var(--c-muted);
+}
 
 .mobile-menu__phone {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--c-navy);
+  color: var(--c-ink);
 }
 
-.mobile-menu__hours { font-size: 0.85rem; color: var(--c-muted); }
+.lang-switcher--mobile {
+  align-self: flex-start;
+  padding: 4px;
+}
 
-.lang-switcher--mobile { align-self: flex-start; }
+.lang-switcher--mobile .lang-btn {
+  font-size: 0.875rem;
+  padding: 0.35rem 0.8rem;
+}
 
-.mobile-menu__cta { align-self: stretch; text-align: center; padding: 0.9rem 1.5rem; }
+.mobile-menu__cta {
+  align-self: stretch;
+  padding: 0.9rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+}
 
+/* Responsive */
 @media (min-width: 1024px) {
-  .header-nav  { display: flex; }
+  .header-nav { display: flex; }
   .header-right { display: flex; }
-  .burger-btn  { display: none; }
+  .burger-btn { display: none; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .header-right { display: flex; }
-  .header-phone { display: none; }
+  .header-right {
+    display: flex;
+    gap: var(--s-3);
+  }
+  .header-hours { display: none; }
 }
 </style>

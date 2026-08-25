@@ -1,83 +1,87 @@
 ---
-// WhyUsSection v2 — no left-bar AI pattern, clean grid with ambient numbering
+// WhyUsSection — 6 benefit cards with unified light-blue design
 ---
 
-<section class="whyus section section--stone" id="whyus">
+<section class="whyus section section--surface" id="whyus">
   <div class="container">
     <div class="section-header">
-      <span class="eyebrow eyebrow--amber" data-i18n="whyus.eyebrow">Наши принципы</span>
       <h2 data-i18n="whyus.title">Почему выбирают Lumivis</h2>
-      <p data-i18n="whyus.subtitle">Мы не просто лечим зрение — мы берём ответственность за его будущее</p>
+      <p data-i18n="whyus.subtitle">Мы не просто лечим зрение — мы берём на себя ответственность за его будущее</p>
     </div>
 
     <div class="whyus__grid">
 
-      <article class="why-item">
-        <span class="why-item__num" aria-hidden="true">01</span>
-        <div class="why-item__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Card 1 -->
+      <article class="whyus-card">
+        <div class="whyus-card__icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <circle cx="12" cy="12" r="3"/>
           </svg>
         </div>
-        <h3 class="card-title" data-i18n="whyus.1.title">Единственные в Самарканде</h3>
+        <h3 data-i18n="whyus.1.title">Единственные в Самарканде</h3>
         <p data-i18n="whyus.1.text">Только в нашей клинике проводят скрининг и лечение ретинопатии недоношенных — по всему городу</p>
       </article>
 
-      <article class="why-item">
-        <span class="why-item__num" aria-hidden="true">02</span>
-        <div class="why-item__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+      <!-- Card 2 -->
+      <article class="whyus-card">
+        <div class="whyus-card__icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
           </svg>
         </div>
-        <h3 class="card-title" data-i18n="whyus.2.title">Экспертное оборудование</h3>
+        <h3 data-i18n="whyus.2.title">Экспертное оборудование</h3>
         <p data-i18n="whyus.2.text">8 профессиональных аппаратов ведущих производителей для точной диагностики и аппаратного лечения</p>
       </article>
 
-      <article class="why-item">
-        <span class="why-item__num" aria-hidden="true">03</span>
-        <div class="why-item__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l8.84 8.84 8.84-8.84a5.5 5.5 0 000-7.78z"/>
+      <!-- Card 3 -->
+      <article class="whyus-card">
+        <div class="whyus-card__icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
         </div>
-        <h3 class="card-title" data-i18n="whyus.3.title">Детский приём без стресса</h3>
-        <p data-i18n="whyus.3.text">Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной обстановке</p>
+        <h3 data-i18n="whyus.3.title">Детский приём без стресса</h3>
+        <p data-i18n="whyus.3.text">Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной и спокойной обстановке</p>
       </article>
 
-      <article class="why-item">
-        <span class="why-item__num" aria-hidden="true">04</span>
-        <div class="why-item__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 11.08 22 12 12 17 2 12 2 11.08"/>
-            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-            <polyline points="6 9.6 6 15 12 18 18 15 18 9.6"/>
+      <!-- Card 4 -->
+      <article class="whyus-card">
+        <div class="whyus-card__icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <line x1="19" y1="8" x2="19" y2="14"/>
+            <line x1="16" y1="11" x2="22" y2="11"/>
           </svg>
         </div>
-        <h3 class="card-title" data-i18n="whyus.4.title">Квалифицированные специалисты</h3>
+        <h3 data-i18n="whyus.4.title">Квалифицированные специалисты</h3>
         <p data-i18n="whyus.4.text">Врачи с подтверждёнными квалификациями, регулярно проходящие курсы повышения квалификации</p>
       </article>
 
-      <article class="why-item">
-        <span class="why-item__num" aria-hidden="true">05</span>
-        <div class="why-item__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Card 5 -->
+      <article class="whyus-card">
+        <div class="whyus-card__icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
           </svg>
         </div>
-        <h3 class="card-title" data-i18n="whyus.5.title">Полный цикл лечения</h3>
-        <p data-i18n="whyus.5.text">От первой консультации до завершения курса — под наблюдением одного специалиста</p>
+        <h3 data-i18n="whyus.5.title">Полный цикл лечения</h3>
+        <p data-i18n="whyus.5.text">От первой консультации до завершения курса — под наблюдением одного специалиста, без лишних перенаправлений</p>
       </article>
 
-      <article class="why-item">
-        <span class="why-item__num" aria-hidden="true">06</span>
-        <div class="why-item__icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"/>
+      <!-- Card 6 -->
+      <article class="whyus-card">
+        <div class="whyus-card__icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
           </svg>
         </div>
-        <h3 class="card-title" data-i18n="whyus.6.title">Контроль результата</h3>
-        <p data-i18n="whyus.6.text">Контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения</p>
+        <h3 data-i18n="whyus.6.title">Контроль результата</h3>
+        <p data-i18n="whyus.6.text">Мы контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения</p>
       </article>
 
     </div>
@@ -88,78 +92,68 @@
 .whyus__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1px;           /* gap через border-collapse-подобный трюк */
-  background: var(--c-border-lt);
-  border: 1px solid var(--c-border-lt);
-  border-radius: var(--r-lg);
-  overflow: hidden;
+  gap: 12px;
 }
 
-.why-item {
-  background: var(--c-white);
-  padding: var(--s-8) var(--s-6);
-  position: relative;
-  display: grid;
-  grid-template-rows: auto auto 1fr;
+.whyus-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 2px solid #378add;
+  border-radius: 0 12px 12px 0;
+  padding: 16px;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
   gap: var(--s-3);
-  transition: background var(--t-fast);
+  transition: border-color 200ms ease;
 }
 
-.why-item:hover {
-  background: var(--c-amber-bg);
+.whyus-card:hover {
+  border-color: #cbd5e1;
+  border-left-color: #378add;
 }
 
-/* Фоновый номер — большой, бледный, декоративный */
-.why-item__num {
-  position: absolute;
-  top: var(--s-4);
-  right: var(--s-5);
-  font-family: var(--font-display);
-  font-size: 3.5rem;
-  line-height: 1;
-  color: var(--c-border);
-  user-select: none;
-  pointer-events: none;
-  transition: color var(--t-fast);
-}
-
-.why-item:hover .why-item__num {
-  color: rgba(179, 124, 40, 0.15);
-}
-
-/* Иконка */
-.why-item__icon {
-  width: 44px;
-  height: 44px;
-  background: var(--c-stone);
-  border-radius: var(--r-md);
+.whyus-card__icon-wrap {
+  width: 40px;
+  height: 40px;
+  background: rgba(55, 138, 221, 0.09);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--c-navy);
-  transition: background var(--t-fast), color var(--t-fast);
+  color: #378add;
+  flex-shrink: 0;
 }
 
-.why-item:hover .why-item__icon {
-  background: var(--c-amber);
-  color: var(--c-white);
+.whyus-card h3 {
+  font-size: 1.05rem;
+  color: var(--c-ink);
+  line-height: 1.3;
 }
 
-.why-item .card-title {
-  color: var(--c-navy);
-}
-
-.why-item p {
-  font-size: 0.875rem;
-  line-height: 1.7;
-  color: var(--c-body);
+.whyus-card p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--c-muted);
 }
 
 @media (min-width: 640px) {
-  .whyus__grid { grid-template-columns: repeat(2, 1fr); }
+  .whyus__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .whyus-card {
+    padding: 20px;
+  }
 }
 
 @media (min-width: 1024px) {
-  .whyus__grid { grid-template-columns: repeat(3, 1fr); }
+  .whyus__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .whyus-card {
+    padding: 24px;
+  }
 }
 </style>
