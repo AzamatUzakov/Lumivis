@@ -1,11 +1,10 @@
 ---
-// MapSection v2 — editorial map & contacts section
+// MapSection — Yandex Maps embed + contact details
 ---
 
 <section class="map-section section" id="contacts">
   <div class="container">
     <div class="section-header">
-      <span class="eyebrow eyebrow--amber">Локация</span>
       <h2 data-i18n="map.title">Как нас найти</h2>
     </div>
 
@@ -27,7 +26,7 @@
       <div class="map-section__details">
         <div class="contact-block">
           <div class="contact-block__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
@@ -40,7 +39,7 @@
 
         <div class="contact-block">
           <div class="contact-block__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <circle cx="12" cy="12" r="10"/>
               <polyline points="12 6 12 12 16 14"/>
             </svg>
@@ -53,7 +52,7 @@
 
         <div class="contact-block">
           <div class="contact-block__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
               <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.67 10.37a19.79 19.79 0 01-3.07-8.67A2 2 0 012.58 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.53a16 16 0 006.56 6.56l.9-.9a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
             </svg>
           </div>
@@ -65,24 +64,32 @@
           </div>
         </div>
 
-        <!-- Social Buttons -->
+        <!-- Social -->
         <div class="contact-socials">
           <a
             href="https://t.me/NKernel"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn--outline"
+            class="social-btn social-btn--tg"
             aria-label="Telegram"
           >
-            Telegram @NKernel
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+            </svg>
+            Telegram
           </a>
           <a
             href="https://www.instagram.com/abduqayyum_ocularist/"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn--outline"
+            class="social-btn social-btn--ig"
             aria-label="Instagram"
           >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
             Instagram
           </a>
         </div>
@@ -91,7 +98,7 @@
           href="https://yandex.uz/maps/org/lumivis/194206637683/?ll=66.976016%2C39.666194&z=16"
           target="_blank"
           rel="noopener noreferrer"
-          class="btn btn--primary map-route-btn"
+          class="btn btn--outline map-route-btn"
           data-i18n="map.route"
         >
           Построить маршрут
@@ -112,9 +119,9 @@
 .map-section__map {
   border-radius: var(--r-lg);
   overflow: hidden;
-  border: 1px solid var(--c-border-lt);
-  height: 380px;
-  background: var(--c-stone);
+  box-shadow: var(--shadow-card);
+  height: 360px;
+  background: var(--c-surface);
 }
 
 .map-section__map iframe {
@@ -124,14 +131,11 @@
   display: block;
 }
 
+/* Details */
 .map-section__details {
   display: flex;
   flex-direction: column;
   gap: var(--s-5);
-  background: var(--c-white);
-  padding: var(--s-8);
-  border-radius: var(--r-lg);
-  border: 1px solid var(--c-border-lt);
 }
 
 .contact-block {
@@ -141,48 +145,86 @@
 }
 
 .contact-block__icon {
-  width: 40px;
-  height: 40px;
-  background: var(--c-stone);
+  width: 44px;
+  height: 44px;
+  background: rgba(46, 134, 245, 0.08);
   border-radius: var(--r-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--c-navy);
+  color: var(--c-sky);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .contact-block__label {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--c-amber);
-  margin-bottom: 2px;
+  letter-spacing: 0.06em;
+  color: var(--c-sky);
+  margin-bottom: 4px;
 }
 
 .contact-block__value {
   font-size: 0.95rem;
-  color: var(--c-body);
+  color: var(--c-text);
   line-height: 1.5;
 }
 
 .contact-block__phone {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: var(--c-navy);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-ink);
   transition: color var(--t-fast);
 }
 
 .contact-block__phone:hover {
-  color: var(--c-amber);
+  color: var(--c-sky);
 }
 
+/* Socials */
 .contact-socials {
   display: flex;
   gap: var(--s-3);
   flex-wrap: wrap;
-  padding-top: var(--s-2);
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--r-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1.5px solid;
+  transition: all var(--t-fast);
+  text-decoration: none;
+}
+
+.social-btn--tg {
+  color: #2AABEE;
+  border-color: rgba(42, 171, 238, 0.3);
+  background: rgba(42, 171, 238, 0.05);
+}
+
+.social-btn--tg:hover {
+  background: #2AABEE;
+  color: white;
+  border-color: #2AABEE;
+}
+
+.social-btn--ig {
+  color: #E1306C;
+  border-color: rgba(225, 48, 108, 0.3);
+  background: rgba(225, 48, 108, 0.05);
+}
+
+.social-btn--ig:hover {
+  background: #E1306C;
+  color: white;
+  border-color: #E1306C;
 }
 
 .map-route-btn {
@@ -192,7 +234,7 @@
 
 @media (min-width: 900px) {
   .map-section__inner {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.6fr 1fr;
   }
 
   .map-section__map {

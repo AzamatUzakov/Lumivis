@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+// Onest — self-hosted via Fontsource (кириллица гарантирована, без зависимости от CDN)
+import "@fontsource-variable/onest";
 
 interface Props {
   title?: string;
@@ -30,14 +32,14 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_UZ" />
 
-    <!-- Preconnect for fonts -->
+    <!-- Preconnect for Google Fonts (Inter only — Onest грузится локально) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Instrument Serif (display) + DM Sans (body) -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
   </head>
   <body>
     <slot />
