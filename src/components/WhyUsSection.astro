@@ -1,159 +1,239 @@
 ---
-// WhyUsSection — 6 benefit cards with unified light-blue design
+// WhyUsSection — Variant B: editorial split
+// Left: featured "01" — unique RN-screening claim (large type + watermark)
+// Right: 5 remaining points — typographic stack, dividers only, no numbering
+// No icons · No cards · No shadows · No uniform grid
 ---
 
-<section class="whyus section section--surface" id="whyus">
+<section class="whyus section" id="whyus">
   <div class="container">
+
     <div class="section-header">
       <h2 data-i18n="whyus.title">Почему выбирают Lumivis</h2>
       <p data-i18n="whyus.subtitle">Мы не просто лечим зрение — мы берём на себя ответственность за его будущее</p>
     </div>
 
-    <div class="whyus__grid">
+    <div class="whyus__body">
 
-      <!-- Card 1 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
+      <!-- ── Left: Featured anchor — unique differentiator ── -->
+      <div class="whyus__featured">
+        <!-- "01" is decorative only — not part of a numbering system -->
+        <span class="whyus__watermark" aria-hidden="true">01</span>
+
+        <h3 class="whyus__feat-title" data-i18n="whyus.1.title">
+          Единственные в Самарканде
+        </h3>
+
+        <div class="whyus__feat-rule" aria-hidden="true"></div>
+
+        <p class="whyus__feat-text" data-i18n="whyus.1.text">
+          Только в нашей клинике проводят скрининг и лечение ретинопатии недоношенных — по всему городу
+        </p>
+      </div>
+
+      <!-- ── Right: Typographic stack — no icons, no numbers, dividers only ── -->
+      <div class="whyus__stack">
+
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.2.title">Экспертное оборудование</h3>
+          <p data-i18n="whyus.2.text">8 профессиональных аппаратов ведущих производителей для точной диагностики и аппаратного лечения</p>
         </div>
-        <h3 data-i18n="whyus.1.title">Единственные в Самарканде</h3>
-        <p data-i18n="whyus.1.text">Только в нашей клинике проводят скрининг и лечение ретинопатии недоношенных — по всему городу</p>
-      </article>
 
-      <!-- Card 2 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-            <line x1="8" y1="21" x2="16" y2="21"/>
-            <line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.3.title">Детский приём без стресса</h3>
+          <p data-i18n="whyus.3.text">Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной и спокойной обстановке</p>
         </div>
-        <h3 data-i18n="whyus.2.title">Экспертное оборудование</h3>
-        <p data-i18n="whyus.2.text">8 профессиональных аппаратов ведущих производителей для точной диагностики и аппаратного лечения</p>
-      </article>
 
-      <!-- Card 3 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.4.title">Квалифицированные специалисты</h3>
+          <p data-i18n="whyus.4.text">Врачи с подтверждёнными квалификациями, регулярно проходящие курсы повышения квалификации</p>
         </div>
-        <h3 data-i18n="whyus.3.title">Детский приём без стресса</h3>
-        <p data-i18n="whyus.3.text">Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной и спокойной обстановке</p>
-      </article>
 
-      <!-- Card 4 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <line x1="19" y1="8" x2="19" y2="14"/>
-            <line x1="16" y1="11" x2="22" y2="11"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.5.title">Полный цикл лечения</h3>
+          <p data-i18n="whyus.5.text">От первой консультации до завершения курса — под наблюдением одного специалиста, без лишних перенаправлений</p>
         </div>
-        <h3 data-i18n="whyus.4.title">Квалифицированные специалисты</h3>
-        <p data-i18n="whyus.4.text">Врачи с подтверждёнными квалификациями, регулярно проходящие курсы повышения квалификации</p>
-      </article>
 
-      <!-- Card 5 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.6.title">Контроль результата</h3>
+          <p data-i18n="whyus.6.text">Мы контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения</p>
         </div>
-        <h3 data-i18n="whyus.5.title">Полный цикл лечения</h3>
-        <p data-i18n="whyus.5.text">От первой консультации до завершения курса — под наблюдением одного специалиста, без лишних перенаправлений</p>
-      </article>
 
-      <!-- Card 6 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h3 data-i18n="whyus.6.title">Контроль результата</h3>
-        <p data-i18n="whyus.6.text">Мы контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения</p>
-      </article>
-
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-.whyus__grid {
+/* ── Section: white bg, thin borders delineate without colour ── */
+.whyus {
+  background: var(--c-white);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+/* ── Body grid: single column → split on desktop ── */
+.whyus__body {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: clamp(2rem, 5vw, 3rem);
+  align-items: start;
 }
 
-.whyus-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-left: 2px solid #378add;
-  border-radius: 0 12px 12px 0;
-  padding: 16px;
-  box-shadow: none;
+/* ─────────────────────────────────────────
+   Featured block (left zone)
+   "01" is a watermark — decorative, aria-hidden
+───────────────────────────────────────── */
+.whyus__featured {
+  position: relative;
+  overflow: hidden;
+  /* top padding creates visual room beneath the watermark number */
+  padding-top: clamp(3.5rem, 10vw, 5rem);
+  padding-bottom: var(--s-4);
+}
+
+.whyus__watermark {
+  position: absolute;
+  top: -0.18em;
+  left: -0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 22vw, 10rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--c-sky-pale);
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.03em;
+}
+
+.whyus__feat-title {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--c-ink);
+  line-height: 1.2;
+  margin-bottom: var(--s-5);
+}
+
+/* Teal accent line — only visual marker of hierarchy, not icon/number */
+.whyus__feat-rule {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 2px;
+  background: var(--c-teal);
+  margin-bottom: var(--s-5);
+  border-radius: 1px;
+}
+
+.whyus__feat-text {
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+  color: var(--c-text);
+  line-height: 1.72;
+  max-width: 40ch;
+}
+
+/* ─────────────────────────────────────────
+   Typographic stack (right zone)
+   Dividers only — no icons, no numbers
+───────────────────────────────────────── */
+.whyus__stack {
   display: flex;
   flex-direction: column;
-  gap: var(--s-3);
-  transition: border-color 200ms ease;
 }
 
-.whyus-card:hover {
-  border-color: #cbd5e1;
-  border-left-color: #378add;
+.whyus__item {
+  padding: var(--s-5) 0;
+  border-top: 1px solid var(--c-border);
 }
 
-.whyus-card__icon-wrap {
-  width: 40px;
-  height: 40px;
-  background: rgba(55, 138, 221, 0.09);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #378add;
-  flex-shrink: 0;
+.whyus__item:last-child {
+  border-bottom: 1px solid var(--c-border);
 }
 
-.whyus-card h3 {
-  font-size: 1.05rem;
+.whyus__item h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--c-ink);
   line-height: 1.3;
+  margin-bottom: var(--s-2);
 }
 
-.whyus-card p {
-  font-size: 0.9rem;
-  line-height: 1.65;
+.whyus__item p {
+  font-size: 0.875rem;
   color: var(--c-muted);
+  line-height: 1.6;
 }
 
-@media (min-width: 640px) {
-  .whyus__grid {
+/* ── Tablet (640–899px): featured full-width → stack 2-col grid ── */
+@media (min-width: 640px) and (max-width: 899px) {
+  .whyus__stack {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    column-gap: var(--s-8);
   }
-  .whyus-card {
-    padding: 20px;
+
+  /* In 2-col grid, only top border — bottom applied at container level */
+  .whyus__item {
+    border-top: 1px solid var(--c-border);
+    border-bottom: none;
+    padding: var(--s-4) 0;
+  }
+
+  .whyus__item:last-child {
+    border-bottom: none;
+  }
+
+  /* Visual bottom rule under the whole stack on tablet */
+  .whyus__stack {
+    border-bottom: 1px solid var(--c-border);
+    padding-bottom: var(--s-2);
   }
 }
 
-@media (min-width: 1024px) {
-  .whyus__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+/* ── Desktop (≥900px): 55/45 editorial split ── */
+@media (min-width: 900px) {
+  .whyus__body {
+    grid-template-columns: 55fr 45fr;
+    gap: clamp(3rem, 6vw, 5.5rem);
   }
-  .whyus-card {
-    padding: 24px;
+
+  .whyus__featured {
+    padding-top: clamp(4.5rem, 9vw, 6rem);
+    padding-bottom: var(--s-8);
+    /* Subtle column separator */
+    border-right: 1px solid var(--c-border);
+    padding-right: clamp(2rem, 4vw, 4rem);
   }
+
+  .whyus__watermark {
+    font-size: clamp(8rem, 12vw, 11rem);
+  }
+
+  .whyus__feat-text {
+    max-width: none;
+  }
+
+  /* Stack items fill the right column proportionally */
+  .whyus__stack {
+    padding-top: var(--s-2);
+  }
+
+  .whyus__item {
+    padding: var(--s-4) 0;
+  }
+}
+
+/* ── Focus states for accessibility ── */
+.whyus__item h3:focus-visible {
+  outline: 2px solid var(--c-sky);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 </style>
