@@ -1,14 +1,22 @@
 ---
 // DoctorsSection — 8 team cards with smooth bottom fade to white
 const doctors = [
-  { id: 1, image: "/doctors/doctor-3.png", bgClass: "doctor-card__photo--3" },
-  { id: 2, image: "/doctors/doctor-2.png", bgClass: "doctor-card__photo--2" },
-  { id: 3, image: "/doctors/doctor-5.png", bgClass: "doctor-card__photo--5" },
-  { id: 4, image: "/doctors/doctor-6.png", bgClass: "doctor-card__photo--6" },
-  { id: 5, image: "/doctors/doctor-7.png", bgClass: "doctor-card__photo--7" },
-  { id: 6, image: "/doctors/doctor-4.png", bgClass: "doctor-card__photo--4" },
-  { id: 7, image: "/doctors/doctor-8.png", bgClass: "doctor-card__photo--8" },
-  { id: 8, image: "/doctors/doctor-1.png", bgClass: "doctor-card__photo--1" },
+  { id: 1, image: "/doctors/doctor-3.png", bgClass: "doctor-card__photo--3",
+    nameRu: "Бобоев Саидафзал Абдурахманович", specRu: "Офтальмохирург, к.м.н., доцент" },
+  { id: 2, image: "/doctors/doctor-2.png", bgClass: "doctor-card__photo--2",
+    nameRu: "Ражабов Санжар Мансурович", specRu: "Офтальмохирург, катарактолог" },
+  { id: 3, image: "/doctors/doctor-5.png", bgClass: "doctor-card__photo--5",
+    nameRu: "Абдурахмонов Фаридун Саидакбарович", specRu: "Детский офтальмолог, страбизмолог" },
+  { id: 4, image: "/doctors/doctor-6.png", bgClass: "doctor-card__photo--6",
+    nameRu: "Раупова Парвина Хасановна", specRu: "Врач-окулист" },
+  { id: 5, image: "/doctors/doctor-7.png", bgClass: "doctor-card__photo--7",
+    nameRu: "Зикириллоев Абдурасул Нусратиллоевич", specRu: "Офтальмохирург-катарактолог, главный врач" },
+  { id: 6, image: "/doctors/doctor-4.png", bgClass: "doctor-card__photo--4",
+    nameRu: "Мусинов Абдукаюм Суюнбоевич", specRu: "Врач-окулист" },
+  { id: 7, image: "/doctors/doctor-8.png", bgClass: "doctor-card__photo--8",
+    nameRu: "Мусинов Хусниддин Суюнбоевич", specRu: "Окулярист" },
+  { id: 8, image: "/doctors/doctor-1.png", bgClass: "doctor-card__photo--1",
+    nameRu: "Бобоев Сиёвуш Саидафзалзода", specRu: "Офтальмохирург, Ph.D" },
 ];
 ---
 
@@ -26,7 +34,7 @@ const doctors = [
             {doc.image ? (
               <img
                 src={doc.image}
-                alt={`Врач-офтальмолог ${doc.id}`}
+                alt={`${doc.nameRu}, ${doc.specRu}`}
                 class="doctor-card__img"
                 loading="lazy"
               />
@@ -40,8 +48,8 @@ const doctors = [
             )}
           </div>
           <div class="doctor-card__info">
-            <h3 class="doctor-card__name" data-i18n={`doctor.${doc.id}.name`}>Врач-офтальмолог #{doc.id}</h3>
-            <p class="doctor-card__spec" data-i18n={`doctor.${doc.id}.spec`}>Специализация уточняется</p>
+            <h3 class="doctor-card__name" data-i18n={`doctor.${doc.id}.name`}>{doc.nameRu}</h3>
+            <p class="doctor-card__spec" data-i18n={`doctor.${doc.id}.spec`}>{doc.specRu}</p>
           </div>
         </article>
       ))}
