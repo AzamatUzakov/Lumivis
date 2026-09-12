@@ -193,7 +193,6 @@ p {
   background: var(--c-sky-light);
   border-color: var(--c-sky-light);
   color: var(--c-white);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-blue);
 }
 
@@ -206,7 +205,6 @@ p {
   border-color: var(--c-sky);
   color: var(--c-sky);
   background: rgba(46, 134, 245, 0.05);
-  transform: translateY(-2px);
 }
 
 .btn--outline-white {
@@ -229,7 +227,6 @@ p {
   background: var(--c-teal-light);
   border-color: var(--c-teal-light);
   color: var(--c-white);
-  transform: translateY(-2px);
 }
 
 /* ── Badge / Pill ── */
@@ -241,8 +238,7 @@ p {
   border-radius: var(--r-full);
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   line-height: 1.35;
   max-width: 100%;
   box-sizing: border-box;

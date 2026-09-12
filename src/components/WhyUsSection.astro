@@ -1,159 +1,361 @@
 ---
-// WhyUsSection — 6 benefit cards with unified light-blue design
+// WhyUsSection.astro — Editorial split layout for Lumivis
 ---
 
-<section class="whyus section section--surface" id="whyus">
+<section class="whyus section" id="whyus">
   <div class="container">
+
     <div class="section-header">
-      <h2 data-i18n="whyus.title">Почему выбирают Lumivis</h2>
-      <p data-i18n="whyus.subtitle">Мы не просто лечим зрение — мы берём на себя ответственность за его будущее</p>
+      <h2 data-i18n="whyus.title">Nima uchun Lumivis?</h2>
+      <p data-i18n="whyus.subtitle">Biz faqat ko'rishni davolamaymiz — uning kelajagi uchun javobgarlik olamiz</p>
     </div>
 
-    <div class="whyus__grid">
+    <div class="whyus__body">
 
-      <!-- Card 1 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
+      <!-- ── Left Column (Item #1 + Fact Stat) ── -->
+      <div class="whyus__featured">
+        <!-- Decorative Watermark "01" -->
+        <span class="whyus__watermark" aria-hidden="true">01</span>
+
+        <h3 class="whyus__feat-title" data-i18n="whyus.1.title">
+          Samarqandda yagona
+        </h3>
+
+        <div class="whyus__feat-rule" aria-hidden="true"></div>
+
+        <p class="whyus__feat-text" data-i18n="whyus.1.text">
+          Shaharda chaqaloqlarda retinopathiya skrining va davolashni amalga oshiradigan yagona klinika
+        </p>
+
+        <!-- Compact Fact-Stat Block -->
+        <div class="whyus__stat">
+          <div class="whyus__stat-num" data-i18n="whyus.stat.num">3–6 hafta</div>
+          <div class="whyus__stat-label" data-i18n="whyus.stat.label">
+            chaqaloqlarda birinchi ko'rik uchun eng maqbul muddat
+          </div>
         </div>
-        <h3 data-i18n="whyus.1.title">Единственные в Самарканде</h3>
-        <p data-i18n="whyus.1.text">Только в нашей клинике проводят скрининг и лечение ретинопатии недоношенных — по всему городу</p>
-      </article>
+      </div>
 
-      <!-- Card 2 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-            <line x1="8" y1="21" x2="16" y2="21"/>
-            <line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
+      <!-- ── Right Column (Items #2–#6) ── -->
+      <div class="whyus__stack">
+
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.2.title">Zamonaviy jihozlar</h3>
+          <p data-i18n="whyus.2.text">Aniq diagnostika va apparatli davolash uchun 8 ta professional apparat</p>
         </div>
-        <h3 data-i18n="whyus.2.title">Экспертное оборудование</h3>
-        <p data-i18n="whyus.2.text">8 профессиональных аппаратов ведущих производителей для точной диагностики и аппаратного лечения</p>
-      </article>
 
-      <!-- Card 3 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.3.title">Bolalarda stresssiz qabul</h3>
+          <p data-i18n="whyus.3.text">Kichik bemorlarga maxsus yondashuv: og'riqsiz, ehtiyotkorlik bilan va qulay muhitda</p>
         </div>
-        <h3 data-i18n="whyus.3.title">Детский приём без стресса</h3>
-        <p data-i18n="whyus.3.text">Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной и спокойной обстановке</p>
-      </article>
 
-      <!-- Card 4 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <line x1="19" y1="8" x2="19" y2="14"/>
-            <line x1="16" y1="11" x2="22" y2="11"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.4.title">Malakali mutaxassislar</h3>
+          <p data-i18n="whyus.4.text">Tasdiqlangan malakaga ega va muntazam malaka oshirib boradigan shifokorlar</p>
         </div>
-        <h3 data-i18n="whyus.4.title">Квалифицированные специалисты</h3>
-        <p data-i18n="whyus.4.text">Врачи с подтверждёнными квалификациями, регулярно проходящие курсы повышения квалификации</p>
-      </article>
 
-      <!-- Card 5 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
+        <div class="whyus__item">
+          <h3 data-i18n="whyus.5.title">To'liq davolash sikli</h3>
+          <p data-i18n="whyus.5.text">Dastlabki maslahatlashuvdan kurs yakunigacha — bir mutaxassis nazoratida</p>
         </div>
-        <h3 data-i18n="whyus.5.title">Полный цикл лечения</h3>
-        <p data-i18n="whyus.5.text">От первой консультации до завершения курса — под наблюдением одного специалиста, без лишних перенаправлений</p>
-      </article>
 
-      <!-- Card 6 -->
-      <article class="whyus-card">
-        <div class="whyus-card__icon-wrap" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
+        <div class="whyus__item whyus__item--full">
+          <h3 data-i18n="whyus.6.title">Natijani nazorat qilish</h3>
+          <p data-i18n="whyus.6.text">Har bir bosqichda natijalarni nazorat qilamiz va davolash natijasi uchun javob beramiz</p>
         </div>
-        <h3 data-i18n="whyus.6.title">Контроль результата</h3>
-        <p data-i18n="whyus.6.text">Мы контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения</p>
-      </article>
 
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-.whyus__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+/* ── Section Container ── */
+.whyus {
+  background: var(--c-white);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  position: relative;
+  overflow: hidden;
 }
 
-.whyus-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-left: 2px solid #378add;
-  border-radius: 0 12px 12px 0;
-  padding: 16px;
-  box-shadow: none;
+/* ── Section Header ── */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  width: 100%;
+}
+
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+
+.section-header p {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: var(--c-muted);
+  max-width: 52ch;
+  margin-inline: auto;
+  line-height: 1.6;
+  word-break: break-word;
+  padding-inline: 0.5rem;
+}
+
+/* ── Body Layout ── */
+/* Base / Mobile (<640px): 1 column stack */
+.whyus__body {
   display: flex;
   flex-direction: column;
-  gap: var(--s-3);
-  transition: border-color 200ms ease;
+  gap: 2rem;
 }
 
-.whyus-card:hover {
-  border-color: #cbd5e1;
-  border-left-color: #378add;
-}
-
-.whyus-card__icon-wrap {
-  width: 40px;
-  height: 40px;
-  background: rgba(55, 138, 221, 0.09);
-  border-radius: 10px;
+/* ── Left Column / Featured Item #1 ── */
+.whyus__featured {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #378add;
-  flex-shrink: 0;
+  flex-direction: column;
+  padding-top: clamp(3.25rem, 8vw, 4.5rem);
 }
 
-.whyus-card h3 {
-  font-size: 1.05rem;
+.whyus__watermark {
+  position: absolute;
+  top: 0;
+  left: -0.02em;
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 18vw, 7.5rem);
+  font-weight: 900;
+  line-height: 0.85;
+  color: var(--c-sky-pale);
+  opacity: 0.35;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.03em;
+}
+
+.whyus__feat-title {
+  position: relative;
+  z-index: 1;
+  order: 1;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
   color: var(--c-ink);
-  line-height: 1.3;
+  line-height: 1.25;
+  margin-bottom: 1rem;
 }
 
-.whyus-card p {
-  font-size: 0.9rem;
-  line-height: 1.65;
+/* Mobile (<640px) order: title (1) -> description (2) -> teal line (3) -> stat (4) */
+.whyus__feat-text {
+  position: relative;
+  z-index: 1;
+  order: 2;
+  font-size: 1rem;
+  color: var(--c-text);
+  line-height: 1.7;
+  max-width: 38ch;
+  margin-bottom: 1rem;
+}
+
+.whyus__feat-rule {
+  position: relative;
+  z-index: 1;
+  order: 3;
+  width: 70px;
+  height: 3px;
+  background: var(--c-teal);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+}
+
+/* Standalone Fact-Stat Accent Block */
+.whyus__stat {
+  position: relative;
+  z-index: 1;
+  order: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--c-border);
+  margin-top: 0.5rem;
+  max-width: 38ch;
+}
+
+.whyus__stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  color: var(--c-teal);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.whyus__stat-label {
+  font-size: 0.85rem;
   color: var(--c-muted);
+  line-height: 1.5;
 }
 
+/* ── Right Column / Stack (Items #2–#6) ── */
+.whyus__stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.whyus__item {
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--c-border);
+}
+
+.whyus__item:last-child {
+  border-bottom: 1px solid var(--c-border);
+}
+
+.whyus__item h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-ink);
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+}
+
+.whyus__item p {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  line-height: 1.55;
+}
+
+/* ──────────────────────────────────────────────
+   TABLET (640px – 1023px)
+   - Item 1 full width top, restricted max-width
+   - Order: title (1) -> teal line (2) -> description (3) -> stat (4)
+   - Items 2–6 in 2-column grid, 6th item full width bottom
+────────────────────────────────────────────── */
 @media (min-width: 640px) {
-  .whyus__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+  .whyus__featured {
+    max-width: 580px;
+    padding-top: clamp(3rem, 7vw, 4.5rem);
   }
-  .whyus-card {
-    padding: 20px;
+
+  .whyus__watermark {
+    font-size: clamp(7rem, 14vw, 9rem);
+  }
+
+  .whyus__feat-rule {
+    order: 2;
+    margin-bottom: 1rem;
+  }
+
+  .whyus__feat-text {
+    order: 3;
+    margin-bottom: 0;
+  }
+
+  .whyus__stat {
+    order: 4;
+    margin-top: 1.5rem;
+  }
+
+  /* Right items become a 2-col grid */
+  .whyus__stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+  }
+
+  .whyus__item {
+    border-top: 1px solid var(--c-border);
+    border-bottom: none;
+    padding: 1.25rem 0;
+  }
+
+  .whyus__item:last-child {
+    border-bottom: none;
+  }
+
+  /* Item 6 (5th child in right stack) spans full width at bottom */
+  .whyus__item--full {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
   }
 }
 
+/* ──────────────────────────────────────────────
+   DESKTOP (≥1024px) — TWO COLUMNS (55% / 45%)
+────────────────────────────────────────────── */
 @media (min-width: 1024px) {
-  .whyus__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+  .whyus__body {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    column-gap: clamp(3rem, 5vw, 5rem);
+    align-items: stretch;
   }
-  .whyus-card {
-    padding: 24px;
+
+  .whyus__featured {
+    max-width: none;
+    height: 100%;
+    padding-top: clamp(3.5rem, 8vw, 5rem);
+    padding-right: clamp(1.5rem, 3vw, 3rem);
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .whyus__watermark {
+    font-size: clamp(8rem, 10vw, 10rem);
+    opacity: 0.35;
+  }
+
+  .whyus__feat-title {
+    order: 1;
+  }
+
+  .whyus__feat-rule {
+    order: 2;
+    margin-bottom: 1.25rem;
+  }
+
+  .whyus__feat-text {
+    order: 3;
+  }
+
+  .whyus__stat {
+    order: 4;
+    margin-top: auto; /* Anchors fact block cleanly to the bottom of the left column */
+    padding-top: 1.5rem;
+  }
+
+  .whyus__stack {
+    display: flex;
+    flex-direction: column;
+    column-gap: 0;
+    margin-top: 0;
+    padding-top: 0.5rem;
+  }
+
+  .whyus__item {
+    border-top: 1px solid var(--c-border);
+    border-bottom: none;
+    padding: 1.2rem 0;
+  }
+
+  .whyus__item:last-child {
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .whyus__item--full {
+    grid-column: auto;
+    border-bottom: 1px solid var(--c-border);
   }
 }
 </style>
+
+

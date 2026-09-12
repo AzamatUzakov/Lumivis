@@ -1,14 +1,22 @@
 ---
 // DoctorsSection — 8 team cards with smooth bottom fade to white
 const doctors = [
-  { id: 1, image: "/doctors/doctor-3.png", bgClass: "doctor-card__photo--3" },
-  { id: 2, image: "/doctors/doctor-2.png", bgClass: "doctor-card__photo--2" },
-  { id: 3, image: "/doctors/doctor-5.png", bgClass: "doctor-card__photo--5" },
-  { id: 4, image: "/doctors/doctor-6.png", bgClass: "doctor-card__photo--6" },
-  { id: 5, image: "/doctors/doctor-7.png", bgClass: "doctor-card__photo--7" },
-  { id: 6, image: "/doctors/doctor-4.png", bgClass: "doctor-card__photo--4" },
-  { id: 7, image: "/doctors/doctor-8.png", bgClass: "doctor-card__photo--8" },
-  { id: 8, image: "/doctors/doctor-1.png", bgClass: "doctor-card__photo--1" },
+  { id: 1, image: "/doctors/doctor-3.png", bgClass: "doctor-card__photo--3",
+    nameRu: "Бобоев Саидафзал Абдурахманович", specRu: "Офтальмохирург, к.м.н., доцент" },
+  { id: 2, image: "/doctors/doctor-2.png", bgClass: "doctor-card__photo--2",
+    nameRu: "Ражабов Санжар Мансурович", specRu: "Офтальмохирург, катарактолог" },
+  { id: 3, image: "/doctors/doctor-5.png", bgClass: "doctor-card__photo--5",
+    nameRu: "Абдурахмонов Фаридун Саидакбарович", specRu: "Детский офтальмолог, страбизмолог" },
+  { id: 4, image: "/doctors/doctor-6.png", bgClass: "doctor-card__photo--6",
+    nameRu: "Раупова Парвина Хасановна", specRu: "Врач-окулист" },
+  { id: 5, image: "/doctors/doctor-7.png", bgClass: "doctor-card__photo--7",
+    nameRu: "Зикириллоев Абдурасул Нусратиллоевич", specRu: "Офтальмохирург-катарактолог, главный врач" },
+  { id: 6, image: "/doctors/doctor-4.png", bgClass: "doctor-card__photo--4",
+    nameRu: "Мусинов Абдукаюм Суюнбоевич", specRu: "Врач-окулист" },
+  { id: 7, image: "/doctors/doctor-8.png", bgClass: "doctor-card__photo--8",
+    nameRu: "Мусинов Хусниддин Суюнбоевич", specRu: "Окулярист" },
+  { id: 8, image: "/doctors/doctor-1.png", bgClass: "doctor-card__photo--1",
+    nameRu: "Бобоев Сиёвуш Саидафзалзода", specRu: "Офтальмохирург, Ph.D" },
 ];
 ---
 
@@ -26,7 +34,7 @@ const doctors = [
             {doc.image ? (
               <img
                 src={doc.image}
-                alt={`Врач-офтальмолог ${doc.id}`}
+                alt={`${doc.nameRu}, ${doc.specRu}`}
                 class="doctor-card__img"
                 loading="lazy"
               />
@@ -40,8 +48,8 @@ const doctors = [
             )}
           </div>
           <div class="doctor-card__info">
-            <h3 class="doctor-card__name" data-i18n={`doctor.${doc.id}.name`}>Врач-офтальмолог #{doc.id}</h3>
-            <p class="doctor-card__spec" data-i18n={`doctor.${doc.id}.spec`}>Специализация уточняется</p>
+            <h3 class="doctor-card__name" data-i18n={`doctor.${doc.id}.name`}>{doc.nameRu}</h3>
+            <p class="doctor-card__spec" data-i18n={`doctor.${doc.id}.spec`}>{doc.specRu}</p>
           </div>
         </article>
       ))}
@@ -62,12 +70,6 @@ const doctors = [
   box-shadow: var(--shadow-card);
   background: var(--c-white);
   border: 1px solid var(--c-border);
-  transition: transform var(--t-base), box-shadow var(--t-base);
-}
-
-.doctor-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-card-hover);
 }
 
 /* Photo container with background gradients */
@@ -78,19 +80,7 @@ const doctors = [
   display: flex;
   align-items: flex-end;
   justify-content: center;
-}
-
-/* Smooth gradient fade to white at bottom of photo */
-.doctor-card__photo::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 45%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-  pointer-events: none;
-  z-index: 2;
+  border-bottom: 3px solid var(--c-teal);
 }
 
 /* Rich background themes for photos */
@@ -129,26 +119,27 @@ const doctors = [
   position: relative;
   z-index: 3;
   background: var(--c-white);
-  padding: 0 var(--s-5) var(--s-6) var(--s-5);
-  margin-top: -0.5rem;
+  padding: var(--s-5);
   display: flex;
   flex-direction: column;
   gap: var(--s-2);
-  text-align: center;
+  text-align: left;
 }
 
 .doctor-card__name {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--c-ink);
   line-height: 1.3;
+  text-align: left;
 }
 
 .doctor-card__spec {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--c-muted);
   line-height: 1.4;
+  text-align: left;
 }
 
 /* Responsive Grid */
