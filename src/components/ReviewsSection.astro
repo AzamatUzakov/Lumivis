@@ -55,8 +55,12 @@
           Записывался на плановую проверку зрения — приятно удивлён профессионализмом и оснащением. Лучшая офтальмологическая клиника в Самарканде.
         </p>
         <div class="review-card__footer">
-          <div class="review-card__stars" aria-label="5 из 5 звёзд">
-            ★★★★★
+          <div class="review-card__badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span data-i18n="review.3.verified">Подтверждённый визит</span>
           </div>
           <cite class="review-card__author" data-i18n="review.3.author">А.К., Самарканд, 42 года</cite>
         </div>
@@ -124,6 +128,19 @@
   color: #F59E0B;
   font-size: 0.9rem;
   letter-spacing: 2px;
+}
+
+.review-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0d9488;
+  background: #f0fdfa;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccfbf1;
 }
 
 .review-card__author {

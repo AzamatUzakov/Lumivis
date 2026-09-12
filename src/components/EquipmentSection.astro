@@ -169,11 +169,11 @@ const equipment = [
   line-height: 1.5;
 }
 
-/* Left-border accent every 4th card */
-.equip-card:nth-child(4n+1) { border-left: 3px solid var(--c-sky); }
-.equip-card:nth-child(4n+2) { border-left: 3px solid var(--c-teal); }
-.equip-card:nth-child(4n+3) { border-left: 3px solid var(--c-sky-light); }
-.equip-card:nth-child(4n)   { border-left: 3px solid var(--c-teal-light); }
+/* Clean subtle border for equipment cards */
+.equip-card {
+  border: 1px solid var(--c-border);
+  border-top: 3px solid var(--c-sky-pale);
+}
 
 @media (min-width: 768px) {
   .equipment__grid {

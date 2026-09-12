@@ -114,7 +114,7 @@
 <style>
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #ffffff 0%, #f0f6ff 60%, #e5f0ff 100%);
+  background: linear-gradient(135deg, #fdfdfd 0%, #f4f7fb 55%, #e9f1fa 100%);
   overflow: hidden;
   padding-block: clamp(3rem, 8vw, 5.5rem);
 }
@@ -215,16 +215,7 @@
   width: 420px;
   height: 420px;
   pointer-events: none;
-  animation: iris-rotate 30s linear infinite;
-}
-
-@keyframes iris-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__iris-ring { animation: none; }
+  opacity: 0.65;
 }
 
 .hero__img-wrap {
