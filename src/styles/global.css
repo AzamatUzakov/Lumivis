@@ -241,8 +241,7 @@ p {
   border-radius: var(--r-full);
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   line-height: 1.35;
   max-width: 100%;
   box-sizing: border-box;
