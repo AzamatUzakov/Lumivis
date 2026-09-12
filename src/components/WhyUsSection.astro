@@ -1,62 +1,67 @@
 ---
-// WhyUsSection — Variant B: editorial split
-// Left: featured "01" — unique RN-screening claim (large type + watermark)
-// Right: 5 remaining points — typographic stack, dividers only, no numbering
-// No icons · No cards · No shadows · No uniform grid
+// WhyUsSection.astro — Editorial split layout for Lumivis
 ---
 
 <section class="whyus section" id="whyus">
   <div class="container">
 
     <div class="section-header">
-      <h2 data-i18n="whyus.title">Почему выбирают Lumivis</h2>
-      <p data-i18n="whyus.subtitle">Мы не просто лечим зрение — мы берём на себя ответственность за его будущее</p>
+      <h2 data-i18n="whyus.title">Nima uchun Lumivis?</h2>
+      <p data-i18n="whyus.subtitle">Biz faqat ko'rishni davolamaymiz — uning kelajagi uchun javobgarlik olamiz</p>
     </div>
 
     <div class="whyus__body">
 
-      <!-- ── Left: Featured anchor — unique differentiator ── -->
+      <!-- ── Left Column (Item #1 + Fact Stat) ── -->
       <div class="whyus__featured">
-        <!-- "01" is decorative only — not part of a numbering system -->
+        <!-- Decorative Watermark "01" -->
         <span class="whyus__watermark" aria-hidden="true">01</span>
 
         <h3 class="whyus__feat-title" data-i18n="whyus.1.title">
-          Единственные в Самарканде
+          Samarqandda yagona
         </h3>
 
         <div class="whyus__feat-rule" aria-hidden="true"></div>
 
         <p class="whyus__feat-text" data-i18n="whyus.1.text">
-          Только в нашей клинике проводят скрининг и лечение ретинопатии недоношенных — по всему городу
+          Shaharda chaqaloqlarda retinopathiya skrining va davolashni amalga oshiradigan yagona klinika
         </p>
+
+        <!-- Compact Fact-Stat Block -->
+        <div class="whyus__stat">
+          <div class="whyus__stat-num" data-i18n="whyus.stat.num">3–6 hafta</div>
+          <div class="whyus__stat-label" data-i18n="whyus.stat.label">
+            chaqaloqlarda birinchi ko'rik uchun eng maqbul muddat
+          </div>
+        </div>
       </div>
 
-      <!-- ── Right: Typographic stack — no icons, no numbers, dividers only ── -->
+      <!-- ── Right Column (Items #2–#6) ── -->
       <div class="whyus__stack">
 
         <div class="whyus__item">
-          <h3 data-i18n="whyus.2.title">Экспертное оборудование</h3>
-          <p data-i18n="whyus.2.text">8 профессиональных аппаратов ведущих производителей для точной диагностики и аппаратного лечения</p>
+          <h3 data-i18n="whyus.2.title">Zamonaviy jihozlar</h3>
+          <p data-i18n="whyus.2.text">Aniq diagnostika va apparatli davolash uchun 8 ta professional apparat</p>
         </div>
 
         <div class="whyus__item">
-          <h3 data-i18n="whyus.3.title">Детский приём без стресса</h3>
-          <p data-i18n="whyus.3.text">Особый подход к маленьким пациентам: безболезненно, с заботой, в комфортной и спокойной обстановке</p>
+          <h3 data-i18n="whyus.3.title">Bolalarda stresssiz qabul</h3>
+          <p data-i18n="whyus.3.text">Kichik bemorlarga maxsus yondashuv: og'riqsiz, ehtiyotkorlik bilan va qulay muhitda</p>
         </div>
 
         <div class="whyus__item">
-          <h3 data-i18n="whyus.4.title">Квалифицированные специалисты</h3>
-          <p data-i18n="whyus.4.text">Врачи с подтверждёнными квалификациями, регулярно проходящие курсы повышения квалификации</p>
+          <h3 data-i18n="whyus.4.title">Malakali mutaxassislar</h3>
+          <p data-i18n="whyus.4.text">Tasdiqlangan malakaga ega va muntazam malaka oshirib boradigan shifokorlar</p>
         </div>
 
         <div class="whyus__item">
-          <h3 data-i18n="whyus.5.title">Полный цикл лечения</h3>
-          <p data-i18n="whyus.5.text">От первой консультации до завершения курса — под наблюдением одного специалиста, без лишних перенаправлений</p>
+          <h3 data-i18n="whyus.5.title">To'liq davolash sikli</h3>
+          <p data-i18n="whyus.5.text">Dastlabki maslahatlashuvdan kurs yakunigacha — bir mutaxassis nazoratida</p>
         </div>
 
-        <div class="whyus__item">
-          <h3 data-i18n="whyus.6.title">Контроль результата</h3>
-          <p data-i18n="whyus.6.text">Мы контролируем динамику на каждом этапе и несём ответственность за исход каждого курса лечения</p>
+        <div class="whyus__item whyus__item--full">
+          <h3 data-i18n="whyus.6.title">Natijani nazorat qilish</h3>
+          <p data-i18n="whyus.6.text">Har bir bosqichda natijalarni nazorat qilamiz va davolash natijasi uchun javob beramiz</p>
         </div>
 
       </div>
@@ -65,43 +70,67 @@
 </section>
 
 <style>
-/* ── Section: white bg, thin borders delineate without colour ── */
+/* ── Section Container ── */
 .whyus {
   background: var(--c-white);
   border-top: 1px solid var(--c-border);
   border-bottom: 1px solid var(--c-border);
-}
-
-/* ── Body grid: single column → split on desktop ── */
-.whyus__body {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2rem, 5vw, 3rem);
-  align-items: start;
-}
-
-/* ─────────────────────────────────────────
-   Featured block (left zone)
-   "01" is a watermark — decorative, aria-hidden
-───────────────────────────────────────── */
-.whyus__featured {
   position: relative;
   overflow: hidden;
-  /* top padding creates visual room beneath the watermark number */
-  padding-top: clamp(3.5rem, 10vw, 5rem);
-  padding-bottom: var(--s-4);
+}
+
+/* ── Section Header ── */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  width: 100%;
+}
+
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+
+.section-header p {
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  color: var(--c-muted);
+  max-width: 52ch;
+  margin-inline: auto;
+  line-height: 1.6;
+  word-break: break-word;
+  padding-inline: 0.5rem;
+}
+
+/* ── Body Layout ── */
+/* Base / Mobile (<640px): 1 column stack */
+.whyus__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Left Column / Featured Item #1 ── */
+.whyus__featured {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(3.25rem, 8vw, 4.5rem);
 }
 
 .whyus__watermark {
   position: absolute;
-  top: -0.18em;
-  left: -0.04em;
+  top: 0;
+  left: -0.02em;
   font-family: var(--font-display);
-  font-size: clamp(6rem, 22vw, 10rem);
+  font-size: clamp(5.5rem, 18vw, 7.5rem);
   font-weight: 900;
-  line-height: 1;
+  line-height: 0.85;
   color: var(--c-sky-pale);
-  opacity: 0.55;
+  opacity: 0.35;
   pointer-events: none;
   user-select: none;
   z-index: 0;
@@ -111,45 +140,77 @@
 .whyus__feat-title {
   position: relative;
   z-index: 1;
-  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  order: 1;
   font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 700;
   color: var(--c-ink);
-  line-height: 1.2;
-  margin-bottom: var(--s-5);
+  line-height: 1.25;
+  margin-bottom: 1rem;
 }
 
-/* Teal accent line — only visual marker of hierarchy, not icon/number */
-.whyus__feat-rule {
-  position: relative;
-  z-index: 1;
-  width: 36px;
-  height: 2px;
-  background: var(--c-teal);
-  margin-bottom: var(--s-5);
-  border-radius: 1px;
-}
-
+/* Mobile (<640px) order: title (1) -> description (2) -> teal line (3) -> stat (4) */
 .whyus__feat-text {
   position: relative;
   z-index: 1;
+  order: 2;
   font-size: 1rem;
   color: var(--c-text);
-  line-height: 1.72;
-  max-width: 40ch;
+  line-height: 1.7;
+  max-width: 38ch;
+  margin-bottom: 1rem;
 }
 
-/* ─────────────────────────────────────────
-   Typographic stack (right zone)
-   Dividers only — no icons, no numbers
-───────────────────────────────────────── */
+.whyus__feat-rule {
+  position: relative;
+  z-index: 1;
+  order: 3;
+  width: 70px;
+  height: 3px;
+  background: var(--c-teal);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+}
+
+/* Standalone Fact-Stat Accent Block */
+.whyus__stat {
+  position: relative;
+  z-index: 1;
+  order: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--c-border);
+  margin-top: 0.5rem;
+  max-width: 38ch;
+}
+
+.whyus__stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  color: var(--c-teal);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.whyus__stat-label {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  line-height: 1.5;
+}
+
+/* ── Right Column / Stack (Items #2–#6) ── */
 .whyus__stack {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .whyus__item {
-  padding: var(--s-5) 0;
+  padding: 1.25rem 0;
   border-top: 1px solid var(--c-border);
 }
 
@@ -158,82 +219,143 @@
 }
 
 .whyus__item h3 {
+  font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--c-ink);
-  line-height: 1.3;
-  margin-bottom: var(--s-2);
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
 }
 
 .whyus__item p {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: var(--c-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-/* ── Tablet (640–899px): featured full-width → stack 2-col grid ── */
-@media (min-width: 640px) and (max-width: 899px) {
+/* ──────────────────────────────────────────────
+   TABLET (640px – 1023px)
+   - Item 1 full width top, restricted max-width
+   - Order: title (1) -> teal line (2) -> description (3) -> stat (4)
+   - Items 2–6 in 2-column grid, 6th item full width bottom
+────────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .whyus__featured {
+    max-width: 580px;
+    padding-top: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .whyus__watermark {
+    font-size: clamp(7rem, 14vw, 9rem);
+  }
+
+  .whyus__feat-rule {
+    order: 2;
+    margin-bottom: 1rem;
+  }
+
+  .whyus__feat-text {
+    order: 3;
+    margin-bottom: 0;
+  }
+
+  .whyus__stat {
+    order: 4;
+    margin-top: 1.5rem;
+  }
+
+  /* Right items become a 2-col grid */
   .whyus__stack {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: var(--s-8);
+    column-gap: 2rem;
   }
 
-  /* In 2-col grid, only top border — bottom applied at container level */
   .whyus__item {
     border-top: 1px solid var(--c-border);
     border-bottom: none;
-    padding: var(--s-4) 0;
+    padding: 1.25rem 0;
   }
 
   .whyus__item:last-child {
     border-bottom: none;
   }
 
-  /* Visual bottom rule under the whole stack on tablet */
-  .whyus__stack {
+  /* Item 6 (5th child in right stack) spans full width at bottom */
+  .whyus__item--full {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--c-border);
     border-bottom: 1px solid var(--c-border);
-    padding-bottom: var(--s-2);
   }
 }
 
-/* ── Desktop (≥900px): 55/45 editorial split ── */
-@media (min-width: 900px) {
+/* ──────────────────────────────────────────────
+   DESKTOP (≥1024px) — TWO COLUMNS (55% / 45%)
+────────────────────────────────────────────── */
+@media (min-width: 1024px) {
   .whyus__body {
+    display: grid;
     grid-template-columns: 55fr 45fr;
-    gap: clamp(3rem, 6vw, 5.5rem);
+    column-gap: clamp(3rem, 5vw, 5rem);
+    align-items: stretch;
   }
 
   .whyus__featured {
-    padding-top: clamp(4.5rem, 9vw, 6rem);
-    padding-bottom: var(--s-8);
-    /* Subtle column separator */
-    border-right: 1px solid var(--c-border);
-    padding-right: clamp(2rem, 4vw, 4rem);
+    max-width: none;
+    height: 100%;
+    padding-top: clamp(3.5rem, 8vw, 5rem);
+    padding-right: clamp(1.5rem, 3vw, 3rem);
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
   }
 
   .whyus__watermark {
-    font-size: clamp(8rem, 12vw, 11rem);
+    font-size: clamp(8rem, 10vw, 10rem);
+    opacity: 0.35;
+  }
+
+  .whyus__feat-title {
+    order: 1;
+  }
+
+  .whyus__feat-rule {
+    order: 2;
+    margin-bottom: 1.25rem;
   }
 
   .whyus__feat-text {
-    max-width: none;
+    order: 3;
   }
 
-  /* Stack items fill the right column proportionally */
+  .whyus__stat {
+    order: 4;
+    margin-top: auto; /* Anchors fact block cleanly to the bottom of the left column */
+    padding-top: 1.5rem;
+  }
+
   .whyus__stack {
-    padding-top: var(--s-2);
+    display: flex;
+    flex-direction: column;
+    column-gap: 0;
+    margin-top: 0;
+    padding-top: 0.5rem;
   }
 
   .whyus__item {
-    padding: var(--s-4) 0;
+    border-top: 1px solid var(--c-border);
+    border-bottom: none;
+    padding: 1.2rem 0;
+  }
+
+  .whyus__item:last-child {
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .whyus__item--full {
+    grid-column: auto;
+    border-bottom: 1px solid var(--c-border);
   }
 }
-
-/* ── Focus states for accessibility ── */
-.whyus__item h3:focus-visible {
-  outline: 2px solid var(--c-sky);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
 </style>
+
+
