@@ -1,21 +1,21 @@
 ---
-// DoctorsSection — 8 team cards with smooth bottom fade to white
+// DoctorsSection.astro — 2-zone card: photo on white bg + solid branded text panel
 const doctors = [
-  { id: 1, image: "/doctors/doctor-3.png", bgClass: "doctor-card__photo--3",
+  { id: 1, image: "/doctors/doctor-3.png", pos: "center 10%",
     nameRu: "Бобоев Саидафзал Абдурахманович", specRu: "Офтальмохирург, к.м.н., доцент" },
-  { id: 2, image: "/doctors/doctor-2.png", bgClass: "doctor-card__photo--2",
+  { id: 2, image: "/doctors/doctor-2.png", pos: "center 10%",
     nameRu: "Ражабов Санжар Мансурович", specRu: "Офтальмохирург, катарактолог" },
-  { id: 3, image: "/doctors/doctor-5.png", bgClass: "doctor-card__photo--5",
+  { id: 3, image: "/doctors/doctor-5.png", pos: "center 10%",
     nameRu: "Абдурахмонов Фаридун Саидакбарович", specRu: "Детский офтальмолог, страбизмолог" },
-  { id: 4, image: "/doctors/doctor-6.png", bgClass: "doctor-card__photo--6",
+  { id: 4, image: "/doctors/doctor-6.png", pos: "center 22%",
     nameRu: "Раупова Парвина Хасановна", specRu: "Врач-окулист" },
-  { id: 5, image: "/doctors/doctor-7.png", bgClass: "doctor-card__photo--7",
+  { id: 5, image: "/doctors/doctor-7.png", pos: "center 10%",
     nameRu: "Зикириллоев Абдурасул Нусратиллоевич", specRu: "Офтальмохирург-катарактолог, главный врач" },
-  { id: 6, image: "/doctors/doctor-4.png", bgClass: "doctor-card__photo--4",
+  { id: 6, image: "/doctors/doctor-4.png", pos: "center 10%",
     nameRu: "Мусинов Абдукаюм Суюнбоевич", specRu: "Врач-окулист" },
-  { id: 7, image: "/doctors/doctor-8.png", bgClass: "doctor-card__photo--8",
+  { id: 7, image: "/doctors/doctor-8.png", pos: "center 10%",
     nameRu: "Мусинов Хусниддин Суюнбоевич", specRu: "Окулярист" },
-  { id: 8, image: "/doctors/doctor-1.png", bgClass: "doctor-card__photo--1",
+  { id: 8, image: "/doctors/doctor-1.png", pos: "center 10%",
     nameRu: "Бобоев Сиёвуш Саидафзалзода", specRu: "Офтальмохирург, Ph.D" },
 ];
 ---
@@ -30,23 +30,27 @@ const doctors = [
     <div class="doctors__grid">
       {doctors.map((doc) => (
         <article class="doctor-card">
-          <div class={`doctor-card__photo ${doc.bgClass}`}>
+          <!-- Photo zone: white bg matches studio photos -->
+          <div class="doctor-card__photo-wrap">
             {doc.image ? (
               <img
                 src={doc.image}
                 alt={`${doc.nameRu}, ${doc.specRu}`}
                 class="doctor-card__img"
+                style={{ objectPosition: doc.pos || "center 10%" }}
                 loading="lazy"
               />
             ) : (
               <div class="doctor-card__placeholder" aria-hidden="true">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                   <circle cx="12" cy="8" r="5"/>
                   <path d="M3 21c0-5 3.5-9 9-9s9 4 9 9"/>
                 </svg>
               </div>
             )}
           </div>
+
+          <!-- Text zone: solid brand panel, always below photo -->
           <div class="doctor-card__info">
             <h3 class="doctor-card__name" data-i18n={`doctor.${doc.id}.name`}>{doc.nameRu}</h3>
             <p class="doctor-card__spec" data-i18n={`doctor.${doc.id}.spec`}>{doc.specRu}</p>
@@ -58,49 +62,66 @@ const doctors = [
 </section>
 
 <style>
+/* ── Section background ── */
+.doctors {
+  background: var(--c-surface);
+}
+
+/* ── Grid ── */
 .doctors__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-6);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-4);
 }
 
+@media (min-width: 640px) {
+  .doctors__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+}
+
+@media (min-width: 1024px) {
+  .doctors__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+  }
+}
+
+/* ── Card — rounded corners, clean white/grey split ── */
 .doctor-card {
-  border-radius: var(--r-xl);
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: var(--r-md) !important;
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  background: var(--c-white);
-  border: 1px solid var(--c-border);
+  background: #ffffff;
+  border-bottom: none;
+  transition: box-shadow var(--t-base), transform var(--t-base);
+  position: relative !important;
+  aspect-ratio: unset !important;
 }
 
-/* Photo container with background gradients */
-.doctor-card__photo {
-  position: relative;
+
+
+/* ── Photo zone ── */
+.doctor-card__photo-wrap {
+  position: relative !important;
+  width: 100%;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  border-bottom: 3px solid var(--c-teal);
+  background: #ffffff;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
-
-/* Rich background themes for photos */
-.doctor-card__photo--1 { background: linear-gradient(160deg, #e8f2fe 0%, #c8e0fd 100%); }
-.doctor-card__photo--2 { background: linear-gradient(160deg, #e0f2fe 0%, #bae6fd 100%); }
-.doctor-card__photo--3 { background: linear-gradient(160deg, #f0fdf4 0%, #bbf7d0 100%); }
-.doctor-card__photo--4 { background: linear-gradient(160deg, #f5f3ff 0%, #ddd6fe 100%); }
-.doctor-card__photo--5 { background: linear-gradient(160deg, #e0e7ff 0%, #c7d2fe 100%); }
-.doctor-card__photo--6 { background: linear-gradient(160deg, #ecfeff 0%, #a5f3fc 100%); }
-.doctor-card__photo--7 { background: linear-gradient(160deg, #f1f5f9 0%, #cbd5e1 100%); }
-.doctor-card__photo--8 { background: linear-gradient(160deg, #f0fdfa 0%, #99f6e4 100%); }
 
 .doctor-card__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center 10%;
   display: block;
-  position: relative;
-  z-index: 1;
+  transition: transform 350ms ease;
 }
 
 .doctor-card__placeholder {
@@ -109,55 +130,63 @@ const doctors = [
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(11, 42, 107, 0.35);
-  position: relative;
-  z-index: 1;
+  color: rgba(11, 42, 107, 0.25);
+  background: #f7faff;
 }
 
-/* Info block under photo */
+/* ── Text zone — fixed height, identical for every card ── */
 .doctor-card__info {
-  position: relative;
-  z-index: 3;
-  background: var(--c-white);
-  padding: var(--s-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-2);
-  text-align: left;
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  /* Light brand-blue panel */
+  background: #f0f6ff !important;
+  background-image: none !important;
+  padding: 12px 14px 14px;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start;
+  gap: 4px;
+  height: 96px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  overflow: hidden;
 }
 
+@media (max-width: 639px) {
+  .doctor-card__info {
+    padding: 10px 12px 12px;
+    height: 90px;
+  }
+}
+
+/* ── Typography ── */
 .doctor-card__name {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.92rem);
   font-weight: 700;
-  color: var(--c-ink);
+  color: var(--c-ink) !important;
   line-height: 1.3;
-  text-align: left;
+  margin: 0;
+  text-shadow: none;
+  /* Clamp to 2 lines max — long names truncate with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .doctor-card__spec {
-  font-size: 0.9rem;
-  color: var(--c-muted);
-  line-height: 1.4;
-  text-align: left;
-}
-
-/* Responsive Grid */
-@media (min-width: 600px) {
-  .doctors__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
-  .doctors__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .doctors__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  font-size: clamp(0.7rem, 1vw, 0.78rem);
+  color: var(--c-muted) !important;
+  line-height: 1.35;
+  margin: 0;
+  /* Clamp to 2 lines max — long specialties truncate with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>
