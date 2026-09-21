@@ -58,6 +58,16 @@ const {
           "nav.retinopathy": "РН-скрининг",
           "nav.contacts": "Контакты",
           "nav.reviews": "Отзывы",
+          "nav.videos": "Результаты",
+          "videos.title": "Результаты лечения",
+          "videos.subtitle": "Как меняется взгляд ребёнка после лечения",
+          "videos.disclaimer": "Результаты индивидуальны. Подробности вам расскажет врач на консультации.",
+          "videos.play_label": "Смотреть видео",
+          "videos.1.title": "Обследование и диагностика зрения",
+          "videos.2.title": "Детский приём и работа с пациентами",
+          "videos.3.title": "Процесс лечения и оборудование",
+          "videos.4.title": "Офтальмологический осмотр клиники",
+          "videos.5.title": "Консультация и забота о пациентах",
           "header.hours": "Пн–Сб 09:00–17:00",
           "header.cta": "Записаться",
           "hero.badge": "Единственная частная клиника РН‑скрининга",
@@ -170,6 +180,16 @@ const {
           "nav.retinopathy": "ROP Screening",
           "nav.contacts": "Contacts",
           "nav.reviews": "Reviews",
+          "nav.videos": "Results",
+          "videos.title": "Treatment results",
+          "videos.subtitle": "How a child's eyes change after treatment",
+          "videos.disclaimer": "Results vary from patient to patient. Your doctor will explain the details at the consultation.",
+          "videos.play_label": "Watch video",
+          "videos.1.title": "Vision Examination and Diagnostics",
+          "videos.2.title": "Pediatric Appointment and Patient Care",
+          "videos.3.title": "Treatment Process and Equipment",
+          "videos.4.title": "Clinic Ophthalmic Inspection",
+          "videos.5.title": "Consultation and Patient Care",
           "header.hours": "Mon–Sat 09:00–17:00",
           "header.cta": "Book Now",
           "hero.badge": "The only private ROP screening clinic",
@@ -282,6 +302,16 @@ const {
           "nav.retinopathy": "RN skrining",
           "nav.contacts": "Aloqa",
           "nav.reviews": "Sharhlar",
+          "nav.videos": "Natijalar",
+          "videos.title": "Davolash natijalari",
+          "videos.subtitle": "Davolashdan keyin bolaning ko'zlari qanday o'zgaradi",
+          "videos.disclaimer": "Natijalar har bir bemor uchun individual. Tafsilotlarni shifokor maslahat vaqtida tushuntiradi.",
+          "videos.play_label": "Videoni ko'rish",
+          "videos.1.title": "Ko'rishni tekshirish va diagnostikasi",
+          "videos.2.title": "Bolalar qabuli va bemorlar bilan ishlash",
+          "videos.3.title": "Davolash jarayoni va jihozlar",
+          "videos.4.title": "Klinika oftalmologik ko'rigi",
+          "videos.5.title": "Konsultatsiya va bemorlarga g'amxo'rlik",
           "header.hours": "Du–Shan 09:00–17:00",
           "header.cta": "Yozilish",
           "hero.badge": "Yagona xususiy RN‑skrining klinikasi",
@@ -416,6 +446,13 @@ const {
           const key = el.dataset.i18nAlt!;
           const val = TRANSLATIONS[lang]?.[key];
           if (val !== undefined) el.alt = val;
+        });
+
+        // Update aria-label attributes
+        document.querySelectorAll<HTMLElement>("[data-i18n-aria-label]").forEach((el) => {
+          const key = el.dataset.i18nAriaLabel!;
+          const val = TRANSLATIONS[lang]?.[key];
+          if (val !== undefined) el.setAttribute("aria-label", val);
         });
 
         // Highlight active lang button

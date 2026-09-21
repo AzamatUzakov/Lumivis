@@ -502,20 +502,15 @@
   container-name: rn-card;
 }
 
-/* Photo Layer */
+/* Photo Layer — Full Card Background */
 .bento-rn-visual {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 42%;
+  inset: 0;
+  width: 100%;
   height: 100%;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
-  /* Smooth mask gradient dissolving left edge into #0b2a6b */
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 40%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 40%);
 }
 
 .bento-rn-picture {
@@ -528,16 +523,24 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 55% 30%;
+  object-position: 78% 30%;
   display: block;
 }
 
-/* Dark blue overlay to harmonize bright photo with brand colors */
+/* Multi-stop smooth gradient overlay without hard lines */
 .bento-rn-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(11, 42, 107, 0.28);
+  background:
+    linear-gradient(0deg, rgba(11, 42, 107, 0.5) 0%, transparent 35%),
+    linear-gradient(90deg,
+      rgba(11, 42, 107, 0.97) 0%,
+      rgba(11, 42, 107, 0.94) 30%,
+      rgba(11, 42, 107, 0.72) 48%,
+      rgba(11, 42, 107, 0.28) 68%,
+      rgba(11, 42, 107, 0.08) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Background Pattern */
@@ -548,21 +551,23 @@
   width: 280px;
   height: 280px;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.7;
+  z-index: 1;
+  opacity: 0.4;
 }
 
-/* Content Container */
+/* Content Container sitting above overlay */
 .bento-rn-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 58%;
+  width: 56%;
+  max-width: 550px;
   box-sizing: border-box;
   min-height: 100%;
+  overflow: visible; /* allow badge to extend into photo area without clipping its border */
 }
 
 .bento-card__rn-header {
@@ -587,8 +592,8 @@
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.35);
   width: fit-content;
-  max-width: 100%;
-  white-space: normal;
+  /* Desktop default: single line */
+  white-space: nowrap;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: none;
@@ -723,6 +728,8 @@
 
   /* ROP Mobile Card Layout */
   .bento-card--rn {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -736,18 +743,11 @@
   }
 
   .bento-rn-visual {
-    position: relative;
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 180px;
-    aspect-ratio: 16 / 10;
-    flex-shrink: 0;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    border-radius: 20px 20px 0 0;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    height: 100%;
+    z-index: 0;
   }
 
   .bento-rn-picture {
@@ -761,19 +761,30 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 25%;
+    object-position: 70% 20%;
+  }
+
+  .bento-rn-overlay {
+    background: linear-gradient(180deg,
+      rgba(11, 42, 107, 0.15) 0%,
+      rgba(11, 42, 107, 0.35) 28%,
+      rgba(11, 42, 107, 0.88) 55%,
+      rgba(11, 42, 107, 0.97) 100%);
   }
 
   .bento-rn-content {
+    position: relative;
+    z-index: 2;
     width: 100%;
-    padding: 16px 20px 22px;
+    padding: 200px 20px 24px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
     gap: 14px;
     min-height: auto !important;
     height: auto !important;
     margin-top: 0;
+    box-sizing: border-box;
   }
 
   .bento-card__rn-header {
@@ -784,6 +795,8 @@
 
   .bento-badge {
     font-size: 12.5px;
+    /* Mobile: allow wrapping */
+    white-space: normal;
   }
 
   .bento-card__rn-body {
@@ -892,10 +905,7 @@
   .bento-rn-content {
     width: 58%;
     padding: 28px 24px;
-  }
-
-  .bento-rn-visual {
-    width: 42%;
+    overflow: visible;
   }
 
   .bento-title,
@@ -952,12 +962,9 @@
   }
 
   .bento-rn-content {
-    width: 58%;
+    width: 56%;
     padding: 34px 30px;
-  }
-
-  .bento-rn-visual {
-    width: 42%;
+    overflow: visible;
   }
 
   .bento-card--diag {
