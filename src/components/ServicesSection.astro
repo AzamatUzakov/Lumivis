@@ -1,229 +1,976 @@
 ---
-// ServicesSection — 8 service cards
+// ServicesSection.astro — Bento Grid redesign with optimized ROP photo for Lumivis
 ---
 
-<section class="services section section--surface" id="services">
+<section class="services section section--surface" id="services" aria-labelledby="services-title">
   <div class="container">
     <div class="section-header">
-      <h2 data-i18n="services.title">Наши услуги</h2>
+      <h2 id="services-title" data-i18n="services.title">Наши услуги</h2>
       <p data-i18n="services.subtitle">Полный спектр офтальмологической помощи взрослым и детям</p>
     </div>
 
-    <div class="services__grid">
+    <ul class="bento-grid">
+      <!-- 01: РН (Retinopathy) — 2x2 Bento Feature Block with Photo -->
+      <li class="bento-item bento-item--rn">
+        <div class="bento-card bento-card--rn">
+          <!-- Card Number 01 moved to Top-Right to avoid badge collision -->
+          <span class="bento-num bento-num--rn" aria-hidden="true">01</span>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.1.title">Диагностика зрения</h3>
-          <p data-i18n="services.1.text">Авторефрактометрия, биомикроскопия, тонометрия, периметрия — комплексное обследование</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta" aria-label="Записаться на диагностику зрения">Записаться</a>
-      </article>
+          <!-- Photo Layer with Picture/WebP & Smooth Gradient Mask -->
+          <div class="bento-rn-visual" aria-hidden="true">
+            <picture class="bento-rn-picture">
+              <source media="(max-width: 599px)" srcset="/rn-card-mobile.webp" type="image/webp" width="800" height="534" />
+              <source media="(min-width: 600px)" srcset="/rn-card.webp" type="image/webp" width="1200" height="800" />
+              <img
+                src="/rn-card.webp"
+                alt="Ребёнок на проверке зрения у офтальмолога"
+                data-i18n-alt="services.rn_img.alt"
+                class="bento-rn-img"
+                loading="lazy"
+                decoding="async"
+                width="1200"
+                height="800"
+              />
+            </picture>
+            <div class="bento-rn-overlay"></div>
+          </div>
 
-      <article class="service-card service-card--accent">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.2.title">Ретинопатия недоношенных</h3>
-          <p data-i18n="services.2.text">Скрининг, наблюдение и лечение РН — единственная клиника в Самарканде</p>
-        </div>
-        <a href="#retinopathy" class="service-card__link" data-i18n="services.cta" aria-label="Подробнее о ретинопатии">Записаться</a>
-      </article>
+          <!-- Background SVG Iris Pattern -->
+          <div class="bento-card__bg-pattern" aria-hidden="true">
+            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="200" cy="200" r="60" stroke="#2E86F5" stroke-width="1" opacity="0.10"/>
+              <circle cx="200" cy="200" r="120" stroke="#2E86F5" stroke-width="1" opacity="0.08"/>
+              <circle cx="200" cy="200" r="180" stroke="#2E86F5" stroke-width="0.8" opacity="0.06"/>
+              <line x1="200" y1="0" x2="200" y2="400" stroke="#2E86F5" stroke-width="0.6" opacity="0.06"/>
+              <line x1="0" y1="200" x2="400" y2="200" stroke="#2E86F5" stroke-width="0.6" opacity="0.06"/>
+              <line x1="58" y1="58" x2="342" y2="342" stroke="#2E86F5" stroke-width="0.6" opacity="0.05"/>
+              <line x1="342" y1="58" x2="58" y2="342" stroke="#2E86F5" stroke-width="0.6" opacity="0.05"/>
+            </svg>
+          </div>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.3.title">Лечение косоглазия</h3>
-          <p data-i18n="services.3.text">Аппаратное лечение и хирургическая коррекция косоглазия у детей и взрослых</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta">Записаться</a>
-      </article>
+          <!-- Text Content Zone (Left ~58% on Desktop/Tablet) -->
+          <div class="bento-rn-content">
+            <div class="bento-card__rn-header">
+              <span class="bento-badge" data-i18n="hero.badge">
+                Единственная частная клиника РН-скрининга
+              </span>
+            </div>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003"/>
-            <path d="M20.25 15c1.66 0 3 1.34 3 3 0 .414-.084.809-.234 1.17"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.4.title">Лечение амблиопии</h3>
-          <p data-i18n="services.4.text">Комплексное лечение «ленивого глаза» с применением аппаратных методик</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta">Записаться</a>
-      </article>
+            <div class="bento-card__rn-body">
+              <div class="bento-icon bento-icon--rn" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 2v2m0 16v2M2 12h2m16 0h2"/>
+                </svg>
+              </div>
+              <h3 class="bento-rn-title" data-i18n="services.2.title">
+                Ретинопатия недоношенных
+              </h3>
+              <p class="bento-rn-text" data-i18n="services.2.text">
+                Скрининг, наблюдение и лечение РН — единственная клиника в Самарканде
+              </p>
+            </div>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
+            <div class="bento-card__rn-footer">
+              <a href="#retinopathy" class="btn btn--primary bento-rn-btn" data-i18n="rn.cta">
+                Записать ребёнка
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.5.title">Детская офтальмология</h3>
-          <p data-i18n="services.5.text">Диагностика и лечение нарушений зрения у детей с первых недель жизни</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta">Записаться</a>
-      </article>
+      </li>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="4"/>
-            <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/>
-            <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/>
-            <line x1="14.83" y1="9.17" x2="19.07" y2="4.93"/>
-            <line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.6.title">Подбор очков и линз</h3>
-          <p data-i18n="services.6.text">Точный подбор корректирующей оптики для взрослых и детей</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta">Записаться</a>
-      </article>
+      <!-- 02: Диагностика зрения (2x1 on Desktop) -->
+      <li class="bento-item bento-item--diag">
+        <a href="#contacts" class="bento-card bento-card--interactive bento-card--diag" aria-label="Диагностика зрения — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <circle cx="11" cy="11" r="3"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">02</span>
+          </div>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.7.title">Синдром сухого глаза</h3>
-          <p data-i18n="services.7.text">Диагностика и комплексное лечение синдрома сухого глаза</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta">Записаться</a>
-      </article>
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.1.title">Диагностика зрения</h3>
+            <p class="bento-text" data-i18n="services.1.text">
+              Авторефрактометрия, биомикроскопия, тонометрия, периметрия — комплексное обследование
+            </p>
+          </div>
 
-      <article class="service-card">
-        <div class="service-card__icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-          </svg>
-        </div>
-        <div class="service-card__body">
-          <h3 data-i18n="services.8.title">Промывание слёзных путей</h3>
-          <p data-i18n="services.8.text">Лечение непроходимости слёзных путей, в том числе у новорождённых</p>
-        </div>
-        <a href="#contacts" class="service-card__link" data-i18n="services.cta">Записаться</a>
-      </article>
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
 
+      <!-- 03: Лечение косоглазия (1x1) -->
+      <li class="bento-item bento-item--squint">
+        <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Лечение косоглазия — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/>
+                <circle cx="9.5" cy="12" r="2.5"/>
+                <circle cx="14.5" cy="12" r="2.5"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">03</span>
+          </div>
+
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.3.title">Лечение косоглазия</h3>
+            <p class="bento-text" data-i18n="services.3.text">
+              Аппаратное лечение и хирургическая коррекция косоглазия у детей и взрослых
+            </p>
+          </div>
+
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
+
+      <!-- 04: Лечение амблиопии (1x1) -->
+      <li class="bento-item bento-item--amb">
+        <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Лечение амблиопии — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <circle cx="12" cy="12" r="5"/>
+                <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">04</span>
+          </div>
+
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.4.title">Лечение амблиопии</h3>
+            <p class="bento-text" data-i18n="services.4.text">
+              Комплексное лечение «ленивого глаза» с применением аппаратных методик
+            </p>
+          </div>
+
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
+
+      <!-- 05: Детская офтальмология (1x1) -->
+      <li class="bento-item bento-item--kids">
+        <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Детская офтальмология — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M6 21v-2a6 6 0 0 1 12 0v2"/>
+                <path d="M12 2v2M8.5 3.5l1 1.5M15.5 3.5l-1 1.5"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">05</span>
+          </div>
+
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.5.title">Детская офтальмология</h3>
+            <p class="bento-text" data-i18n="services.5.text">
+              Диагностика и лечение нарушений зрения у детей с первых недель жизни
+            </p>
+          </div>
+
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
+
+      <!-- 06: Подбор очков и линз (1x1) -->
+      <li class="bento-item bento-item--glasses">
+        <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Подбор очков и линз — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="14" r="4"/>
+                <circle cx="18" cy="14" r="4"/>
+                <line x1="10" y1="14" x2="14" y2="14"/>
+                <path d="M2 13l2.5-5A2 2 0 0 1 6.3 7H7"/>
+                <path d="M22 13l-2.5-5A2 2 0 0 0 17.7 7H17"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">06</span>
+          </div>
+
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.6.title">Подбор очков и линз</h3>
+            <p class="bento-text" data-i18n="services.6.text">
+              Точный подбор корректирующей оптики для взрослых и детей
+            </p>
+          </div>
+
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
+
+      <!-- 07: Синдром сухого глаза (1x1) -->
+      <li class="bento-item bento-item--dry">
+        <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Синдром сухого глаза — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                <path d="M12 12a3 3 0 0 0 3-3"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">07</span>
+          </div>
+
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.7.title">Синдром сухого глаза</h3>
+            <p class="bento-text" data-i18n="services.7.text">
+              Диагностика и комплексное лечение синдрома сухого глаза
+            </p>
+          </div>
+
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
+
+      <!-- 08: Промывание слёзных путей (1x1) -->
+      <li class="bento-item bento-item--tear">
+        <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Промывание слёзных путей — Записаться">
+          <div class="bento-card__top">
+            <div class="bento-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12"/>
+                <path d="M8 11l4 4 4-4"/>
+                <path d="M4 19h16"/>
+              </svg>
+            </div>
+            <span class="bento-num" aria-hidden="true">08</span>
+          </div>
+
+          <div class="bento-card__body">
+            <h3 class="bento-title" data-i18n="services.8.title">Промывание слёзных путей</h3>
+            <p class="bento-text" data-i18n="services.8.text">
+              Лечение непроходимости слёзных путей, в том числе у новорождённых
+            </p>
+          </div>
+
+          <div class="bento-card__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Bottom CTA Bar -->
+    <div class="services-bottom-cta">
+      <p class="services-bottom-cta__text" data-i18n="services.bottom.text">
+        Не нашли нужную услугу?
+      </p>
+      <a href="#contacts" class="btn btn--outline services-bottom-cta__btn" data-i18n="services.bottom.cta">
+        Записаться на приём
+      </a>
     </div>
   </div>
 </section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".bento-item");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("bento-animated");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+      );
+      items.forEach((item, index) => {
+        (item as HTMLElement).style.setProperty("--bento-delay", `${index * 40}ms`);
+        observer.observe(item);
+      });
+    } else {
+      items.forEach((item) => item.classList.add("bento-animated"));
+    }
+  });
+</script>
+
 <style>
-.services__grid {
+/* ── Section Container ── */
+.services {
+  padding-block: clamp(56px, 10vw, 120px);
+  scroll-margin-top: calc(72px + 16px);
+  overflow: hidden;
+}
+
+/* ── Bento Grid Base ── */
+.bento-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-4);
+  gap: 16px;
+  width: 100%;
 }
 
-.service-card {
-  background: var(--c-white);
-  border-radius: var(--r-md);
-  padding: var(--s-6);
-  box-shadow: var(--shadow-card);
-  display: grid;
-  grid-template-columns: 52px 1fr auto;
-  align-items: start;
-  gap: var(--s-4);
-  transition: transform var(--t-base), box-shadow var(--t-base);
-  border-left: 3px solid transparent;
+/* ── Item Reveal Animation ── */
+.bento-item {
+  opacity: 1; /* Fallback for SSR / No JS */
+  transform: none;
+  transition: opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 0;
+  display: flex;
 }
 
-.service-card:hover {
-  box-shadow: var(--shadow-card-hover);
-  border-left-color: var(--c-sky);
+@media (prefers-reduced-motion: no-preference) {
+  .bento-item:not(.bento-animated) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
 }
 
-.service-card--accent {
-  border-left-color: var(--c-teal);
-  background: linear-gradient(135deg, rgba(13,148,136,0.03) 0%, var(--c-white) 40%);
+.bento-item.bento-animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: var(--bento-delay, 0ms);
 }
 
-.service-card--accent:hover {
-  border-left-color: var(--c-teal);
+/* ── Card Base ── */
+.bento-card {
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
 }
 
-.service-card__icon {
-  width: 52px;
-  height: 52px;
-  background: rgba(46, 134, 245, 0.08);
-  border-radius: var(--r-md);
+/* Interactive Tiles (02 to 08) */
+.bento-card--interactive {
+  background: #ffffff;
+  border: 1px solid rgba(11, 42, 107, 0.10);
+  box-shadow: 0 1px 2px rgba(11, 42, 107, 0.04);
+  padding: 20px;
+  transition: transform 220ms ease,
+              border-color 220ms ease,
+              box-shadow 220ms ease,
+              background-color 220ms ease;
+  min-height: 100%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bento-card--interactive:hover {
+    transform: translateY(-2px);
+    border-color: rgba(46, 134, 245, 0.45);
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(11, 42, 107, 0.08);
+  }
+
+  .bento-card--interactive:hover .bento-card__arrow {
+    transform: translate(3px, -3px);
+    color: var(--c-sky);
+    opacity: 1;
+  }
+}
+
+.bento-card--interactive:active {
+  transform: scale(0.99);
+  background: #f5f9ff;
+}
+
+.bento-card:focus-visible,
+.bento-rn-btn:focus-visible {
+  outline: 2px solid var(--c-sky);
+  outline-offset: 3px;
+}
+
+/* Top section inside tile (Icon + Number) */
+.bento-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.bento-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eaf2ff;
+  color: #2e86f5;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--c-sky);
   flex-shrink: 0;
   transition: background var(--t-fast);
 }
 
-.service-card--accent .service-card__icon {
-  background: rgba(13, 148, 136, 0.1);
-  color: var(--c-teal);
+.bento-num {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #9db0d0;
+  letter-spacing: 0.05em;
 }
 
-.service-card:hover .service-card__icon {
-  background: rgba(46, 134, 245, 0.14);
-}
-
-.service-card__body {
+/* Card Typography */
+.bento-card__body {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--s-2);
+  gap: 6px;
 }
 
-.service-card__body h3 {
-  font-size: 0.95rem;
-  color: var(--c-ink);
+.bento-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   font-weight: 700;
+  color: #0b2a6b;
+  line-height: 1.35;
+  margin: 0;
+  overflow-wrap: break-word;
 }
 
-.service-card__body p {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--c-muted);
+.bento-text {
+  font-size: 0.88rem;
+  color: #5b6b8a;
+  line-height: 1.55;
+  margin: 0;
+  overflow-wrap: break-word;
 }
 
-.service-card__link {
-  font-size: 0.8rem;
+.bento-card__arrow {
+  align-self: flex-end;
+  color: #9db0d0;
+  opacity: 0.7;
+  margin-top: 12px;
+  transition: transform 200ms ease, opacity 200ms ease, color 200ms ease;
+}
+
+/* ──────────────────────────────────────────────
+   01: РН-CARD (Retinopathy Feature Block with Photo)
+────────────────────────────────────────────── */
+.bento-card--rn {
+  background: var(--c-ink);
+  color: var(--c-white);
+  border-radius: 24px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 12px 36px rgba(11, 42, 107, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 100%;
+  container-type: inline-size;
+  container-name: rn-card;
+}
+
+/* Photo Layer */
+.bento-rn-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  /* Smooth mask gradient dissolving left edge into #0b2a6b */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 40%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 40%);
+}
+
+.bento-rn-picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.bento-rn-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% 30%;
+  display: block;
+}
+
+/* Dark blue overlay to harmonize bright photo with brand colors */
+.bento-rn-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 42, 107, 0.28);
+  pointer-events: none;
+}
+
+/* Background Pattern */
+.bento-card__bg-pattern {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: 280px;
+  height: 280px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+/* Content Container */
+.bento-rn-content {
+  position: relative;
+  z-index: 1;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 58%;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+.bento-card__rn-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.bento-badge {
+  display: inline-flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 8px 14px;
+  border-radius: 16px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--c-sky);
-  white-space: nowrap;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--c-sky-pale);
-  border-radius: var(--r-full);
-  transition: all var(--t-fast);
-  align-self: start;
-  margin-top: 2px;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  width: fit-content;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
-.service-card__link:hover {
+.bento-badge::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  margin-right: 8px;
+  flex: none;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.bento-num--rn {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.bento-card__rn-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.bento-icon--rn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #5aa4f8;
+  margin-bottom: 4px;
+}
+
+.bento-rn-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5.8cqi, 34px);
+  font-weight: 700;
+  color: var(--c-white);
+  line-height: 1.2;
+  margin: 0;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  -webkit-hyphens: manual;
+}
+
+.bento-rn-text {
+  font-size: clamp(0.88rem, 1.8vw, 0.98rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.bento-card__rn-footer {
+  margin-top: auto;
+}
+
+.bento-rn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--r-full);
   background: var(--c-sky);
   color: var(--c-white);
-  border-color: var(--c-sky);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  transition: background var(--t-base), box-shadow var(--t-base);
+  box-shadow: 0 4px 16px rgba(46, 134, 245, 0.35);
 }
 
-@media (min-width: 640px) {
-  .services__grid {
-    grid-template-columns: repeat(2, 1fr);
+.bento-rn-btn:hover {
+  background: var(--c-sky-light);
+  box-shadow: 0 6px 20px rgba(46, 134, 245, 0.45);
+  color: var(--c-white);
+}
+
+/* ──────────────────────────────────────────────
+   BOTTOM CTA BAR
+────────────────────────────────────────────── */
+.services-bottom-cta {
+  margin-top: 36px;
+  padding: 24px 28px;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-card);
+}
+
+.services-bottom-cta__text {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-ink);
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.services-bottom-cta__btn {
+  padding: 0.65rem 1.4rem;
+  font-size: 0.9rem;
+}
+
+/* ──────────────────────────────────────────────
+   RESPONSIVE LAYOUTS (Mobile First)
+────────────────────────────────────────────── */
+
+/* Mobile (< 600px): Photo Top Strip + Horizontal tiles 02–08 */
+@media (max-width: 599px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* ROP Mobile Card Layout */
+  .bento-card--rn {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-radius: 20px;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .bento-num--rn {
+    display: none;
+  }
+
+  .bento-rn-visual {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    aspect-ratio: 16 / 10;
+    flex-shrink: 0;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  }
+
+  .bento-rn-picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bento-rn-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  .bento-rn-content {
+    width: 100%;
+    padding: 16px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+    min-height: auto !important;
+    height: auto !important;
+    margin-top: 0;
+  }
+
+  .bento-card__rn-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  .bento-badge {
+    font-size: 12.5px;
+  }
+
+  .bento-card__rn-body {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .bento-rn-title {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+  }
+
+  .bento-rn-text {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    hyphens: auto;
+  }
+
+  .bento-card__rn-footer {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .bento-rn-btn {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hyphenation only on mobile body text */
+  .bento-title,
+  .bento-text {
+    hyphens: auto;
+  }
+
+  .bento-card--interactive {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    min-height: 72px;
+    border-radius: 18px;
+  }
+
+  .bento-card__top {
+    margin-bottom: 0;
+  }
+
+  .bento-num {
+    display: none; /* Hide numbers on mobile horizontal cards */
+  }
+
+  .bento-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .bento-title {
+    font-size: 0.98rem;
+    margin-bottom: 3px;
+  }
+
+  .bento-text {
+    font-size: 0.85rem;
+  }
+
+  .bento-card__arrow {
+    align-self: center;
+    margin-top: 0;
+  }
+
+  .services-bottom-cta {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+  }
+
+  .services-bottom-cta__btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+/* Tablet (600px – 1023px): 2 Columns */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .bento-item--rn,
+  .bento-item--diag {
+    grid-column: span 2;
+  }
+
+  .bento-rn-content {
+    width: 58%;
+    padding: 28px 24px;
+  }
+
+  .bento-rn-visual {
+    width: 42%;
+  }
+
+  .bento-title,
+  .bento-text,
+  .bento-rn-text {
+    hyphens: manual;
+  }
+
+  .bento-card--diag {
+    padding: 28px;
+  }
+
+  .bento-card--diag .bento-title {
+    font-size: 1.2rem;
+  }
+
+  .bento-card--diag .bento-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop (≥ 1024px): Full 4-Column Bento Grid */
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(160px, auto);
+    grid-template-areas:
+      "rn   rn   diag diag"
+      "rn   rn   squint amb"
+      "kids glasses dry tear";
+    gap: 16px;
+  }
+
+  .bento-item--rn {
+    grid-area: rn;
+  }
+
+  .bento-item--diag {
+    grid-area: diag;
+  }
+
+  .bento-item--squint { grid-area: squint; }
+  .bento-item--amb { grid-area: amb; }
+  .bento-item--kids { grid-area: kids; }
+  .bento-item--glasses { grid-area: glasses; }
+  .bento-item--dry { grid-area: dry; }
+  .bento-item--tear { grid-area: tear; }
+
+  /* Disable hyphenation on desktop */
+  .bento-title,
+  .bento-text,
+  .bento-rn-text {
+    hyphens: manual;
+  }
+
+  .bento-rn-content {
+    width: 58%;
+    padding: 34px 30px;
+  }
+
+  .bento-rn-visual {
+    width: 42%;
+  }
+
+  .bento-card--diag {
+    padding: 24px 26px;
+    background: #ffffff;
+  }
+
+  .bento-card--diag .bento-title {
+    font-size: 1.15rem;
+  }
+
+  .bento-card--diag .bento-text {
+    font-size: 0.92rem;
   }
 }
 </style>
