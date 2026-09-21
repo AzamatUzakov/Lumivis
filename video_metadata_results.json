@@ -1,0 +1,52 @@
+[
+  {
+    "index": 1,
+    "file": "video_2026-09-22_01-27-13.mp4",
+    "sizeMB": "37.12 MB",
+    "sizeBytes": 38925660,
+    "resolution": "1080x1920",
+    "durationSec": 23,
+    "posterName": "videos/posters/video-1.webp",
+    "posterKB": "230.1 KB"
+  },
+  {
+    "index": 2,
+    "file": "video_2026-09-22_01-27-56.mp4",
+    "sizeMB": "42.82 MB",
+    "sizeBytes": 44900634,
+    "resolution": "1080x1920",
+    "durationSec": 25,
+    "posterName": "videos/posters/video-2.webp",
+    "posterKB": "106.9 KB"
+  },
+  {
+    "index": 3,
+    "file": "video_2026-09-22_01-30-59.mp4",
+    "sizeMB": "38.68 MB",
+    "sizeBytes": 40558068,
+    "resolution": "1080x1920",
+    "durationSec": 23,
+    "posterName": "videos/posters/video-3.webp",
+    "posterKB": "281.6 KB"
+  },
+  {
+    "index": 4,
+    "file": "video_2026-09-22_01-36-47.mp4",
+    "sizeMB": "35.78 MB",
+    "sizeBytes": 37516816,
+    "resolution": "1080x1920",
+    "durationSec": 21,
+    "posterName": "videos/posters/video-4.webp",
+    "posterKB": "372.2 KB"
+  },
+  {
+    "index": 5,
+    "file": "video_2026-09-22_01-36-58.mp4",
+    "sizeMB": "34.90 MB",
+    "sizeBytes": 36600377,
+    "resolution": "1080x1920",
+    "durationSec": 22,
+    "posterName": "videos/posters/video-5.webp",
+    "posterKB": "297.9 KB"
+  }
+]

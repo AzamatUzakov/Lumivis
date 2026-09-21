@@ -1,0 +1,392 @@
+---
+// VideosSection.astro — Shorts-style vertical video gallery (9:16)
+interface VideoItem {
+  id: number;
+  src: string;
+  poster: string;
+  titleKey: string;
+  position?: string;
+}
+
+const videos: VideoItem[] = [
+  {
+    id: 1,
+    src: '/videos/video_2026-09-22_01-27-13.mp4',
+    poster: '/videos/posters/video-1.webp',
+    titleKey: 'videos.1.title',
+    position: '50% 40%',
+  },
+  {
+    id: 2,
+    src: '/videos/video_2026-09-22_01-27-56.mp4',
+    poster: '/videos/posters/video-2.webp',
+    titleKey: 'videos.2.title',
+    position: '50% 35%',
+  },
+  {
+    id: 3,
+    src: '/videos/video_2026-09-22_01-30-59.mp4',
+    poster: '/videos/posters/video-3.webp',
+    titleKey: 'videos.3.title',
+    position: '50% 40%',
+  },
+  {
+    id: 4,
+    src: '/videos/video_2026-09-22_01-36-47.mp4',
+    poster: '/videos/posters/video-4.webp',
+    titleKey: 'videos.4.title',
+    position: '50% 40%',
+  },
+  {
+    id: 5,
+    src: '/videos/video_2026-09-22_01-36-58.mp4',
+    poster: '/videos/posters/video-5.webp',
+    titleKey: 'videos.5.title',
+    position: '50% 40%',
+  },
+];
+---
+
+<section id="results" class="videos-section" aria-labelledby="results-title">
+  <div class="container videos-container">
+    <div class="videos-header">
+      <h2 id="results-title" class="section-title" data-i18n="videos.title">Результаты лечения</h2>
+      <p class="section-subtitle" data-i18n="videos.subtitle">
+        Как меняется взгляд ребёнка после лечения
+      </p>
+    </div>
+
+    <div class="videos-strip-wrapper">
+      <ul class="videos-list" role="list">
+        {videos.map((video) => (
+          <li class="video-card-item">
+            <div
+              class="video-card"
+              data-video-id={video.id}
+              data-video-src={video.src}
+              data-video-poster={video.poster}
+              data-title-key={video.titleKey}
+              style={video.position ? `--object-pos: ${video.position};` : undefined}
+            >
+              <img
+                src={video.poster}
+                alt={`Результаты лечения: Видео ${video.id}`}
+                class="video-poster"
+                loading="lazy"
+                decoding="async"
+                width="540"
+                height="960"
+              />
+              <button
+                type="button"
+                class="video-play-btn"
+                data-i18n-aria-label="videos.play_label"
+                aria-label="Смотреть видео"
+              >
+                <span class="video-play-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                  </svg>
+                </span>
+              </button>
+              <noscript>
+                <a
+                  href={video.src}
+                  target="_blank"
+                  rel="noopener"
+                  class="video-fallback-link"
+                >
+                  Смотреть
+                </a>
+              </noscript>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="videos-disclaimer" data-i18n="videos.disclaimer">
+        Результаты индивидуальны. Подробности вам расскажет врач на консультации.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initVideos() {
+    const cards = document.querySelectorAll<HTMLElement>('.video-card');
+
+    function resetCard(card: HTMLElement) {
+      const video = card.querySelector('video');
+      if (video) {
+        video.pause();
+        video.remove();
+      }
+      card.classList.remove('video-card--active');
+      const poster = card.querySelector('.video-poster') as HTMLElement | null;
+      const playBtn = card.querySelector('.video-play-btn') as HTMLElement | null;
+      if (poster) poster.style.display = 'block';
+      if (playBtn) playBtn.style.display = 'flex';
+    }
+
+    function activateCard(card: HTMLElement) {
+      // Pause & reset all other active video cards
+      cards.forEach((otherCard) => {
+        if (otherCard !== card && otherCard.classList.contains('video-card--active')) {
+          resetCard(otherCard);
+        }
+      });
+
+      const src = card.dataset.videoSrc;
+      const poster = card.dataset.videoPoster;
+      if (!src) return;
+
+      const posterImg = card.querySelector('.video-poster') as HTMLElement | null;
+      const playBtn = card.querySelector('.video-play-btn') as HTMLElement | null;
+
+      if (posterImg) posterImg.style.display = 'none';
+      if (playBtn) playBtn.style.display = 'none';
+
+      const video = document.createElement('video');
+      video.src = src;
+      if (poster) video.poster = poster;
+      video.controls = true;
+      video.setAttribute('playsinline', '');
+      video.preload = 'metadata';
+      video.className = 'video-player';
+
+      card.appendChild(video);
+      card.classList.add('video-card--active');
+
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay fallback if blocked
+        });
+      }
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement | null;
+        if (target && target.tagName === 'VIDEO') return;
+        if (!card.classList.contains('video-card--active')) {
+          activateCard(card);
+        }
+      });
+
+      card.addEventListener('keydown', (e: KeyboardEvent) => {
+        if ((e.key === 'Enter' || e.key === ' ') && !card.classList.contains('video-card--active')) {
+          e.preventDefault();
+          activateCard(card);
+        } else if (e.key === 'Escape' && card.classList.contains('video-card--active')) {
+          e.preventDefault();
+          resetCard(card);
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initVideos);
+</script>
+
+<style>
+/* ── Section Container ── */
+.videos-section {
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+  background: var(--c-surface, #f8fafc);
+  overflow: hidden;
+  scroll-margin-top: 80px;
+}
+
+.videos-header {
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.videos-header .section-title {
+  font-family: var(--font-display, inherit);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--c-ink, #0b1628);
+  margin-bottom: 0.5rem;
+}
+
+.videos-header .section-subtitle {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: var(--c-muted, #475569);
+  max-width: 48ch;
+  margin-inline: auto;
+}
+
+.videos-disclaimer {
+  font-size: clamp(0.8rem, 1.4vw, 0.875rem);
+  color: #5b6b8a;
+  text-align: center;
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+  line-height: 1.5;
+}
+
+/* ── Mobile/Tablet Full-Bleed Strip ── */
+@media (max-width: 1023px) {
+  .videos-strip-wrapper {
+    margin-inline: calc(var(--pad-x, 20px) * -1);
+    padding-inline: var(--pad-x, 20px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-inline: var(--pad-x, 20px);
+  }
+
+  .videos-strip-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .videos-list {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .video-card-item {
+    flex: 0 0 62%; /* Cards ~62% width on mobile, next card peeking */
+    scroll-snap-align: start;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .video-card-item {
+    flex: 0 0 32%; /* Cards ~32% width on tablet, next card peeking */
+  }
+}
+
+/* ── Desktop Grid (≥ 1024px) ── */
+@media (min-width: 1024px) {
+  .videos-strip-wrapper {
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+
+  .videos-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .video-card-item {
+    width: 100%;
+  }
+}
+
+/* ── Video Card ── */
+.video-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0b1628;
+  border: 1px solid rgba(11, 42, 107, 0.08);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: border-color var(--t-fast, 0.2s), box-shadow var(--t-fast, 0.2s), transform var(--t-fast, 0.2s);
+}
+
+.video-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--object-pos, 50% 40%);
+  display: block;
+}
+
+/* Play Button */
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: none;
+  color: #0b2a6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(11, 42, 107, 0.16);
+  transition: transform var(--t-fast, 0.2s), background-color var(--t-fast, 0.2s), box-shadow var(--t-fast, 0.2s);
+  z-index: 2;
+  padding: 0;
+}
+
+.video-play-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .video-card:hover {
+    border-color: rgba(11, 42, 107, 0.18);
+    box-shadow: 0 8px 24px rgba(11, 42, 107, 0.12);
+  }
+
+  .video-card:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(11, 42, 107, 0.24);
+  }
+}
+
+.video-card:active .video-play-btn {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.video-card:focus-visible {
+  outline: 2px solid var(--c-sky, #0284c7);
+  outline-offset: 3px;
+}
+
+/* Player element inserted on click */
+:global(.video-player) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+/* Fallback link for no JS */
+.video-fallback-link {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 42, 107, 0.85);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-card,
+  .video-play-btn {
+    transition: none !important;
+  }
+}
+</style>
