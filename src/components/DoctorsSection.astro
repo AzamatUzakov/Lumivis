@@ -36,6 +36,7 @@ const doctors = [
               <img
                 src={doc.image}
                 alt={`${doc.nameRu}, ${doc.specRu}`}
+                data-i18n-alt={`doctor.${doc.id}.alt`}
                 class="doctor-card__img"
                 style={{ objectPosition: doc.pos || "center 10%" }}
                 loading="lazy"

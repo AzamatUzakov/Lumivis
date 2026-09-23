@@ -23,10 +23,10 @@ const equipment = [
         <div class="equip-cell">
           <div class="equip-cell__thumb">
             <span class="equip-cell__index">{String(i + 1).padStart(2, "0")}</span>
-            <img src={item.file} alt={item.nameRu} loading="lazy" decoding="async" width="240" height="240" />
+            <img src={item.file} alt={item.nameRu} data-i18n-alt={`equip.${i + 1}.alt`} loading="lazy" decoding="async" width="240" height="240" />
           </div>
-          <p class="equip-cell__name">{item.nameRu}</p>
-          <p class="equip-cell__desc">{item.descRu}</p>
+          <p class="equip-cell__name" data-i18n={`equip.${i + 1}.name`}>{item.nameRu}</p>
+          <p class="equip-cell__desc" data-i18n={`equip.${i + 1}.desc`}>{item.descRu}</p>
         </div>
       ))}
     </div>
