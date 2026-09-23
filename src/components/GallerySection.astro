@@ -24,6 +24,7 @@ const photos = [
           <img
             src={photo.src}
             alt={photo.alt}
+            data-i18n-alt={`gallery.${i + 1}.alt`}
             class="gallery__img"
             loading="lazy"
             decoding="async"
