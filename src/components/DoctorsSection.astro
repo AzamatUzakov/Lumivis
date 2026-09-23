@@ -22,14 +22,14 @@ const doctors = [
 
 <section class="doctors section" id="doctors">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="doctors.title">Наша команда</h2>
       <p data-i18n="doctors.subtitle">Специалисты с многолетним опытом в офтальмологии взрослых и детей</p>
     </div>
 
     <div class="doctors__grid">
       {doctors.map((doc) => (
-        <article class="doctor-card">
+        <article class="doctor-card reveal">
           <!-- Photo zone: white bg matches studio photos -->
           <div class="doctor-card__photo-wrap">
             {doc.image ? (

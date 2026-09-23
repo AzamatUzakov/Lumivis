@@ -13,14 +13,14 @@ const equipment = [
 
 <section class="equipment section" id="equipment">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="equipment.title">Оснащение экспертного уровня</h2>
       <p data-i18n="equipment.subtitle">Профессиональные аппараты для точной диагностики и эффективного лечения</p>
     </div>
 
     <div class="equip-wall">
       {equipment.map((item, i) => (
-        <div class="equip-cell">
+        <div class="equip-cell reveal">
           <div class="equip-cell__thumb">
             <span class="equip-cell__index">{String(i + 1).padStart(2, "0")}</span>
             <img src={item.file} alt={item.nameRu} data-i18n-alt={`equip.${i + 1}.alt`} loading="lazy" decoding="async" width="240" height="240" />

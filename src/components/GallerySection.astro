@@ -13,14 +13,14 @@ const photos = [
 
 <section class="gallery section" id="gallery">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="gallery.title">Как проходит приём</h2>
       <p data-i18n="gallery.subtitle">Тепло, спокойно и безболезненно — для маленьких и взрослых пациентов</p>
     </div>
 
     <div class="gallery__grid">
       {photos.map((photo, i) => (
-        <div class={`gallery__item gallery__item--${i + 1}`}>
+        <div class={`gallery__item gallery__item--${i + 1} reveal-fade`}>
           <img
             src={photo.src}
             alt={photo.alt}

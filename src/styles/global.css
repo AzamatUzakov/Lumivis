@@ -178,10 +178,18 @@ p {
   font-size: 0.95rem;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: all var(--t-base);
+  transition: color 200ms ease,
+              background-color 200ms ease,
+              border-color 200ms ease,
+              box-shadow 200ms ease,
+              transform 200ms ease;
   text-decoration: none;
   white-space: nowrap;
   line-height: 1;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
 }
 
 .btn--primary {
@@ -271,6 +279,53 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* ── Unified Entrance Animations (.reveal) ── */
+.reveal,
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-fade,
+.reveal-hero {
+  opacity: 0;
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal,
+.reveal-up {
+  transform: translateY(18px);
+}
+
+.reveal-left {
+  transform: translateX(-24px);
+}
+
+.reveal-right {
+  transform: translateX(24px);
+}
+
+.reveal-fade {
+  transform: none;
+}
+
+.reveal-hero {
+  transform: translateY(14px);
+}
+
+.reveal.is-visible,
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-fade.is-visible,
+.reveal-hero.is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.will-animate {
+  will-change: opacity, transform;
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -278,6 +333,16 @@ p {
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .reveal-up,
+  .reveal-left,
+  .reveal-right,
+  .reveal-fade,
+  .reveal-hero {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

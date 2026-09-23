@@ -49,7 +49,7 @@ const videos: VideoItem[] = [
 
 <section id="results" class="videos-section" aria-labelledby="results-title">
   <div class="container videos-container">
-    <div class="videos-header">
+    <div class="videos-header reveal">
       <h2 id="results-title" class="section-title" data-i18n="videos.title">Результаты лечения</h2>
       <p class="section-subtitle" data-i18n="videos.subtitle">
         Как меняется взгляд ребёнка после лечения
@@ -59,7 +59,7 @@ const videos: VideoItem[] = [
     <div class="videos-strip-wrapper">
       <ul class="videos-list" role="list">
         {videos.map((video) => (
-          <li class="video-card-item">
+          <li class="video-card-item reveal">
             <div
               class="video-card"
               data-video-id={video.id}
