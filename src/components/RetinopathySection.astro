@@ -1,5 +1,7 @@
 ---
 // RetinopathySection — dark accent block with key photo IMG_0345.JPG
+import { Image } from "astro:assets";
+import rnImg from "../assets/gallery/IMG_0345.JPG";
 ---
 
 <section class="rn section--dark" id="retinopathy">
@@ -54,15 +56,17 @@
     <!-- Right: Key photo -->
     <div class="rn__visual reveal-right">
       <div class="rn__img-frame">
-        <img
-          src="/IMG_0345.JPG"
+        <Image
+          src={rnImg}
           alt="Врачи проводят офтальмоскопию новорождённому"
           data-i18n-alt="rn.img.alt"
           class="rn__img"
+          width={800}
+          height={600}
+          quality={80}
+          format="webp"
           loading="lazy"
           decoding="async"
-          width="600"
-          height="450"
         />
         <!-- Decorative corner accents -->
         <div class="rn__img-corner rn__img-corner--tl" aria-hidden="true"></div>

@@ -1,7 +1,10 @@
 ---
 import "../styles/global.css";
-// Onest — self-hosted via Fontsource (кириллица гарантирована, без зависимости от CDN)
+// Onest & Inter — self-hosted via Fontsource (кириллица + латиница гарантированы, 0 CDN-запросов)
 import "@fontsource-variable/onest";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
 
 interface Props {
   title?: string;
@@ -102,13 +105,6 @@ const {
       }
     </script>
 
-    <!-- Preconnect for Google Fonts (Inter only — Onest грузится локально) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <slot />

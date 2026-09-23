@@ -1,5 +1,7 @@
 ---
 // SiteFooter — footer with mini booking form, social links, copyright
+import { Image } from "astro:assets";
+import logoImg from "../assets/header-logo.png";
 ---
 
 <footer class="site-footer" id="footer">
@@ -8,7 +10,7 @@
       <!-- Brand -->
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="Lumivis — на главную">
-          <img src="/header-logo.png" alt="Lumivis" width="100" height="36" />
+          <Image src={logoImg} alt="Lumivis" width={100} height={36} loading="lazy" format="webp" />
         </a>
         <p class="footer-tagline" data-i18n="footer.tagline">Офтальмологическая клиника в Самарканде</p>
         <div class="footer-social">

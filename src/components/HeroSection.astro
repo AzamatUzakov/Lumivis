@@ -1,5 +1,7 @@
 ---
 // HeroSection — main hero block
+import { Image } from "astro:assets";
+import heroDoctorImg from "../assets/hero-doctor.png";
 ---
 
 <section class="hero" id="hero">
@@ -90,13 +92,17 @@
 
       <div class="hero__img-wrap">
         <div class="hero__img-backdrop" aria-hidden="true"></div>
-        <img
-          src="/hero-doctor.png"
+        <Image
+          src={heroDoctorImg}
           alt="Врач-офтальмолог Lumivis"
           data-i18n-alt="hero.img.alt"
           class="hero__img"
-          width="440"
-          height="520"
+          width={440}
+          height={520}
+          loading="eager"
+          fetchpriority="high"
+          quality={82}
+          format="webp"
         />
         <!-- Floating badge: Doctor Name -->
         <div class="hero__float-badge">

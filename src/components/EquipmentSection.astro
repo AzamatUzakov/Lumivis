@@ -1,13 +1,23 @@
 ---
+import { Image } from "astro:assets";
+import eq1 from "../assets/equipment/Huvitz.png";
+import eq2 from "../assets/equipment/Labomed.png";
+import eq3 from "../assets/equipment/biomikroskop.png";
+import eq4 from "../assets/equipment/sinoptofon.png";
+import eq5 from "../assets/equipment/rucheek.png";
+import eq6 from "../assets/equipment/akkomodometr.png";
+import eq7 from "../assets/equipment/amo-atos.png";
+import eq8 from "../assets/equipment/Gezatone.png";
+
 const equipment = [
-  { file: "/Huvitz.png", nameRu: "Щелевая лампа Huvitz", descRu: "Биомикроскопия переднего отрезка глаза" },
-  { file: "/Labomed.png", nameRu: "Щелевая лампа Labomed", descRu: "Диагностический микроскоп высокого разрешения" },
-  { file: "/biomikroskop.png", nameRu: "Офтальмологический биомикроскоп", descRu: "Детальный осмотр структур глаза" },
-  { file: "/sinoptofon.png", nameRu: "Синоптофор", descRu: "Аппаратное лечение косоглазия, тренировка бинокулярного зрения" },
-  { file: "/rucheek.png", nameRu: "Аппарат «Ручеёк»", descRu: "Лечение и профилактика косоглазия и амблиопии" },
-  { file: "/akkomodometr.png", nameRu: "Аккомодометр", descRu: "Диагностика аккомодации глаза" },
-  { file: "/amo-atos.png", nameRu: "Аппарат АМО-АТОС", descRu: "Магнитотерапия и аппаратное лечение" },
-  { file: "/Gezatone.png", nameRu: "Аппарат Gezatone", descRu: "Физиотерапевтическое воздействие" },
+  { file: eq1, nameRu: "Щелевая лампа Huvitz", descRu: "Биомикроскопия переднего отрезка глаза" },
+  { file: eq2, nameRu: "Щелевая лампа Labomed", descRu: "Диагностический микроскоп высокого разрешения" },
+  { file: eq3, nameRu: "Офтальмологический биомикроскоп", descRu: "Детальный осмотр структур глаза" },
+  { file: eq4, nameRu: "Синоптофор", descRu: "Аппаратное лечение косоглазия, тренировка бинокулярного зрения" },
+  { file: eq5, nameRu: "Аппарат «Ручеёк»", descRu: "Лечение и профилактика косоглазия и амблиопии" },
+  { file: eq6, nameRu: "Аккомодометр", descRu: "Диагностика аккомодации глаза" },
+  { file: eq7, nameRu: "Аппарат АМО-АТОС", descRu: "Магнитотерапия и аппаратное лечение" },
+  { file: eq8, nameRu: "Аппарат Gezatone", descRu: "Физиотерапевтическое воздействие" },
 ];
 ---
 
@@ -23,7 +33,17 @@ const equipment = [
         <div class="equip-cell reveal">
           <div class="equip-cell__thumb">
             <span class="equip-cell__index">{String(i + 1).padStart(2, "0")}</span>
-            <img src={item.file} alt={item.nameRu} data-i18n-alt={`equip.${i + 1}.alt`} loading="lazy" decoding="async" width="240" height="240" />
+            <Image
+              src={item.file}
+              alt={item.nameRu}
+              data-i18n-alt={`equip.${i + 1}.alt`}
+              loading="lazy"
+              decoding="async"
+              width={240}
+              height={240}
+              quality={78}
+              format="webp"
+            />
           </div>
           <p class="equip-cell__name" data-i18n={`equip.${i + 1}.name`}>{item.nameRu}</p>
           <p class="equip-cell__desc" data-i18n={`equip.${i + 1}.desc`}>{item.descRu}</p>

@@ -1,12 +1,14 @@
 ---
 // SiteHeader — sticky, responsive, RU/EN/UZ switcher
+import { Image } from "astro:assets";
+import logoImg from "../assets/header-logo.png";
 ---
 
 <header id="site-header" class="site-header">
   <div class="container header-inner">
     <!-- Logo -->
     <a href="/" class="header-logo" aria-label="Lumivis — главная">
-      <img src="/header-logo.png" alt="Lumivis" width="160" height="60" />
+      <Image src={logoImg} alt="Lumivis" width={160} height={60} loading="eager" format="webp" />
     </a>
 
     <!-- Desktop Nav -->
