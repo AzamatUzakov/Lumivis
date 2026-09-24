@@ -16,7 +16,35 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  /* Safari/older Chrome fallback — also handled via Lenis in BaseLayout */
+  -webkit-overflow-scrolling: touch;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Lenis Smooth Scroll Core Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Ensure anchor targets are not hidden under sticky header (~72px) */
+[id] {
+  scroll-margin-top: 80px;
 }
 
 /* ── Design Tokens ── */
