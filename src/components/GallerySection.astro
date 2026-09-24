@@ -1,35 +1,45 @@
 ---
 // GallerySection — 7 process photos in masonry-style grid
+import { Image } from "astro:assets";
+import g1 from "../assets/gallery/IMG_0316.JPG";
+import g2 from "../assets/gallery/IMG_0322.JPG";
+import g3 from "../assets/gallery/IMG_0323.JPG";
+import g4 from "../assets/gallery/IMG_0325.JPG";
+import g5 from "../assets/gallery/IMG_0348.JPG";
+import g6 from "../assets/gallery/IMG_0351.JPG";
+import g7 from "../assets/gallery/IMG_0353.JPG";
+
 const photos = [
-  { src: "/IMG_0316.JPG", alt: "Детская диагностика зрения" },
-  { src: "/IMG_0322.JPG", alt: "Проверка зрения у ребёнка" },
-  { src: "/IMG_0323.JPG", alt: "Офтальмологическое обследование" },
-  { src: "/IMG_0325.JPG", alt: "Диагностика на аппарате" },
-  { src: "/IMG_0348.JPG", alt: "Приём взрослого пациента" },
-  { src: "/IMG_0351.JPG", alt: "Консультация офтальмолога" },
-  { src: "/IMG_0353.JPG", alt: "Обследование пациента" },
+  { src: g1, alt: "Детская диагностика зрения" },
+  { src: g2, alt: "Проверка зрения у ребёнка" },
+  { src: g3, alt: "Офтальмологическое обследование" },
+  { src: g4, alt: "Диагностика на аппарате" },
+  { src: g5, alt: "Приём взрослого пациента" },
+  { src: g6, alt: "Консультация офтальмолога" },
+  { src: g7, alt: "Обследование пациента" },
 ];
 ---
 
 <section class="gallery section" id="gallery">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="gallery.title">Как проходит приём</h2>
       <p data-i18n="gallery.subtitle">Тепло, спокойно и безболезненно — для маленьких и взрослых пациентов</p>
     </div>
 
     <div class="gallery__grid">
       {photos.map((photo, i) => (
-        <div class={`gallery__item gallery__item--${i + 1}`}>
-          <img
+        <div class={`gallery__item gallery__item--${i + 1} reveal-fade`}>
+          <Image
             src={photo.src}
             alt={photo.alt}
             data-i18n-alt={`gallery.${i + 1}.alt`}
             class="gallery__img"
+            width={800}
+            quality={76}
+            format="webp"
             loading="lazy"
             decoding="async"
-            width="600"
-            height="450"
           />
           <div class="gallery__overlay" aria-hidden="true"></div>
         </div>

@@ -1,43 +1,57 @@
 ---
 // DoctorsSection.astro — 2-zone card: photo on white bg + solid branded text panel
+import { Image } from "astro:assets";
+import doc1 from "../assets/doctors/doctor-3.png";
+import doc2 from "../assets/doctors/doctor-2.png";
+import doc3 from "../assets/doctors/doctor-5.png";
+import doc4 from "../assets/doctors/doctor-6.png";
+import doc5 from "../assets/doctors/doctor-7.png";
+import doc6 from "../assets/doctors/doctor-4.png";
+import doc7 from "../assets/doctors/doctor-8.png";
+import doc8 from "../assets/doctors/doctor-1.png";
+
 const doctors = [
-  { id: 1, image: "/doctors/doctor-3.png", pos: "center 10%",
+  { id: 1, image: doc1, pos: "center 10%",
     nameRu: "Бобоев Саидафзал Абдурахманович", specRu: "Офтальмохирург, к.м.н., доцент" },
-  { id: 2, image: "/doctors/doctor-2.png", pos: "center 10%",
+  { id: 2, image: doc2, pos: "center 10%",
     nameRu: "Ражабов Санжар Мансурович", specRu: "Офтальмохирург, катарактолог" },
-  { id: 3, image: "/doctors/doctor-5.png", pos: "center 10%",
+  { id: 3, image: doc3, pos: "center 10%",
     nameRu: "Абдурахмонов Фаридун Саидакбарович", specRu: "Детский офтальмолог, страбизмолог" },
-  { id: 4, image: "/doctors/doctor-6.png", pos: "center 22%",
+  { id: 4, image: doc4, pos: "center 22%",
     nameRu: "Раупова Парвина Хасановна", specRu: "Врач-окулист" },
-  { id: 5, image: "/doctors/doctor-7.png", pos: "center 10%",
+  { id: 5, image: doc5, pos: "center 10%",
     nameRu: "Зикириллоев Абдурасул Нусратиллоевич", specRu: "Офтальмохирург-катарактолог, главный врач" },
-  { id: 6, image: "/doctors/doctor-4.png", pos: "center 10%",
+  { id: 6, image: doc6, pos: "center 10%",
     nameRu: "Мусинов Абдукаюм Суюнбоевич", specRu: "Врач-окулист" },
-  { id: 7, image: "/doctors/doctor-8.png", pos: "center 10%",
+  { id: 7, image: doc7, pos: "center 10%",
     nameRu: "Мусинов Хусниддин Суюнбоевич", specRu: "Окулярист" },
-  { id: 8, image: "/doctors/doctor-1.png", pos: "center 10%",
+  { id: 8, image: doc8, pos: "center 10%",
     nameRu: "Бобоев Сиёвуш Саидафзалзода", specRu: "Офтальмохирург, Ph.D" },
 ];
 ---
 
 <section class="doctors section" id="doctors">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="doctors.title">Наша команда</h2>
       <p data-i18n="doctors.subtitle">Специалисты с многолетним опытом в офтальмологии взрослых и детей</p>
     </div>
 
     <div class="doctors__grid">
       {doctors.map((doc) => (
-        <article class="doctor-card">
+        <article class="doctor-card reveal">
           <!-- Photo zone: white bg matches studio photos -->
           <div class="doctor-card__photo-wrap">
             {doc.image ? (
-              <img
+              <Image
                 src={doc.image}
                 alt={`${doc.nameRu}, ${doc.specRu}`}
                 data-i18n-alt={`doctor.${doc.id}.alt`}
                 class="doctor-card__img"
+                width={360}
+                height={480}
+                quality={78}
+                format="webp"
                 style={{ objectPosition: doc.pos || "center 10%" }}
                 loading="lazy"
               />

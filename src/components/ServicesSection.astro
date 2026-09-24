@@ -4,14 +4,14 @@
 
 <section class="services section section--surface" id="services" aria-labelledby="services-title">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 id="services-title" data-i18n="services.title">Наши услуги</h2>
       <p data-i18n="services.subtitle">Полный спектр офтальмологической помощи взрослым и детям</p>
     </div>
 
     <ul class="bento-grid">
       <!-- 01: РН (Retinopathy) — 2x2 Bento Feature Block with Photo -->
-      <li class="bento-item bento-item--rn">
+      <li class="bento-item bento-item--rn reveal">
         <div class="bento-card bento-card--rn">
           <!-- Card Number 01 moved to Top-Right to avoid badge collision -->
           <span class="bento-num bento-num--rn" aria-hidden="true">01</span>
@@ -51,6 +51,8 @@
           <!-- Text Content Zone (Left ~58% on Desktop/Tablet) -->
           <div class="bento-rn-content">
             <div class="bento-card__rn-header">
+              <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: текст берётся из i18n hero.badge
+                   «Единственная частная клиника РН-скрининга» — нужно подтверждение от владельца -->
               <span class="bento-badge" data-i18n="hero.badge">
                 Единственная частная клиника РН-скрининга
               </span>
@@ -82,7 +84,7 @@
       </li>
 
       <!-- 02: Диагностика зрения (2x1 on Desktop) -->
-      <li class="bento-item bento-item--diag">
+      <li class="bento-item bento-item--diag reveal">
         <a href="#contacts" class="bento-card bento-card--interactive bento-card--diag" aria-label="Диагностика зрения — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -112,7 +114,7 @@
       </li>
 
       <!-- 03: Лечение косоглазия (1x1) -->
-      <li class="bento-item bento-item--squint">
+      <li class="bento-item bento-item--squint reveal">
         <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Лечение косоглазия — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -142,7 +144,7 @@
       </li>
 
       <!-- 04: Лечение амблиопии (1x1) -->
-      <li class="bento-item bento-item--amb">
+      <li class="bento-item bento-item--amb reveal">
         <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Лечение амблиопии — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -172,7 +174,7 @@
       </li>
 
       <!-- 05: Детская офтальмология (1x1) -->
-      <li class="bento-item bento-item--kids">
+      <li class="bento-item bento-item--kids reveal">
         <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Детская офтальмология — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -202,7 +204,7 @@
       </li>
 
       <!-- 06: Подбор очков и линз (1x1) -->
-      <li class="bento-item bento-item--glasses">
+      <li class="bento-item bento-item--glasses reveal">
         <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Подбор очков и линз — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -234,7 +236,7 @@
       </li>
 
       <!-- 07: Синдром сухого глаза (1x1) -->
-      <li class="bento-item bento-item--dry">
+      <li class="bento-item bento-item--dry reveal">
         <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Синдром сухого глаза — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -263,7 +265,7 @@
       </li>
 
       <!-- 08: Промывание слёзных путей (1x1) -->
-      <li class="bento-item bento-item--tear">
+      <li class="bento-item bento-item--tear reveal">
         <a href="#contacts" class="bento-card bento-card--interactive" aria-label="Промывание слёзных путей — Записаться">
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
@@ -294,7 +296,7 @@
     </ul>
 
     <!-- Bottom CTA Bar -->
-    <div class="services-bottom-cta">
+    <div class="services-bottom-cta reveal">
       <p class="services-bottom-cta__text" data-i18n="services.bottom.text">
         Не нашли нужную услугу?
       </p>
@@ -304,31 +306,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll(".bento-item");
-    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("bento-animated");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
-      );
-      items.forEach((item, index) => {
-        (item as HTMLElement).style.setProperty("--bento-delay", `${index * 40}ms`);
-        observer.observe(item);
-      });
-    } else {
-      items.forEach((item) => item.classList.add("bento-animated"));
-    }
-  });
-</script>
 
 <style>
 /* ── Section Container ── */
@@ -350,25 +327,8 @@
 
 /* ── Item Reveal Animation ── */
 .bento-item {
-  opacity: 1; /* Fallback for SSR / No JS */
-  transform: none;
-  transition: opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
   min-width: 0;
   display: flex;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .bento-item:not(.bento-animated) {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-}
-
-.bento-item.bento-animated {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: var(--bento-delay, 0ms);
 }
 
 /* ── Card Base ── */

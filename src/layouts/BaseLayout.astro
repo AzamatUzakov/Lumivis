@@ -1,7 +1,11 @@
 ---
 import "../styles/global.css";
-// Onest — self-hosted via Fontsource (кириллица гарантирована, без зависимости от CDN)
+import "lenis/dist/lenis.css";
+// Onest & Inter — self-hosted via Fontsource (кириллица + латиница гарантированы, 0 CDN-запросов)
 import "@fontsource-variable/onest";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
 
 interface Props {
   title?: string;
@@ -102,13 +106,6 @@ const {
       }
     </script>
 
-    <!-- Preconnect for Google Fonts (Inter only — Onest грузится локально) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <slot />
@@ -132,6 +129,8 @@ const {
           "header.hours": "Пн–Сб 09:00–17:00",
           "header.cta": "Записаться на приём",
 
+          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: Уточнить у владельца — действительно ли клиника является
+          // единственной частной клиникой, проводящей РН-скрининг в Самарканде?
           "hero.badge": "Единственная частная клиника РН‑скрининга в Самарканде",
           "hero.h1": "Первый взгляд в жизни — под бережным контролем экспертов",
           "hero.subtitle": "Заботимся о зрении детей и взрослых в Самарканде. Скрининг ретинопатии недоношенных, точная диагностика, аппаратное и хирургическое лечение косоглазия в комфортной атмосфере.",
@@ -148,6 +147,8 @@ const {
 
           "whyus.title": "Почему семьи Самарканда выбирают Lumivis",
           "whyus.subtitle": "Мы совмещаем высочайшие медицинские стандарты с искренней эмпатией к каждому пациенту — от новорождённых до пожилых людей",
+          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: то же утверждение, что и в hero.badge — уточнить, нет ли
+          // других приватных клиник с РН-скринингом в городе
           "whyus.1.title": "Уникальный РН-скрининг в Самарканде",
           "whyus.1.text": "Единственная частная клиника в городе, где проводится раннее выявление и ведение ретинопатии недоношенных детей — здоровье глаз с первых недель жизни.",
           "whyus.stat.num": "3–6 недель",
@@ -242,6 +243,8 @@ const {
           "services.rn_img.alt": "Детский офтальмолог проводит обследование ребёнка в Самарканде",
 
           "rn.badge": "Уникальная компетенция в Самарканде",
+          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: уточнить у владельца — является ли клиника единственной частной,
+          // проводящей РН-скрининг в Самарканде (в RetinopathySection)
           "rn.title": "Единственная частная клиника в Самарканде, выявляющая и ведущая ретинопатию недоношенных",
           "rn.text": "Ретинопатия недоношенных (РН) — тяжелая патология сосудов сетчатки у детей, родившихся раньше срока. Без своевременной помощи болезнь быстро прогрессирует и может привести к необратимой слепоте.",
           "rn.text2": "Диагностическое окно составляет всего 3–6 недель жизни. Наша клиника оснащена всем необходимым оборудованием для бережного обследования младенцев и проведения своевременной терапии.",
@@ -264,6 +267,8 @@ const {
           "review.1.author": "Мать 4-летней пациентки, Самарканд",
           "review.2.text": "Искали клинику для скрининга ретинопатии после перинатального центра. Lumivis — единственное место в городе с нужным опытом и оборудованием. Огромное спасибо врачам!",
           "review.2.author": "Семья пациента из Самарканда",
+          // СУБЪЕКТИВНЫЙ ОТЗЫВ ПАЦИЕНТА — оставляем как есть (мнение пациента, не заявление клиники),
+          // но если хотите быть осторожными — можно смягчить до «Одна из лучших офтальмологических клиник в Самарканде»
           "review.3.text": "Проходил проверку зрения и подбор очков. Профессионализм, чистота и отсутствие очередей. Лучшая офтальмологическая клиника в Самарканде.",
           "review.3.author": "А. К., Самарканд, 42 года",
           "review.3.verified": "Подтверждённый визит",
@@ -279,6 +284,8 @@ const {
           "videos.5.title": "Консультация офтальмолога и забота о пациенте",
 
           "map.title": "Контакты и расположение",
+          "map.facade.title": "Клиника Lumivis на карте",
+          "map.facade.btn": "Показать карту",
           "map.address.label": "Наш адрес",
           "map.address": "г. Самарканд, Узбекистан",
           "map.hours.label": "Режим работы",
@@ -294,6 +301,9 @@ const {
           "footer.phone.placeholder": "Ваш номер телефона",
           "footer.submit": "Отправить заявку",
           "footer.copyright": "© 2025–2026 Офтальмологическая клиника Lumivis. Все права защищены.",
+          "footer.privacy.link": "Политика конфиденциальности",
+          "footer.consent.text": "Я согласен(на) на обработку указанных персональных данных (имя и телефон) в целях записи на приём и связи со мной как с пациентом клиники Lumivis. Данные не передаются третьим лицам и не используются в рекламных целях. Подробнее:",
+          "footer.consent.link": "Политика конфиденциальности",
         },
 
         en: {
@@ -311,6 +321,7 @@ const {
           "header.hours": "Mon–Sat 09:00–17:00",
           "header.cta": "Book Appointment",
 
+          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ (EN hero badge): same as ru hero.badge — confirm with owner
           "hero.badge": "The only private ROP screening eye clinic in Samarkand",
           "hero.h1": "Protecting your family's eyesight with expert medical care",
           "hero.subtitle": "Comprehensive pediatric & adult ophthalmology in Samarkand. Specialized retinopathy of prematurity (ROP) screening, accurate diagnostics, strabismus and amblyopia treatment.",
@@ -421,6 +432,8 @@ const {
           "services.rn_img.alt": "Pediatric ophthalmologist examining child's vision in Samarkand",
 
           "rn.badge": "Unique Expertise in Samarkand",
+          // REQUIRES CONFIRMATION: verify with clinic owner that this is actually
+          // the only private ROP-screening clinic in Samarkand
           "rn.title": "The only private clinic in Samarkand screening and managing Retinopathy of Prematurity",
           "rn.text": "Retinopathy of Prematurity (ROP) is a serious retinal vessel disorder affecting preterm infants. Without timely detection, it can rapidly progress to irreversible vision loss.",
           "rn.text2": "The critical diagnostic window is 3 to 6 weeks after birth. Our clinic is equipped with specialized instrumentation and medical expertise for gentle, prompt infant care.",
@@ -458,6 +471,8 @@ const {
           "videos.5.title": "Ophthalmologist Consultation & Patient Care",
 
           "map.title": "Location & Contacts",
+          "map.facade.title": "Lumivis Clinic on Map",
+          "map.facade.btn": "Show Interactive Map",
           "map.address.label": "Our Address",
           "map.address": "Samarkand, Uzbekistan",
           "map.hours.label": "Working Hours",
@@ -473,6 +488,9 @@ const {
           "footer.phone.placeholder": "Phone Number",
           "footer.submit": "Submit Request",
           "footer.copyright": "© 2025–2026 Lumivis Ophthalmology Clinic. All rights reserved.",
+          "footer.privacy.link": "Privacy Policy",
+          "footer.consent.text": "I consent to the processing of the provided personal data (name and phone number) for the purpose of booking an appointment and being contacted as a patient of Lumivis clinic. Data is not shared with third parties or used for marketing purposes. Learn more:",
+          "footer.consent.link": "Privacy Policy",
         },
 
         uz: {
@@ -637,6 +655,8 @@ const {
           "videos.5.title": "Oftalmolog konsultatsiyasi va bemorga g'amxo'rlik",
 
           "map.title": "Manzil va aloqa",
+          "map.facade.title": "Lumivis klinikasi xaritada",
+          "map.facade.btn": "Xaritani ko'rsatish",
           "map.address.label": "Bizning manzil",
           "map.address": "Samarqand shahri, O'zbekiston",
           "map.hours.label": "Ish vaqti",
@@ -652,6 +672,9 @@ const {
           "footer.phone.placeholder": "Telefon raqamingiz",
           "footer.submit": "Ariza yuborish",
           "footer.copyright": "© 2025–2026 Lumivis ko'z klinikasi. Barcha huquqlar himoyalangan.",
+          "footer.privacy.link": "Maxfiylik siyosati",
+          "footer.consent.text": "Men Lumivis klinikasining bemorsi sifatida qabul yozilish va men bilan bog'lanish maqsadida ko'rsatilgan shaxsiy ma'lumotlarimni (ism va telefon) qayta ishlashga roziman. Ma'lumotlar uchinchi shaxslarga berilmaydi va reklama maqsadida ishlatilmaydi. Batafsil:",
+          "footer.consent.link": "Maxfiylik siyosati",
         },
       };
 
@@ -765,7 +788,141 @@ const {
             });
           });
         }
+
+        // Init Smooth Scroll with Lenis
+        initSmoothScroll();
+
+        // Entrance Animations System
+        initAnimations();
       });
+
+      function initSmoothScroll() {
+        // Respect user preference for reduced motion
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+
+        import("lenis").then(({ default: Lenis }) => {
+          const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            touchMultiplier: 1.5,
+            infinite: false,
+          });
+
+          function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+
+          // Smooth scroll event delegation for all anchor links
+          document.addEventListener("click", (e) => {
+            const target = e.target as HTMLElement | null;
+            const anchor = target?.closest<HTMLAnchorElement>('a[href^="#"]');
+            if (!anchor) return;
+
+            const href = anchor.getAttribute("href");
+            if (!href || href === "#") return;
+
+            const targetEl = document.querySelector(href);
+            if (targetEl) {
+              e.preventDefault();
+
+              // Close mobile menu if open
+              const mobileMenu = document.getElementById("mobile-menu");
+              const burger = document.getElementById("burger-btn");
+              if (mobileMenu && mobileMenu.classList.contains("mobile-menu--open")) {
+                mobileMenu.classList.remove("mobile-menu--open");
+                burger?.setAttribute("aria-expanded", "false");
+                document.body.style.overflow = "";
+              }
+
+              lenis.scrollTo(targetEl as HTMLElement, {
+                offset: -80,
+                duration: 1.2,
+              });
+            }
+          });
+        }).catch((err) => {
+          console.error("Lenis smooth scroll failed to load:", err);
+        });
+      }
+
+      function initAnimations() {
+        const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function handleTransitionEnd(e: Event) {
+          const target = e.target as HTMLElement;
+          target.classList.remove("will-animate");
+          target.removeEventListener("transitionend", handleTransitionEnd);
+        }
+
+        function triggerElement(el: HTMLElement, delay: number = 0) {
+          if (isReduced) {
+            el.classList.add("is-visible");
+            return;
+          }
+          el.classList.add("will-animate");
+          if (delay > 0) {
+            el.style.transitionDelay = `${delay}ms`;
+          }
+          el.addEventListener("transitionend", handleTransitionEnd);
+          requestAnimationFrame(() => {
+            el.classList.add("is-visible");
+          });
+        }
+
+        // 1. Hero Animation (Initial page load)
+        const heroElements = document.querySelectorAll<HTMLElement>(".reveal-hero");
+        heroElements.forEach((el, idx) => {
+          triggerElement(el, idx * 100);
+        });
+
+        // 2. Scroll Reveal Observer
+        if (isReduced) {
+          document.querySelectorAll<HTMLElement>(".reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-fade").forEach((el) => {
+            el.classList.add("is-visible");
+          });
+          return;
+        }
+
+        const observerOptions: IntersectionObserverInit = {
+          threshold: 0.15,
+          rootMargin: "0px 0px -40px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              observer.unobserve(el);
+
+              // Calculate stagger index among siblings if inside a list/grid
+              let delay = 0;
+              const parent = el.parentElement;
+              if (parent) {
+                const siblings = Array.from(parent.children).filter((child) =>
+                  child.matches(".reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-fade")
+                );
+                if (siblings.length > 1) {
+                  const idx = siblings.indexOf(el);
+                  if (idx >= 0) {
+                    delay = Math.min(idx, 4) * 80;
+                  }
+                }
+              }
+
+              triggerElement(el, delay);
+            }
+          });
+        }, observerOptions);
+
+        const targetElements = document.querySelectorAll<HTMLElement>(
+          ".reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-fade"
+        );
+        targetElements.forEach((el) => observer.observe(el));
+      }
     </script>
   </body>
 </html>

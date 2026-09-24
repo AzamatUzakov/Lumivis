@@ -1,5 +1,24 @@
 ---
 // SiteFooter — footer with mini booking form, social links, copyright
+// ─────────────────────────────────────────────────────────────────────
+// FORM INTEGRATION: Telegram Bot API
+//   Required env vars (copy .env.example → .env and fill in values):
+//     PUBLIC_TG_BOT_TOKEN — Telegram bot token from @BotFather
+//     PUBLIC_TG_CHAT_ID   — Chat ID to send messages to (use @userinfobot to find it)
+//
+// TODO (РЕКВИЗИТЫ): Заполни данные владельца у клиента и раскомментируй блок
+// "footer-requisites" ниже в HTML-разметке:
+//   - Юридическое название организации [ЗАПОЛНИТЬ: ООО / МЧЖЖ / ИП ...]
+//   - ИНН / ПИНФЛ                      [ЗАПОЛНИТЬ]
+//   - Номер медицинской лицензии        [ЗАПОЛНИТЬ]
+//   - Дата выдачи лицензии              [ЗАПОЛНИТЬ]
+// ─────────────────────────────────────────────────────────────────────
+import { Image } from "astro:assets";
+import logoImg from "../assets/header-logo.png";
+
+// Read Telegram credentials from env (Astro exposes PUBLIC_* vars to client)
+const TG_BOT_TOKEN = import.meta.env.PUBLIC_TG_BOT_TOKEN ?? "";
+const TG_CHAT_ID   = import.meta.env.PUBLIC_TG_CHAT_ID   ?? "";
 ---
 
 <footer class="site-footer" id="footer">
@@ -8,7 +27,7 @@
       <!-- Brand -->
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="Lumivis — на главную">
-          <img src="/header-logo.png" alt="Lumivis" width="100" height="36" />
+          <Image src={logoImg} alt="Lumivis" width={300} height={100} loading="lazy" format="webp" />
         </a>
         <p class="footer-tagline" data-i18n="footer.tagline">Офтальмологическая клиника в Самарканде</p>
         <div class="footer-social">
@@ -42,6 +61,7 @@
           <a href="#retinopathy" class="footer-nav__link" data-i18n="nav.retinopathy">РН-скрининг</a>
           <a href="#results" class="footer-nav__link" data-i18n="nav.videos">Результаты</a>
           <a href="#contacts" class="footer-nav__link" data-i18n="nav.contacts">Контакты</a>
+          <a href="/privacy" class="footer-nav__link footer-nav__link--legal" data-i18n="footer.privacy.link">Политика конфиденциальности</a>
         </nav>
       </div>
 
@@ -51,7 +71,17 @@
         <div class="footer-contacts">
           <a href="tel:+998995981010" class="footer-contacts__phone">+998 99 598 10 10</a>
           <p class="footer-contacts__hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</p>
+          <!-- TODO (АДРЕС): Уточнить точный адрес у владельца (улица, дом) и обновить
+               data-i18n="map.address" в BaseLayout.astro — сейчас стоит:
+               "г. Самарканд, Узбекистан" [ЗАПОЛНИТЬ: полный адрес] -->
           <p class="footer-contacts__address" data-i18n="map.address">г. Самарканд, Узбекистан</p>
+          <!-- TODO (РЕКВИЗИТЫ): Раскомментируй когда получишь данные от клиента
+          <p class="footer-contacts__requisites">
+            [ЗАПОЛНИТЬ: юридическое название, напр. МЧЖЖ «Lumivis»]<br/>
+            ИНН: [ЗАПОЛНИТЬ]<br/>
+            Лицензия №[ЗАПОЛНИТЬ] от [ЗАПОЛНИТЬ]<br/>
+          </p>
+          -->
           <div class="footer-contacts__socials">
             <a href="https://t.me/NKernel" target="_blank" rel="noopener" class="footer-contacts__social-link">
               Telegram: @NKernel
@@ -84,7 +114,27 @@
             required
             autocomplete="tel"
           />
-          <button type="submit" class="btn btn--primary footer-form__submit" data-i18n="footer.submit">
+
+          <!-- Consent checkbox (required by law for medical data processing) -->
+          <label class="footer-form__consent" id="consent-label">
+            <input
+              type="checkbox"
+              id="footer-consent"
+              name="consent"
+              class="footer-form__consent-checkbox"
+              required
+            />
+            <span class="footer-form__consent-text">
+              <span data-i18n="footer.consent.text">Я согласен(на) на обработку указанных персональных данных (имя и телефон) в целях записи на приём и связи со мной как с пациентом клиники Lumivis. Данные не передаются третьим лицам и не используются в рекламных целях. Подробнее:</span>
+              <a href="/privacy" class="footer-form__consent-link" data-i18n="footer.consent.link">Политика конфиденциальности</a>
+            </span>
+          </label>
+
+          <div class="footer-form__error" id="consent-error" role="alert" aria-live="polite" hidden>
+            Пожалуйста, дайте согласие на обработку данных
+          </div>
+
+          <button type="submit" id="booking-submit" class="btn btn--primary footer-form__submit" data-i18n="footer.submit">
             Отправить заявку
           </button>
         </form>
@@ -105,23 +155,84 @@
   </div>
 </footer>
 
-<script>
-  const form = document.getElementById('booking-form') as HTMLFormElement | null;
+<script define:vars={{ TG_BOT_TOKEN, TG_CHAT_ID }}>
+  var form = document.getElementById('booking-form');
+  var consentError = document.getElementById('consent-error');
+
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = (form.querySelector('[name="name"]') as HTMLInputElement)?.value?.trim();
-      const phone = (form.querySelector('[name="phone"]') as HTMLInputElement)?.value?.trim();
+
+      var nameInput  = form.querySelector('[name="name"]');
+      var phoneInput = form.querySelector('[name="phone"]');
+      var consentBox = form.querySelector('[name="consent"]');
+      var btn        = document.getElementById('booking-submit');
+
+      var name  = (nameInput  && nameInput.value)  ? nameInput.value.trim()  : '';
+      var phone = (phoneInput && phoneInput.value) ? phoneInput.value.trim() : '';
+
+      // Guard: require non-empty fields
       if (!name || !phone) return;
-      // In production: send to CRM/Telegram bot/backend
-      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+      // Guard: consent checkbox must be checked
+      if (!consentBox || !consentBox.checked) {
+        if (consentError) consentError.hidden = false;
+        if (consentBox) consentBox.focus();
+        return;
+      }
+      if (consentError) consentError.hidden = true;
+
+      // ── Telegram Bot API send ─────────────────────────────────────────
+      var botToken = TG_BOT_TOKEN;
+      var chatId   = TG_CHAT_ID;
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Отправка...';
+      }
+
+      if (botToken && chatId) {
+        try {
+          var text =
+            '📋 *Новая заявка — Lumivis*\n' +
+            '👤 Имя: ' + name + '\n' +
+            '📞 Телефон: ' + phone + '\n' +
+            '🕐 Время: ' + new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Samarkand' });
+
+          var res = await fetch(
+            'https://api.telegram.org/bot' + botToken + '/sendMessage',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: 'Markdown' }),
+            }
+          );
+
+          if (!res.ok) {
+            console.error('[Lumivis] Telegram API error:', res.status);
+          }
+        } catch (err) {
+          console.error('[Lumivis] Failed to send to Telegram:', err);
+        }
+      } else {
+        console.warn('[Lumivis] Telegram credentials not configured. Form data:', { name: name, phone: phone });
+      }
+      // ─────────────────────────────────────────────────────────────────
+
       if (btn) {
         btn.textContent = '✓ Заявка отправлена!';
         btn.style.background = 'var(--c-teal)';
-        btn.disabled = true;
-        form.reset();
       }
+      form.reset();
     });
+
+    // Hide consent error when checkbox is ticked
+    var cb = form.querySelector('[name="consent"]');
+    if (cb) {
+      cb.addEventListener('change', function() {
+        if (consentError && cb.checked) consentError.hidden = true;
+      });
+    }
   }
 </script>
 
@@ -149,11 +260,18 @@
   gap: var(--s-4);
 }
 
+.footer-logo {
+  display: inline-block;
+  line-height: 1;
+}
+
 .footer-logo img {
   filter: brightness(0) invert(1);
   opacity: 0.95;
   height: 40px;
   width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-tagline {
@@ -283,6 +401,57 @@
 .footer-form__submit {
   width: 100%;
   justify-content: center;
+}
+
+/* Consent checkbox */
+.footer-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+  padding-top: var(--s-1);
+}
+
+.footer-form__consent-checkbox {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--c-sky);
+  cursor: pointer;
+}
+
+.footer-form__consent-text {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.55;
+}
+
+.footer-form__consent-link {
+  color: var(--c-sky-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--t-fast);
+  margin-left: 0.25em;
+}
+
+.footer-form__consent-link:hover {
+  color: var(--c-white);
+}
+
+.footer-form__error {
+  font-size: 0.78rem;
+  color: #ff8a8a;
+  padding: 0.35rem 0.5rem;
+  border-left: 2px solid #ff8a8a;
+  margin-top: calc(-1 * var(--s-1));
+}
+
+/* Legal link in nav (slightly dimmer + italic to visually separate from section links) */
+.footer-nav__link--legal {
+  font-style: italic;
+  opacity: 0.65;
+  margin-top: var(--s-1);
 }
 
 /* Bottom bar */

@@ -1,5 +1,7 @@
 ---
 // RetinopathySection — dark accent block with key photo IMG_0345.JPG
+import { Image } from "astro:assets";
+import rnImg from "../assets/gallery/IMG_0345.JPG";
 ---
 
 <section class="rn section--dark" id="retinopathy">
@@ -16,9 +18,11 @@
 
   <div class="container rn__inner">
     <!-- Left: Text -->
-    <div class="rn__content">
+    <div class="rn__content reveal-left">
       <div class="badge badge--teal rn__badge" data-i18n="rn.badge">Уникальная компетенция</div>
 
+      <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: «Единственная клиника в Самарканде» — уточнить у владельца,
+           нет ли других государственных или частных учреждений с РН-скринингом в городе -->
       <h2 class="rn__title" data-i18n="rn.title">
         Единственная клиника в Самарканде, где выявляют и ведут ретинопатию недоношенных
       </h2>
@@ -42,6 +46,8 @@
         </div>
         <div class="rn__fact">
           <div class="rn__fact-num">1</div>
+          <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: «1 клиника в городе ведёт РН-скрининг» —
+               фактическое основание нужно подтвердить у владельца -->
           <div class="rn__fact-label">клиника в городе<br>ведёт РН-скрининг</div>
         </div>
       </div>
@@ -52,17 +58,19 @@
     </div>
 
     <!-- Right: Key photo -->
-    <div class="rn__visual">
+    <div class="rn__visual reveal-right">
       <div class="rn__img-frame">
-        <img
-          src="/IMG_0345.JPG"
+        <Image
+          src={rnImg}
           alt="Врачи проводят офтальмоскопию новорождённому"
           data-i18n-alt="rn.img.alt"
           class="rn__img"
+          width={800}
+          height={600}
+          quality={80}
+          format="webp"
           loading="lazy"
           decoding="async"
-          width="600"
-          height="450"
         />
         <!-- Decorative corner accents -->
         <div class="rn__img-corner rn__img-corner--tl" aria-hidden="true"></div>

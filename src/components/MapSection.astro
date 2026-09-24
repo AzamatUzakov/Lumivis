@@ -4,13 +4,13 @@
 
 <section class="map-section section" id="contacts">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="map.title">Как нас найти</h2>
     </div>
 
     <div class="map-section__inner">
       <!-- Map embed -->
-      <div class="map-section__map">
+      <div class="map-section__map reveal-left">
         <iframe
           src="https://yandex.uz/map-widget/v1/org/lumivis/194206637683/?ll=66.976016,39.666194&z=16&lang=ru_RU"
           width="100%"
@@ -23,7 +23,7 @@
       </div>
 
       <!-- Contact details -->
-      <div class="map-section__details">
+      <div class="map-section__details reveal-right">
         <div class="contact-block">
           <div class="contact-block__icon" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -33,7 +33,6 @@
           </div>
           <div>
             <p class="contact-block__label" data-i18n="map.address.label">Адрес</p>
-            <!-- TODO: заменить на полный адрес с улицей, например "г. Самарканд, ул. Пример, д. 10" -->
             <p class="contact-block__value" data-i18n="map.address">г. Самарканд, Узбекистан</p>
           </div>
         </div>

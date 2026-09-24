@@ -1,5 +1,7 @@
 ---
 // HeroSection — main hero block
+import { Image } from "astro:assets";
+import heroDoctorImg from "../assets/hero-doctor.png";
 ---
 
 <section class="hero" id="hero">
@@ -28,20 +30,22 @@
   <div class="container hero__inner">
     <!-- Left: Text content -->
     <div class="hero__content">
-      <div class="badge badge--blue hero__badge" data-i18n="hero.badge">
+      <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: «Единственная частная клиника РН-скрининга в Самарканде»
+           Уточнить у владельца — есть ли конкуренты с аналогичной услугой в городе -->
+      <div class="badge badge--blue hero__badge reveal-hero" data-i18n="hero.badge">
         Единственная частная клиника РН-скрининга в Самарканде
       </div>
 
-      <h1 class="hero__h1" data-i18n="hero.h1">
+      <h1 class="hero__h1 reveal-hero" data-i18n="hero.h1">
         Первый взгляд в жизни — под нашим наблюдением
       </h1>
 
-      <p class="hero__subtitle" data-i18n="hero.subtitle">
+      <p class="hero__subtitle reveal-hero" data-i18n="hero.subtitle">
         Полный цикл офтальмологической помощи взрослым и детям: диагностика,
         аппаратное и хирургическое лечение косоглазия, ретинопатии и нарушений зрения.
       </p>
 
-      <div class="hero__actions">
+      <div class="hero__actions reveal-hero">
         <a href="#contacts" class="btn btn--primary" data-i18n="hero.cta1">
           Записаться на приём
         </a>
@@ -51,7 +55,7 @@
       </div>
 
       <!-- Stats -->
-      <div class="hero__stats">
+      <div class="hero__stats reveal-hero">
         <div class="hero__stat">
           <span class="hero__stat-value" data-i18n="hero.stat1.value">10+</span>
           <span class="hero__stat-label" data-i18n="hero.stat1.label">лет опыта</span>
@@ -70,7 +74,7 @@
     </div>
 
     <!-- Right: Doctor image -->
-    <div class="hero__visual">
+    <div class="hero__visual reveal-hero">
       <!-- Decorative iris ring -->
       <div class="hero__iris-ring" aria-hidden="true">
         <svg viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,13 +94,16 @@
 
       <div class="hero__img-wrap">
         <div class="hero__img-backdrop" aria-hidden="true"></div>
-        <img
-          src="/hero-doctor.png"
+        <Image
+          src={heroDoctorImg}
           alt="Врач-офтальмолог Lumivis"
           data-i18n-alt="hero.img.alt"
           class="hero__img"
-          width="440"
-          height="520"
+          width={440}
+          loading="eager"
+          fetchpriority="high"
+          quality={88}
+          format="webp"
         />
         <!-- Floating badge: Doctor Name -->
         <div class="hero__float-badge">

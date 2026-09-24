@@ -11,35 +11,35 @@ interface VideoItem {
 const videos: VideoItem[] = [
   {
     id: 1,
-    src: '/videos/video_2026-09-22_01-27-13.mp4',
+    src: '/videos/video_2026-09-22_01-27-13_compressed.webm',
     poster: '/videos/posters/video-1.webp',
     titleKey: 'videos.1.title',
     position: '50% 40%',
   },
   {
     id: 2,
-    src: '/videos/video_2026-09-22_01-27-56.mp4',
+    src: '/videos/video_2026-09-22_01-27-56_compressed.webm',
     poster: '/videos/posters/video-2.webp',
     titleKey: 'videos.2.title',
     position: '50% 35%',
   },
   {
     id: 3,
-    src: '/videos/video_2026-09-22_01-30-59.mp4',
+    src: '/videos/video_2026-09-22_01-30-59_compressed.webm',
     poster: '/videos/posters/video-3.webp',
     titleKey: 'videos.3.title',
     position: '50% 40%',
   },
   {
     id: 4,
-    src: '/videos/video_2026-09-22_01-36-47.mp4',
+    src: '/videos/video_2026-09-22_01-36-47_compressed.webm',
     poster: '/videos/posters/video-4.webp',
     titleKey: 'videos.4.title',
     position: '50% 40%',
   },
   {
     id: 5,
-    src: '/videos/video_2026-09-22_01-36-58.mp4',
+    src: '/videos/video_2026-09-22_01-36-58_compressed.webm',
     poster: '/videos/posters/video-5.webp',
     titleKey: 'videos.5.title',
     position: '50% 40%',
@@ -49,7 +49,7 @@ const videos: VideoItem[] = [
 
 <section id="results" class="videos-section" aria-labelledby="results-title">
   <div class="container videos-container">
-    <div class="videos-header">
+    <div class="videos-header reveal">
       <h2 id="results-title" class="section-title" data-i18n="videos.title">Результаты лечения</h2>
       <p class="section-subtitle" data-i18n="videos.subtitle">
         Как меняется взгляд ребёнка после лечения
@@ -59,7 +59,7 @@ const videos: VideoItem[] = [
     <div class="videos-strip-wrapper">
       <ul class="videos-list" role="list">
         {videos.map((video) => (
-          <li class="video-card-item">
+          <li class="video-card-item reveal">
             <div
               class="video-card"
               data-video-id={video.id}

@@ -1,31 +1,51 @@
 ---
+import { Image } from "astro:assets";
+import eq1 from "../assets/equipment/Huvitz.png";
+import eq2 from "../assets/equipment/Labomed.png";
+import eq3 from "../assets/equipment/biomikroskop.png";
+import eq4 from "../assets/equipment/sinoptofon.png";
+import eq5 from "../assets/equipment/rucheek.png";
+import eq6 from "../assets/equipment/akkomodometr.png";
+import eq7 from "../assets/equipment/amo-atos.png";
+import eq8 from "../assets/equipment/Gezatone.png";
+
 const equipment = [
-  { file: "/Huvitz.png", nameRu: "Щелевая лампа Huvitz", descRu: "Биомикроскопия переднего отрезка глаза" },
-  { file: "/Labomed.png", nameRu: "Щелевая лампа Labomed", descRu: "Диагностический микроскоп высокого разрешения" },
-  { file: "/biomikroskop.png", nameRu: "Офтальмологический биомикроскоп", descRu: "Детальный осмотр структур глаза" },
-  { file: "/sinoptofon.png", nameRu: "Синоптофор", descRu: "Аппаратное лечение косоглазия, тренировка бинокулярного зрения" },
-  { file: "/rucheek.png", nameRu: "Аппарат «Ручеёк»", descRu: "Лечение и профилактика косоглазия и амблиопии" },
-  { file: "/akkomodometr.png", nameRu: "Аккомодометр", descRu: "Диагностика аккомодации глаза" },
-  { file: "/amo-atos.png", nameRu: "Аппарат АМО-АТОС", descRu: "Магнитотерапия и аппаратное лечение" },
-  { file: "/Gezatone.png", nameRu: "Аппарат Gezatone", descRu: "Физиотерапевтическое воздействие" },
+  { file: eq1, nameRu: "Щелевая лампа Huvitz", descRu: "Биомикроскопия переднего отрезка глаза" },
+  { file: eq2, nameRu: "Щелевая лампа Labomed", descRu: "Диагностический микроскоп высокого разрешения" },
+  { file: eq3, nameRu: "Офтальмологический биомикроскоп", descRu: "Детальный осмотр структур глаза" },
+  { file: eq4, nameRu: "Синоптофор", descRu: "Аппаратное лечение косоглазия, тренировка бинокулярного зрения" },
+  { file: eq5, nameRu: "Аппарат «Ручеёк»", descRu: "Лечение и профилактика косоглазия и амблиопии" },
+  { file: eq6, nameRu: "Аккомодометр", descRu: "Диагностика аккомодации глаза" },
+  { file: eq7, nameRu: "Аппарат АМО-АТОС", descRu: "Магнитотерапия и аппаратное лечение" },
+  { file: eq8, nameRu: "Аппарат Gezatone", descRu: "Физиотерапевтическое воздействие" },
 ];
 ---
 
 <section class="equipment section" id="equipment">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <h2 data-i18n="equipment.title">Оснащение экспертного уровня</h2>
       <p data-i18n="equipment.subtitle">Профессиональные аппараты для точной диагностики и эффективного лечения</p>
     </div>
 
     <div class="equip-wall">
       {equipment.map((item, i) => (
-        <div class="equip-cell">
+        <div class="equip-cell reveal">
           <div class="equip-cell__thumb">
             <span class="equip-cell__index">{String(i + 1).padStart(2, "0")}</span>
-            <img src={item.file} alt={item.nameRu} data-i18n-alt={`equip.${i + 1}.alt`} loading="lazy" decoding="async" width="240" height="240" />
+            <Image
+              src={item.file}
+              alt={item.nameRu}
+              data-i18n-alt={`equip.${i + 1}.alt`}
+              loading="lazy"
+              decoding="async"
+              width={640}
+              height={640}
+              quality={92}
+              format="webp"
+            />
           </div>
-          <p class="equip-cell__name" data-i18n={`equip.${i + 1}.name`}>{item.nameRu}</p>
+          <h3 class="equip-cell__name" data-i18n={`equip.${i + 1}.name`}>{item.nameRu}</h3>
           <p class="equip-cell__desc" data-i18n={`equip.${i + 1}.desc`}>{item.descRu}</p>
         </div>
       ))}
@@ -38,37 +58,44 @@ const equipment = [
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
-  background: var(--c-border);
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-md);
+  background: #e4eefb;
+  border: 1px solid #d8e5f7;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(11, 42, 107, 0.04);
 }
 
 .equip-cell {
-  background: var(--c-white);
-  padding: var(--s-3) var(--s-2);
+  background: #ffffff;
+  padding: 18px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
 .equip-cell__thumb {
   position: relative;
-  aspect-ratio: 1;
-  background: #f7f6f3;
-  border-radius: var(--r-md);
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid rgba(11, 42, 107, 0.08);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin: 0 auto var(--s-3);
-  max-width: 220px;
+  margin-bottom: 14px;
+  padding: 10px;
 }
 
 .equip-cell__thumb img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: var(--s-2);
-  border-radius: var(--r-sm, 8px);
+  object-position: center;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(11, 42, 107, 0.06));
 }
 
 .equip-cell__index {
@@ -78,46 +105,79 @@ const equipment = [
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--c-white);
-  border: 1px solid var(--c-border);
+  background: #ffffff;
+  border: 1px solid rgba(46, 134, 245, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--c-muted);
-  z-index: 1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #2e86f5;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(11, 42, 107, 0.08);
 }
 
 .equip-cell__name {
+  font-family: var(--font-display);
   font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--c-ink);
-  margin: 0 0 4px;
+  font-weight: 700;
+  color: #0b2a6b;
+  margin: 0 0 6px;
+  line-height: 1.3;
 }
 
 .equip-cell__desc {
-  font-size: 0.8rem;
-  color: var(--c-muted);
-  line-height: 1.45;
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.4;
   margin: 0;
+  max-width: 28ch;
 }
 
 @media (min-width: 768px) {
   .equip-wall {
     grid-template-columns: repeat(4, 1fr);
   }
+
   .equip-cell {
-    padding: var(--s-5);
+    padding: 24px 20px 26px;
   }
-  .equip-cell__thumb {
-    max-width: 100%;
+
+  .equip-cell__name {
+    font-size: 1.02rem;
+  }
+
+  .equip-cell__desc {
+    font-size: 0.84rem;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 639px) {
+  .equip-cell {
+    padding: 12px 10px 14px;
+  }
+
+  .equip-cell__thumb {
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .equip-cell__index {
+    top: 6px;
+    left: 6px;
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+
+  .equip-cell__name {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+
   .equip-cell__desc {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
+    line-height: 1.35;
   }
 }
 </style>
