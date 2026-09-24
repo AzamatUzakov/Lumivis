@@ -10,7 +10,7 @@ import logoImg from "../assets/header-logo.png";
       <!-- Brand -->
       <div class="footer-brand">
         <a href="/" class="footer-logo" aria-label="Lumivis — на главную">
-          <Image src={logoImg} alt="Lumivis" width={100} height={36} loading="lazy" format="webp" />
+          <Image src={logoImg} alt="Lumivis" width={300} height={100} loading="lazy" format="webp" />
         </a>
         <p class="footer-tagline" data-i18n="footer.tagline">Офтальмологическая клиника в Самарканде</p>
         <div class="footer-social">
@@ -151,11 +151,18 @@ import logoImg from "../assets/header-logo.png";
   gap: var(--s-4);
 }
 
+.footer-logo {
+  display: inline-block;
+  line-height: 1;
+}
+
 .footer-logo img {
   filter: brightness(0) invert(1);
   opacity: 0.95;
   height: 40px;
   width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-tagline {

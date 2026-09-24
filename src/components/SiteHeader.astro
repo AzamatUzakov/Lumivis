@@ -8,7 +8,7 @@ import logoImg from "../assets/header-logo.png";
   <div class="container header-inner">
     <!-- Logo -->
     <a href="/" class="header-logo" aria-label="Lumivis — главная">
-      <Image src={logoImg} alt="Lumivis" width={160} height={60} loading="eager" format="webp" />
+      <Image src={logoImg} alt="Lumivis" width={300} height={100} loading="eager" format="webp" />
     </a>
 
     <!-- Desktop Nav -->
@@ -102,15 +102,17 @@ import logoImg from "../assets/header-logo.png";
 .header-logo {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-decoration: none;
+  line-height: 1;
 }
 
 .header-logo img {
-  height: 44px;
+  height: 42px;
   width: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
+  display: block;
 }
 
 /* Desktop Nav */
