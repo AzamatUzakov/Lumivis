@@ -157,30 +157,57 @@ const equipment = [
 }
 
 @media (max-width: 639px) {
+  .equip-wall {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-inline: var(--pad-x, 1rem);
+    margin-inline: calc(var(--pad-x, 1rem) * -1);
+    padding-inline: var(--pad-x, 1rem);
+    padding-block: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    gap: 12px;
+  }
+
+  .equip-wall::-webkit-scrollbar {
+    display: none;
+  }
+
   .equip-cell {
-    padding: 12px 10px 14px;
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+    border-radius: 16px;
+    border: 1px solid #d8e5f7;
+    box-shadow: 0 4px 16px rgba(11, 42, 107, 0.06);
+    padding: 16px 14px 18px;
   }
 
   .equip-cell__thumb {
-    border-radius: 10px;
+    border-radius: 12px;
     margin-bottom: 10px;
   }
 
   .equip-cell__index {
-    top: 6px;
-    left: 6px;
-    width: 22px;
-    height: 22px;
-    font-size: 0.65rem;
+    top: 8px;
+    left: 8px;
+    width: 24px;
+    height: 24px;
+    font-size: 0.68rem;
   }
 
   .equip-cell__name {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-bottom: 4px;
   }
 
   .equip-cell__desc {
-    font-size: 0.74rem;
+    font-size: 0.78rem;
     line-height: 1.35;
   }
 }
