@@ -8,6 +8,8 @@ import eq5 from "../assets/equipment/rucheek.png";
 import eq6 from "../assets/equipment/akkomodometr.png";
 import eq7 from "../assets/equipment/amo-atos.png";
 import eq8 from "../assets/equipment/Gezatone.png";
+import eq9 from "../assets/equipment/mocular.png";
+import eq10 from "../assets/equipment/huvitz-tono.jpg";
 
 const equipment = [
   { file: eq1, nameRu: "Авторефкератометр", descRu: "Биомикроскопия переднего отрезка глаза" },
@@ -18,6 +20,8 @@ const equipment = [
   { file: eq6, nameRu: "Аккомодометр", descRu: "Диагностика аккомодации глаза" },
   { file: eq7, nameRu: "Аппарат АМО-АТОС", descRu: "Магнитотерапия и аппаратное лечение" },
   { file: eq8, nameRu: "Аппарат Gezatone", descRu: "Физиотерапевтическое воздействие" },
+  { file: eq9, nameRu: "Диагностический аппарат Mocular Medical", descRu: "Портативный цифровой аппарат для комплексной диагностики зрения" },
+  { file: eq10, nameRu: "Бесконтактный тонометр-пахиметр Huvitz", descRu: "Бесконтактное измерение глазного давления и толщины роговицы" },
 ];
 ---
 
@@ -134,21 +138,21 @@ const equipment = [
   max-width: 28ch;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .equip-wall {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .equip-cell {
-    padding: 24px 20px 26px;
+    padding: 20px 14px 22px;
   }
 
   .equip-cell__name {
-    font-size: 1.02rem;
+    font-size: 0.95rem;
   }
 
   .equip-cell__desc {
-    font-size: 0.84rem;
+    font-size: 0.8rem;
   }
 }
 
