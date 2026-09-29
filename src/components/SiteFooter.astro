@@ -91,7 +91,7 @@ const TG_CHAT_ID   = import.meta.env.PUBLIC_TG_CHAT_ID   ?? "";
       </div>
 
       <!-- Mini Booking Form -->
-      <div class="footer-col footer-form-col">
+      <div class="footer-col footer-form-col" id="booking-form-section">
         <h4 class="footer-col__title" data-i18n="footer.booking.title">Записаться на приём</h4>
         <form class="footer-form" id="booking-form" novalidate>
           <input
@@ -370,6 +370,16 @@ const TG_CHAT_ID   = import.meta.env.PUBLIC_TG_CHAT_ID   ?? "";
 }
 
 /* Form */
+#booking-form-section {
+  scroll-margin-top: calc(72px + 24px);
+}
+
+@media (max-width: 639px) {
+  #booking-form-section {
+    scroll-margin-top: calc(72px + 16px);
+  }
+}
+
 .footer-form {
   display: flex;
   flex-direction: column;
