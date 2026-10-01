@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import rnImg from "../assets/gallery/IMG_0345.JPG";
+
 // ServicesSection.astro — Bento Grid redesign with optimized ROP photo for Lumivis
 ---
 
@@ -18,20 +21,18 @@
 
           <!-- Photo Layer with Picture/WebP & Smooth Gradient Mask -->
           <div class="bento-rn-visual" aria-hidden="true">
-            <picture class="bento-rn-picture">
-              <source media="(max-width: 599px)" srcset="/rn-card-mobile.webp" type="image/webp" width="800" height="534" />
-              <source media="(min-width: 600px)" srcset="/rn-card.webp" type="image/webp" width="1200" height="800" />
-              <img
-                src="/rn-card.webp"
-                alt="Ребёнок на проверке зрения у офтальмолога"
-                data-i18n-alt="services.rn_img.alt"
-                class="bento-rn-img"
-                loading="lazy"
-                decoding="async"
-                width="1200"
-                height="800"
-              />
-            </picture>
+           <Image
+          src={rnImg}
+          alt="Врачи проводят офтальмоскопию новорождённому"
+          data-i18n-alt="rn.img.alt"
+          class="bento-rn-img rn__img"
+          width={800}
+          height={600}
+          quality={80}
+          format="webp"
+          loading="lazy"
+          decoding="async"
+        />
             <div class="bento-rn-overlay"></div>
           </div>
 
@@ -340,7 +341,7 @@
 <style>
 /* ── Section Container ── */
 .services {
-  padding-block: clamp(56px, 10vw, 120px);
+  padding-block: clamp(48px, 7vw, 92px);
   scroll-margin-top: calc(72px + 16px);
   overflow: hidden;
 }
@@ -378,7 +379,7 @@
   background: #ffffff;
   border: 1px solid rgba(11, 42, 107, 0.10);
   box-shadow: 0 1px 2px rgba(11, 42, 107, 0.04);
-  padding: 20px;
+  padding: 16px 18px;
   transition: transform 220ms ease,
               border-color 220ms ease,
               box-shadow 220ms ease,
@@ -417,13 +418,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .bento-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   background: #eaf2ff;
   color: #2e86f5;
   display: flex;
@@ -446,12 +447,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .bento-title {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: #0b2a6b;
   line-height: 1.35;
@@ -460,9 +461,9 @@
 }
 
 .bento-text {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: #5b6b8a;
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
   overflow-wrap: break-word;
 }
@@ -471,7 +472,7 @@
   align-self: flex-end;
   color: #9db0d0;
   opacity: 0.7;
-  margin-top: 12px;
+  margin-top: 8px;
   transition: transform 200ms ease, opacity 200ms ease, color 200ms ease;
 }
 
@@ -512,23 +513,24 @@
 .bento-rn-img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  object-position: 78% 30%;
+  object-position: center center;
   display: block;
 }
 
-/* Multi-stop smooth gradient overlay without hard lines */
+/* Soft, lightened multi-stop gradient overlay allowing photo to shine through clearly */
 .bento-rn-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgba(11, 42, 107, 0.5) 0%, transparent 35%),
+    linear-gradient(0deg, rgba(11, 42, 107, 0.25) 0%, transparent 25%),
     linear-gradient(90deg,
-      rgba(11, 42, 107, 0.97) 0%,
-      rgba(11, 42, 107, 0.94) 30%,
-      rgba(11, 42, 107, 0.72) 48%,
-      rgba(11, 42, 107, 0.28) 68%,
-      rgba(11, 42, 107, 0.08) 100%);
+      rgba(11, 42, 107, 0.85) 0%,
+      rgba(11, 42, 107, 0.65) 25%,
+      rgba(11, 42, 107, 0.25) 45%,
+      rgba(11, 42, 107, 0.05) 65%,
+      transparent 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -542,75 +544,77 @@
   height: 280px;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 /* Content Container sitting above overlay */
 .bento-rn-content {
   position: relative;
   z-index: 2;
-  padding: 32px 28px;
+  padding: 24px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 56%;
-  max-width: 550px;
+  width: 62%;
+  max-width: 600px;
   box-sizing: border-box;
   min-height: 100%;
-  overflow: visible; /* allow badge to extend into photo area without clipping its border */
+  overflow: visible;
 }
 
 .bento-card__rn-header {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .bento-badge {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   box-sizing: border-box;
-  padding: 8px 14px;
-  border-radius: 16px;
-  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.3;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(11, 42, 107, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.35);
   width: fit-content;
-  /* Desktop default: single line */
   white-space: nowrap;
   overflow-wrap: normal;
   word-break: normal;
   hyphens: none;
+  text-shadow: 0 1px 3px rgba(11, 42, 107, 0.5);
 }
 
 .bento-badge::before {
   content: "";
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #ffffff;
+  width: 2px;
+  align-self: stretch;
+  height: auto;
+  margin-block: -2px;
+  border-radius: 1px;
+  background-color: rgba(255, 255, 255, 0.85);
   margin-right: 8px;
   flex: none;
   flex-shrink: 0;
-  align-self: flex-start;
-  margin-top: 4px;
 }
 
 .bento-num--rn {
   position: absolute;
-  top: 18px;
-  right: 22px;
+  top: 16px;
+  right: 20px;
   z-index: 3;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.5);
   font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   pointer-events: none;
 }
@@ -618,35 +622,39 @@
 .bento-card__rn-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .bento-icon--rn {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   color: #5aa4f8;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .bento-rn-title {
   font-family: var(--font-display);
-  font-size: clamp(22px, 5.8cqi, 34px);
+  font-size: clamp(18px, 3.5cqi, 24px);
   font-weight: 700;
   color: var(--c-white);
-  line-height: 1.2;
+  line-height: 1.25;
   margin: 0;
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
   -webkit-hyphens: manual;
+  text-shadow: 0 1px 4px rgba(11, 42, 107, 0.6);
 }
 
 .bento-rn-text {
-  font-size: clamp(0.88rem, 1.8vw, 0.98rem);
-  color: rgba(255, 255, 255, 0.88);
-  line-height: 1.6;
+  font-size: clamp(0.88rem, 1.8cqi, 0.96rem);
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.5;
   margin: 0;
+  width: 100%;
+  max-width: 100%;
   overflow-wrap: break-word;
+  text-shadow: 0 1px 4px rgba(11, 42, 107, 0.6);
 }
 
 .bento-card__rn-footer {
@@ -657,12 +665,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 1.6rem;
+  padding: 0.68rem 1.35rem;
   border-radius: var(--r-full);
   background: var(--c-sky);
   color: var(--c-white);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   border: none;
   transition: background var(--t-base), box-shadow var(--t-base);
   box-shadow: 0 4px 16px rgba(46, 134, 245, 0.35);
@@ -678,22 +686,22 @@
    BOTTOM CTA BAR
 ────────────────────────────────────────────── */
 .services-bottom-cta {
-  margin-top: 36px;
-  padding: 24px 28px;
+  margin-top: 24px;
+  padding: 16px 20px;
   background: var(--c-white);
   border: 1px solid var(--c-border);
-  border-radius: 20px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
   box-shadow: var(--shadow-card);
 }
 
 .services-bottom-cta__text {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 0.94rem;
   font-weight: 700;
   color: var(--c-ink);
   margin: 0;
@@ -701,8 +709,8 @@
 }
 
 .services-bottom-cta__btn {
-  padding: 0.65rem 1.4rem;
-  font-size: 0.9rem;
+  padding: 0.55rem 1.25rem;
+  font-size: 0.85rem;
 }
 
 /* ──────────────────────────────────────────────
@@ -722,10 +730,12 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     padding: 0;
     border-radius: 20px;
-    min-height: auto !important;
+    min-height: 420px !important;
     height: auto !important;
+    background: var(--c-ink);
   }
 
   .bento-num--rn {
@@ -738,6 +748,7 @@
     width: 100%;
     height: 100%;
     z-index: 0;
+    pointer-events: none;
   }
 
   .bento-rn-picture {
@@ -751,27 +762,30 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 70% 20%;
+    object-position: center 25%;
   }
 
   .bento-rn-overlay {
+    position: absolute;
+    inset: 0;
     background: linear-gradient(180deg,
-      rgba(11, 42, 107, 0.15) 0%,
-      rgba(11, 42, 107, 0.35) 28%,
-      rgba(11, 42, 107, 0.88) 55%,
-      rgba(11, 42, 107, 0.97) 100%);
+      rgba(11, 42, 107, 0.02) 0%,
+      rgba(11, 42, 107, 0.12) 35%,
+      rgba(11, 42, 107, 0.72) 68%,
+      rgba(11, 42, 107, 0.96) 100%);
+    pointer-events: none;
   }
 
   .bento-rn-content {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: 200px 20px 24px;
+    padding: 130px 20px 22px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    gap: 14px;
-    min-height: auto !important;
+    gap: 12px;
+    min-height: 420px !important;
     height: auto !important;
     margin-top: 0;
     box-sizing: border-box;
@@ -785,7 +799,6 @@
 
   .bento-badge {
     font-size: 12.5px;
-    /* Mobile: allow wrapping */
     white-space: normal;
   }
 
@@ -844,7 +857,7 @@
   }
 
   .bento-num {
-    display: none; /* Hide numbers on mobile horizontal cards */
+    display: none;
   }
 
   .bento-icon {
@@ -884,7 +897,7 @@
 @media (min-width: 600px) and (max-width: 1023px) {
   .bento-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    gap: 14px;
   }
 
   .bento-item--rn,
@@ -894,8 +907,8 @@
   }
 
   .bento-rn-content {
-    width: 58%;
-    padding: 28px 24px;
+    width: 62%;
+    padding: 24px 22px;
     overflow: visible;
   }
 
@@ -906,15 +919,15 @@
   }
 
   .bento-card--diag {
-    padding: 28px;
+    padding: 22px 24px;
   }
 
   .bento-card--diag .bento-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .bento-card--diag .bento-text {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 }
 
@@ -922,13 +935,13 @@
 @media (min-width: 1024px) {
   .bento-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-auto-rows: minmax(160px, auto);
+    grid-auto-rows: minmax(138px, auto);
     grid-template-areas:
       "rn   rn   diag diag"
       "rn   rn   squint amb"
       "kids glasses dry tear"
       "prosthesis prosthesis prosthesis prosthesis";
-    gap: 16px;
+    gap: 14px;
   }
 
   .bento-item--rn {
@@ -952,14 +965,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 24px;
-    padding: 22px 28px;
+    gap: 16px;
+    padding: 16px 20px;
     background: #ffffff;
   }
 
   .bento-card--prosthesis .bento-card__top {
     margin-bottom: 0;
-    gap: 16px;
+    gap: 12px;
     flex-shrink: 0;
   }
 
@@ -968,18 +981,18 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
   }
 
   .bento-card--prosthesis .bento-title {
-    font-size: 1.1rem;
+    font-size: 0.98rem;
     white-space: nowrap;
     margin: 0;
     flex-shrink: 0;
   }
 
   .bento-card--prosthesis .bento-text {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     margin: 0;
     color: #5b6b8a;
   }
@@ -998,22 +1011,22 @@
   }
 
   .bento-rn-content {
-    width: 56%;
-    padding: 34px 30px;
+    width: 62%;
+    padding: 24px 22px;
     overflow: visible;
   }
 
   .bento-card--diag {
-    padding: 24px 26px;
+    padding: 18px 20px;
     background: #ffffff;
   }
 
   .bento-card--diag .bento-title {
-    font-size: 1.15rem;
+    font-size: 1.02rem;
   }
 
   .bento-card--diag .bento-text {
-    font-size: 0.92rem;
+    font-size: 0.85rem;
   }
 }
 </style>

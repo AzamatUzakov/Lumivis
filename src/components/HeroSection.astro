@@ -148,7 +148,7 @@ import heroDoctorImg from "../assets/hero-doctor.png";
 
 .hero__badge {
   display: inline-flex;
-  align-items: flex-start;
+  align-items: center;
   box-sizing: border-box;
   background: #ffffff;
   border: 1px solid rgba(11, 42, 107, 0.18);
@@ -170,15 +170,15 @@ import heroDoctorImg from "../assets/hero-doctor.png";
 .hero__badge::before {
   content: "";
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #2e86f5;
-  margin-right: 8px;
+  width: 2px;
+  align-self: stretch;
+  height: auto;
+  margin-block: -2px;
+  border-radius: 1px;
+  background-color: rgba(46, 134, 245, 0.75);
+  margin-right: 10px;
   flex: none;
   flex-shrink: 0;
-  align-self: flex-start;
-  margin-top: 4px;
 }
 
 .hero__h1 {
