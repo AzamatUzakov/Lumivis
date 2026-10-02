@@ -1,8 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import rnImg from "../assets/gallery/IMG_0345.JPG";
+import RnInfoModal from "./RnInfoModal.astro";
 
-// ServicesSection.astro — Bento Grid redesign with optimized ROP photo for Lumivis
+// ServicesSection.astro — Bento Grid redesign with ROP Photo & RnInfoModal
 ---
 
 <section class="services section section--surface" id="services" aria-labelledby="services-title">
@@ -52,8 +53,6 @@ import rnImg from "../assets/gallery/IMG_0345.JPG";
           <!-- Text Content Zone (Left ~58% on Desktop/Tablet) -->
           <div class="bento-rn-content">
             <div class="bento-card__rn-header">
-              <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: текст берётся из i18n hero.badge
-                   «Единственная частная клиника РН-скрининга» — нужно подтверждение от владельца -->
               <span class="bento-badge" data-i18n="hero.badge">
                 Единственная частная клиника РН-скрининга
               </span>
@@ -76,9 +75,9 @@ import rnImg from "../assets/gallery/IMG_0345.JPG";
             </div>
 
             <div class="bento-card__rn-footer">
-              <a href="#retinopathy" class="btn btn--primary bento-rn-btn" data-i18n="rn.cta">
-                Записать ребёнка
-              </a>
+              <button type="button" class="btn btn--primary bento-rn-btn" data-open-rn-modal data-i18n="rn.modal.trigger">
+                Узнать подробнее о РН
+              </button>
             </div>
           </div>
         </div>
@@ -336,6 +335,9 @@ import rnImg from "../assets/gallery/IMG_0345.JPG";
       </a>
     </div>
   </div>
+
+  <!-- Modal Dialog with ROP Medical Info & Brochure content -->
+  <RnInfoModal />
 </section>
 
 <style>
@@ -515,16 +517,16 @@ import rnImg from "../assets/gallery/IMG_0345.JPG";
   height: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  object-position: center center;
+  object-position: 58% 45%;
   display: block;
 }
 
-/* Soft, lightened multi-stop gradient overlay allowing photo to shine through clearly */
+/* Soft, lightened multi-stop gradient overlay with gentle bottom-left vignette */
 .bento-rn-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgba(11, 42, 107, 0.25) 0%, transparent 25%),
+    radial-gradient(ellipse at 10% 95%, rgba(11, 42, 107, 0.65) 0%, rgba(11, 42, 107, 0.3) 45%, transparent 75%),
     linear-gradient(90deg,
       rgba(11, 42, 107, 0.85) 0%,
       rgba(11, 42, 107, 0.65) 25%,
