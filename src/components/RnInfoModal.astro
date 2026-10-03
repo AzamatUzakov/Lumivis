@@ -3,9 +3,15 @@ import { Image } from "astro:assets";
 import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
 ---
 
-<dialog id="rn-info-modal" class="rn-modal" aria-labelledby="rn-modal-title" aria-describedby="rn-modal-subtitle">
+<dialog
+  id="rn-info-modal"
+  class="rn-modal"
+  data-lenis-prevent
+  aria-labelledby="rn-modal-title"
+  aria-describedby="rn-modal-subtitle"
+>
   <div class="rn-modal__backdrop" data-close-rn-modal></div>
-  <div class="rn-modal__container" role="document">
+  <div class="rn-modal__container" data-lenis-prevent role="document">
     
     <!-- Modal Header -->
     <header class="rn-modal__header">
@@ -32,8 +38,8 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
       </button>
     </header>
 
-    <!-- Scrollable Body Content -->
-    <div class="rn-modal__body">
+    <!-- Scrollable Body Content with data-lenis-prevent -->
+    <div class="rn-modal__body" data-lenis-prevent>
       
       <!-- Section 1: Definition -->
       <section class="rn-modal__section">
@@ -252,10 +258,14 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
   color: #0b2a6b;
 }
 
-/* Body */
+/* Scrollable Body Container */
 .rn-modal__body {
   padding: 22px 24px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -391,57 +401,165 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
 
 @media (max-width: 599px) {
   .rn-modal__container {
-    width: 94vw;
-    max-height: 90vh;
+    width: min(680px, calc(100vw - 24px));
+    max-height: 85vh;
     border-radius: 20px;
   }
 
   .rn-modal__header {
-    padding: 16px 18px 12px;
+    padding: 16px 16px 14px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .rn-modal__header-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .rn-modal__header-icon svg {
+    width: 20px;
+    height: 20px;
   }
 
   .rn-modal__title {
-    font-size: 1.05rem;
+    font-size: 0.94rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .rn-modal__subtitle {
+    display: none;
+  }
+
+  .rn-modal__close-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    flex-shrink: 0;
   }
 
   .rn-modal__body {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .rn-modal__section {
+    gap: 8px;
+  }
+
+  .rn-modal__section-title {
+    font-size: 1.02rem;
+    line-height: 1.35;
+  }
+
+  .rn-modal__p {
+    font-size: 0.92rem;
+    line-height: 1.68;
+  }
+
+  .rn-modal__section--risk {
+    padding: 18px 20px;
+    border-radius: 14px;
+  }
+
+  .rn-modal__risk-list {
+    gap: 8px;
+    padding-left: 18px;
+    margin-top: 8px;
+  }
+
+  .rn-modal__risk-list li {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .rn-modal__diagram {
+    margin: 8px 0;
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .rn-modal__diagram-caption {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin-top: 10px;
+  }
+
+  .rn-modal__quote {
+    margin: 12px 0 0;
     padding: 16px 18px;
-    gap: 14px;
+  }
+
+  .rn-modal__quote p {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 
   .rn-modal__footer {
-    padding: 14px 18px;
+    padding: 16px 20px 20px;
+    gap: 12px;
     flex-direction: column-reverse;
   }
 
   .rn-modal__book-btn,
   .rn-modal__cancel-btn {
     width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.92rem;
     justify-content: center;
   }
 }
 </style>
 
 <script>
-  // Modal Controller Script
+  // Modal Controller Script with Lenis & Touch/Wheel Scroll Lock Fix
   document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("rn-info-modal") as HTMLDialogElement | null;
     if (!modal) return;
 
     // Function to open modal
     function openModal() {
-      if (modal && !modal.open) {
+      if (!modal) return;
+      if (!modal.open) {
         modal.showModal();
         document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+
+        // Stop Lenis global smooth scrolling while modal is active
+        if ((window as any).lenis) {
+          (window as any).lenis.stop();
+        }
       }
     }
 
     // Function to close modal
     function closeModal() {
-      if (modal && modal.open) {
+      if (!modal) return;
+      if (modal.open) {
         modal.close();
         document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+
+        // Resume Lenis smooth scrolling when modal closes
+        if ((window as any).lenis) {
+          (window as any).lenis.start();
+        }
       }
+    }
+
+    // Prevent wheel/touch events inside modal body from propagating to Lenis / background page
+    const bodyEl = modal.querySelector(".rn-modal__body") as HTMLElement | null;
+    if (bodyEl) {
+      bodyEl.addEventListener("wheel", (e) => {
+        e.stopPropagation();
+      }, { passive: true });
+
+      bodyEl.addEventListener("touchmove", (e) => {
+        e.stopPropagation();
+      }, { passive: true });
     }
 
     // Attach click listeners to all open trigger elements
@@ -469,7 +587,12 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
         setTimeout(() => {
           const formSec = document.getElementById("booking-form-section") || document.getElementById("contacts");
           if (formSec) {
-            formSec.scrollIntoView({ behavior: "smooth" });
+            // Use lenis.scrollTo if available, otherwise native smooth scroll
+            if ((window as any).lenis) {
+              (window as any).lenis.scrollTo(formSec, { offset: -80, duration: 1.2 });
+            } else {
+              formSec.scrollIntoView({ behavior: "smooth" });
+            }
           }
         }, 150);
       });
@@ -492,6 +615,10 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
     // Handle Esc key
     modal.addEventListener("cancel", () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      if ((window as any).lenis) {
+        (window as any).lenis.start();
+      }
     });
   });
 </script>
