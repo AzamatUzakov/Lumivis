@@ -89,6 +89,37 @@ const doctors = [
   gap: var(--s-4);
 }
 
+@media (max-width: 639px) {
+  .doctors__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-inline: var(--pad-x, 1rem);
+    margin-inline: calc(var(--pad-x, 1rem) * -1);
+    padding-inline: var(--pad-x, 1rem);
+    padding-block: 4px;
+    gap: 12px;
+  }
+
+  .doctors__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .doctor-card {
+    flex: 0 0 75%;
+    scroll-snap-align: start;
+  }
+
+  .doctor-card.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 @media (min-width: 640px) {
   .doctors__grid {
     grid-template-columns: repeat(3, 1fr);
@@ -205,3 +236,59 @@ const doctors = [
   overflow: hidden;
 }
 </style>
+
+<script>
+  function initDoctorsAutoscroll() {
+    const grid = document.querySelector('.doctors__grid') as HTMLElement | null;
+    if (!grid) return;
+
+    let timer: ReturnType<typeof setInterval> | null = null;
+    let isInteracting = false;
+
+    function startTimer() {
+      if (timer || window.innerWidth >= 640) return;
+      timer = setInterval(() => {
+        if (isInteracting || window.innerWidth >= 640) return;
+
+        const firstCard = grid.querySelector('.doctor-card') as HTMLElement | null;
+        const cardWidth = firstCard ? firstCard.offsetWidth + 12 : 270;
+        const maxScroll = grid.scrollWidth - grid.clientWidth;
+
+        if (grid.scrollLeft >= maxScroll - 15) {
+          grid.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+      }, 2000); // 2 seconds interval
+    }
+
+    function stopTimer() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    // Pause autoscroll on user touch / swipe
+    function onTouchStart() {
+      isInteracting = true;
+      stopTimer();
+    }
+
+    grid.addEventListener('touchstart', onTouchStart, { passive: true });
+    grid.addEventListener('pointerdown', onTouchStart, { passive: true });
+
+    function checkBreakpoint() {
+      if (window.innerWidth < 640) {
+        if (!isInteracting) startTimer();
+      } else {
+        stopTimer();
+      }
+    }
+
+    checkBreakpoint();
+    window.addEventListener('resize', checkBreakpoint);
+  }
+
+  document.addEventListener('DOMContentLoaded', initDoctorsAutoscroll);
+</script>

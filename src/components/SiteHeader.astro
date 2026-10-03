@@ -1,7 +1,7 @@
 ---
 // SiteHeader — sticky, responsive, RU/EN/UZ switcher
 import { Image } from "astro:assets";
-import logoImg from "../assets/header-logo.png";
+import logoImg from "../assets/logo.png";
 ---
 
 <header id="site-header" class="site-header">
@@ -50,6 +50,12 @@ import logoImg from "../assets/header-logo.png";
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="Мобильное меню">
   <div class="mobile-menu__inner">
+    <div class="lang-switcher lang-switcher--mobile" role="group" aria-label="Выбор языка">
+      <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
+      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+    </div>
+
     <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
       <a href="#doctors" class="mobile-menu__link" data-i18n="nav.doctors">Врачи</a>
       <a href="#equipment" class="mobile-menu__link" data-i18n="nav.equipment">Оборудование</a>
@@ -62,12 +68,6 @@ import logoImg from "../assets/header-logo.png";
     <div class="mobile-menu__meta">
       <p class="mobile-menu__hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</p>
       <a href="tel:+998995981010" class="mobile-menu__phone">+998 99 598 10 10</a>
-    </div>
-
-    <div class="lang-switcher lang-switcher--mobile" role="group" aria-label="Выбор языка">
-      <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
-      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-      <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
     </div>
 
     <a href="#contacts" class="btn btn--primary mobile-menu__cta" data-i18n="header.cta">Записаться</a>
@@ -315,6 +315,7 @@ import logoImg from "../assets/header-logo.png";
 
 /* Responsive */
 @media (min-width: 1024px) {
+  .header-logo { transform: translateY(-4px); }
   .header-nav { display: flex; }
   .header-right { display: flex; }
   .burger-btn { display: none; }
