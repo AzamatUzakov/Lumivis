@@ -1,6 +1,7 @@
 ---
 // GallerySection — 11 process photos in CSS multi-column masonry grid
 import { Image } from "astro:assets";
+import GalleryInfoModal from "./GalleryInfoModal.astro";
 import g1 from "../assets/gallery/IMG_0316.JPG";
 import g2 from "../assets/gallery/IMG_0322.JPG";
 import g3 from "../assets/gallery/IMG_0323.JPG";
@@ -37,7 +38,13 @@ const photos = [
 
     <div class="gallery__masonry">
       {photos.map((photo, i) => (
-        <div class="gallery__item reveal-fade">
+        <div
+          class="gallery__item reveal-fade"
+          data-open-gallery-modal={i + 1}
+          role="button"
+          tabindex="0"
+          aria-label={`${photo.alt} — открыть подробнее`}
+        >
           <Image
             src={photo.src}
             alt={photo.alt}
@@ -50,10 +57,18 @@ const photos = [
             decoding="async"
           />
           <div class="gallery__overlay" aria-hidden="true"></div>
+          <div class="card-arrow" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
         </div>
       ))}
     </div>
   </div>
+
+  <GalleryInfoModal />
 </section>
 
 <style>
@@ -94,7 +109,13 @@ const photos = [
   overflow: hidden;
   box-shadow: 0 3px 12px rgba(11, 42, 107, 0.06);
   background: #ffffff;
+  cursor: pointer;
   transition: transform var(--t-base, 220ms ease), box-shadow var(--t-base, 220ms ease);
+}
+
+.gallery__item:focus-visible {
+  outline: 2px solid var(--c-sky, #2e86f5);
+  outline-offset: 3px;
 }
 
 @media (min-width: 640px) {
@@ -132,13 +153,52 @@ const photos = [
 .gallery__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(11,42,107,0.20) 100%);
+  background: linear-gradient(180deg, transparent 50%, rgba(11,42,107,0.30) 100%);
   pointer-events: none;
   transition: opacity var(--t-base, 220ms ease);
-  opacity: 0;
+  opacity: 0.6;
 }
 
 .gallery__item:hover .gallery__overlay {
   opacity: 1;
+}
+
+.card-arrow {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #0b2a6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(11, 42, 107, 0.16);
+  transition: transform 220ms ease, background 220ms ease, color 220ms ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.gallery__item:hover .card-arrow {
+  transform: translate(2px, -2px) scale(1.05);
+  background: #2e86f5;
+  color: #ffffff;
+}
+
+@media (max-width: 599px) {
+  .card-arrow {
+    width: 28px;
+    height: 28px;
+    bottom: 8px;
+    right: 8px;
+  }
+  .card-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
 }
 </style>
