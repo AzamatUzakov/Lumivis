@@ -498,7 +498,7 @@
           const formSec = document.getElementById("booking-form-section") || document.getElementById("contacts");
           if (formSec) {
             if ((window as any).lenis) {
-              (window as any).lenis.scrollTo(formSec, { offset: -80, duration: 1.2 });
+              (window as any).lenis.scrollTo(formSec, { duration: 1.2 });
             } else {
               formSec.scrollIntoView({ behavior: "smooth" });
             }
