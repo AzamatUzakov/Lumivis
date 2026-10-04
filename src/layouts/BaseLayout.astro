@@ -255,6 +255,8 @@ const {
           "rn.text": "Ретинопатия недоношенных (РН) — тяжелая патология сосудов сетчатки у детей, родившихся раньше срока. Без своевременной помощи болезнь быстро прогрессирует и может привести к необратимой слепоте.",
           "rn.text2": "Диагностическое окно составляет всего 3–6 недель жизни. Наша клиника оснащена всем необходимым оборудованием для бережного обследования младенцев и проведения своевременной терапии.",
           "rn.cta": "Записать ребёнка на РН-скрининг",
+          "rn.fact1.label": "недель — оптимальный<br>срок первого осмотра",
+          "rn.fact2.label": "клиника в городе<br>ведёт РН-скрининг",
           "rn.img.alt": "Офтальмологический осмотр новорождённого ребёнка на ретинопатию в клинике Lumivis Самарканд",
 
           "rn.modal.trigger": "Узнать подробнее о РН",
@@ -532,6 +534,8 @@ const {
           "rn.text": "Retinopathy of Prematurity (ROP) is a serious retinal vessel disorder affecting preterm infants. Without timely detection, it can rapidly progress to irreversible vision loss.",
           "rn.text2": "The critical diagnostic window is 3 to 6 weeks after birth. Our clinic is equipped with specialized instrumentation and medical expertise for gentle, prompt infant care.",
           "rn.cta": "Book ROP Infant Screening",
+          "rn.fact1.label": "weeks — optimal window<br>for first eye exam",
+          "rn.fact2.label": "clinic in the city<br>provides ROP screening",
           "rn.img.alt": "Ophthalmic examination of a newborn baby for retinopathy at Lumivis Clinic Samarkand",
 
           "rn.modal.trigger": "Learn more about ROP",
@@ -806,6 +810,8 @@ const {
           "rn.text": "Chala tug'ilganlar retinopatiyasi (RN) — vaqtidan oldin tug'ilgan chaqaloqlarda to'r parda tomirlarining xavfli patologiyasi. O'z vaqtida yordam ko'rsatilsa, ko'rish yo'qolishining oldi olinadi.",
           "rn.text2": "Tekshiruv uchun eng muhim muddat hayotning 3–6-haftasidir. Klinikamiz chaqaloqlarni xavfsiz ko'rikdan o'tkazish uchun barcha modern apparatlar bilan ta'minlangan.",
           "rn.cta": "Bolani RN-skriningga yozish",
+          "rn.fact1.label": "hafta — birinchi ko'rik uchun<br>maqbul muddat",
+          "rn.fact2.label": "shahar klinikasida<br>RN-skrining o'tkaziladi",
           "rn.img.alt": "Yangi tug'ilgan chaqaloqni retinopatiya bo'yicha oftalmologik ko'rigi Lumivis klinikasi Samarqand",
 
           "rn.modal.trigger": "RN haqida batafsil",
@@ -987,7 +993,10 @@ const {
         document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
           const key = el.dataset.i18n!;
           const val = TRANSLATIONS[lang]?.[key];
-          if (val !== undefined) el.textContent = val;
+          if (val !== undefined) {
+            if (val.includes("<")) el.innerHTML = val;
+            else el.textContent = val;
+          }
         });
 
         // Update placeholders
