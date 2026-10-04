@@ -42,9 +42,14 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Ensure anchor targets are not hidden under sticky header (~72px) */
+/* Ensure anchor targets are positioned cleanly under sticky header (72px + 20px desktop / 16px mobile) */
 [id] {
-  scroll-margin-top: 80px;
+  scroll-margin-top: calc(72px + 20px);
+}
+@media (max-width: 639px) {
+  [id] {
+    scroll-margin-top: calc(72px + 16px);
+  }
 }
 
 /* ── Design Tokens ── */

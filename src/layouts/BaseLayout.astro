@@ -1100,6 +1100,13 @@ const {
           }
           requestAnimationFrame(raf);
 
+          // Clean scroll offset: header height (72px) + comfortable gap (20px desktop / 16px mobile)
+          function getScrollOffset(): number {
+            const headerHeight = 72;
+            const gap = window.innerWidth < 640 ? 16 : 20;
+            return -(headerHeight + gap);
+          }
+
           // Smooth scroll event delegation for all anchor links
           document.addEventListener("click", (e) => {
             const target = e.target as HTMLElement | null;
@@ -1109,7 +1116,7 @@ const {
             const href = anchor.getAttribute("href");
             if (!href || href === "#") return;
 
-            const targetEl = document.querySelector(href);
+            const targetEl = document.querySelector<HTMLElement>(href);
             if (targetEl) {
               e.preventDefault();
 
@@ -1122,8 +1129,7 @@ const {
                 document.body.style.overflow = "";
               }
 
-              lenis.scrollTo(targetEl as HTMLElement, {
-                offset: -80,
+              lenis.scrollTo(targetEl, {
                 duration: 1.2,
               });
             }
