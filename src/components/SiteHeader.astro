@@ -50,10 +50,20 @@ import logoImg from "../assets/logo.png";
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="mobile-menu" role="dialog" aria-label="Мобильное меню">
   <div class="mobile-menu__inner">
-    <div class="lang-switcher lang-switcher--mobile" role="group" aria-label="Выбор языка">
-      <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
-      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-      <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+    <div class="mobile-menu__top">
+      <div class="lang-switcher lang-switcher--mobile" role="group" aria-label="Выбор языка">
+        <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+      </div>
+
+      <div class="mobile-menu__hours-badge">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span data-i18n="header.hours">Пн–Сб 09:00–17:00</span>
+      </div>
     </div>
 
     <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
@@ -66,7 +76,6 @@ import logoImg from "../assets/logo.png";
     </nav>
 
     <div class="mobile-menu__meta">
-      <p class="mobile-menu__hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</p>
       <a href="tel:+998995981010" class="mobile-menu__phone">+998 99 598 10 10</a>
     </div>
 
@@ -289,9 +298,30 @@ import logoImg from "../assets/logo.png";
   margin-top: auto;
 }
 
-.mobile-menu__hours {
-  font-size: 0.875rem;
+.mobile-menu__top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+
+.mobile-menu__hours-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-full);
+  font-size: 0.8125rem;
+  font-weight: 500;
   color: var(--c-muted);
+  line-height: 1.2;
+}
+
+.mobile-menu__hours-badge svg {
+  color: var(--c-sky);
+  flex-shrink: 0;
 }
 
 .mobile-menu__phone {
