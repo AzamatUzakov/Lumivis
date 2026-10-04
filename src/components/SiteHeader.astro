@@ -241,12 +241,16 @@ import logoImg from "../assets/logo.png";
   z-index: 999;
   background: var(--c-white);
   transform: translateX(100%);
-  transition: transform var(--t-slow);
+  transition: transform var(--t-slow), visibility var(--t-slow);
   overflow-y: auto;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .mobile-menu--open {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-menu__inner {

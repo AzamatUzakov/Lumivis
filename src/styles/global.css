@@ -166,6 +166,8 @@ p {
 }
 
 .section {
+  position: relative;
+  overflow: hidden;
   padding-block: clamp(3.5rem, 8vw, 6rem);
 }
 
