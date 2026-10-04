@@ -1,0 +1,533 @@
+---
+// GalleryInfoModal.astro — Interactive modal for 11 process photos in Lumivis gallery
+---
+
+<dialog
+  id="gallery-info-modal"
+  class="gallery-modal"
+  data-lenis-prevent
+  aria-labelledby="gallery-modal-title"
+  aria-describedby="gallery-modal-subtitle"
+>
+  <div class="gallery-modal__backdrop" data-close-gallery-modal></div>
+  <div class="gallery-modal__container" data-lenis-prevent role="document">
+    
+    <!-- Decorative Ophthalmic Iris SVG Background Pattern -->
+    <div class="gallery-modal__bg-pattern" aria-hidden="true">
+      <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="80" stroke="#2E86F5" stroke-width="1.2" opacity="0.05"/>
+        <circle cx="250" cy="250" r="150" stroke="#2E86F5" stroke-width="1" opacity="0.04"/>
+        <circle cx="250" cy="250" r="220" stroke="#2E86F5" stroke-width="0.8" opacity="0.03"/>
+        <line x1="250" y1="0" x2="250" y2="500" stroke="#2E86F5" stroke-width="0.8" opacity="0.03"/>
+        <line x1="0" y1="250" x2="500" y2="250" stroke="#2E86F5" stroke-width="0.8" opacity="0.03"/>
+        <line x1="73" y1="73" x2="427" y2="427" stroke="#2E86F5" stroke-width="0.6" opacity="0.03"/>
+        <line x1="427" y1="73" x2="73" y2="427" stroke="#2E86F5" stroke-width="0.6" opacity="0.03"/>
+      </svg>
+    </div>
+
+    <!-- Modal Header -->
+    <header class="gallery-modal__header">
+      <div class="gallery-modal__header-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="2" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="22" y2="12"/>
+        </svg>
+      </div>
+      <div class="gallery-modal__header-text">
+        <span id="gallery-modal-badge" class="gallery-modal__badge">Категория</span>
+        <h2 id="gallery-modal-title" class="gallery-modal__title">
+          Название процедуры
+        </h2>
+        <p id="gallery-modal-subtitle" class="gallery-modal__subtitle" data-i18n="gallery.modal.subtitle">
+          Информация о процедуре клиники Lumivis
+        </p>
+      </div>
+      <button type="button" class="gallery-modal__close-icon" data-close-gallery-modal aria-label="Закрыть модальное окно">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Scrollable Body Content -->
+    <div class="gallery-modal__body" data-lenis-prevent>
+      <div class="gallery-modal__card">
+        <div class="gallery-modal__card-header">
+          <div class="gallery-modal__card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <h3 class="gallery-modal__card-title" data-i18n="gallery.modal.card_title">Описание и назначение:</h3>
+        </div>
+        <p id="gallery-modal-desc" class="gallery-modal__desc">
+          Подробная информация о процедуре...
+        </p>
+      </div>
+    </div>
+
+    <!-- Modal Footer Actions -->
+    <footer class="gallery-modal__footer">
+      <a href="#booking-form-section" class="btn btn--primary gallery-modal__book-btn" id="gallery-modal-book-btn" data-i18n="gallery.modal.book">
+        Записаться на процедуру
+      </a>
+      <button type="button" class="btn btn--outline gallery-modal__cancel-btn" data-close-gallery-modal data-i18n="gallery.modal.close">
+        Закрыть
+      </button>
+    </footer>
+
+  </div>
+</dialog>
+
+<style>
+/* ── Modal Dialog Styles ── */
+.gallery-modal {
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gallery-modal:not([open]) {
+  display: none;
+}
+
+.gallery-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 24, 48, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1;
+  animation: galleryFadeIn 220ms ease-out forwards;
+}
+
+.gallery-modal__container {
+  position: relative;
+  z-index: 2;
+  width: min(620px, 92vw);
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(11, 42, 107, 0.28), 0 0 0 1px rgba(11, 42, 107, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: galleryPopIn 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.gallery-modal__bg-pattern {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header */
+.gallery-modal__header {
+  padding: 16px 20px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid rgba(11, 42, 107, 0.08);
+  background: #f8fbff;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-modal__header-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #eaf2ff;
+  color: #2e86f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.gallery-modal__header-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.gallery-modal__header-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gallery-modal__badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(46, 134, 245, 0.08);
+  color: #2e86f5;
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.gallery-modal__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0b2a6b;
+  margin: 0;
+  line-height: 1.28;
+}
+
+.gallery-modal__subtitle {
+  font-size: 0.78rem;
+  color: #6b7c96;
+  margin: 0;
+}
+
+.gallery-modal__close-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(11, 42, 107, 0.06);
+  color: #5b6b8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+  flex-shrink: 0;
+}
+
+.gallery-modal__close-icon:hover {
+  background: rgba(11, 42, 107, 0.12);
+  color: #0b2a6b;
+}
+
+/* Scrollable Body Container */
+.gallery-modal__body {
+  padding: 22px 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(11, 42, 107, 0.2) transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-modal__card {
+  background: #f5f9ff;
+  border: 1px solid rgba(46, 134, 245, 0.16);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gallery-modal__card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0b2a6b;
+}
+
+.gallery-modal__card-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(46, 134, 245, 0.15);
+  color: #2e86f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gallery-modal__card-title {
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #0b2a6b;
+  margin: 0;
+}
+
+.gallery-modal__desc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #384860;
+  margin: 0;
+}
+
+/* Footer */
+.gallery-modal__footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(11, 42, 107, 0.08);
+  background: #f8fbff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-modal__book-btn {
+  padding: 0.65rem 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 100px;
+}
+
+.gallery-modal__cancel-btn {
+  padding: 0.62rem 1.25rem;
+  font-size: 0.85rem;
+  border-radius: 100px;
+}
+
+/* Keyframe Animations */
+@keyframes galleryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes galleryPopIn {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (max-width: 599px) {
+  .gallery-modal__container {
+    width: min(620px, calc(100vw - 24px));
+    max-height: 82vh;
+    border-radius: 20px;
+  }
+
+  .gallery-modal__header {
+    padding: 16px 16px 14px;
+    gap: 10px;
+  }
+
+  .gallery-modal__header-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .gallery-modal__title {
+    font-size: 0.98rem;
+  }
+
+  .gallery-modal__subtitle {
+    display: none;
+  }
+
+  .gallery-modal__body {
+    padding: 16px;
+  }
+
+  .gallery-modal__card {
+    padding: 14px 16px;
+  }
+
+  .gallery-modal__desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .gallery-modal__footer {
+    padding: 14px 16px 18px;
+    flex-direction: column-reverse;
+  }
+
+  .gallery-modal__book-btn,
+  .gallery-modal__cancel-btn {
+    width: 100%;
+    padding: 0.72rem 1.25rem;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("gallery-info-modal") as HTMLDialogElement | null;
+    if (!modal) return;
+
+    const titleEl = document.getElementById("gallery-modal-title");
+    const badgeEl = document.getElementById("gallery-modal-badge");
+    const descEl = document.getElementById("gallery-modal-desc");
+
+    let currentModalIndex = 1;
+
+    // Helper to get current active language ('ru', 'uz', 'en')
+    function getLang(): string {
+      return (window as any).currentLang || document.documentElement.lang || "ru";
+    }
+
+    // Function to update modal content dynamically by card index (1..11)
+    function updateContent(index: number) {
+      currentModalIndex = index;
+      const lang = getLang();
+      const translations = (window as any).TRANSLATIONS || {};
+      const langDict = translations[lang] || translations["ru"] || {};
+
+      const titleKey = `gallery.modal.${index}.title`;
+      const badgeKey = `gallery.modal.${index}.badge`;
+      const descKey = `gallery.modal.${index}.desc`;
+
+      if (titleEl && langDict[titleKey]) titleEl.textContent = langDict[titleKey];
+      if (badgeEl && langDict[badgeKey]) badgeEl.textContent = langDict[badgeKey];
+      if (descEl && langDict[descKey]) descEl.textContent = langDict[descKey];
+
+      // Also sync static data-i18n elements inside the modal container
+      modal?.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
+        const key = el.dataset.i18n!;
+        const val = langDict[key];
+        if (val !== undefined) el.textContent = val;
+      });
+    }
+
+    // Immediately re-update modal content whenever site language changes
+    window.addEventListener("languageChanged", () => {
+      updateContent(currentModalIndex);
+    });
+
+    // Open Modal
+    function openModal(index: number) {
+      if (!modal) return;
+      updateContent(index);
+      if (!modal.open) {
+        modal.showModal();
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+
+        if ((window as any).lenis) {
+          (window as any).lenis.stop();
+        }
+      }
+    }
+
+    // Close Modal
+    function closeModal() {
+      if (!modal) return;
+      if (modal.open) {
+        modal.close();
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+
+        if ((window as any).lenis) {
+          (window as any).lenis.start();
+        }
+      }
+    }
+
+    // Prevent wheel/touch bubbling to body/Lenis
+    const bodyEl = modal.querySelector(".gallery-modal__body") as HTMLElement | null;
+    if (bodyEl) {
+      bodyEl.addEventListener("wheel", (e) => {
+        e.stopPropagation();
+      }, { passive: true });
+
+      bodyEl.addEventListener("touchmove", (e) => {
+        e.stopPropagation();
+      }, { passive: true });
+    }
+
+    // Global trigger delegation for [data-open-gallery-modal]
+    document.addEventListener("click", (e) => {
+      const target = (e.target as HTMLElement).closest("[data-open-gallery-modal]");
+      if (target) {
+        e.preventDefault();
+        const indexAttr = target.getAttribute("data-open-gallery-modal");
+        const idx = indexAttr ? parseInt(indexAttr, 10) : 1;
+        openModal(idx);
+      }
+    });
+
+    // Close trigger listeners
+    document.querySelectorAll("[data-close-gallery-modal]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeModal();
+      });
+    });
+
+    // Book Button Handler -> smooth scroll to booking form
+    const bookBtn = document.getElementById("gallery-modal-book-btn");
+    if (bookBtn) {
+      bookBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeModal();
+        setTimeout(() => {
+          const formSec = document.getElementById("booking-form-section") || document.getElementById("contacts");
+          if (formSec) {
+            if ((window as any).lenis) {
+              (window as any).lenis.scrollTo(formSec, { offset: -80, duration: 1.2 });
+            } else {
+              formSec.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        }, 150);
+      });
+    }
+
+    // Backdrop click
+    modal.addEventListener("click", (e) => {
+      const rect = modal.getBoundingClientRect();
+      const isInDialog = (
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width
+      );
+      if (!isInDialog) {
+        closeModal();
+      }
+    });
+
+    // Esc Key
+    modal.addEventListener("cancel", () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      if ((window as any).lenis) {
+        (window as any).lenis.start();
+      }
+    });
+  });
+</script>

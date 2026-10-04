@@ -1,6 +1,7 @@
 ---
-// GallerySection — 7 process photos in masonry-style grid
+// GallerySection — 11 process photos in CSS multi-column masonry grid
 import { Image } from "astro:assets";
+import GalleryInfoModal from "./GalleryInfoModal.astro";
 import g1 from "../assets/gallery/IMG_0316.JPG";
 import g2 from "../assets/gallery/IMG_0322.JPG";
 import g3 from "../assets/gallery/IMG_0323.JPG";
@@ -8,15 +9,23 @@ import g4 from "../assets/gallery/IMG_0325.JPG";
 import g5 from "../assets/gallery/IMG_0348.JPG";
 import g6 from "../assets/gallery/IMG_0351.JPG";
 import g7 from "../assets/gallery/IMG_0353.JPG";
+import g8 from "../assets/gallery/amo_atos.jpg";
+import g9 from "../assets/gallery/rucheyok.jpg";
+import g10 from "../assets/gallery/gezatone.jpg";
+import g11 from "../assets/gallery/speckl.jpg";
 
 const photos = [
   { src: g1, alt: "Детская диагностика зрения" },
+  { src: g7, alt: "Обследование пациента" },
   { src: g2, alt: "Проверка зрения у ребёнка" },
+  { src: g10, alt: "Свето-магнитотерапия очками Gezatone" },
   { src: g3, alt: "Офтальмологическое обследование" },
+  { src: g9, alt: "Тренировка зрения на аппарате Ручеёк" },
   { src: g4, alt: "Диагностика на аппарате" },
+  { src: g11, alt: "Лазерная стимуляция сетчатки" },
   { src: g5, alt: "Приём взрослого пациента" },
   { src: g6, alt: "Консультация офтальмолога" },
-  { src: g7, alt: "Обследование пациента" },
+  { src: g8, alt: "Магнитотерапия на аппарате АМО-АТОС" },
 ];
 ---
 
@@ -27,91 +36,169 @@ const photos = [
       <p data-i18n="gallery.subtitle">Тепло, спокойно и безболезненно — для маленьких и взрослых пациентов</p>
     </div>
 
-    <div class="gallery__grid">
+    <div class="gallery__masonry">
       {photos.map((photo, i) => (
-        <div class={`gallery__item gallery__item--${i + 1} reveal-fade`}>
+        <div
+          class="gallery__item reveal-fade"
+          data-open-gallery-modal={i + 1}
+          role="button"
+          tabindex="0"
+          aria-label={`${photo.alt} — открыть подробнее`}
+        >
           <Image
             src={photo.src}
             alt={photo.alt}
             data-i18n-alt={`gallery.${i + 1}.alt`}
             class="gallery__img"
             width={800}
-            quality={76}
+            quality={78}
             format="webp"
             loading="lazy"
             decoding="async"
           />
           <div class="gallery__overlay" aria-hidden="true"></div>
+          <div class="card-arrow" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </div>
         </div>
       ))}
     </div>
   </div>
+
+  <GalleryInfoModal />
 </section>
 
 <style>
-.gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 200px;
-  gap: var(--s-3);
+.gallery__masonry {
+  columns: 2;
+  -webkit-columns: 2;
+  column-count: 2;
+  -webkit-column-count: 2;
+  column-gap: 12px;
+  -webkit-column-gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .gallery__masonry {
+    column-gap: 16px;
+    -webkit-column-gap: 16px;
+  }
+}
+
+@media (min-width: 960px) {
+  .gallery__masonry {
+    columns: 3;
+    -webkit-columns: 3;
+    column-count: 3;
+    -webkit-column-count: 3;
+    column-gap: 20px;
+    -webkit-column-gap: 20px;
+  }
 }
 
 .gallery__item {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin-bottom: 12px;
   position: relative;
-  border-radius: var(--r-md);
+  border-radius: var(--r-md, 14px);
   overflow: hidden;
+  box-shadow: 0 3px 12px rgba(11, 42, 107, 0.06);
+  background: #ffffff;
   cursor: pointer;
+  transition: transform var(--t-base, 220ms ease), box-shadow var(--t-base, 220ms ease);
 }
 
-/* Varied heights for masonry feel */
-.gallery__item--1 { grid-row: span 2; }
-.gallery__item--5 { grid-row: span 2; }
+.gallery__item:focus-visible {
+  outline: 2px solid var(--c-sky, #2e86f5);
+  outline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .gallery__item {
+    margin-bottom: 16px;
+    border-radius: var(--r-md, 16px);
+  }
+}
+
+@media (min-width: 960px) {
+  .gallery__item {
+    margin-bottom: 20px;
+  }
+}
+
+.gallery__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(11, 42, 107, 0.12);
+}
 
 .gallery__img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
-  transition: transform var(--t-slow), filter var(--t-slow);
-  filter: brightness(0.97) saturate(0.95);
+  transition: transform var(--t-slow, 350ms ease), filter var(--t-slow, 350ms ease);
+  filter: brightness(0.98) saturate(0.97);
 }
 
 .gallery__item:hover .gallery__img {
-  transform: scale(1.04);
+  transform: scale(1.02);
   filter: brightness(1.02) saturate(1.05);
 }
 
 .gallery__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(11,42,107,0.25) 100%);
-  transition: opacity var(--t-base);
-  opacity: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(11,42,107,0.30) 100%);
+  pointer-events: none;
+  transition: opacity var(--t-base, 220ms ease);
+  opacity: 0.6;
 }
 
 .gallery__item:hover .gallery__overlay {
   opacity: 1;
 }
 
-@media (min-width: 768px) {
-  .gallery__grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 220px;
-  }
-
-  .gallery__item--1 { grid-row: span 2; }
-  .gallery__item--3 { grid-row: span 2; grid-column: span 1; }
-  .gallery__item--5 { grid-row: span 1; }
-  .gallery__item--6 { grid-row: span 2; }
+.card-arrow {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #0b2a6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(11, 42, 107, 0.16);
+  transition: transform 220ms ease, background 220ms ease, color 220ms ease;
+  pointer-events: none;
+  z-index: 2;
 }
 
-@media (min-width: 1100px) {
-  .gallery__grid {
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
-  }
+.gallery__item:hover .card-arrow {
+  transform: translate(2px, -2px) scale(1.05);
+  background: #2e86f5;
+  color: #ffffff;
+}
 
-  .gallery__item--1 { grid-column: span 2; grid-row: span 2; }
-  .gallery__item--3 { grid-row: span 2; }
-  .gallery__item--6 { grid-column: span 2; }
+@media (max-width: 599px) {
+  .card-arrow {
+    width: 28px;
+    height: 28px;
+    bottom: 8px;
+    right: 8px;
+  }
+  .card-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
 }
 </style>
