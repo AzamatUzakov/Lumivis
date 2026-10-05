@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import HeroSection from "../../components/HeroSection.astro";
+import WhyUsSection from "../../components/WhyUsSection.astro";
+import DoctorsSection from "../../components/DoctorsSection.astro";
+import EquipmentSection from "../../components/EquipmentSection.astro";
+import ServicesSection from "../../components/ServicesSection.astro";
+import ProstheticsSection from "../../components/ProstheticsSection.astro";
+import RetinopathySection from "../../components/RetinopathySection.astro";
+import GallerySection from "../../components/GallerySection.astro";
+import VideosSection from "../../components/VideosSection.astro";
+import MapSection from "../../components/MapSection.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import type { Lang } from "../../i18n/translations";
+import { useTranslations, SUPPORTED_LANGS } from "../../i18n/utils";
+
+export function getStaticPaths() {
+  return SUPPORTED_LANGS.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const title = t("meta.title");
+const description = t("meta.description");
+---
+
+<BaseLayout title={title} description={description} lang={lang}>
+  <SiteHeader lang={lang} />
+  <main id="main-content">
+    <HeroSection lang={lang} />
+    <WhyUsSection lang={lang} />
+    <DoctorsSection lang={lang} />
+    <EquipmentSection lang={lang} />
+    <ServicesSection lang={lang} />
+    <ProstheticsSection lang={lang} />
+    <RetinopathySection lang={lang} />
+    <GallerySection lang={lang} />
+    <VideosSection lang={lang} />
+    <MapSection lang={lang} />
+  </main>
+  <SiteFooter lang={lang} />
+</BaseLayout>

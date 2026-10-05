@@ -1,7 +1,16 @@
 ---
-// HeroSection — main hero block
+// HeroSection — main hero block with SSG translations
 import { Image } from "astro:assets";
 import heroDoctorImg from "../assets/hero-doctor.png";
+import type { Lang } from "../i18n/translations";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="hero" id="hero">
@@ -30,45 +39,42 @@ import heroDoctorImg from "../assets/hero-doctor.png";
   <div class="container hero__inner">
     <!-- Left: Text content -->
     <div class="hero__content">
-      <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: «Единственная частная клиника РН-скрининга в Самарканде»
-           Уточнить у владельца — есть ли конкуренты с аналогичной услугой в городе -->
-      <div class="badge badge--blue hero__badge reveal-hero" data-i18n="hero.badge">
-        Единственная частная клиника РН-скрининга в Самарканде
+      <div class="badge badge--blue hero__badge reveal-hero">
+        {t("hero.badge")}
       </div>
 
-      <h1 class="hero__h1 reveal-hero" data-i18n="hero.h1">
-        Первый взгляд в жизни — под нашим наблюдением
+      <h1 class="hero__h1 reveal-hero">
+        {t("hero.h1")}
       </h1>
 
-      <p class="hero__subtitle reveal-hero" data-i18n="hero.subtitle">
-        Полный цикл офтальмологической помощи взрослым и детям: диагностика,
-        аппаратное и хирургическое лечение косоглазия, ретинопатии и нарушений зрения.
+      <p class="hero__subtitle reveal-hero">
+        {t("hero.subtitle")}
       </p>
 
       <div class="hero__actions reveal-hero">
-        <a href="#booking-form-section" class="btn btn--primary" data-i18n="hero.cta1">
-          Записаться на приём
+        <a href="#booking-form-section" class="btn btn--primary">
+          {t("hero.cta1")}
         </a>
-        <a href="#services" class="btn btn--outline" data-i18n="hero.cta2">
-          Наши услуги
+        <a href="#services" class="btn btn--outline">
+          {t("hero.cta2")}
         </a>
       </div>
 
       <!-- Stats -->
       <div class="hero__stats reveal-hero">
         <div class="hero__stat">
-          <span class="hero__stat-value" data-i18n="hero.stat1.value">10+</span>
-          <span class="hero__stat-label" data-i18n="hero.stat1.label">лет опыта</span>
+          <span class="hero__stat-value">{t("hero.stat1.value")}</span>
+          <span class="hero__stat-label">{t("hero.stat1.label")}</span>
         </div>
         <div class="hero__stat-divider" aria-hidden="true"></div>
         <div class="hero__stat">
-          <span class="hero__stat-value" data-i18n="hero.stat2.value">3 000+</span>
-          <span class="hero__stat-label" data-i18n="hero.stat2.label">пациентов в год</span>
+          <span class="hero__stat-value">{t("hero.stat2.value")}</span>
+          <span class="hero__stat-label">{t("hero.stat2.label")}</span>
         </div>
         <div class="hero__stat-divider" aria-hidden="true"></div>
         <div class="hero__stat">
-          <span class="hero__stat-value" data-i18n="hero.stat3.value">10</span>
-          <span class="hero__stat-label" data-i18n="hero.stat3.label">аппаратов</span>
+          <span class="hero__stat-value">{t("hero.stat3.value")}</span>
+          <span class="hero__stat-label">{t("hero.stat3.label")}</span>
         </div>
       </div>
     </div>
@@ -96,8 +102,7 @@ import heroDoctorImg from "../assets/hero-doctor.png";
         <div class="hero__img-backdrop" aria-hidden="true"></div>
         <Image
           src={heroDoctorImg}
-          alt="Врач-офтальмолог Lumivis"
-          data-i18n-alt="hero.img.alt"
+          alt={t("hero.img.alt")}
           class="hero__img"
           width={800}
           loading="eager"
@@ -111,7 +116,7 @@ import heroDoctorImg from "../assets/hero-doctor.png";
             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
-          <span data-i18n="hero.doctor.badge">Абдурахмонов Фаридун Саидакбарович</span>
+          <span>{t("hero.doctor.badge")}</span>
         </div>
       </div>
     </div>
@@ -284,7 +289,6 @@ import heroDoctorImg from "../assets/hero-doctor.png";
   height: auto;
   display: block;
   filter: drop-shadow(0 15px 35px rgba(11, 42, 107, 0.14));
-  /* Smooth mask-image gradient fade to remove bottom cut completely */
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 68%, rgba(0, 0, 0, 0) 97%);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 68%, rgba(0, 0, 0, 0) 97%);
 }

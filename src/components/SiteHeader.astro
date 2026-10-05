@@ -1,35 +1,44 @@
 ---
-// SiteHeader — sticky, responsive, RU/EN/UZ switcher
+// SiteHeader — sticky, responsive, SSG RU/EN/UZ switcher
 import { Image } from "astro:assets";
 import logoImg from "../assets/logo.png";
+import type { Lang } from "../i18n/translations";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <header id="site-header" class="site-header">
   <div class="container header-inner">
     <!-- Logo -->
-    <a href="/" class="header-logo" aria-label="Lumivis — главная">
+    <a href={`/${lang}/`} class="header-logo" aria-label="Lumivis — главная">
       <Image src={logoImg} alt="Lumivis" width={300} height={100} loading="eager" format="webp" />
     </a>
 
     <!-- Desktop Nav -->
     <nav class="header-nav" aria-label="Основная навигация">
-      <a href="#doctors" class="header-nav__link" data-i18n="nav.doctors">Врачи</a>
-      <a href="#equipment" class="header-nav__link" data-i18n="nav.equipment">Оборудование</a>
-      <a href="#services" class="header-nav__link" data-i18n="nav.services">Услуги</a>
-      <a href="#retinopathy" class="header-nav__link" data-i18n="nav.retinopathy">РН-скрининг</a>
-      <a href="#results" class="header-nav__link" data-i18n="nav.videos">Результаты</a>
-      <a href="#contacts" class="header-nav__link" data-i18n="nav.contacts">Контакты</a>
+      <a href="#doctors" class="header-nav__link">{t("nav.doctors")}</a>
+      <a href="#equipment" class="header-nav__link">{t("nav.equipment")}</a>
+      <a href="#services" class="header-nav__link">{t("nav.services")}</a>
+      <a href="#retinopathy" class="header-nav__link">{t("nav.retinopathy")}</a>
+      <a href="#results" class="header-nav__link">{t("nav.videos")}</a>
+      <a href="#contacts" class="header-nav__link">{t("nav.contacts")}</a>
     </nav>
 
     <!-- Desktop Right -->
     <div class="header-right">
       <div class="lang-switcher" role="group" aria-label="Выбор языка">
-        <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
-        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-        <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+        <a href="/ru/" class={`lang-btn ${lang === 'ru' ? 'lang-btn--active' : ''}`} data-lang-btn="ru">RU</a>
+        <a href="/en/" class={`lang-btn ${lang === 'en' ? 'lang-btn--active' : ''}`} data-lang-btn="en">EN</a>
+        <a href="/uz/" class={`lang-btn ${lang === 'uz' ? 'lang-btn--active' : ''}`} data-lang-btn="uz">UZ</a>
       </div>
-      <span class="header-hours" data-i18n="header.hours">Пн–Сб 09:00–17:00</span>
-      <a href="#booking-form-section" class="btn btn--primary header-cta" data-i18n="header.cta">Записаться</a>
+      <span class="header-hours">{t("header.hours")}</span>
+      <a href="#booking-form-section" class="btn btn--primary header-cta">{t("header.cta")}</a>
     </div>
 
     <!-- Burger -->
@@ -52,9 +61,9 @@ import logoImg from "../assets/logo.png";
   <div class="mobile-menu__inner">
     <div class="mobile-menu__top">
       <div class="lang-switcher lang-switcher--mobile" role="group" aria-label="Выбор языка">
-        <button class="lang-btn lang-btn--active" data-lang="ru" aria-pressed="true">RU</button>
-        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-        <button class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+        <a href="/ru/" class={`lang-btn ${lang === 'ru' ? 'lang-btn--active' : ''}`} data-lang-btn="ru">RU</a>
+        <a href="/en/" class={`lang-btn ${lang === 'en' ? 'lang-btn--active' : ''}`} data-lang-btn="en">EN</a>
+        <a href="/uz/" class={`lang-btn ${lang === 'uz' ? 'lang-btn--active' : ''}`} data-lang-btn="uz">UZ</a>
       </div>
 
       <div class="mobile-menu__hours-badge">
@@ -62,24 +71,24 @@ import logoImg from "../assets/logo.png";
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        <span data-i18n="header.hours">Пн–Сб 09:00–17:00</span>
+        <span>{t("header.hours")}</span>
       </div>
     </div>
 
     <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
-      <a href="#doctors" class="mobile-menu__link" data-i18n="nav.doctors">Врачи</a>
-      <a href="#equipment" class="mobile-menu__link" data-i18n="nav.equipment">Оборудование</a>
-      <a href="#services" class="mobile-menu__link" data-i18n="nav.services">Услуги</a>
-      <a href="#retinopathy" class="mobile-menu__link" data-i18n="nav.retinopathy">РН-скрининг</a>
-      <a href="#results" class="mobile-menu__link" data-i18n="nav.videos">Результаты</a>
-      <a href="#contacts" class="mobile-menu__link" data-i18n="nav.contacts">Контакты</a>
+      <a href="#doctors" class="mobile-menu__link">{t("nav.doctors")}</a>
+      <a href="#equipment" class="mobile-menu__link">{t("nav.equipment")}</a>
+      <a href="#services" class="mobile-menu__link">{t("nav.services")}</a>
+      <a href="#retinopathy" class="mobile-menu__link">{t("nav.retinopathy")}</a>
+      <a href="#results" class="mobile-menu__link">{t("nav.videos")}</a>
+      <a href="#contacts" class="mobile-menu__link">{t("nav.contacts")}</a>
     </nav>
 
     <div class="mobile-menu__meta">
       <a href="tel:+998995981010" class="mobile-menu__phone">+998 99 598 10 10</a>
     </div>
 
-    <a href="#booking-form-section" class="btn btn--primary mobile-menu__cta" data-i18n="header.cta">Записаться</a>
+    <a href="#booking-form-section" class="btn btn--primary mobile-menu__cta">{t("header.cta")}</a>
   </div>
 </div>
 
@@ -204,6 +213,8 @@ import logoImg from "../assets/logo.png";
   cursor: pointer;
   transition: all var(--t-fast);
   letter-spacing: 0.03em;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .lang-btn--active {

@@ -1,13 +1,22 @@
 ---
-// WhyUsSection.astro — Editorial split layout for Lumivis
+// WhyUsSection.astro — Editorial split layout for Lumivis with SSG translations
+import type { Lang } from "../i18n/translations";
+import { useTranslations } from "../i18n/utils";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="whyus section" id="whyus">
   <div class="container">
 
     <div class="section-header reveal">
-      <h2 data-i18n="whyus.title">Nima uchun Lumivis?</h2>
-      <p data-i18n="whyus.subtitle">Biz faqat ko'rishni davolamaymiz — uning kelajagi uchun javobgarlik olamiz</p>
+      <h2>{t("whyus.title")}</h2>
+      <p>{t("whyus.subtitle")}</p>
     </div>
 
     <div class="whyus__body">
@@ -17,21 +26,21 @@
         <!-- Decorative Watermark "01" -->
         <span class="whyus__watermark" aria-hidden="true">01</span>
 
-        <h3 class="whyus__feat-title" data-i18n="whyus.1.title">
-          Samarqandda yagona
+        <h3 class="whyus__feat-title">
+          {t("whyus.1.title")}
         </h3>
 
         <div class="whyus__feat-rule" aria-hidden="true"></div>
 
-        <p class="whyus__feat-text" data-i18n="whyus.1.text">
-          Shaharda chaqaloqlarda retinopathiya skrining va davolashni amalga oshiradigan yagona klinika
+        <p class="whyus__feat-text">
+          {t("whyus.1.text")}
         </p>
 
         <!-- Compact Fact-Stat Block -->
         <div class="whyus__stat">
-          <div class="whyus__stat-num" data-i18n="whyus.stat.num">3–6 hafta</div>
-          <div class="whyus__stat-label" data-i18n="whyus.stat.label">
-            chaqaloqlarda birinchi ko'rik uchun eng maqbul muddat
+          <div class="whyus__stat-num">{t("whyus.stat.num")}</div>
+          <div class="whyus__stat-label">
+            {t("whyus.stat.label")}
           </div>
         </div>
       </div>
@@ -40,28 +49,28 @@
       <div class="whyus__stack">
 
         <div class="whyus__item reveal">
-          <h3 data-i18n="whyus.2.title">Zamonaviy jihozlar</h3>
-          <p data-i18n="whyus.2.text">Aniq diagnostika va apparatli davolash uchun 10 ta professional apparat</p>
+          <h3>{t("whyus.2.title")}</h3>
+          <p>{t("whyus.2.text")}</p>
         </div>
 
         <div class="whyus__item reveal">
-          <h3 data-i18n="whyus.3.title">Bolalarda stresssiz qabul</h3>
-          <p data-i18n="whyus.3.text">Kichik bemorlarga maxsus yondashuv: og'riqsiz, ehtiyotkorlik bilan va qulay muhitda</p>
+          <h3>{t("whyus.3.title")}</h3>
+          <p>{t("whyus.3.text")}</p>
         </div>
 
         <div class="whyus__item reveal">
-          <h3 data-i18n="whyus.4.title">Malakali mutaxassislar</h3>
-          <p data-i18n="whyus.4.text">Tasdiqlangan malakaga ega va muntazam malaka oshirib boradigan shifokorlar</p>
+          <h3>{t("whyus.4.title")}</h3>
+          <p>{t("whyus.4.text")}</p>
         </div>
 
         <div class="whyus__item reveal">
-          <h3 data-i18n="whyus.5.title">To'liq davolash sikli</h3>
-          <p data-i18n="whyus.5.text">Dastlabki maslahatlashuvdan kurs yakunigacha — bir mutaxassis nazoratida</p>
+          <h3>{t("whyus.5.title")}</h3>
+          <p>{t("whyus.5.text")}</p>
         </div>
 
         <div class="whyus__item whyus__item--full reveal">
-          <h3 data-i18n="whyus.6.title">Natijani nazorat qilish</h3>
-          <p data-i18n="whyus.6.text">Har bir bosqichda natijalarni nazorat qilamiz va davolash natijasi uchun javob beramiz</p>
+          <h3>{t("whyus.6.title")}</h3>
+          <p>{t("whyus.6.text")}</p>
         </div>
 
       </div>
@@ -106,7 +115,6 @@
 }
 
 /* ── Body Layout ── */
-/* Base / Mobile (<640px): 1 column stack */
 .whyus__body {
   display: flex;
   flex-direction: column;
@@ -149,7 +157,6 @@
   margin-bottom: 1rem;
 }
 
-/* Mobile (<640px) order: title (1) -> description (2) -> teal line (3) -> stat (4) */
 .whyus__feat-text {
   position: relative;
   z-index: 1;
@@ -172,7 +179,6 @@
   margin-bottom: 1.25rem;
 }
 
-/* Standalone Fact-Stat Accent Block */
 .whyus__stat {
   position: relative;
   z-index: 1;
@@ -233,12 +239,6 @@
   line-height: 1.55;
 }
 
-/* ──────────────────────────────────────────────
-   TABLET (640px – 1023px)
-   - Item 1 full width top, restricted max-width
-   - Order: title (1) -> teal line (2) -> description (3) -> stat (4)
-   - Items 2–6 in 2-column grid, 6th item full width bottom
-────────────────────────────────────────────── */
 @media (min-width: 640px) {
   .whyus__featured {
     max-width: 580px;
@@ -264,7 +264,6 @@
     margin-top: 1.5rem;
   }
 
-  /* Right items become a 2-col grid */
   .whyus__stack {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -281,7 +280,6 @@
     border-bottom: none;
   }
 
-  /* Item 6 (5th child in right stack) spans full width at bottom */
   .whyus__item--full {
     grid-column: 1 / -1;
     border-top: 1px solid var(--c-border);
@@ -289,9 +287,6 @@
   }
 }
 
-/* ──────────────────────────────────────────────
-   DESKTOP (≥1024px) — TWO COLUMNS (55% / 45%)
-────────────────────────────────────────────── */
 @media (min-width: 1024px) {
   .whyus__body {
     display: grid;
@@ -329,7 +324,7 @@
 
   .whyus__stat {
     order: 4;
-    margin-top: auto; /* Anchors fact block cleanly to the bottom of the left column */
+    margin-top: auto;
     padding-top: 1.5rem;
   }
 
@@ -357,5 +352,3 @@
   }
 }
 </style>
-
-

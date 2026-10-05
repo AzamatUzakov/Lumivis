@@ -1,35 +1,18 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SiteHeader from "../components/SiteHeader.astro";
-import HeroSection from "../components/HeroSection.astro";
-import WhyUsSection from "../components/WhyUsSection.astro";
-import DoctorsSection from "../components/DoctorsSection.astro";
-import EquipmentSection from "../components/EquipmentSection.astro";
-import ServicesSection from "../components/ServicesSection.astro";
-import ProstheticsSection from "../components/ProstheticsSection.astro";
-import RetinopathySection from "../components/RetinopathySection.astro";
-import GallerySection from "../components/GallerySection.astro";
-import VideosSection from "../components/VideosSection.astro";
-import MapSection from "../components/MapSection.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+// Root URL redirect page: lumivis.uz/ -> lumivis.uz/ru/
 ---
-
-<BaseLayout
-  title="Lumivis — Офтальмологическая клиника в Самарканде"
-  description="Lumivis — офтальмологическая клиника в Самарканде. Единственная клиника, где проводят скрининг и лечение ретинопатии недоношенных детей. Диагностика, аппаратное и хирургическое лечение глаз."
->
-  <SiteHeader />
-  <main id="main-content">
-    <HeroSection />
-    <WhyUsSection />
-    <DoctorsSection />
-    <EquipmentSection />
-    <ServicesSection />
-    <ProstheticsSection />
-    <RetinopathySection />
-    <GallerySection />
-    <VideosSection />
-    <MapSection />
-  </main>
-  <SiteFooter />
-</BaseLayout>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0;url=/ru/" />
+    <link rel="canonical" href="https://lumivis.uz/ru/" />
+    <title>Lumivis — Офтальмологическая клиника в Самарканде</title>
+  </head>
+  <body>
+    <p>Перенаправление на <a href="/ru/">русскоязычную версию клиники Lumivis</a>...</p>
+    <script is:inline>
+      window.location.replace("/ru/");
+    </script>
+  </body>
+</html>
