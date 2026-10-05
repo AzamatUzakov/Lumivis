@@ -128,7 +128,8 @@ const t = useTranslations(lang);
   position: relative;
   background: linear-gradient(135deg, #fdfdfd 0%, #f4f7fb 55%, #e9f1fa 100%);
   overflow: hidden;
-  padding-block: clamp(3rem, 8vw, 5.5rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .hero__bg-pattern {
@@ -187,8 +188,8 @@ const t = useTranslations(lang);
 }
 
 .hero__h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 1.15;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  line-height: 1.22;
   margin-bottom: var(--s-5);
   color: var(--c-ink);
   max-width: 100%;
@@ -326,7 +327,8 @@ const t = useTranslations(lang);
 
   .hero__h1 {
     max-width: 100%;
-    font-size: clamp(1.65rem, 6.5vw, 2.2rem);
+    font-size: clamp(1.25rem, 5.2vw, 1.55rem);
+    line-height: 1.25;
   }
 
   .hero__subtitle {
@@ -358,7 +360,7 @@ const t = useTranslations(lang);
 
 @media (min-width: 900px) {
   .hero__h1 {
-    max-width: 14ch;
+    max-width: 100%;
   }
 
   .hero__inner {
