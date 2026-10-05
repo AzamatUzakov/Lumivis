@@ -60,60 +60,58 @@ const ogLocale = lang === "uz" ? "uz_UZ" : lang === "en" ? "en_US" : "ru_UZ";
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Schema.org JSON-LD Microdata -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "MedicalClinic",
-        "name": "Lumivis Ophthalmology Clinic",
-        "alternateName": "Lumivis — Офтальмологическая клиника в Самарканде",
-        "image": "https://lumivis.uz/logo.png",
-        "@id": "https://lumivis.uz/#clinic",
-        "url": "https://lumivis.uz",
-        "telephone": "+998 90 123 45 67",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Самарканд, Узбекистан",
-          "addressLocality": "Самарканд",
-          "addressRegion": "Самаркандская область",
-          "addressCountry": "UZ"
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "name": "Lumivis Ophthalmology Clinic",
+      "alternateName": lang === "uz" ? "Lumivis — Samarqandda ko'z klinikasi" : lang === "en" ? "Lumivis Eye Clinic in Samarkand" : "Lumivis — Офтальмологическая клиника в Самарканде",
+      "image": "https://lumivis.uz/logo.png",
+      "@id": "https://lumivis.uz/#clinic",
+      "url": canonicalUrl,
+      "telephone": "+998 99 598 10 10",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": lang === "uz" ? "Ro'dakiy ko'chasi 217" : lang === "en" ? "217 Rudaki Street" : "улица Рудаки, 217",
+        "addressLocality": lang === "uz" ? "Samarqand" : lang === "en" ? "Samarkand" : "Самарканд",
+        "addressRegion": lang === "uz" ? "Samarqand viloyati" : lang === "en" ? "Samarkand Region" : "Самаркандская область",
+        "addressCountry": "UZ"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.666194,
+        "longitude": 66.976016
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "medicalSpecialty": [
+        "Ophthalmology",
+        "PediatricOphthalmology"
+      ],
+      "availableService": [
+        {
+          "@type": "MedicalProcedure",
+          "name": lang === "uz" ? "Chala tug'ilgan chaqaloqlar retinopatiyasi (ChTChR) skriningi" : lang === "en" ? "ROP screening for retinopathy of prematurity" : "РН-скрининг ретинопатии недоношенных",
+          "description": lang === "uz" ? "Chala tug'ilgan chaqaloqlarda retinopatiyani aniqlash va kuzatish" : lang === "en" ? "Screening, tracking and management of ROP in infants" : "Скрининг, наблюдение и ведение ретинопатии у недоношенных детей"
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 39.6542,
-          "longitude": 66.9597
+        {
+          "@type": "MedicalProcedure",
+          "name": lang === "uz" ? "Ko'rish diagnostikasi" : lang === "en" ? "Vision Diagnostics" : "Диагностика зрения",
+          "description": lang === "uz" ? "Avtorefrakto-keratometriya, biomikroskopiya, tonometriya, perimetriya" : lang === "en" ? "Autorefractometry, biomicroscopy, tonometry, perimetry" : "Авторефрактометрия, биомикроскопия, тонометрия, периметрия"
         },
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "09:00",
-            "closes": "17:00"
-          }
-        ],
-        "medicalSpecialty": [
-          "Ophthalmology",
-          "PediatricOphthalmology"
-        ],
-        "availableService": [
-          {
-            "@type": "MedicalProcedure",
-            "name": "РН-скрининг ретинопатии недоношенных",
-            "description": "Скрининг, наблюдение и ведение ретинопатии у недоношенных детей"
-          },
-          {
-            "@type": "MedicalProcedure",
-            "name": "Диагностика зрения",
-            "description": "Авторефрактометрия, биомикроскопия, тонометрия, периметрия"
-          },
-          {
-            "@type": "MedicalProcedure",
-            "name": "Лечение косоглазия и амблиопии",
-            "description": "Аппаратное и хирургическое лечение у детей и взрослых"
-          }
-        ]
-      }
-    </script>
+        {
+          "@type": "MedicalProcedure",
+          "name": lang === "uz" ? "G'ilaylik va ambliopiyani davolash" : lang === "en" ? "Strabismus & Amblyopia Treatment" : "Лечение косоглазия и амблиопии",
+          "description": lang === "uz" ? "Bolalar va kattalarda apparatli va jarrohlik davolash" : lang === "en" ? "Hardware and surgical treatment for pediatric & adult patients" : "Аппаратное и хирургическое лечение у детей и взрослых"
+        }
+      ]
+    })} />
   </head>
   <body>
     <slot />

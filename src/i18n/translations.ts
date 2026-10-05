@@ -5,8 +5,8 @@ export type Lang = "ru" | "en" | "uz";
 
 export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
   ru: {
-    "meta.title": "Lumivis — Офтальмологическая клиника в Самарканде | РН-скрининг и лечение глаз",
-    "meta.description": "Клиника Lumivis в Самарканде: единственная частная клиника РН-скрининга недоношенных. Полный цикл диагностики, лечения косоглазия, амблиопии у детей и взрослых.",
+    "meta.title": "Lumivis — Офтальмологическая клиника в Самарканде | Ретинопатия недоношенных (РН) и лечение глаз",
+    "meta.description": "Офтальмологическая клиника Lumivis в Самарканде: единственная частная клиника РН-скрининга ретинопатии недоношенных. Диагностика, лечение косоглазия и амблиопии у детей и взрослых.",
 
     "nav.doctors": "Врачи",
     "nav.equipment": "Оборудование",
@@ -20,7 +20,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "header.cta": "Записаться на приём",
 
     "hero.badge": "Единственная частная клиника РН‑скрининга в Самарканде",
-    "hero.h1": "Первый взгляд в жизни — под бережным контролем экспертов",
+    "hero.h1": "Офтальмологическая клиника в Самарканде — первый взгляд в жизни под бережным контролем экспертов",
     "hero.subtitle": "Заботимся о зрении детей и взрослых в Самарканде. Скрининг ретинопатии недоношенных, точная диагностика, аппаратное и хирургическое лечение косоглазия в комфортной атмосфере.",
     "hero.cta1": "Записаться на консультацию",
     "hero.cta2": "Наши услуги",
@@ -307,8 +307,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
   },
 
   en: {
-    "meta.title": "Lumivis — Eye Clinic in Samarkand | ROP Screening & Vision Care",
-    "meta.description": "Lumivis eye clinic in Samarkand: unique ROP screening for infants, advanced diagnostics, strabismus & amblyopia treatment for children and adults.",
+    "meta.title": "Lumivis — Eye Clinic in Samarkand | Retinopathy of Prematurity (ROP) & Vision Care",
+    "meta.description": "Lumivis eye clinic in Samarkand: unique ROP screening for retinopathy of prematurity, advanced diagnostics, strabismus & amblyopia treatment for children and adults.",
 
     "nav.doctors": "Doctors",
     "nav.equipment": "Equipment",
@@ -322,7 +322,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "header.cta": "Book Appointment",
 
     "hero.badge": "The only private ROP screening eye clinic in Samarkand",
-    "hero.h1": "Protecting your family's eyesight with expert medical care",
+    "hero.h1": "Eye clinic in Samarkand — first glance in life under the caring guidance of experts",
     "hero.subtitle": "Comprehensive pediatric & adult ophthalmology in Samarkand. Specialized retinopathy of prematurity (ROP) screening, accurate diagnostics, strabismus and amblyopia treatment.",
     "hero.cta1": "Book a Consultation",
     "hero.cta2": "Our Services",
@@ -609,8 +609,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
   },
 
   uz: {
-    "meta.title": "Lumivis — Samarqanddagi oftalmologiya klinikasi | ChTChR skriningi va ko'rishni davolash",
-    "meta.description": "Samarqanddagi Lumivis ko'z klinikasi: vaqtidan oldin tug'ilgan chaqaloqlarda ChTChR skriningi o'tkazadigan yagona xususiy klinika. Kattalar va bolalarda ko'rishni diagnostika va davolash.",
+    "meta.title": "Lumivis — Samarqandda ko'z klinikasi | Chala tug'ilgan chaqaloqlar retinopatiyasi (ChTChR)",
+    "meta.description": "Samarqanddagi Lumivis ko'z klinikasi: chala tug'ilgan chaqaloqlarda retinopatiya (ChTChR) skriningi o'tkazadigan yagona xususiy klinika. Kattalar va bolalarda ko'rishni diagnostika va davolash.",
 
     "nav.doctors": "Shifokorlar",
     "nav.equipment": "Jihozlar",
@@ -624,7 +624,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "header.cta": "Qabulga yozilish",
 
     "hero.badge": "Samarqandda ChTChR skriningi o'tkazadigan yagona xususiy klinika",
-    "hero.h1": "Hayotdagi birinchi niqob — ekspertlar nazorati ostida",
+    "hero.h1": "Samarqandda ko'z klinikasi — hayotdagi birinchi nigoh ekspertlarning g'amxo'rlik nazorati ostida",
     "hero.subtitle": "Samarqandda bolalar va kattalar ko'rish qobiliyatiga g'amxo'rlik qilamiz. Chala tug'ilgan chaqaloqlar retinopatiyasi skriningi, aniq diagnostika, g'ilaylikni apparatli va jarrohlik davolash.",
     "hero.cta1": "Konsultatsiyaga yozilish",
     "hero.cta2": "Bizning xizmatlar",
