@@ -1,5 +1,13 @@
 ---
 // GalleryInfoModal.astro — Interactive modal for 11 process photos in Lumivis gallery
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <dialog
@@ -43,10 +51,10 @@
           Название процедуры
         </h2>
         <p id="gallery-modal-subtitle" class="gallery-modal__subtitle" data-i18n="gallery.modal.subtitle">
-          Информация о процедуре клиники Lumivis
+          {t("gallery.modal.subtitle")}
         </p>
       </div>
-      <button type="button" class="gallery-modal__close-icon" data-close-gallery-modal aria-label="Закрыть модальное окно">
+      <button type="button" class="gallery-modal__close-icon" data-close-gallery-modal aria-label={t("gallery.modal.close")}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"/>
           <line x1="6" y1="6" x2="18" y2="18"/>
@@ -63,7 +71,7 @@
               <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
             </svg>
           </div>
-          <h3 class="gallery-modal__card-title" data-i18n="gallery.modal.card_title">Описание и назначение:</h3>
+          <h3 class="gallery-modal__card-title" data-i18n="gallery.modal.card_title">{t("gallery.modal.card_title")}</h3>
         </div>
         <p id="gallery-modal-desc" class="gallery-modal__desc">
           Подробная информация о процедуре...
@@ -74,10 +82,10 @@
     <!-- Modal Footer Actions -->
     <footer class="gallery-modal__footer">
       <a href="#booking-form-section" class="btn btn--primary gallery-modal__book-btn" id="gallery-modal-book-btn" data-i18n="gallery.modal.book">
-        Записаться на процедуру
+        {t("gallery.modal.book")}
       </a>
       <button type="button" class="btn btn--outline gallery-modal__cancel-btn" data-close-gallery-modal data-i18n="gallery.modal.close">
-        Закрыть
+        {t("gallery.modal.close")}
       </button>
     </footer>
 
@@ -385,6 +393,8 @@
 </style>
 
 <script>
+  import { TRANSLATIONS } from "../i18n/translations";
+
   document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("gallery-info-modal") as HTMLDialogElement | null;
     if (!modal) return;
@@ -396,16 +406,16 @@
     let currentModalIndex = 1;
 
     // Helper to get current active language ('ru', 'uz', 'en')
-    function getLang(): string {
-      return (window as any).currentLang || document.documentElement.lang || "ru";
+    function getLang(): "ru" | "uz" | "en" {
+      const htmlLang = document.documentElement.lang as "ru" | "uz" | "en";
+      return htmlLang || (window as any).currentLang || "ru";
     }
 
     // Function to update modal content dynamically by card index (1..11)
     function updateContent(index: number) {
       currentModalIndex = index;
       const lang = getLang();
-      const translations = (window as any).TRANSLATIONS || {};
-      const langDict = translations[lang] || translations["ru"] || {};
+      const langDict = TRANSLATIONS[lang] || TRANSLATIONS["ru"] || {};
 
       const titleKey = `gallery.modal.${index}.title`;
       const badgeKey = `gallery.modal.${index}.badge`;

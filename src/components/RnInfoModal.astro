@@ -1,6 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <dialog
@@ -24,13 +32,13 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
       </div>
       <div class="rn-modal__header-text">
         <h2 id="rn-modal-title" class="rn-modal__title" data-i18n="rn.modal.title">
-          Ретинопатия недоношенных (РН)
+          {t("rn.modal.title")}
         </h2>
         <p id="rn-modal-subtitle" class="rn-modal__subtitle" data-i18n="rn.modal.subtitle">
-          Официальная медицинская брошюра клиники Lumivis
+          {t("rn.modal.subtitle")}
         </p>
       </div>
-      <button type="button" class="rn-modal__close-icon" data-close-rn-modal aria-label="Закрыть модальное окно">
+      <button type="button" class="rn-modal__close-icon" data-close-rn-modal aria-label={t("rn.modal.close")}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"/>
           <line x1="6" y1="6" x2="18" y2="18"/>
@@ -43,61 +51,61 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
       
       <!-- Section 1: Definition -->
       <section class="rn-modal__section">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p1_title">Что такое ретинопатия недоношенных?</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p1_title">{t("rn.modal.p1_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.p1_text">
-          РН (Ретинопатия недоношенных) — это тяжёлое заболевание глаз у недоношенных детей, возникающее из-за наличия аваскулярной (безсосудистой) зоны сетчатки и аномального развития сосудов (роста новых сосудов и фиброваскулярной ткани), что может привести к отслойке сетчатки и неизлечимой инвалидности по зрению.
+          {t("rn.modal.p1_text")}
         </p>
       </section>
 
       <!-- Section 2: Vascular Timeline -->
       <section class="rn-modal__section">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p2_title">Сроки развития сосудов сетчатки</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p2_title">{t("rn.modal.p2_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.p2_text">
-          В норме у плода сосуды сетчатки начинают развиваться с 12–16 недель беременности, и этот процесс продолжается до 38–40 недель.
+          {t("rn.modal.p2_text")}
         </p>
       </section>
 
       <!-- Section 3: Pathology Mechanism -->
       <section class="rn-modal__section">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p3_title">Механизм развития патологии</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p3_title">{t("rn.modal.p3_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.p3_text">
-          Нарушение нормального физиологического формирования сосудов сетчатки приводит к извилистости сосудов и образованию новых патологических сосудов на демаркационной линии между сосудистой и безсосудистой зонами. Это влечёт за собой рост фиброваскулярной ткани в сторону переднего отрезка глаза (за хрусталик), натяжение и отслойку сетчатки.
+          {t("rn.modal.p3_text")}
         </p>
       </section>
 
       <!-- Section 4: Critical Window -->
       <section class="rn-modal__section">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p4_title">Критический период наблюдения и скрининг</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p4_title">{t("rn.modal.p4_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.p4_text">
-          Заболевание развивается преимущественно на 5–15 неделях после рождения (в этот период ребёнок обязательно должен находиться под наблюдением офтальмолога). Осмотр глазного дна детским окулистом в эти сроки строго обязателен.
+          {t("rn.modal.p4_text")}
         </p>
       </section>
 
       <!-- Section 5: Stages & Consequences -->
       <section class="rn-modal__section">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p5_title">Стадии болезни и риски</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p5_title">{t("rn.modal.p5_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.p5_text">
-          Заболевание проходит 5 стадий. Без своевременного лечения и профилактических мер болезнь может привести к пожизненной необратимой слепоте. Скрининг продолжается 4–5 месяцев.
+          {t("rn.modal.p5_text")}
         </p>
       </section>
 
       <!-- Section 6: VEGF Factor -->
       <section class="rn-modal__section">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p6_title">Фактор VEGF</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.p6_title">{t("rn.modal.p6_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.p6_text">
-          Фактором, вызывающим неоваскуляризацию (патологический рост сосудов), является VEGF (сосудистый эндотелиальный фактор роста), вырабатываемый тканью сетчатки в условиях гипоксии (нехватки кислорода).
+          {t("rn.modal.p6_text")}
         </p>
       </section>
 
       <!-- Section 7: Risk Factors List -->
       <section class="rn-modal__section rn-modal__section--risk">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.risk_title">Факторы риска развития заболевания:</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.risk_title">{t("rn.modal.risk_title")}</h3>
         <ul class="rn-modal__risk-list">
-          <li data-i18n="rn.modal.risk_1">Масса тела при рождении менее 2000 г;</li>
-          <li data-i18n="rn.modal.risk_2">Срок гестации менее 35 недель;</li>
-          <li data-i18n="rn.modal.risk_3">Задержка внутриутробного развития плода;</li>
-          <li data-i18n="rn.modal.risk_4">Длительная оксигенотерапия (подача кислорода);</li>
-          <li data-i18n="rn.modal.risk_5">Многоплодная беременность.</li>
+          <li data-i18n="rn.modal.risk_1">{t("rn.modal.risk_1")}</li>
+          <li data-i18n="rn.modal.risk_2">{t("rn.modal.risk_2")}</li>
+          <li data-i18n="rn.modal.risk_3">{t("rn.modal.risk_3")}</li>
+          <li data-i18n="rn.modal.risk_4">{t("rn.modal.risk_4")}</li>
+          <li data-i18n="rn.modal.risk_5">{t("rn.modal.risk_5")}</li>
         </ul>
       </section>
 
@@ -105,7 +113,7 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
       <figure class="rn-modal__diagram">
         <Image
           src={eyeDiagram}
-          alt="Схема глаза: сравнение здоровой сетчатки и сетчатки при ретинопатии недоношенных"
+          alt={t("rn.modal.diagram_caption")}
           class="rn-modal__diagram-img"
           width={700}
           height={320}
@@ -114,20 +122,20 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
           loading="lazy"
         />
         <figcaption class="rn-modal__diagram-caption" data-i18n="rn.modal.diagram_caption">
-          Схема: Сравнение здоровой сетчатки и сетчатки при ретинопатии недоношенных (РН)
+          {t("rn.modal.diagram_caption")}
         </figcaption>
       </figure>
 
       <!-- Section 9: Treatment & Call to Action -->
       <section class="rn-modal__section rn-modal__section--treatment">
-        <h3 class="rn-modal__section-title" data-i18n="rn.modal.treatment_title">Лечение:</h3>
+        <h3 class="rn-modal__section-title" data-i18n="rn.modal.treatment_title">{t("rn.modal.treatment_title")}</h3>
         <p class="rn-modal__p" data-i18n="rn.modal.treatment_text">
-          Главным звеном сохранения зрения является своевременное проведение Anti-VEGF терапии (интравитреальная инъекция для остановки неоваскуляризации) на начальных стадиях заболевания.
+          {t("rn.modal.treatment_text")}
         </p>
 
         <blockquote class="rn-modal__quote">
           <p data-i18n="rn.modal.closing">
-            Не будьте равнодушны к возможности вашего ребёнка видеть этот мир, ведь он имеет право видеть наравне со всеми!
+            {t("rn.modal.closing")}
           </p>
         </blockquote>
       </section>
@@ -137,10 +145,10 @@ import eyeDiagram from "../assets/gallery/rn-eye-diagram.png";
     <!-- Modal Footer Actions -->
     <footer class="rn-modal__footer">
       <a href="#booking-form-section" class="btn btn--primary rn-modal__book-btn" id="rn-modal-book-btn" data-i18n="rn.modal.book">
-        Записаться на РН-скрининг
+        {t("rn.modal.book")}
       </a>
       <button type="button" class="btn btn--outline rn-modal__cancel-btn" data-close-rn-modal data-i18n="rn.modal.close">
-        Закрыть
+        {t("rn.modal.close")}
       </button>
     </footer>
 

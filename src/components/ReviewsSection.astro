@@ -1,12 +1,20 @@
 ---
 // ReviewsSection — patient reviews with placeholders
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="reviews section section--surface" id="reviews">
   <div class="container">
     <div class="section-header">
-      <h2 data-i18n="reviews.title">Отзывы пациентов</h2>
-      <p data-i18n="reviews.subtitle">Нам доверяют семьи Самарканда</p>
+      <h2 data-i18n="reviews.title">{t("reviews.title")}</h2>
+      <p data-i18n="reviews.subtitle">{t("reviews.subtitle")}</p>
     </div>
 
     <div class="reviews__grid">
@@ -18,13 +26,13 @@
           </svg>
         </div>
         <p class="review-card__text" data-i18n="review.1.text">
-          Привела дочку на диагностику косоглазия — врач нашла подход к ребёнку с первой минуты. Лечение прошло отлично, через месяц уже видим результат.
+          {t("review.1.text")}
         </p>
         <div class="review-card__footer">
-          <div class="review-card__stars" aria-label="5 из 5 звёзд">
+          <div class="review-card__stars" aria-label="5 / 5">
             ★★★★★
           </div>
-          <cite class="review-card__author" data-i18n="review.1.author">Мать пациентки, 4 года</cite>
+          <cite class="review-card__author" data-i18n="review.1.author">{t("review.1.author")}</cite>
         </div>
       </article>
 
@@ -35,13 +43,13 @@
           </svg>
         </div>
         <p class="review-card__text" data-i18n="review.2.text">
-          Обратились по поводу ретинопатии у новорождённого. Только здесь оказалось необходимое оборудование и специалист с опытом. Очень благодарны клинике Lumivis.
+          {t("review.2.text")}
         </p>
         <div class="review-card__footer">
-          <div class="review-card__stars" aria-label="5 из 5 звёзд">
+          <div class="review-card__stars" aria-label="5 / 5">
             ★★★★★
           </div>
-          <cite class="review-card__author" data-i18n="review.2.author">Семья пациента из роддома</cite>
+          <cite class="review-card__author" data-i18n="review.2.author">{t("review.2.author")}</cite>
         </div>
       </article>
 
@@ -52,7 +60,7 @@
           </svg>
         </div>
         <p class="review-card__text" data-i18n="review.3.text">
-          Записывался на плановую проверку зрения — приятно удивлён профессионализмом и оснащением. Лучшая офтальмологическая клиника в Самарканде.
+          {t("review.3.text")}
         </p>
         <div class="review-card__footer">
           <div class="review-card__badge">
@@ -60,9 +68,9 @@
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
               <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
-            <span data-i18n="review.3.verified">Подтверждённый визит</span>
+            <span data-i18n="review.3.verified">{t("review.3.verified")}</span>
           </div>
-          <cite class="review-card__author" data-i18n="review.3.author">А.К., Самарканд, 42 года</cite>
+          <cite class="review-card__author" data-i18n="review.3.author">{t("review.3.author")}</cite>
         </div>
       </article>
 

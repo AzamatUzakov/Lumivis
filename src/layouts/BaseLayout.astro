@@ -6,21 +6,30 @@ import "@fontsource-variable/onest";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
+import type { Lang } from "../i18n/translations";
 
 interface Props {
   title?: string;
   description?: string;
-  lang?: string;
+  lang?: Lang;
 }
 
 const {
   title = "Lumivis — Офтальмологическая клиника в Самарканде | РН-скрининг и лечение глаз",
   description = "Клиника Lumivis в Самарканде: единственная частная клиника РН-скрининга недоношенных. Полный цикл диагностики, лечения косоглазия, амблиопии у детей и взрослых.",
+  lang = "ru",
 } = Astro.props;
+
+// Strip language prefix from pathname to get relative page path (e.g. "" or "privacy")
+const rawPath = Astro.url.pathname.replace(/^\/(ru|uz|en)\/?/, "");
+const currentPath = rawPath ? `${rawPath}` : "";
+
+const canonicalUrl = `https://lumivis.uz/${lang}/${currentPath}`;
+const ogLocale = lang === "uz" ? "uz_UZ" : lang === "en" ? "en_US" : "ru_UZ";
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,20 +43,20 @@ const {
     <title>{title}</title>
 
     <!-- Canonical and Hreflang Tags -->
-    <link rel="canonical" href="https://lumivis.uz/" />
-    <link rel="alternate" hreflang="ru-UZ" href="https://lumivis.uz/" />
-    <link rel="alternate" hreflang="uz-UZ" href="https://lumivis.uz/" />
-    <link rel="alternate" hreflang="en-UZ" href="https://lumivis.uz/" />
-    <link rel="alternate" hreflang="x-default" href="https://lumivis.uz/" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="ru-UZ" href={`https://lumivis.uz/ru/${currentPath}`} />
+    <link rel="alternate" hreflang="uz-UZ" href={`https://lumivis.uz/uz/${currentPath}`} />
+    <link rel="alternate" hreflang="en-UZ" href={`https://lumivis.uz/en/${currentPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://lumivis.uz/ru/${currentPath}`} />
 
     <!-- Open Graph & Social Cards -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lumivis.uz/" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Lumivis Ophthalmology Clinic" />
     <meta property="og:image" content="https://lumivis.uz/logo.png" />
-    <meta property="og:locale" content="ru_UZ" />
+    <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Schema.org JSON-LD Microdata -->
@@ -105,997 +114,35 @@ const {
         ]
       }
     </script>
-
   </head>
   <body>
     <slot />
 
-    <!-- i18n Script -->
+    <!-- Core Interactive Client Script -->
     <script>
-      // ── Translations ──────────────────────────────────────────────
-      const TRANSLATIONS: Record<string, Record<string, string>> = {
-        ru: {
-          "meta.title": "Lumivis — Офтальмологическая клиника в Самарканде | РН-скрининг и лечение глаз",
-          "meta.description": "Клиника Lumivis в Самарканде: единственная частная клиника РН-скрининга недоношенных. Полный цикл диагностики, лечения косоглазия, амблиопии у детей и взрослых.",
-
-          "nav.doctors": "Врачи",
-          "nav.equipment": "Оборудование",
-          "nav.services": "Услуги",
-          "nav.retinopathy": "РН-скрининг",
-          "nav.contacts": "Контакты",
-          "nav.reviews": "Отзывы",
-          "nav.videos": "Результаты",
-
-          "header.hours": "Пн–Сб 09:00–17:00",
-          "header.cta": "Записаться на приём",
-
-          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: Уточнить у владельца — действительно ли клиника является
-          // единственной частной клиникой, проводящей РН-скрининг в Самарканде?
-          "hero.badge": "Единственная частная клиника РН‑скрининга в Самарканде",
-          "hero.h1": "Первый взгляд в жизни — под бережным контролем экспертов",
-          "hero.subtitle": "Заботимся о зрении детей и взрослых в Самарканде. Скрининг ретинопатии недоношенных, точная диагностика, аппаратное и хирургическое лечение косоглазия в комфортной атмосфере.",
-          "hero.cta1": "Записаться на консультацию",
-          "hero.cta2": "Наши услуги",
-          "hero.stat1.value": "10+",
-          "hero.stat1.label": "лет опыта",
-          "hero.stat2.value": "3 000+",
-          "hero.stat2.label": "пациентов в год",
-          "hero.stat3.value": "10",
-          "hero.stat3.label": "аппаратов",
-          "hero.doctor.badge": "Абдурахмонов Фаридун Саидакбарович",
-          "hero.img.alt": "Детский офтальмолог Абдурахмонов Фаридун Саидакбарович — клиника Lumivis Самарканд",
-
-          "whyus.title": "Почему семьи Самарканда выбирают Lumivis",
-          "whyus.subtitle": "Мы совмещаем высочайшие медицинские стандарты с искренней эмпатией к каждому пациенту — от новорождённых до пожилых людей",
-          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: то же утверждение, что и в hero.badge — уточнить, нет ли
-          // других приватных клиник с РН-скринингом в городе
-          "whyus.1.title": "Уникальный РН-скрининг в Самарканде",
-          "whyus.1.text": "Единственная частная клиника в городе, где проводится раннее выявление и ведение ретинопатии недоношенных детей — здоровье глаз с первых недель жизни.",
-          "whyus.stat.num": "3–6 недель",
-          "whyus.stat.label": "жизни — рекомендуемый срок первого осмотра недоношенного ребёнка",
-          "whyus.2.title": "Экспертное оборудование",
-          "whyus.2.text": "10 профессиональных аппаратов ведущих мировых производителей для точнейшей диагностики и аппаратного лечения.",
-          "whyus.3.title": "Приём детей без страха и слёз",
-          "whyus.3.text": "Особый подход к малышам: обследование проходит безболезненно, бережно и в спокойной игровой атмосфере.",
-          "whyus.4.title": "Квалифицированные специалисты",
-          "whyus.4.text": "Офтальмохирурги, страбизмологи и детские врачи с опытом и регулярным повышением квалификации.",
-          "whyus.5.title": "Полный цикл офтальмологической помощи",
-          "whyus.5.text": "От первой компьютерной диагностики до завершения курса лечения — под непрерывным контролем одного врача.",
-          "whyus.6.title": "Персональный контроль динамики",
-          "whyus.6.text": "Отслеживаем результаты на каждом этапе терапии и несём ответственность за исход каждого курса лечения.",
-
-          "doctors.title": "Наша врачебная команда",
-          "doctors.subtitle": "Специалисты с многолетним опытом в офтальмологии для детей и взрослых",
-          "doctor.1.name": "Бобоев Саидафзал Абдурахманович",
-          "doctor.1.spec": "Офтальмохирург, врач высшей категории, к.м.н., доцент, консультант клиники Lumivis",
-          "doctor.1.alt": "Офтальмохирург Бобоев Саидафзал Абдурахманович Самарканд",
-          "doctor.2.name": "Ражабов Санжар Мансурович",
-          "doctor.2.spec": "Врач высшей категории, офтальмохирург, катарактолог",
-          "doctor.2.alt": "Офтальмохирург катарактолог Ражабов Санжар Мансурович Самарканд",
-          "doctor.3.name": "Абдурахмонов Фаридун Саидакбарович",
-          "doctor.3.spec": "Детский офтальмолог, окулопластический хирург, страбизмолог",
-          "doctor.3.alt": "Детский офтальмолог страбизмолог Абдурахмонов Фаридун Саидакбарович",
-          "doctor.4.name": "Раупова Парвина Хасановна",
-          "doctor.4.spec": "Врач-окулист",
-          "doctor.4.alt": "Врач-окулист Раупова Парвина Хасановна Самарканд",
-          "doctor.5.name": "Зикириллоев Абдурасул Нусратиллоевич",
-          "doctor.5.spec": "Врач-офтальмохирург-катарактолог, главный врач клиники",
-          "doctor.5.alt": "Главный врач офтальмохирург Зикириллоев Абдурасул Нусратиллоевич",
-          "doctor.6.name": "Мусинов Абдукаюм Суюнбоевич",
-          "doctor.6.spec": "Врач-окулист",
-          "doctor.6.alt": "Врач-окулист Мусинов Абдукаюм Суюнбоевич",
-          "doctor.7.name": "Мусинов Хусниддин Суюнбоевич",
-          "doctor.7.spec": "Окулярист",
-          "doctor.7.alt": "Окулярист Мусинов Хусниддин Суюнбоевич",
-          "doctor.8.name": "Бобоев Сиёвуш Саидафзалзода",
-          "doctor.8.spec": "Офтальмохирург, Ph.D, консультант клиники Lumivis",
-          "doctor.8.alt": "Офтальмохирург Бобоев Сиёвуш Саидафзалзода",
-          "doctors.photo.soon": "Фото готовится",
-
-          "equipment.title": "Оснащение экспертного уровня",
-          "equipment.subtitle": "Передовые аппараты для точной диагностики зрения и эффективной аппаратной терапии",
-          "equip.1.name": "Авторефкератометр",
-          "equip.1.desc": "Детальная биомикроскопия переднего отрезка глаза",
-          "equip.1.alt": "Авторефкератометр в офтальмологической клинике Lumivis Самарканд",
-          "equip.2.name": "Щелевая лампа Labomed",
-          "equip.2.desc": "Диагностический микроскоп высокого разрешения",
-          "equip.2.alt": "Офтальмологическая щелевая лампа Labomed Самарканд",
-          "equip.3.name": "Офтальмологический биомикроскоп",
-          "equip.3.desc": "Послойный осмотр внутренних структур глаза",
-          "equip.3.alt": "Офтальмологический биомикроскоп для диагностики глаз",
-          "equip.4.name": "Синоптофор",
-          "equip.4.desc": "Аппаратное лечение косоглазия и развитие бинокулярного зрения",
-          "equip.4.alt": "Синоптофор — аппарат для лечения косоглазия у детей в Самарканде",
-          "equip.5.name": "Аппарат «Ручеёк»",
-          "equip.5.desc": "Тренировка аккомодации, лечение амблиопии и близорукости",
-          "equip.5.alt": "Аппарат Ручеёк для тренировки зрения у детей",
-          "equip.6.name": "Аккомодометр",
-          "equip.6.desc": "Точная оценка запаса и гибкости аккомодации",
-          "equip.6.alt": "Аккомодометр для исследования фокуса зрения",
-          "equip.7.name": "Аппарат АМО-АТОС",
-          "equip.7.desc": "Магнитотерапия при воспалениях и спазме аккомодации",
-          "equip.7.alt": "Аппарат АМО-АТОС для магнитотерапии глаз",
-          "equip.8.name": "Аппарат Gezatone",
-          "equip.8.desc": "Физиотерапевтическое стимулирование органа зрения",
-          "equip.8.alt": "Аппарат Gezatone для физиотерапии зрения",
-          "equip.9.name": "Диагностический аппарат Mocular Medical",
-          "equip.9.desc": "Портативный цифровой аппарат для комплексной диагностики зрения",
-          "equip.9.alt": "Диагностический аппарат Mocular Medical в клинике Lumivis Самарканд",
-          "equip.10.name": "Бесконтактный тонометр-пахиметр Huvitz",
-          "equip.10.desc": "Бесконтактное измерение глазного давления и толщины роговицы",
-          "equip.10.alt": "Бесконтактный тонометр-пахиметр Huvitz в офтальмологической клинике Lumivis Самарканд",
-
-          "services.title": "Офтальмологические услуги",
-          "services.subtitle": "Комплексная помощь для всей семьи: от новорождённых до пациентов старшего возраста",
-          "services.cta": "Записаться",
-          "services.1.title": "Комплексная диагностика зрения",
-          "services.1.text": "Авторефрактометрия, биомикроскопия, измерение глазного давления и периметрия за один визит.",
-          "services.2.title": "Ретинопатия недоношенных (РН)",
-          "services.2.text": "Профильный скрининг, динамическое наблюдение и лечение недоношенных детей с первых недель жизни.",
-          "services.3.title": "Лечение косоглазия (страбизм)",
-          "services.3.text": "Аппаратные курсы и хирургическая коррекция косоглазия для детей и взрослых.",
-          "services.4.title": "Лечение амблиопии («ленивый глаз»)",
-          "services.4.text": "Плеоптическое и аппаратное восстановление остроты зрения с индивидуальным трекингом.",
-          "services.5.title": "Детская офтальмология",
-          "services.5.text": "Бережная диагностика и коррекция зрения у младенцев и школьников без боли и слез.",
-          "services.6.title": "Подбор очков и контактных линз",
-          "services.6.text": "Точное определение рецепта для сложной оптики, астигматизма и прогрессивных линз.",
-          "services.7.title": "Синдром сухого глаза",
-          "services.7.text": "Диагностика слезной плёнки и эффективная терапия сухости и усталости глаз.",
-          "services.8.title": "Промывание слёзных путей",
-          "services.8.text": "Безопасное устранение непроходимости носослёзного канала у младенцев и взрослых.",
-          "services.9.title": "Индивидуальное глазное протезирование",
-          "services.9.text": "Подбор и адаптация индивидуального глазного протеза по форме и цвету здорового глаза после травм, заболеваний или врождённой патологии.",
-          "services.bottom.text": "Нужна консультация по индивидуальному случаю?",
-          "services.bottom.cta": "Записаться на приём",
-          "services.rn_img.alt": "Детский офтальмолог проводит обследование ребёнка в Самарканде",
-
-          "rn.badge": "Уникальная компетенция в Самарканде",
-          "rn.title": "Единственная частная клиника в Самарканде, выявляющая и ведущая ретинопатию недоношенных",
-          "rn.text": "Ретинопатия недоношенных (РН) — тяжелая патология сосудов сетчатки у детей, родившихся раньше срока. Без своевременной помощи болезнь быстро прогрессирует и может привести к необратимой слепоте.",
-          "rn.text2": "Диагностическое окно составляет всего 3–6 недель жизни. Наша клиника оснащена всем необходимым оборудованием для бережного обследования младенцев и проведения своевременной терапии.",
-          "rn.cta": "Записать ребёнка на РН-скрининг",
-          "rn.fact1.label": "недель — оптимальный<br>срок первого осмотра",
-          "rn.fact2.label": "клиника в городе<br>ведёт РН-скрининг",
-          "rn.img.alt": "Офтальмологический осмотр новорождённого ребёнка на ретинопатию в клинике Lumivis Самарканд",
-
-          "rn.modal.trigger": "Узнать подробнее о РН",
-          "rn.modal.title": "Ретинопатия недоношенных (РН)",
-          "rn.modal.subtitle": "Официальная медицинская брошюра клиники Lumivis",
-          "rn.modal.p1_title": "Что такое ретинопатия недоношенных?",
-          "rn.modal.p1_text": "РН (Ретинопатия недоношенных) — это тяжёлое заболевание глаз у недоношенных детей, возникающее из-за наличия аваскулярной (безсосудистой) зоны сетчатки и аномального развития сосудов (роста новых сосудов и фиброваскулярной ткани), что может привести к отслойке сетчатки и неизлечимой инвалидности по зрению.",
-          "rn.modal.p2_title": "Сроки развития сосудов сетчатки",
-          "rn.modal.p2_text": "В норме у плода сосуды сетчатки начинают развиваться с 12–16 недель беременности, и этот процесс продолжается до 38–40 недель.",
-          "rn.modal.p3_title": "Механизм развития патологии",
-          "rn.modal.p3_text": "Нарушение нормального физиологического формирования сосудов сетчатки приводит к извилистости сосудов и образованию новых патологических сосудов на демаркационной линии между сосудистой и безсосудистой зонами. Это влечёт за собой рост фиброваскулярной ткани в сторону переднего отрезка глаза (за хрусталик), натяжение и отслойку сетчатки.",
-          "rn.modal.p4_title": "Критический период наблюдения и скрининг",
-          "rn.modal.p4_text": "Заболевание развивается преимущественно на 5–15 неделях после рождения (в этот период ребёнок обязательно должен находиться под наблюдением офтальмолога). Осмотр глазного дна детским окулистом в эти сроки строго обязателен.",
-          "rn.modal.p5_title": "Стадии болезни и риски",
-          "rn.modal.p5_text": "Заболевание проходит 5 стадий. Без своевременного лечения и профилактических мер болезнь может привести к пожизненной необратимой слепоте. Скрининг продолжается 4–5 месяцев.",
-          "rn.modal.p6_title": "Фактор VEGF",
-          "rn.modal.p6_text": "Фактором, вызывающим неоваскуляризацию (патологический рост сосудов), является VEGF (сосудистый эндотелиальный фактор роста), вырабатываемый тканью сетчатки в условиях гипоксии (нехватки кислорода).",
-          "rn.modal.risk_title": "Факторы риска развития заболевания:",
-          "rn.modal.risk_1": "Масса тела при рождении менее 2000 г;",
-          "rn.modal.risk_2": "Срок гестации менее 35 недель;",
-          "rn.modal.risk_3": "Задержка внутриутробного развития плода;",
-          "rn.modal.risk_4": "Длительная оксигенотерапия (подача кислорода);",
-          "rn.modal.risk_5": "Многоплодная беременность.",
-          "rn.modal.diagram_caption": "Схема: Сравнение здоровой сетчатки и сетчатки при ретинопатии недоношенных (РН)",
-          "rn.modal.treatment_title": "Лечение:",
-          "rn.modal.treatment_text": "Главным звеном сохранения зрения является своевременное проведение Anti-VEGF терапии (интравитреальная инъекция для остановки неоваскуляризации) на начальных стадиях заболевания.",
-          "rn.modal.closing": "Не будьте равнодушны к возможности вашего ребёнка видеть этот мир, ведь он имеет право видеть наравне со всеми!",
-          "rn.modal.book": "Записаться на РН-скрининг",
-          "rn.modal.close": "Закрыть",
-
-          "gallery.title": "Как проходит приём в Lumivis",
-          "gallery.subtitle": "Спокойная атмосфера, современный комфорт и внимательное отношение к каждому пациенту",
-          "gallery.1.alt": "Процесс детской диагностики зрения в клинике Lumivis Самарканд",
-          "gallery.2.alt": "Проверка зрения у ребёнка на офтальмологическом оборудовании",
-          "gallery.3.alt": "Врач-офтальмолог проводит осмотр пациента в кабинете",
-          "gallery.4.alt": "Диагностика структуры глаза на щелевой лампе",
-          "gallery.5.alt": "Офтальмологический приём взрослого пациента в Самарканде",
-          "gallery.6.alt": "Консультация офтальмохирурга в клинике Lumivis",
-          "gallery.7.alt": "Обследование зрительных функций пациента",
-          "gallery.8.alt": "Магнитотерапия на аппарате АМО-АТОС",
-          "gallery.9.alt": "Тренировка зрения на аппарате Ручеёк",
-          "gallery.10.alt": "Свето-магнитотерапия очками Gezatone",
-          "gallery.11.alt": "Лазерная стимуляция сетчатки",
-
-          "gallery.modal.card_title": "Описание и назначение:",
-          "gallery.modal.subtitle": "Информация о процедуре клиники Lumivis",
-          "gallery.modal.book": "Записаться на процедуру",
-          "gallery.modal.close": "Закрыть",
-
-          "gallery.modal.1.title": "Компьютерная плеоптика",
-          "gallery.modal.1.badge": "Плеоптическое лечение",
-          "gallery.modal.1.desc": "Развивающие и стимуляционные компьютерные программы («Крестики», «Паучок», «Контур», «CUP») для лечения амблиопии («ленивого глаза») и восстановления бинокулярных функций. Увлекательная игровая форма делает лечение комфортным для детей всех возрастов.",
-
-          "gallery.modal.2.title": "Авторефкератометрия",
-          "gallery.modal.2.badge": "Компьютерная диагностика",
-          "gallery.modal.2.desc": "Высокоточная компьютерная диагностика преломляющей способности глаза (рефракции) и кривизны роговицы на офтальмологическом приборе Huvitz. Позволяет мгновенно и бесконтактно выявить близорукость, дальнозоркость и астигматизм даже у самых маленьких пациентов.",
-
-          "gallery.modal.3.title": "Аппарат АКА-01 (Оценка аккомодации №1)",
-          "gallery.modal.3.badge": "Диагностика аккомодации",
-          "gallery.modal.3.desc": "Автоматизированный офтальмологический комплекс АКА-01 для объективной оценки резервов абсолютной и относительной аккомодации. Измеряет работоспособность и выявляет спазм цилиарной мышцы при высоких зрительных нагрузках у школьников и взрослых.",
-
-          "gallery.modal.4.title": "Вибромассаж глаз (Gezatone)",
-          "gallery.modal.4.badge": "Физиотерапия и релаксация",
-          "gallery.modal.4.desc": "Деликатный пневмо- и вибромассаж периорбитальной области очками Gezatone с мягким инфракрасным прогревом. Эффективно снимает спазм аккомодации, устраняет синдром зрительного утомления (компьютерный синдром), улучшает микроциркуляцию крови и лимфоотток.",
-
-          "gallery.modal.5.title": "Аппарат АКА-01 (Динамика аккомодации №2)",
-          "gallery.modal.5.badge": "Контроль лечения",
-          "gallery.modal.5.desc": "Оценка динамических характеристик фокусировки глаза и выносливости цилиарной мышцы в процессе аппаратной терапии. Позволяет лечащему врачу точно контролировать положительную динамику и регулировать параметры индивидуального курса.",
-
-          "gallery.modal.6.title": "Тренажёр аккомодации «Ручеёк»",
-          "gallery.modal.6.badge": "Аппаратная тренировка",
-          "gallery.modal.6.desc": "Специализированный офтальмологический тренажёр для стимуляции аккомодации. Световые стимулы последовательно перемещаются на разных расстояниях от глаза, заставляя цилиарную мышцу активно работать, тренируя фокусировку и замедляя прогрессирование близорукости.",
-
-          "gallery.modal.7.title": "Синоптофор",
-          "gallery.modal.7.badge": "Ортоптическое лечение косоглазия",
-          "gallery.modal.7.desc": "Главный ортоптический прибор для диагностики и лечения косоглазия, восстановления бинокулярного и стереоскопического зрения. Разделяет поля зрения правого и левого глаза, тренируя мозг объединять два раздельных изображения в единую объёмную 3D-картинку.",
-
-          "gallery.modal.8.title": "Лазерная макулостимуляция («Спекл-М»)",
-          "gallery.modal.8.badge": "Лазерно-оптическая стимуляция",
-          "gallery.modal.8.desc": "Лазерная и светодиодная стимуляция макулярной (центральной) зоны сетчатки спекл-структурой — импульсным красным интерференционным узором. Высокоэффективна при амблиопии любого происхождения, дистрофических процессах сетчатки и зрительного нерва.",
-
-          "gallery.modal.9.title": "Осмотр переднего отрезка глаза",
-          "gallery.modal.9.badge": "Первичный фокальный осмотр",
-          "gallery.modal.9.desc": "Детальный визуальный осмотр роговицы, конъюнктивы, радужки и хрусталика с использованием узконаправленного бокового фокального освещения. Позволяет офтальмологу выявить микротравмы, признаки воспаления и особенности строения передних сред глаза.",
-
-          "gallery.modal.10.title": "Биомикроскопия (Щелевая лампа)",
-          "gallery.modal.10.badge": "Микроскопическая диагностика",
-          "gallery.modal.10.desc": "Бесконтактное исследование оптических сред и внутренних структур глаза под большим увеличением стереомикроскопа щелевой лампы. Врач детально оценивает роговицу, переднюю камеру, хрусталик, стекловидное тело и глубокие ткани глаза.",
-
-          "gallery.modal.11.title": "АМО-АТОС + АМБЛИО-1",
-          "gallery.modal.11.badge": "Магнитотерапия и фотостимуляция",
-          "gallery.modal.11.desc": "Комбинированная магнитотерапия с фотостимуляцией. Бегущее реверсивное магнитное поле в сочетании с бегущим световым импульсом приставки «АМБЛИО-1» оказывает сосудорасширяющее, спазмолитическое и противоотечное действие, улучшая трофику тканей при спазме аккомодации и амблиопии.",
-
-
-          "reviews.title": "Отзывы наших пациентов",
-          "reviews.subtitle": "Нам доверяют самое ценное — зрение детей и родителей",
-          "review.1.text": "Привела дочку на диагностику косоглазия. Фаридун Саидакбарович нашел подход к ребёнку с первой минуты! После курса аппаратного лечения видим отличную динамику.",
-          "review.1.author": "Мать 4-летней пациентки, Самарканд",
-          "review.2.text": "Искали клинику для скрининга ретинопатии после перинатального центра. Lumivis — единственное место в городе с нужным опытом и оборудованием. Огромное спасибо врачам!",
-          "review.2.author": "Семья пациента из Самарканда",
-          // СУБЪЕКТИВНЫЙ ОТЗЫВ ПАЦИЕНТА — оставляем как есть (мнение пациента, не заявление клиники),
-          // но если хотите быть осторожными — можно смягчить до «Одна из лучших офтальмологических клиник в Самарканде»
-          "review.3.text": "Проходил проверку зрения и подбор очков. Профессионализм, чистота и отсутствие очередей. Лучшая офтальмологическая клиника в Самарканде.",
-          "review.3.author": "А. К., Самарканд, 42 года",
-          "review.3.verified": "Подтверждённый визит",
-
-          "videos.title": "Результаты лечения и видеообзор",
-          "videos.subtitle": "Посмотрите, как меняется качество жизни и взгляд наших пациентов после терапевтических курсов",
-          "videos.disclaimer": "Результаты индивидуальны и зависят от состояния зрения. Подробности расскажет врач на первичной консультации.",
-          "videos.play_label": "Смотреть видео",
-          "videos.1.title": "Комплексное обследование и компьютерная диагностика зрения",
-          "videos.2.title": "Детский приём: комфортная диагностика без страха",
-          "videos.3.title": "Аппаратное лечение косоглазия и амблиопии в действии",
-          "videos.4.title": "Обзор оснащения и кабинетов клиники Lumivis",
-          "videos.5.title": "Консультация офтальмолога и забота о пациенте",
-
-          "map.title": "Контакты и расположение",
-          "map.facade.title": "Клиника Lumivis на карте",
-          "map.facade.btn": "Показать карту",
-          "map.address.label": "Наш адрес",
-          "map.address": "г. Самарканд, улица Рудаки, 217",
-          "map.hours.label": "Режим работы",
-          "map.hours": "Понедельник–Суббота: 09:00–17:00 (Воскресенье — выходной)",
-          "map.phone.label": "Телефон для записи",
-          "map.route": "Построить маршрут на карте",
-
-          "prosthetics.title": "Результаты глазного протезирования",
-          "prosthetics.subtitle": "До и после индивидуального изготовления и подбора глазного протеза по форме и цвету",
-          "prosthetics.before": "ДО",
-          "prosthetics.after": "ПОСЛЕ",
-          "prosthetics.placeholder.before": "Фото до протезирования",
-          "prosthetics.placeholder.after": "Фото после протезирования",
-          "prosthetics.case1.title": "Кейс 01 — Субатрофия глазного яблока",
-          "prosthetics.case1.desc": "Индивидуальный тонкостенный протез со точным повторением рисунка радужки здорового глаза",
-          "prosthetics.case2.title": "Кейс 02 — Посттравматический анофтальм",
-          "prosthetics.case2.desc": "Восстановление симметрии глазной щели и естественного объёма конъюнктивальной полости",
-          "prosthetics.case3.title": "Кейс 03 — Врождённая микрофтальмия",
-          "prosthetics.case3.desc": "Ступенчатое протезирование для стимуляции роста орбиты у ребенка",
-          "prosthetics.case4.title": "Кейс 04 — Коррекция формы и посадки",
-          "prosthetics.case4.desc": "Изготовление сложного слоистого протеза с высокой подвижностью",
-          "prosthetics.case5.title": "Кейс 05 — Подбор цвета и склеры",
-          "prosthetics.case5.desc": "Ручная роспись радужки с имитацией сосудистого рисунка склеры",
-          "prosthetics.case6.title": "Кейс 06 — Косметическая реабилитация",
-          "prosthetics.case6.desc": "Полное возвращение уверенности и эстетической гармонии взгляда",
-
-          "footer.tagline": "Современная офтальмологическая клиника в Самарканде. Скрининг ретинопатии недоношенных, диагностика и лечение зрения у детей и взрослых, индивидуальное глазное протезирование.",
-          "footer.nav.title": "Навигация по сайту",
-          "footer.contact.title": "Контакты клиники",
-          "footer.booking.title": "Записаться на приём",
-          "footer.name.placeholder": "Ваше имя",
-          "footer.phone.placeholder": "Ваш номер телефона",
-          "footer.submit": "Отправить заявку",
-          "footer.copyright": "© 2025–2026 Офтальмологическая клиника Lumivis. Все права защищены.",
-          "footer.privacy.link": "Политика конфиденциальности",
-          "footer.consent.text": "Я согласен(на) на обработку указанных персональных данных (имя и телефон) в целях записи на приём и связи со мной как с пациентом клиники Lumivis. Данные не передаются третьим лицам и не используются в рекламных целях. Подробнее:",
-          "footer.consent.link": "Политика конфиденциальности",
-        },
-
-        en: {
-          "meta.title": "Lumivis — Eye Clinic in Samarkand | ROP Screening & Vision Care",
-          "meta.description": "Lumivis eye clinic in Samarkand: unique ROP screening for infants, advanced diagnostics, strabismus & amblyopia treatment for children and adults.",
-
-          "nav.doctors": "Doctors",
-          "nav.equipment": "Equipment",
-          "nav.services": "Services",
-          "nav.retinopathy": "ROP Screening",
-          "nav.contacts": "Contacts",
-          "nav.reviews": "Reviews",
-          "nav.videos": "Results",
-
-          "header.hours": "Mon–Sat 09:00–17:00",
-          "header.cta": "Book Appointment",
-
-          // ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ (EN hero badge): same as ru hero.badge — confirm with owner
-          "hero.badge": "The only private ROP screening eye clinic in Samarkand",
-          "hero.h1": "Protecting your family's eyesight with expert medical care",
-          "hero.subtitle": "Comprehensive pediatric & adult ophthalmology in Samarkand. Specialized retinopathy of prematurity (ROP) screening, accurate diagnostics, strabismus and amblyopia treatment.",
-          "hero.cta1": "Book a Consultation",
-          "hero.cta2": "Our Services",
-          "hero.stat1.value": "10+",
-          "hero.stat1.label": "years of experience",
-          "hero.stat2.value": "3,000+",
-          "hero.stat2.label": "patients yearly",
-          "hero.stat3.value": "10",
-          "hero.stat3.label": "advanced devices",
-          "hero.doctor.badge": "Dr. Abdurahmonov Faridun Saidakbarovich",
-          "hero.img.alt": "Pediatric ophthalmologist Dr. Abdurahmonov Faridun Saidakbarovich at Lumivis Clinic Samarkand",
-
-          "whyus.title": "Why Families in Samarkand Choose Lumivis",
-          "whyus.subtitle": "Combining advanced ophthalmic technology with compassionate patient care for infants, children, and adults",
-          "whyus.1.title": "Unique ROP Screening in Samarkand",
-          "whyus.1.text": "The only private clinic in the city providing specialized early detection and management of retinopathy of prematurity in newborns.",
-          "whyus.stat.num": "3–6 weeks",
-          "whyus.stat.label": "of life — critical window for a premature infant's first eye exam",
-          "whyus.2.title": "Expert-Grade Equipment",
-          "whyus.2.text": "10 specialized devices from leading global manufacturers for precise vision testing and therapeutic courses.",
-          "whyus.3.title": "Stress-Free Pediatric Appointments",
-          "whyus.3.text": "Child-friendly approach ensuring painless, comfortable examinations without anxiety for young patients and parents.",
-          "whyus.4.title": "Experienced Medical Team",
-          "whyus.4.text": "Ophthalmic surgeons, pediatric eye specialists, and strabismologists with extensive clinical expertise.",
-          "whyus.5.title": "Complete Care Cycle",
-          "whyus.5.text": "From initial digital diagnostic assessment to final treatment recovery supervised by your attending physician.",
-          "whyus.6.title": "Dedicated Outcome Tracking",
-          "whyus.6.text": "Continuous monitoring at every stage of therapy, taking full responsibility for treatment quality.",
-
-          "doctors.title": "Our Medical Experts",
-          "doctors.subtitle": "Specialists with extensive clinical experience in adult and pediatric ophthalmology",
-          "doctor.1.name": "Dr. Boboyev Saidavzal Abdurahmanovich",
-          "doctor.1.spec": "Ophthalmic Surgeon, MD, Associate Professor, Consultant",
-          "doctor.1.alt": "Ophthalmic Surgeon Dr. Boboyev Saidavzal Abdurahmanovich Samarkand",
-          "doctor.2.name": "Dr. Rajabov Sanjar Mansurovich",
-          "doctor.2.spec": "Senior Ophthalmic Surgeon, Cataract Specialist",
-          "doctor.2.alt": "Cataract Specialist Dr. Rajabov Sanjar Mansurovich Samarkand",
-          "doctor.3.name": "Dr. Abdurahmonov Faridun Saidakbarovich",
-          "doctor.3.spec": "Pediatric Ophthalmologist, Oculoplastic Surgeon, Strabismologist",
-          "doctor.3.alt": "Pediatric Ophthalmologist Dr. Abdurahmonov Faridun Saidakbarovich",
-          "doctor.4.name": "Dr. Raupova Parvina Khasanovna",
-          "doctor.4.spec": "Ophthalmologist",
-          "doctor.4.alt": "Ophthalmologist Dr. Raupova Parvina Khasanovna Samarkand",
-          "doctor.5.name": "Dr. Zikirilloyev Abdurasul Nusratilloyevich",
-          "doctor.5.spec": "Ophthalmic Surgeon, Cataract Specialist, Chief Physician",
-          "doctor.5.alt": "Chief Physician Dr. Zikirilloyev Abdurasul Nusratilloyevich",
-          "doctor.6.name": "Dr. Musinov Abduqayum Suyunboyevich",
-          "doctor.6.spec": "Ophthalmologist",
-          "doctor.6.alt": "Ophthalmologist Dr. Musinov Abduqayum Suyunboyevich",
-          "doctor.7.name": "Dr. Musinov Husniddin Suyunboyevich",
-          "doctor.7.spec": "Ocularist",
-          "doctor.7.alt": "Ocularist Dr. Musinov Husniddin Suyunboyevich",
-          "doctor.8.name": "Dr. Boboyev Siyovush Saidavzalzoda",
-          "doctor.8.spec": "Ophthalmic Surgeon, Ph.D, Consultant",
-          "doctor.8.alt": "Ophthalmic Surgeon Dr. Boboyev Siyovush Saidavzalzoda",
-          "doctors.photo.soon": "Photo update coming soon",
-
-          "equipment.title": "Expert Medical Equipment",
-          "equipment.subtitle": "State-of-the-art diagnostic and device-based vision therapy systems",
-          "equip.1.name": "Autorefractometer",
-          "equip.1.desc": "High-precision anterior segment biomicroscopy",
-          "equip.1.alt": "Autorefractometer at Lumivis Eye Clinic Samarkand",
-          "equip.2.name": "Labomed Slit Lamp",
-          "equip.2.desc": "High-resolution ophthalmic diagnostic microscope",
-          "equip.2.alt": "Labomed Slit Lamp Samarkand",
-          "equip.3.name": "Ophthalmic Biomicroscope",
-          "equip.3.desc": "Detailed layer-by-layer ocular structure examination",
-          "equip.3.alt": "Ophthalmic biomicroscope for eye exams",
-          "equip.4.name": "Synoptophore",
-          "equip.4.desc": "Device-based strabismus treatment and binocular vision development",
-          "equip.4.alt": "Synoptophore strabismus treatment device for children in Samarkand",
-          "equip.5.name": "Rucheyok Device",
-          "equip.5.desc": "Accommodation training and amblyopia treatment",
-          "equip.5.alt": "Rucheyok visual training device for children",
-          "equip.6.name": "Accommodometer",
-          "equip.6.desc": "Precise evaluation of ocular accommodation flexibility",
-          "equip.6.alt": "Accommodometer for visual focus testing",
-          "equip.7.name": "AMO-ATOS Magnetotherapy System",
-          "equip.7.desc": "Magnetic therapy for ocular inflammation and accommodation spasm",
-          "equip.7.alt": "AMO-ATOS magnetic therapy system for eyes",
-          "equip.8.name": "Gezatone Physiotherapy Unit",
-          "equip.8.desc": "Targeted ocular physiotherapy stimulation",
-          "equip.8.alt": "Gezatone ocular physiotherapy unit",
-          "equip.9.name": "Mocular Medical Diagnostic Device",
-          "equip.9.desc": "Portable digital system for comprehensive vision diagnostics",
-          "equip.9.alt": "Mocular Medical diagnostic device at Lumivis Clinic Samarkand",
-          "equip.10.name": "Huvitz Non-Contact Tono/Pachymeter",
-          "equip.10.desc": "Non-contact measurement of intraocular pressure and corneal thickness",
-          "equip.10.alt": "Huvitz non-contact tono/pachymeter at Lumivis Eye Clinic Samarkand",
-
-          "services.title": "Ophthalmology Services",
-          "services.subtitle": "Complete vision care for all age groups: from newborns to seniors",
-          "services.cta": "Book",
-          "services.1.title": "Comprehensive Vision Diagnostics",
-          "services.1.text": "Autorefractometry, biomicroscopy, intraocular pressure measurement, and perimetry in one visit.",
-          "services.2.title": "Retinopathy of Prematurity (ROP)",
-          "services.2.text": "Specialized ROP screening, monitoring, and treatment for premature babies from the first weeks of life.",
-          "services.3.title": "Strabismus Treatment",
-          "services.3.text": "Non-surgical device-based therapy and surgical strabismus correction for children and adults.",
-          "services.4.title": "Amblyopia Therapy ('Lazy Eye')",
-          "services.4.text": "Pleoptic and device-assisted visual acuity restoration with personalized tracking.",
-          "services.5.title": "Pediatric Ophthalmology",
-          "services.5.text": "Gentle, painless vision screening and treatment for infants, toddlers, and school children.",
-          "services.6.title": "Glasses & Contact Lenses",
-          "services.6.text": "Precision optical prescription for astigmatism, progressive, and corrective lenses.",
-          "services.7.title": "Dry Eye Syndrome",
-          "services.7.text": "Tear film analysis and targeted therapy for chronic eye dryness and fatigue.",
-          "services.8.title": "Lacrimal Duct Flushing",
-          "services.8.text": "Safe treatment of nasolacrimal duct obstruction for newborns and adults.",
-          "services.9.title": "Individual Ocular Prosthetics",
-          "services.9.text": "Selection and adaptation of custom eye prostheses matching the shape and color of the healthy eye.",
-          "services.bottom.text": "Need advice on a specialized eye condition?",
-          "services.bottom.cta": "Book an Appointment",
-          "services.rn_img.alt": "Pediatric ophthalmologist examining child's vision in Samarkand",
-
-          "rn.badge": "Unique Expertise in Samarkand",
-          "rn.title": "The only private clinic in Samarkand screening and managing Retinopathy of Prematurity",
-          "rn.text": "Retinopathy of Prematurity (ROP) is a serious retinal vessel disorder affecting preterm infants. Without timely detection, it can rapidly progress to irreversible vision loss.",
-          "rn.text2": "The critical diagnostic window is 3 to 6 weeks after birth. Our clinic is equipped with specialized instrumentation and medical expertise for gentle, prompt infant care.",
-          "rn.cta": "Book ROP Infant Screening",
-          "rn.fact1.label": "weeks — optimal window<br>for first eye exam",
-          "rn.fact2.label": "clinic in the city<br>provides ROP screening",
-          "rn.img.alt": "Ophthalmic examination of a newborn baby for retinopathy at Lumivis Clinic Samarkand",
-
-          "rn.modal.trigger": "Learn more about ROP",
-          "rn.modal.title": "Retinopathy of Prematurity (ROP)",
-          "rn.modal.subtitle": "Official Medical Information Brochure by Lumivis Clinic",
-          "rn.modal.p1_title": "What is Retinopathy of Prematurity?",
-          "rn.modal.p1_text": "ROP (Retinopathy of Prematurity) is a severe eye disorder in premature infants caused by an avascular (bloodless) zone of the retina and abnormal vessel growth (fibrovascular proliferation), which can lead to retinal detachment and permanent visual disability.",
-          "rn.modal.p2_title": "Retinal Vascular Timeline",
-          "rn.modal.p2_text": "Normally in a fetus, retinal blood vessels begin to develop from 12–16 weeks of gestation, continuing until 38–40 weeks.",
-          "rn.modal.p3_title": "Pathology Mechanism",
-          "rn.modal.p3_text": "Disruption of normal vessel development leads to tortuosity and formation of abnormal new vessels at the demarcation line between vascular and avascular retina. This causes fibrovascular tissue growth toward the anterior segment, resulting in retinal traction and detachment.",
-          "rn.modal.p4_title": "Critical Observation Window & Screening",
-          "rn.modal.p4_text": "ROP is one of the most common complications in premature babies. It primarily develops between 5–15 weeks after birth, during which expert pediatric eye examination is mandatory.",
-          "rn.modal.p5_title": "Stages & Consequences",
-          "rn.modal.p5_text": "The disease progresses through 5 stages. Without timely treatment, it can result in lifelong irreversible blindness. Screening continues for 4–5 months.",
-          "rn.modal.p6_title": "VEGF Factor",
-          "rn.modal.p6_text": "Neovascularization is driven by VEGF (Vascular Endothelial Growth Factor), produced by the hypoxic retinal tissue.",
-          "rn.modal.risk_title": "Risk Group Factors:",
-          "rn.modal.risk_1": "Birth weight under 2000g;",
-          "rn.modal.risk_2": "Gestational age less than 35 weeks;",
-          "rn.modal.risk_3": "Intrauterine growth restriction (IUGR);",
-          "rn.modal.risk_4": "Prolonged oxygen therapy;",
-          "rn.modal.risk_5": "Multiple pregnancy.",
-          "rn.modal.diagram_caption": "Diagram: Comparison of a healthy retina and a retina with ROP",
-          "rn.modal.treatment_title": "Treatment:",
-          "rn.modal.treatment_text": "The primary intervention to preserve vision is Anti-VEGF therapy (intravitreal injection to halt abnormal vessel growth) during the early stages of the disease.",
-          "rn.modal.closing": "Do not remain indifferent to your child's sight — every child deserves the right to see the light of the world!",
-          "rn.modal.book": "Book ROP Screening",
-          "rn.modal.close": "Close",
-
-          "gallery.title": "Your Experience at Lumivis",
-          "gallery.subtitle": "A calm, modern environment with compassionate care for every patient",
-          "gallery.1.alt": "Pediatric vision examination process at Lumivis Clinic Samarkand",
-          "gallery.2.alt": "Child eye testing using modern ophthalmic equipment",
-          "gallery.3.alt": "Ophthalmologist examining a patient in the consultation room",
-          "gallery.4.alt": "Detailed slit lamp examination of ocular structures",
-          "gallery.5.alt": "Adult patient eye consultation in Samarkand",
-          "gallery.6.alt": "Ophthalmic surgeon consultation at Lumivis Clinic",
-          "gallery.7.alt": "Comprehensive visual function assessment",
-          "gallery.8.alt": "AMO-ATOS magnetotherapy procedure",
-          "gallery.9.alt": "Rucheyok vision training apparatus",
-          "gallery.10.alt": "Gezatone light and magnetotherapy glasses",
-          "gallery.11.alt": "Retinal laser stimulation treatment",
-
-          "gallery.modal.card_title": "Description & Purpose:",
-          "gallery.modal.subtitle": "Lumivis Clinic Procedure Details",
-          "gallery.modal.book": "Book Procedure",
-          "gallery.modal.close": "Close",
-
-          "gallery.modal.1.title": "Computerized Pleoptics",
-          "gallery.modal.1.badge": "Pleoptic Therapy",
-          "gallery.modal.1.desc": "Interactive software programs ('Crosses', 'Spider', 'Contour') designed to treat amblyopia ('lazy eye') and restore binocular vision. The engaging game-like format makes therapy stress-free for children of all ages.",
-
-          "gallery.modal.2.title": "Autorefractokeratometry",
-          "gallery.modal.2.badge": "Computer Diagnostics",
-          "gallery.modal.2.desc": "High-precision computer evaluation of ocular refraction and corneal curvature using the Huvitz diagnostic system. Provides instant, non-contact detection of myopia, hyperopia, and astigmatism even in young pediatric patients.",
-
-          "gallery.modal.3.title": "AKA-01 Apparatus (Accommodation Assessment #1)",
-          "gallery.modal.3.badge": "Accommodation Diagnostics",
-          "gallery.modal.3.desc": "Automated AKA-01 diagnostic complex for objective evaluation of absolute and relative accommodation reserves. Measures ciliary muscle stamina and detects focal spasm caused by intense screen or reading fatigue.",
-
-          "gallery.modal.4.title": "Ocular Vibromassage (Gezatone)",
-          "gallery.modal.4.badge": "Physiotherapy & Relaxation",
-          "gallery.modal.4.desc": "Delicate pneumatic and vibrational massage of the periorbital area using Gezatone therapeutic goggles with gentle infrared warming. Relieves accommodation spasm, eliminates digital eye strain, and enhances microcirculation.",
-
-          "gallery.modal.5.title": "AKA-01 Apparatus (Accommodation Dynamics #2)",
-          "gallery.modal.5.badge": "Treatment Monitoring",
-          "gallery.modal.5.desc": "Assessment of dynamic focal characteristics and ciliary muscle endurance during device-based therapy. Enables the attending specialist to monitor individual treatment progress with high accuracy.",
-
-          "gallery.modal.6.title": "Rucheyok Accommodation Trainer",
-          "gallery.modal.6.badge": "Device-Based Training",
-          "gallery.modal.6.desc": "Specialized ophthalmic trainer designed to stimulate visual accommodation. Light stimuli sequentially shift across varying distances, exercising the ciliary muscle to improve focal reserves and slow myopia progression.",
-
-          "gallery.modal.7.title": "Synoptophore",
-          "gallery.modal.7.badge": "Orthoptic Strabismus Therapy",
-          "gallery.modal.7.desc": "The primary orthoptic instrument for strabismus evaluation and treatment, developing binocular and stereoscopic vision. Separates visual fields for each eye, training the brain to merge dual images into a unified 3D perception.",
-
-          "gallery.modal.8.title": "Macular Laser Stimulation ('Speckle-M')",
-          "gallery.modal.8.badge": "Laser-Optical Stimulation",
-          "gallery.modal.8.desc": "Laser and LED stimulation of the central macular retina using a dynamic red speckle pattern. Highly effective for amblyopia of various etiologies, retinal dystrophies, and optic nerve fatigue.",
-
-          "gallery.modal.9.title": "Anterior Segment Examination",
-          "gallery.modal.9.badge": "Primary Focal Exam",
-          "gallery.modal.9.desc": "Detailed focal examination of the cornea, conjunctiva, iris, and crystalline lens using focused side lighting. Enables the ophthalmologist to detect micro-trauma, inflammatory signs, and structural anomalies.",
-
-          "gallery.modal.10.title": "Biomicroscopy (Slit Lamp)",
-          "gallery.modal.10.badge": "Microscopic Diagnostics",
-          "gallery.modal.10.desc": "Non-contact examination of optical media and deep ocular structures under high magnification using a slit lamp stereomicroscope. Allows meticulous assessment of the cornea, anterior chamber, lens, and vitreous.",
-
-          "gallery.modal.11.title": "AMO-ATOS + AMBLIO-1",
-          "gallery.modal.11.badge": "Magnetotherapy & Photostimulation",
-          "gallery.modal.11.desc": "Combined magnetotherapy with photostimulation. A running magnetic field paired with the 'AMBLIO-1' light-pulse attachment provides vasodilating, spasmolytic, and anti-edema action, enhancing tissue nutrition in accommodation spasm and amblyopia.",
-
-
-          "reviews.title": "Patient Testimonials",
-          "reviews.subtitle": "Trusted by families across Samarkand for their vision health",
-          "review.1.text": "Brought my daughter for strabismus diagnostics. Dr. Abdurahmonov established instant trust with her! After our therapy course, her vision improvement is remarkable.",
-          "review.1.author": "Mother of a 4-year-old patient, Samarkand",
-          "review.2.text": "Searched everywhere for ROP infant screening after leaving the perinatal hospital. Lumivis is the only clinic in Samarkand with the right equipment and doctors.",
-          "review.2.author": "Patient family from Samarkand",
-          "review.3.text": "Visited for a routine vision check and prescription glasses. Highly professional staff, pristine clinic environment, and no waiting line.",
-          "review.3.author": "A. K., Samarkand, 42 years old",
-          "review.3.verified": "Verified Patient",
-
-          "videos.title": "Treatment Outcomes & Clinic Overview",
-          "videos.subtitle": "See how visual health and clarity improve after our therapeutic courses",
-          "videos.disclaimer": "Individual results may vary based on specific conditions. Details are discussed during your initial consultation.",
-          "videos.play_label": "Watch Video",
-          "videos.1.title": "Comprehensive Ocular Examination & Diagnostic Process",
-          "videos.2.title": "Pediatric Care: Stress-Free Examination for Children",
-          "videos.3.title": "Device-Based Strabismus & Amblyopia Therapy in Action",
-          "videos.4.title": "Lumivis Clinic Facilities & Equipment Tour",
-          "videos.5.title": "Ophthalmologist Consultation & Patient Care",
-
-          "map.title": "Location & Contacts",
-          "map.facade.title": "Lumivis Clinic on Map",
-          "map.facade.btn": "Show Interactive Map",
-          "map.address.label": "Our Address",
-          "map.address": "Samarkand, Rudakiy street, 217",
-          "map.hours.label": "Working Hours",
-          "map.hours": "Monday–Saturday: 09:00–17:00 (Sunday: Closed)",
-          "map.phone.label": "Booking Phone",
-          "map.route": "Get Map Directions",
-
-          "prosthetics.title": "Ocular Prosthetics Results",
-          "prosthetics.subtitle": "Before and after custom ocular prosthesis fitting matching eye shape, size, and iris color",
-          "prosthetics.before": "BEFORE",
-          "prosthetics.after": "AFTER",
-          "prosthetics.placeholder.before": "Photo before fitting",
-          "prosthetics.placeholder.after": "Photo after fitting",
-          "prosthetics.case1.title": "Case 01 — Ocular Subatrophy",
-          "prosthetics.case1.desc": "Custom thin-walled prosthesis with precise replication of the healthy eye iris pattern",
-          "prosthetics.case2.title": "Case 02 — Post-Traumatic Anophthalmos",
-          "prosthetics.case2.desc": "Restoration of palpebral fissure symmetry and natural conjunctival cavity volume",
-          "prosthetics.case3.title": "Case 03 — Congenital Microphthalmia",
-          "prosthetics.case3.desc": "Staged prosthetic fitting to stimulate orbital growth in children",
-          "prosthetics.case4.title": "Case 04 — Shape & Fitting Correction",
-          "prosthetics.case4.desc": "Fabrication of a complex layered prosthesis with high motility",
-          "prosthetics.case5.title": "Case 05 — Color & Sclera Matching",
-          "prosthetics.case5.desc": "Hand-painted iris with realistic simulation of scleral vascular patterns",
-          "prosthetics.case6.title": "Case 06 — Cosmetic Rehabilitation",
-          "prosthetics.case6.desc": "Complete restoration of confidence and aesthetic visual harmony",
-
-          "footer.tagline": "Modern ophthalmology clinic in Samarkand. Specialized ROP screening, vision diagnostics and treatment for children and adults, custom ocular prosthetics.",
-          "footer.nav.title": "Navigation",
-          "footer.contact.title": "Clinic Contacts",
-          "footer.booking.title": "Book an Appointment",
-          "footer.name.placeholder": "Your Name",
-          "footer.phone.placeholder": "Phone Number",
-          "footer.submit": "Submit Request",
-          "footer.copyright": "© 2025–2026 Lumivis Ophthalmology Clinic. All rights reserved.",
-          "footer.privacy.link": "Privacy Policy",
-          "footer.consent.text": "I consent to the processing of the provided personal data (name and phone number) for the purpose of booking an appointment and being contacted as a patient of Lumivis clinic. Data is not shared with third parties or used for marketing purposes. Learn more:",
-          "footer.consent.link": "Privacy Policy",
-        },
-
-        uz: {
-          "meta.title": "Lumivis — Samarqanddagi ko'z klinikasi | RN skriningi va ko'rishni davolash",
-          "meta.description": "Samarqanddagi Lumivis ko'z klinikasi: chala tug'ilgan chaqaloqlar RN skriningi, bolalar va kattalar ko'rish qobiliyatini aniq diagnostika va davolash.",
-
-          "nav.doctors": "Shifokorlar",
-          "nav.equipment": "Jihozlar",
-          "nav.services": "Xizmatlar",
-          "nav.retinopathy": "RN skrining",
-          "nav.contacts": "Aloqa",
-          "nav.reviews": "Sharhlar",
-          "nav.videos": "Natijalar",
-
-          "header.hours": "Du–Shan 09:00–17:00",
-          "header.cta": "Qabulga yozilish",
-
-          "hero.badge": "Samarqandda RN‑skrining bo'yicha yagona xususiy klinika",
-          "hero.h1": "Hayotdagi birinchi nazar — ekspertlarimiz g'amxo'rligida",
-          "hero.subtitle": "Samarqandda bolalar va kattalar ko'rish qobiliyatini asraymiz. Chala tug'ilgan chaqaloqlar retinopatiyasi skriningi, aniq diagnostika hamda g'ilaylikni apparatli va jarrohlik davolash.",
-          "hero.cta1": "Konsultatsiyaga yozilish",
-          "hero.cta2": "Xizmatlarimiz",
-          "hero.stat1.value": "10+",
-          "hero.stat1.label": "yillik tajriba",
-          "hero.stat2.value": "3 000+",
-          "hero.stat2.label": "yillik bemorlar",
-          "hero.stat3.value": "10",
-          "hero.stat3.label": "zamonaviy apparat",
-          "hero.doctor.badge": "Dr. Abdurahmonov Faridun Saidakbarovich",
-          "hero.img.alt": "Bolalar oftalmologi Abdurahmonov Faridun Saidakbarovich — Lumivis klinikasi Samarqand",
-
-          "whyus.title": "Nima uchun Samarqand oilalari Lumivisni tanlaydi",
-          "whyus.subtitle": "Biz yuksak tibbiy standartlarni har bir bemorga — chaqaloqlardan tortib nuroniylargacha bo'lgan g'amxo'rlik bilan birga olib boramiz",
-          "whyus.1.title": "Samarqandda yagona RN-skrining",
-          "whyus.1.text": "Shaharda chala tug'ilgan chaqaloqlar retinopatiyasini erta aniqlash va kuzatishni amalga oshiradigan yagona xususiy klinika.",
-          "whyus.stat.num": "3–6 hafta",
-          "whyus.stat.label": "chaqaloqlarda birinchi ko'rik uchun eng maqbul muddat",
-          "whyus.2.title": "Ekspert darajasidagi jihozlar",
-          "whyus.2.text": "Aniq diagnostika va apparatli davolash kurslari uchun dunyoning yetakchi brendlaridan 10 ta apparat.",
-          "whyus.3.title": "Bolalarda stresssiz va og'riqsiz qabul",
-          "whyus.3.text": "Kichik bemorlarga ehtiyotkor yondashuv: tekshiruv og'riqsiz, tinch va qulay muhitda o'tadi.",
-          "whyus.4.title": "Malakali shifokorlar jamoasi",
-          "whyus.4.text": "Ko'p yillik tajribaga va muntazam malaka oshirish sertifikatlariga ega oftalmoxirurg va bolalar shifokorlari.",
-          "whyus.5.title": "To'liq davolash sikli",
-          "whyus.5.text": "Dastlabki kompyuter diagnostikasidan boshlab ko'rish tiklangunicha — bir shifokor nazoratida.",
-          "whyus.6.title": "Natijalarni doimiy nazorat qilish",
-          "whyus.6.text": "Davolashning har bir bosqichida dinamikani kuzatamiz va natijalar uchun mas'uliyat olamiz.",
-
-          "doctors.title": "Bizning shifokorlarimiz",
-          "doctors.subtitle": "Bolalar va kattalar oftalmologiyasida ko'p yillik tajribaga ega mutaxassislar",
-          "doctor.1.name": "Boboyev Saidavzal Abdurahmanovich",
-          "doctor.1.spec": "Oftalmoxirurg, oliy toifali vrach, t.f.n., dotsent, Lumivis konsultanti",
-          "doctor.1.alt": "Oftalmoxirurg Boboyev Saidavzal Abdurahmanovich Samarqand",
-          "doctor.2.name": "Rajabov Sanjar Mansurovich",
-          "doctor.2.spec": "Oliy toifali vrach, oftalmoxirurg, kataraktolog",
-          "doctor.2.alt": "Kataraktolog Rajabov Sanjar Mansurovich Samarqand",
-          "doctor.3.name": "Abdurahmonov Faridun Saidakbarovich",
-          "doctor.3.spec": "Bolalar oftalmologi, okuloplastik jarroh, strabizmolog",
-          "doctor.3.alt": "Bolalar oftalmologi Abdurahmonov Faridun Saidakbarovich",
-          "doctor.4.name": "Raupova Parvina Xasanovna",
-          "doctor.4.spec": "Vrach-okulist",
-          "doctor.4.alt": "Vrach-okulist Raupova Parvina Xasanovna Samarqand",
-          "doctor.5.name": "Zikirilloyev Abdurasul Nusratilloyevich",
-          "doctor.5.spec": "Vrach-oftalmoxirurg-kataraktolog, klinika bosh shifokori",
-          "doctor.5.alt": "Bosh shifokor Zikirilloyev Abdurasul Nusratilloyevich",
-          "doctor.6.name": "Mo‘sinov Abduqayum Suyunboyevich",
-          "doctor.6.spec": "Vrach-okulist",
-          "doctor.6.alt": "Vrach-okulist Mo‘sinov Abduqayum Suyunboyevich",
-          "doctor.7.name": "Mo‘sinov Husniddin Suyunboyevich",
-          "doctor.7.spec": "Okularist",
-          "doctor.7.alt": "Okularist Mo‘sinov Husniddin Suyunboyevich",
-          "doctor.8.name": "Boboyev Siyovush Saidavzalzoda",
-          "doctor.8.spec": "Oftalmoxirurg, Ph.D, Lumivis konsultanti",
-          "doctor.8.alt": "Oftalmoxirurg Boboyev Siyovush Saidavzalzoda",
-          "doctors.photo.soon": "Rasm tez orada",
-
-          "equipment.title": "Ekspert darajasidagi jihozlar",
-          "equipment.subtitle": "Aniq diagnostika va samarali apparatli davolash uchun zamonaviy apparatlar",
-          "equip.1.name": "Avtorefkeratometr",
-          "equip.1.desc": "Ko'z oldi segmentining aniq biomikroskopiyasi",
-          "equip.1.alt": "Avtorefkeratometr Lumivis klinikasi Samarqand",
-          "equip.2.name": "Labomed tirqishli lampasi",
-          "equip.2.desc": "Yuqori aniqlikdagi diagnostik mikroskop",
-          "equip.2.alt": "Labomed tirqishli lampasi Samarqand",
-          "equip.3.name": "Oftalmologik biomikroskop",
-          "equip.3.desc": "Ko'z tuzilmalarini batafsil ko'rikdan o'tkazish",
-          "equip.3.alt": "Oftalmologik biomikroskop diagnostika uchun",
-          "equip.4.name": "Sinoptofor",
-          "equip.4.desc": "G'ilaylikni apparatli davolash va binokulyar ko'rishni rivojlantirish",
-          "equip.4.alt": "Sinoptofor — bolalarda g'ilaylikni davolash apparati Samarqand",
-          "equip.5.name": "«Rucheyok» apparati",
-          "equip.5.desc": "Akkomodatsiyani mashq qildirish va ambliopiyani davolash",
-          "equip.5.alt": "Rucheyok apparati bolalar ko'rishini mashq qildirish",
-          "equip.6.name": "Akkomodometr",
-          "equip.6.desc": "Ko'z akkomodatsiyasi zaxirasini aniq baholash",
-          "equip.6.alt": "Akkomodometr ko'z fokusini tekshirish",
-          "equip.7.name": "AMO-ATOS apparati",
-          "equip.7.desc": "Yallig'lanish va akkomodatsiya spazmida magnitoterapiya",
-          "equip.7.alt": "AMO-ATOS magnitoterapiya apparati",
-          "equip.8.name": "Gezatone apparati",
-          "equip.8.desc": "Ko'rish a'zolarini fizioterapevtik rag'batlantirish",
-          "equip.8.alt": "Gezatone fizioterapya apparati",
-          "equip.9.name": "Mocular Medical diagnostika apparati",
-          "equip.9.desc": "Ko'rish qobiliyatini kompleks diagnostika qilish uchun portativ raqamli apparat",
-          "equip.9.alt": "Lumivis Samarqand klinikasida Mocular Medical diagnostika apparati",
-          "equip.10.name": "Huvitz kontaktsiz tonometr-paximetri",
-          "equip.10.desc": "Ko'z bosimi va shaffof parda qalinligini kontaktsiz o'lchash",
-          "equip.10.alt": "Lumivis Samarqand oftalmologiya klinikasida Huvitz kontaktsiz tonometr-paximetri",
-
-          "services.title": "Oftalmologiya xizmatlari",
-          "services.subtitle": "Butun oila uchun kompleks yordam: chaqaloqlardan kattalargacha",
-          "services.cta": "Yozilish",
-          "services.1.title": "Kompleks ko'rish diagnostikasi",
-          "services.1.text": "Avtorefraktometriya, biomikroskopiya, ko'z bosimini o'lchash va perimetriya — bir tashrifda.",
-          "services.2.title": "Chala tug'ilganlar retinopatiyasi (RN)",
-          "services.2.text": "Chala tug'ilgan chaqaloqlarni hayotning birinchi haftalaridan RN skriningi va kuzatish.",
-          "services.3.title": "G'ilaylikni (qiyshayishni) davolash",
-          "services.3.text": "Bolalar va kattalarda g'ilaylikni apparatli va jarrohlik usulida tuzatish.",
-          "services.4.title": "Ambliopiyani davolash ('Yalqov ko'z')",
-          "services.4.text": "Individual treking bilan ko'rish otkirligini apparatli va pleoptik tiklash.",
-          "services.5.title": "Bolalar oftalmologiyasi",
-          "services.5.text": "Chaqaloqlar va maktab o'quvchilarida ko'rishni og'riqsiz va stresssiz tekshirish.",
-          "services.6.title": "Ko'zoynak va linzalar tanlash",
-          "services.6.text": "Astigmatizm va murakkab optika uchun ko'zoynak va linzalarni aniq tanlash.",
-          "services.7.title": "Quruq ko'z sindromi",
-          "services.7.text": "Ko'z yoshi pardasini diagnostika qilish va quruqlikni kompleks davolash.",
-          "services.8.title": "Ko'z yoshi yo'llarini yuvish",
-          "services.8.text": "Yangi tug'ilgan chaqaloqlarda va kattalarda ko'z yoshi yo'li o'tkazmasligini xavfsiz davolash.",
-          "services.9.title": "Individual ko'z protezlash",
-          "services.9.text": "Jarohat, kasallik yoki tug'ma patologiyadan so'ng sog'lom ko'z shakli va rangiga mos individual ko'z protezini tanlash va moslashtirish.",
-          "services.bottom.text": "Individual holat bo'yicha maslahat kerakmi?",
-          "services.bottom.cta": "Qabulga yozilish",
-          "services.rn_img.alt": "Bolalar ko'z shifokori Samarqandda bolani ko'rikdan o'tkazmoqda",
-
-          "rn.badge": "Samarqandda noyob kompetensiya",
-          "rn.title": "Samarqandda chaqaloqlar retinopathiyasini aniqlaydigan va davolaydigan yagona xususiy klinika",
-          "rn.text": "Chala tug'ilganlar retinopatiyasi (RN) — vaqtidan oldin tug'ilgan chaqaloqlarda to'r parda tomirlarining xavfli patologiyasi. O'z vaqtida yordam ko'rsatilsa, ko'rish yo'qolishining oldi olinadi.",
-          "rn.text2": "Tekshiruv uchun eng muhim muddat hayotning 3–6-haftasidir. Klinikamiz chaqaloqlarni xavfsiz ko'rikdan o'tkazish uchun barcha modern apparatlar bilan ta'minlangan.",
-          "rn.cta": "Bolani RN-skriningga yozish",
-          "rn.fact1.label": "hafta — birinchi ko'rik uchun<br>maqbul muddat",
-          "rn.fact2.label": "shahar klinikasida<br>RN-skrining o'tkaziladi",
-          "rn.img.alt": "Yangi tug'ilgan chaqaloqni retinopatiya bo'yicha oftalmologik ko'rigi Lumivis klinikasi Samarqand",
-
-          "rn.modal.trigger": "RN haqida batafsil",
-          "rn.modal.title": "Chala tug‘ilgan chaqaloqlar retinopatiyasi (ChTChR)",
-          "rn.modal.subtitle": "Lumivis klinikasining rasmiy tibbiy broshyurasi",
-          "rn.modal.p1_title": "Chala tug‘ilgan chaqaloqlar retinopatiyasi nima?",
-          "rn.modal.p1_text": "ChTChR – chala tug‘ilgan chaqaloqlarda ko‘zning to‘r pardasida avaskulyar (qon tomirlarsiz) zona bo‘lishi hisobiga, qon tomirlarining anormal rivojlanishi (ya'ni, yangi qon tomirlar va fibrovaskulyar to‘qima o‘sishi) natijasida to‘r pardaning ko‘chishiga olib keladigan va uning natijasida ko‘z nogironligi kelib chiqadigan og‘ir kasallik hisoblanadi.",
-          "rn.modal.p2_title": "Qon tomirlar rivojlanish muddatlari",
-          "rn.modal.p2_text": "Normada homilada 12-16 haftalardan boshlab ko‘z to‘r pardasida qon tomirlar rivojlana boshlaydi va bu jarayon 38-40 haftagacha davom etadi.",
-          "rn.modal.p3_title": "Patologiya mexanizmi",
-          "rn.modal.p3_text": "Ko‘zning to‘r pardasida qon tomir normal fiziologik shakllanish jarayonining buzilishi, to‘r pardada qon tomirlarning burmalanishi, tomirli va tomirsiz qismlar o‘rtasida demarkatsion chiziqda yangi qon tomirlar shakllanishiga olib keladi. Bu esa o‘z navbatida ko‘z to‘r pardasining ko‘z oldingi segmenti (gavhar orqa yuzasi) ga qarab fibrovaskulyar to‘qimi o‘sishi va shu hisobdan to‘r parda tortilishi va ko‘chishiga olib kelishi mumkin.",
-          "rn.modal.p4_title": "Xavfli davr va skrining",
-          "rn.modal.p4_text": "Bu kasallik muddatiga yetmay tug‘ilgan chaqaloqlarda ko‘p uchraydigan asoratlardan biri hisoblanadi. Kasallik asosan tug‘ilgandan keyin 5-15 haftalar orasida (shu davrda chaqaloq ko‘z shifokori nazoratida turishi kerak) rivojlanishi mumkin, va shu davrlar orasida chaqaloq ko‘z tubini okulist ko‘rishi shart.",
-          "rn.modal.p5_title": "Bosqichlari va oqibatlari",
-          "rn.modal.p5_text": "Kasallik 5 ta bosqichda kechadi. Bemorga tezkor davolanish va profilaktik chora tadbirlar o‘z vaqtida olib borilmasa, unda bir umrlik qaytmas og‘ir ko‘z nogironligiga olib kelishi mumkin. Skrining 4-5 oy davom etadi.",
-          "rn.modal.p6_title": "VEGF faktori",
-          "rn.modal.p6_text": "Neovaskulyarizatsiyaga sababchi faktor VEGF (Vascular endothelial growth factor-endothelial qon tomir o‘sish omili) gipoksiyaga uchragan to‘r parda to‘qimasi tomonidan ishlab chiqariladi.",
-          "rn.modal.risk_title": "Kasallik xavf guruhiga kiruvchi omillar:",
-          "rn.modal.risk_1": "Og‘irligi 2000g dan kam tug‘ilgan;",
-          "rn.modal.risk_2": "Homila muddati 35 haftadan kichik;",
-          "rn.modal.risk_3": "Homiladorlikda homilaning rivojlanishdan orqada qolishi;",
-          "rn.modal.risk_4": "Chaqaloqning uzoq muddat kislorod qabul qilishi;",
-          "rn.modal.risk_5": "Ko‘p homiladorlik.",
-          "rn.modal.diagram_caption": "Sxema: Sog‘lom ko‘z va ChTChR ko‘z to‘r pardasi taqqoslanishi",
-          "rn.modal.treatment_title": "Davolash:",
-          "rn.modal.treatment_text": "Bemor ko‘rish qobiliyatini saqlashning asosiy zvenosi - kasallik boshlang‘ich fazalarida anti-VEGF terapiya (intravitreal ineksiya-neovaskulyarizatsiyani to‘xtatish) o‘tkazish hisoblanadi.",
-          "rn.modal.closing": "Siz farzandingizni yorug‘ dunyoni ko‘rishiga befarq bo‘lmang, zero u ko‘rishga hamma qatori haqlidir!!!",
-          "rn.modal.book": "RN-skriningga yozilish",
-          "rn.modal.close": "Yopish",
-
-          "gallery.title": "Lumivis klinikasida qabul qanday o me'morda o'tadi",
-          "gallery.subtitle": "Tinch muhit, zamonaviy qulaylik va har bir bemorga e'tibor",
-          "gallery.1.alt": "Bolalar ko'rish diagnostikasi jarayoni Lumivis klinikasi Samarqand",
-          "gallery.2.alt": "Bolaning ko'rishini zamonaviy apparatda tekshirish",
-          "gallery.3.alt": "Shifokor-oftalmolog bemorni qabul xonasida ko'rmoqda",
-          "gallery.4.alt": "Tirqishli lampada ko'z tuzilishini diagnostika qilish",
-          "gallery.5.alt": "Katta yoshli bemor oftalmolog qabulida Samarqand",
-          "gallery.6.alt": "Oftalmoxirurg konsultatsiyasi Lumivis klinikasida",
-          "gallery.7.alt": "Bemorning ko me'moriy ko'rish funktsiyalarini tekshirish",
-          "gallery.8.alt": "AMO-ATOS apparatida magnitoterapiya",
-          "gallery.9.alt": "Rucheyok apparatida ko'rish mashqlari",
-          "gallery.10.alt": "Gezatone ko'zoynaklari bilan nurlar va magnitoterapiya",
-          "gallery.11.alt": "To'r pardani lazer bilan rag'batlantirish",
-
-          "gallery.modal.card_title": "Tavsif va maqsadi:",
-          "gallery.modal.subtitle": "Lumivis klinikasi muolajasi haqida ma'lumot",
-          "gallery.modal.book": "Muolajaga yozilish",
-          "gallery.modal.close": "Yopish",
-
-          "gallery.modal.1.title": "Kompyuterli pleoptika",
-          "gallery.modal.1.badge": "Pleoptik davolash",
-          "gallery.modal.1.desc": "Ambliopiya («tuyg'usiz ko'z»)ni davolash va binokulyar funksiyalarni tiklash uchun mo'ljallangan maxsus kompyuter dasturlari («Krestiki», «Pauчок», «Kontur»). Qiziqarli o'yin shakli bolalar uchun davolashni qulay qiladi.",
-
-          "gallery.modal.2.title": "Avtorefkeratometriya",
-          "gallery.modal.2.badge": "Kompyuter diagnostikasi",
-          "gallery.modal.2.desc": "Huvitz apparatida ko'zning nurlar sindirish qobiliyati (refraksiya) va shox parda egri chizig'ini yuqori aniqlikda diagnostika qilish. Kichik yoshdagi bolalarda ham yaqindan ko'rolmaslik, uzoqni ko'rolmaslik va astigmatizmni lahzada aniqlash imkonini beradi.",
-
-          "gallery.modal.3.title": "AKA-01 apparati (Akkomodatsiya baholash №1)",
-          "gallery.modal.3.badge": "Akkomodatsiya diagnostikasi",
-          "gallery.modal.3.desc": "AKA-01 avtomatlashtirilgan kompleksi ko'zning akkomodatsiya zaxiralarini obyektiv baholash uchun mo'ljallangan. Maktab o'quvchilari va kattalarda ko'z mushaklari zo'riqishi va spazmini aniqlaydi.",
-
-          "gallery.modal.4.title": "Ko'z vibromassaji (Gezatone)",
-          "gallery.modal.4.badge": "Fizioterapiya va relaksatsiya",
-          "gallery.modal.4.desc": "Gezatone ko'zoynaklari yordamida pnevmo va vibromassaj hamda yumshoq infraqizil isitish. Akkomodatsiya spazmini va kompyuter charchoq sindromini samarali yo'qotadi, qon aylanishini yaxshilaydi.",
-
-          "gallery.modal.5.title": "AKA-01 apparati (Akkomodatsiya dinamikasi №2)",
-          "gallery.modal.5.badge": "Davolash nazorati",
-          "gallery.modal.5.desc": "Apparatli terapiya jarayonida ko'z diqqatini jamlash va mushaklar chidamliligi dinamikasini baholash. Vrachga har bir kurs samaradorligini aniq nazorat qilish imkonini beradi.",
-
-          "gallery.modal.6.title": "«Rucheyok» akkomodatsiya trenajori",
-          "gallery.modal.6.badge": "Apparatli mashg'ulot",
-          "gallery.modal.6.desc": "Ko'z akkomodatsiyasini rag'batlantirish uchun maxsus apparat. Yorug'lik signallari ko'zdan har xil masofada ketma-ket almashib, ko'z mushaklarini faol ishlatadi, diqqatni mashq qildiradi va uzoqni ko'rolmaslik rivojlanishini sekinlashtiradi.",
-
-          "gallery.modal.7.title": "Sinoptofor",
-          "gallery.modal.7.badge": "G'ilaylikni ortoptik davolash",
-          "gallery.modal.7.desc": "G'ilaylikni tashxislash va davolash, hamda binokulyar va stereoskopik ko'rishni tiklash uchun asosiy ortoptik apparat. O'ng va chap ko'z ko'rish maydonini ajratib, miyani ikkita tasvirni bitta 3D hajmga biriktirishga o'rgatadi.",
-
-          "gallery.modal.8.title": "Makulastimulyatsiya («Spekl-M»)",
-          "gallery.modal.8.badge": "Lazer-optik rag'batlantirish",
-          "gallery.modal.8.desc": "To'r pardaning makulyar (markaziy) zonasini spekl-tuzilma — qizil nurli impulsli naqsh bilan lazerli rag'batlantirish. Har qanday ambliopiya, to'r parda va ko'ruv nervi distrofiya jarayonlarida yuqori samaraga ega.",
-
-          "gallery.modal.9.title": "Ko'z oldi qismini ko'rikdan o'tkazish",
-          "gallery.modal.9.badge": "Dastlabki fokal ko'rik",
-          "gallery.modal.9.desc": "Yon tomondan yo'naltirilgan fokal yorug'lik yordamida shox parda, konyunktiva, rangdor parda va gavharni batafsil ko'rikdan o'tkazish. Vrachga yallig'lanish belgilari va mikrotravmalarni aniqlash imkonini beradi.",
-
-          "gallery.modal.10.title": "Biomikroskopiya (Tirqishli lampa)",
-          "gallery.modal.10.badge": "Mikroskopik diagnostika",
-          "gallery.modal.10.desc": "Teshikli lampaning stereomikroskopi ostida ko'zning barcha muhitlari va ichki tuzilmalarini kontaktasiz tekshirish. Vrach shox parda, gavhar, shishasimon tana va chuqur to'qimalarni batafsil baholaydi.",
-
-          "gallery.modal.11.title": "AMO-ATOS + AMBLIO-1",
-          "gallery.modal.11.badge": "Magnitoterapiya va fotostimulyatsiya",
-          "gallery.modal.11.desc": "Fotostimulyatsiya bilan birgalikdagi magnitoterapiya. Yuguruvchi reversiv magnit maydon va «AMBLIO-1» moslamasining yorug'lik impulslari tomirlarni kengaytiradi, spazmni yechadi va akkomodatsiya spazmi hamda ambliopiyada to'qimalar oziqlanishini yaxshilaydi.",
-
-
-          "reviews.title": "Bemorlarimiz sharhlari",
-          "reviews.subtitle": "Bizga eng qadrli narsani — bolalar va ota-onalarning ko'rish qobiliyatini ishonishadi",
-          "review.1.text": "Qizimni g'ilaylik diagnostikasiga olib keldim. Shifokor birinchi daqiqadanoq bolaga yondashuv topdi! Apparatli davolashdan keyin ajoyib natija ko'ryapmiz.",
-          "review.1.author": "4 yoshli bemor onasi, Samarqand",
-          "review.2.text": "Tug'ruqxonadan keyin chaqaloqlar retinopatiyasi skriningi uchun klinika qidirdik. Samarqandda faqat Lumivisda kerakli apparat va tajriba bor ekan. Rahmat!",
-          "review.2.author": "Bemor oilasi, Samarqand",
-          "review.3.text": "Ko'rishni tekshirish va ko'zoynak tanlash uchun keldim. Professionallik, tozalik va navbatlarsiz xizmat. Samarqanddagi eng yaxshi ko'z klinikasi.",
-          "review.3.author": "A. K., Samarqand, 42 yosh",
-          "review.3.verified": "Tasdiqlangan tashrif",
-
-          "videos.title": "Davolash natijalari va видео sharhlar",
-          "videos.subtitle": "Davolash kurslaridan so'ng bemorlarimiz ko'rish sifati qanday yaxshilanganini ko'ring",
-          "videos.disclaimer": "Natijalar har bir bemor uchun individual. Tafsilotlarni shifokor dastlabki konsultatsiyada tushuntiradi.",
-          "videos.play_label": "Videoni ko'rish",
-          "videos.1.title": "Kompleks ko'z tekshiruvi va kompyuter diagnostikasi",
-          "videos.2.title": "Bolalar qabuli: stress va qo'rquvsiz qulay diagnostika",
-          "videos.3.title": "G'ilaylik va ambliopiyani apparatli davolash jarayoni",
-          "videos.4.title": "Lumivis klinikasi xonalari va apparatlari sharhi",
-          "videos.5.title": "Oftalmolog konsultatsiyasi va bemorga g'amxo'rlik",
-
-          "map.title": "Manzil va aloqa",
-          "map.facade.title": "Lumivis klinikasi xaritada",
-          "map.facade.btn": "Xaritani ko'rsatish",
-          "map.address.label": "Bizning manzil",
-          "map.address": "Samarqand shahar, Rudakiy ko'chasi, 217",
-          "map.hours.label": "Ish vaqti",
-          "map.hours": "Dushanba–Shanba: 09:00–17:00 (Yakshanba — dam olish kuni)",
-          "map.phone.label": "Yozilish uchun telefon",
-          "map.route": "Xaritada marshrut qurish",
-
-          "prosthetics.title": "Ko'z protezlash natijalari",
-          "prosthetics.subtitle": "Individual ko'z protezini shakli, o'lchami va rangi bo'yicha tanlashdan oldin va keyin",
-          "prosthetics.before": "OLDIN",
-          "prosthetics.after": "KEYIN",
-          "prosthetics.placeholder.before": "Protezlashdan oldingi foto",
-          "prosthetics.placeholder.after": "Protezlashdan keyingi foto",
-          "prosthetics.case1.title": "Keys 01 — Ko'z olmasi subatrofiyasi",
-          "prosthetics.case1.desc": "Sog'lom ko'z kamon pardasi rasmini aniq takrorlaydigan individual yupqa devorli protez",
-          "prosthetics.case2.title": "Keys 02 — Jarohatdan keyingi anoftalm",
-          "prosthetics.case2.desc": "Ko'z tirqishi simmetriyasini va konyunktival bo'shliqning табиий hajmini tiklash",
-          "prosthetics.case3.title": "Keys 03 — Tug'ma mikroftalmiya",
-          "prosthetics.case3.desc": "Bolada orbita o'sishini rag'batlantirish uchun bosqichma-bosqich protezlash",
-          "prosthetics.case4.title": "Keys 04 — Shakl va moslashuv korreksiyasi",
-          "prosthetics.case4.desc": "Yuqori harakatchanlikka ega murakkab qatlamli protez tayyorlash",
-          "prosthetics.case5.title": "Keys 05 — Rang va sklera tanlash",
-          "prosthetics.case5.desc": "Sklera tomirlari rasmini taqlid qilgan holda kamon pardasini qo'lda bo'yash",
-          "prosthetics.case6.title": "Keys 06 — Kosmetik reabilitatsiya",
-          "prosthetics.case6.desc": "Ishonchni va ko'z qarashining estetik uyg'unligini to'liq qaytarish",
-
-          "footer.tagline": "Samarqanddagi zamonaviy ko'z klinikasi. Chala tug'ilganlar retinopatiyasi skriningi, bolalar va kattalar ko'rishini diagnostika va davolash, individual ko'z protezlash.",
-          "footer.nav.title": "Navigatsiya",
-          "footer.contact.title": "Klinika aloqalari",
-          "footer.booking.title": "Qabulga yozilish",
-          "footer.name.placeholder": "Ismingiz",
-          "footer.phone.placeholder": "Telefon raqamingiz",
-          "footer.submit": "Ariza yuborish",
-          "footer.copyright": "© 2025–2026 Lumivis ko'z klinikasi. Barcha huquqlar himoyalangan.",
-          "footer.privacy.link": "Maxfiylik siyosati",
-          "footer.consent.text": "Men Lumivis klinikasining bemorsi sifatida qabul yozilish va men bilan bog'lanish maqsadida ko'rsatilgan shaxsiy ma'lumotlarimni (ism va telefon) qayta ishlashga roziman. Ma'lumotlar uchinchi shaxslarga berilmaydi va reklama maqsadida ishlatilmaydi. Batafsil:",
-          "footer.consent.link": "Maxfiylik siyosati",
-        },
-      };
-
-      (window as any).TRANSLATIONS = TRANSLATIONS;
-
-      type Lang = "ru" | "en" | "uz";
-
-      let currentLang: Lang = (localStorage.getItem("lumivis_lang") as Lang) || "ru";
-      (window as any).currentLang = currentLang;
-
-      function applyLang(lang: Lang) {
-        currentLang = lang;
-        (window as any).currentLang = lang;
-        localStorage.setItem("lumivis_lang", lang);
-        document.documentElement.lang = lang;
-
-        // Dynamic Meta & Document Title Update
-        const pageTitle = TRANSLATIONS[lang]?.[
-          "meta.title"
-        ];
-        if (pageTitle) {
-          document.title = pageTitle;
-          const ogTitle = document.querySelector('meta[property="og:title"]');
-          if (ogTitle) ogTitle.setAttribute("content", pageTitle);
-        }
-
-        const pageDesc = TRANSLATIONS[lang]?.[
-          "meta.description"
-        ];
-        if (pageDesc) {
-          const metaDesc = document.querySelector('meta[name="description"]');
-          if (metaDesc) metaDesc.setAttribute("content", pageDesc);
-          const ogDesc = document.querySelector('meta[property="og:description"]');
-          if (ogDesc) ogDesc.setAttribute("content", pageDesc);
-        }
-
-        const ogLocale = document.querySelector('meta[property="og:locale"]');
-        if (ogLocale) {
-          const locales: Record<string, string> = { ru: "ru_UZ", uz: "uz_UZ", en: "en_US" };
-          ogLocale.setAttribute("content", locales[lang] || "ru_UZ");
-        }
-
-        // Update all data-i18n elements
-        document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
-          const key = el.dataset.i18n!;
-          const val = TRANSLATIONS[lang]?.[key];
-          if (val !== undefined) {
-            if (val.includes("<")) el.innerHTML = val;
-            else el.textContent = val;
-          }
-        });
-
-        // Update placeholders
-        document.querySelectorAll<HTMLInputElement>("[data-i18n-placeholder]").forEach((el) => {
-          const key = el.dataset.i18nPlaceholder!;
-          const val = TRANSLATIONS[lang]?.[key];
-          if (val !== undefined) el.placeholder = val;
-        });
-
-        // Update alt text on images
-        document.querySelectorAll<HTMLImageElement>("[data-i18n-alt]").forEach((el) => {
-          const key = el.dataset.i18nAlt!;
-          const val = TRANSLATIONS[lang]?.[key];
-          if (val !== undefined) el.alt = val;
-        });
-
-        // Update aria-label attributes
-        document.querySelectorAll<HTMLElement>("[data-i18n-aria-label]").forEach((el) => {
-          const key = el.dataset.i18nAriaLabel!;
-          const val = TRANSLATIONS[lang]?.[key];
-          if (val !== undefined) el.setAttribute("aria-label", val);
-        });
-
-        // Highlight active lang button
-        document.querySelectorAll<HTMLButtonElement>(".lang-btn").forEach((btn) => {
-          btn.classList.toggle("lang-btn--active", btn.dataset.lang === lang);
-          btn.setAttribute("aria-pressed", String(btn.dataset.lang === lang));
-        });
-
-        // Notify dynamic components (like gallery modal) about language change
-        window.dispatchEvent(new CustomEvent("languageChanged", { detail: { lang } }));
-      }
-
-      // Init
       document.addEventListener("DOMContentLoaded", () => {
-        applyLang(currentLang);
-
-        // Attach click handlers to all lang buttons
-        document.querySelectorAll<HTMLButtonElement>(".lang-btn").forEach((btn) => {
+        // Dynamic language link switcher with anchor & scroll position preservation
+        document.querySelectorAll<HTMLAnchorElement>("a[data-lang-btn]").forEach((btn) => {
           btn.addEventListener("click", () => {
-            const lang = btn.dataset.lang as Lang;
-            if (lang) applyLang(lang);
+            const targetLang = btn.dataset.langBtn;
+            if (!targetLang) return;
+            localStorage.setItem("lumivis_lang", targetLang);
+
+            let hash = window.location.hash;
+            if (!hash) {
+              const sections = document.querySelectorAll<HTMLElement>("section[id]");
+              const scrollPos = window.scrollY + 200;
+              for (const sec of sections) {
+                if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+                  hash = "#" + sec.id;
+                  break;
+                }
+              }
+            }
+
+            const rawPath = window.location.pathname.replace(/^\/(ru|uz|en)\/?/, "");
+            const newHref = `/${targetLang}/${rawPath}${hash}`;
+            btn.setAttribute("href", newHref);
           });
         });
 
@@ -1136,7 +183,6 @@ const {
       });
 
       function initSmoothScroll() {
-        // Respect user preference for reduced motion
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           return;
         }
@@ -1157,13 +203,6 @@ const {
           }
           requestAnimationFrame(raf);
 
-          // Clean scroll offset: header height (72px) + comfortable gap (20px desktop / 16px mobile)
-          function getScrollOffset(): number {
-            const headerHeight = 72;
-            const gap = window.innerWidth < 640 ? 16 : 20;
-            return -(headerHeight + gap);
-          }
-
           // Smooth scroll event delegation for all anchor links
           document.addEventListener("click", (e) => {
             const target = e.target as HTMLElement | null;
@@ -1177,7 +216,6 @@ const {
             if (targetEl) {
               e.preventDefault();
 
-              // Close mobile menu if open
               const mobileMenu = document.getElementById("mobile-menu");
               const burger = document.getElementById("burger-btn");
               if (mobileMenu && mobileMenu.classList.contains("mobile-menu--open")) {
@@ -1245,7 +283,6 @@ const {
               const el = entry.target as HTMLElement;
               observer.unobserve(el);
 
-              // Calculate stagger index among siblings if inside a list/grid
               let delay = 0;
               const parent = el.parentElement;
               if (parent) {

@@ -1,11 +1,19 @@
 ---
 // MapSection — Yandex Maps embed + contact details
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="map-section section" id="contacts">
   <div class="container">
     <div class="section-header reveal">
-      <h2 data-i18n="map.title">Как нас найти</h2>
+      <h2 data-i18n="map.title">{t("map.title")}</h2>
     </div>
 
     <div class="map-section__inner">
@@ -32,8 +40,8 @@
             </svg>
           </div>
           <div>
-            <p class="contact-block__label" data-i18n="map.address.label">Адрес</p>
-            <p class="contact-block__value" data-i18n="map.address">г. Самарканд, улица Рудаки, 217</p>
+            <p class="contact-block__label" data-i18n="map.address.label">{t("map.address.label")}</p>
+            <p class="contact-block__value" data-i18n="map.address">{t("map.address")}</p>
           </div>
         </div>
 
@@ -45,8 +53,8 @@
             </svg>
           </div>
           <div>
-            <p class="contact-block__label" data-i18n="map.hours.label">Режим работы</p>
-            <p class="contact-block__value" data-i18n="map.hours">Понедельник–Суббота: 09:00–17:00</p>
+            <p class="contact-block__label" data-i18n="map.hours.label">{t("map.hours.label")}</p>
+            <p class="contact-block__value" data-i18n="map.hours">{t("map.hours")}</p>
           </div>
         </div>
 
@@ -57,7 +65,7 @@
             </svg>
           </div>
           <div>
-            <p class="contact-block__label" data-i18n="map.phone.label">Телефон</p>
+            <p class="contact-block__label" data-i18n="map.phone.label">{t("map.phone.label")}</p>
             <a href="tel:+998995981010" class="contact-block__value contact-block__phone">
               +998 99 598 10 10
             </a>
@@ -101,7 +109,7 @@
           class="btn btn--outline map-route-btn"
           data-i18n="map.route"
         >
-          Построить маршрут
+          {t("map.route")}
         </a>
       </div>
     </div>

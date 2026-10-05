@@ -2,15 +2,21 @@
 import { Image } from "astro:assets";
 import rnImg from "../assets/gallery/services_rn.JPG";
 import RnInfoModal from "./RnInfoModal.astro";
+import { useTranslations, type SupportedLang } from "../i18n/utils";
 
-// ServicesSection.astro — Bento Grid redesign with ROP Photo & RnInfoModal
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="services section section--surface" id="services" aria-labelledby="services-title">
   <div class="container">
     <div class="section-header reveal">
-      <h2 id="services-title" data-i18n="services.title">Наши услуги</h2>
-      <p data-i18n="services.subtitle">Полный спектр офтальмологической помощи взрослым и детям</p>
+      <h2 id="services-title" data-i18n="services.title">{t("services.title")}</h2>
+      <p data-i18n="services.subtitle">{t("services.subtitle")}</p>
     </div>
 
     <ul class="bento-grid">
@@ -24,8 +30,8 @@ import RnInfoModal from "./RnInfoModal.astro";
           <div class="bento-rn-visual" aria-hidden="true">
            <Image
           src={rnImg}
-          alt="Врачи проводят офтальмоскопию новорождённому"
-          data-i18n-alt="rn.img.alt"
+          alt={t("services.rn_img.alt")}
+          data-i18n-alt="services.rn_img.alt"
           class="bento-rn-img rn__img"
           width={800}
           height={600}
@@ -54,7 +60,7 @@ import RnInfoModal from "./RnInfoModal.astro";
           <div class="bento-rn-content">
             <div class="bento-card__rn-header">
               <span class="bento-badge" data-i18n="hero.badge">
-                Единственная частная клиника РН-скрининга
+                {t("hero.badge")}
               </span>
             </div>
 
@@ -67,16 +73,16 @@ import RnInfoModal from "./RnInfoModal.astro";
                 </svg>
               </div>
               <h3 class="bento-rn-title" data-i18n="services.2.title">
-                Ретинопатия недоношенных
+                {t("services.2.title")}
               </h3>
               <p class="bento-rn-text" data-i18n="services.2.text">
-                Скрининг, наблюдение и лечение РН — единственная клиника в Самарканде
+                {t("services.2.text")}
               </p>
             </div>
 
             <div class="bento-card__rn-footer">
               <button type="button" class="btn btn--primary bento-rn-btn" data-open-rn-modal data-i18n="rn.modal.trigger">
-                Узнать подробнее о РН
+                {t("rn.modal.trigger")}
               </button>
             </div>
           </div>
@@ -85,7 +91,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 02: Диагностика зрения (2x1 on Desktop) -->
       <li class="bento-item bento-item--diag reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive bento-card--diag" aria-label="Диагностика зрения — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive bento-card--diag" aria-label={t("services.1.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -98,9 +104,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.1.title">Диагностика зрения</h3>
+            <h3 class="bento-title" data-i18n="services.1.title">{t("services.1.title")}</h3>
             <p class="bento-text" data-i18n="services.1.text">
-              Авторефрактометрия, биомикроскопия, тонометрия, периметрия — комплексное обследование
+              {t("services.1.text")}
             </p>
           </div>
 
@@ -115,7 +121,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 03: Лечение косоглазия (1x1) -->
       <li class="bento-item bento-item--squint reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label="Лечение косоглазия — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label={t("services.3.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -128,9 +134,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.3.title">Лечение косоглазия</h3>
+            <h3 class="bento-title" data-i18n="services.3.title">{t("services.3.title")}</h3>
             <p class="bento-text" data-i18n="services.3.text">
-              Аппаратное лечение и хирургическая коррекция косоглазия у детей и взрослых
+              {t("services.3.text")}
             </p>
           </div>
 
@@ -145,7 +151,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 04: Лечение амблиопии (1x1) -->
       <li class="bento-item bento-item--amb reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label="Лечение амблиопии — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label={t("services.4.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -158,9 +164,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.4.title">Лечение амблиопии</h3>
+            <h3 class="bento-title" data-i18n="services.4.title">{t("services.4.title")}</h3>
             <p class="bento-text" data-i18n="services.4.text">
-              Комплексное лечение «ленивого глаза» с применением аппаратных методик
+              {t("services.4.text")}
             </p>
           </div>
 
@@ -175,7 +181,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 05: Детская офтальмология (1x1) -->
       <li class="bento-item bento-item--kids reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label="Детская офтальмология — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label={t("services.5.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -188,9 +194,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.5.title">Детская офтальмология</h3>
+            <h3 class="bento-title" data-i18n="services.5.title">{t("services.5.title")}</h3>
             <p class="bento-text" data-i18n="services.5.text">
-              Диагностика и лечение нарушений зрения у детей с первых недель жизни
+              {t("services.5.text")}
             </p>
           </div>
 
@@ -205,7 +211,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 06: Подбор очков и линз (1x1) -->
       <li class="bento-item bento-item--glasses reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label="Подбор очков и линз — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label={t("services.6.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -220,9 +226,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.6.title">Подбор очков и линз</h3>
+            <h3 class="bento-title" data-i18n="services.6.title">{t("services.6.title")}</h3>
             <p class="bento-text" data-i18n="services.6.text">
-              Точный подбор корректирующей оптики для взрослых и детей
+              {t("services.6.text")}
             </p>
           </div>
 
@@ -237,7 +243,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 07: Синдром сухого глаза (1x1) -->
       <li class="bento-item bento-item--dry reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label="Синдром сухого глаза — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label={t("services.7.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -249,9 +255,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.7.title">Синдром сухого глаза</h3>
+            <h3 class="bento-title" data-i18n="services.7.title">{t("services.7.title")}</h3>
             <p class="bento-text" data-i18n="services.7.text">
-              Диагностика и комплексное лечение синдрома сухого глаза
+              {t("services.7.text")}
             </p>
           </div>
 
@@ -266,7 +272,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 08: Промывание слёзных путей (1x1) -->
       <li class="bento-item bento-item--tear reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label="Промывание слёзных путей — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive" aria-label={t("services.8.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -279,9 +285,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.8.title">Промывание слёзных путей</h3>
+            <h3 class="bento-title" data-i18n="services.8.title">{t("services.8.title")}</h3>
             <p class="bento-text" data-i18n="services.8.text">
-              Лечение непроходимости слёзных путей, в том числе у новорождённых
+              {t("services.8.text")}
             </p>
           </div>
 
@@ -296,7 +302,7 @@ import RnInfoModal from "./RnInfoModal.astro";
 
       <!-- 09: Индивидуальное глазное протезирование (2x1 on Desktop) -->
       <li class="bento-item bento-item--prosthesis reveal">
-        <a href="#booking-form-section" class="bento-card bento-card--interactive bento-card--prosthesis" aria-label="Индивидуальное глазное протезирование — Записаться">
+        <a href="#booking-form-section" class="bento-card bento-card--interactive bento-card--prosthesis" aria-label={t("services.9.title")}>
           <div class="bento-card__top">
             <div class="bento-icon" aria-hidden="true">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -309,9 +315,9 @@ import RnInfoModal from "./RnInfoModal.astro";
           </div>
 
           <div class="bento-card__body">
-            <h3 class="bento-title" data-i18n="services.9.title">Индивидуальное глазное протезирование</h3>
+            <h3 class="bento-title" data-i18n="services.9.title">{t("services.9.title")}</h3>
             <p class="bento-text" data-i18n="services.9.text">
-              Подбор и адаптация индивидуального глазного протеза по форме и цвету здорового глаза
+              {t("services.9.text")}
             </p>
           </div>
 
@@ -328,16 +334,16 @@ import RnInfoModal from "./RnInfoModal.astro";
     <!-- Bottom CTA Bar -->
     <div class="services-bottom-cta reveal">
       <p class="services-bottom-cta__text" data-i18n="services.bottom.text">
-        Не нашли нужную услугу?
+        {t("services.bottom.text")}
       </p>
       <a href="#booking-form-section" class="btn btn--outline services-bottom-cta__btn" data-i18n="services.bottom.cta">
-        Записаться на приём
+        {t("services.bottom.cta")}
       </a>
     </div>
   </div>
 
   <!-- Modal Dialog with ROP Medical Info & Brochure content -->
-  <RnInfoModal />
+  <RnInfoModal lang={lang} />
 </section>
 
 <style>

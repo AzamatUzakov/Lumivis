@@ -9,69 +9,78 @@ import doc5 from "../assets/doctors/doctor-7.png";
 import doc6 from "../assets/doctors/doctor-4.png";
 import doc7 from "../assets/doctors/doctor-8.png";
 import doc8 from "../assets/doctors/doctor-1.png";
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 
 const doctors = [
-  { id: 1, image: doc1, pos: "center 10%",
-    nameRu: "Бобоев Саидафзал Абдурахманович", specRu: "Офтальмохирург, к.м.н., доцент" },
-  { id: 2, image: doc2, pos: "center 10%",
-    nameRu: "Ражабов Санжар Мансурович", specRu: "Офтальмохирург, катарактолог" },
-  { id: 3, image: doc3, pos: "center 10%",
-    nameRu: "Абдурахмонов Фаридун Саидакбарович", specRu: "Детский офтальмолог, страбизмолог" },
-  { id: 4, image: doc4, pos: "center 22%",
-    nameRu: "Раупова Парвина Хасановна", specRu: "Врач-окулист" },
-  { id: 5, image: doc5, pos: "center 10%",
-    nameRu: "Зикириллоев Абдурасул Нусратиллоевич", specRu: "Офтальмохирург-катарактолог, главный врач" },
-  { id: 6, image: doc6, pos: "center 10%",
-    nameRu: "Мусинов Абдукаюм Суюнбоевич", specRu: "Врач-окулист" },
-  { id: 7, image: doc7, pos: "center 10%",
-    nameRu: "Мусинов Хусниддин Суюнбоевич", specRu: "Окулярист" },
-  { id: 8, image: doc8, pos: "center 10%",
-    nameRu: "Бобоев Сиёвуш Саидафзалзода", specRu: "Офтальмохирург, Ph.D" },
+  { id: 1, image: doc1, pos: "center 10%" },
+  { id: 2, image: doc2, pos: "center 10%" },
+  { id: 3, image: doc3, pos: "center 10%" },
+  { id: 4, image: doc4, pos: "center 22%" },
+  { id: 5, image: doc5, pos: "center 10%" },
+  { id: 6, image: doc6, pos: "center 10%" },
+  { id: 7, image: doc7, pos: "center 10%" },
+  { id: 8, image: doc8, pos: "center 10%" },
 ];
 ---
 
 <section class="doctors section" id="doctors">
   <div class="container">
     <div class="section-header reveal">
-      <h2 data-i18n="doctors.title">Наша команда</h2>
-      <p data-i18n="doctors.subtitle">Специалисты с многолетним опытом в офтальмологии взрослых и детей</p>
+      <h2 data-i18n="doctors.title">{t("doctors.title")}</h2>
+      <p data-i18n="doctors.subtitle">{t("doctors.subtitle")}</p>
     </div>
 
     <div class="doctors__grid">
-      {doctors.map((doc) => (
-        <article class="doctor-card reveal">
-          <!-- Photo zone: white bg matches studio photos -->
-          <div class="doctor-card__photo-wrap">
-            {doc.image ? (
-              <Image
-                src={doc.image}
-                alt={`${doc.nameRu}, ${doc.specRu}`}
-                data-i18n-alt={`doctor.${doc.id}.alt`}
-                class="doctor-card__img"
-                width={640}
-                height={853}
-                quality={85}
-                format="webp"
-                style={{ objectPosition: doc.pos || "center 10%" }}
-                loading="lazy"
-              />
-            ) : (
-              <div class="doctor-card__placeholder" aria-hidden="true">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                  <circle cx="12" cy="8" r="5"/>
-                  <path d="M3 21c0-5 3.5-9 9-9s9 4 9 9"/>
-                </svg>
-              </div>
-            )}
-          </div>
+      {doctors.map((doc) => {
+        const nameKey = `doctor.${doc.id}.name`;
+        const specKey = `doctor.${doc.id}.spec`;
+        const altKey = `doctor.${doc.id}.alt`;
+        const docName = t(nameKey);
+        const docSpec = t(specKey);
+        const docAlt = t(altKey);
 
-          <!-- Text zone: solid brand panel, always below photo -->
-          <div class="doctor-card__info">
-            <h3 class="doctor-card__name" data-i18n={`doctor.${doc.id}.name`}>{doc.nameRu}</h3>
-            <p class="doctor-card__spec" data-i18n={`doctor.${doc.id}.spec`}>{doc.specRu}</p>
-          </div>
-        </article>
-      ))}
+        return (
+          <article class="doctor-card reveal">
+            <!-- Photo zone: white bg matches studio photos -->
+            <div class="doctor-card__photo-wrap">
+              {doc.image ? (
+                <Image
+                  src={doc.image}
+                  alt={docAlt}
+                  data-i18n-alt={altKey}
+                  class="doctor-card__img"
+                  width={640}
+                  height={853}
+                  quality={85}
+                  format="webp"
+                  style={{ objectPosition: doc.pos || "center 10%" }}
+                  loading="lazy"
+                />
+              ) : (
+                <div class="doctor-card__placeholder" aria-hidden="true">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="12" cy="8" r="5"/>
+                    <path d="M3 21c0-5 3.5-9 9-9s9 4 9 9"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            <!-- Text zone: solid brand panel, always below photo -->
+            <div class="doctor-card__info">
+              <h3 class="doctor-card__name" data-i18n={nameKey}>{docName}</h3>
+              <p class="doctor-card__spec" data-i18n={specKey}>{docSpec}</p>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>

@@ -1,5 +1,14 @@
 ---
 // VideosSection.astro — Shorts-style vertical video gallery (9:16)
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
+
 interface VideoItem {
   id: number;
   src: string;
@@ -50,9 +59,9 @@ const videos: VideoItem[] = [
 <section id="results" class="videos-section" aria-labelledby="results-title">
   <div class="container videos-container">
     <div class="videos-header reveal">
-      <h2 id="results-title" class="section-title" data-i18n="videos.title">Результаты лечения</h2>
+      <h2 id="results-title" class="section-title" data-i18n="videos.title">{t("videos.title")}</h2>
       <p class="section-subtitle" data-i18n="videos.subtitle">
-        Как меняется взгляд ребёнка после лечения
+        {t("videos.subtitle")}
       </p>
     </div>
 
@@ -70,7 +79,7 @@ const videos: VideoItem[] = [
             >
               <img
                 src={video.poster}
-                alt={`Результаты лечения: Видео ${video.id}`}
+                alt={`${t("videos.title")}: ${t(video.titleKey)}`}
                 class="video-poster"
                 loading="lazy"
                 decoding="async"
@@ -81,7 +90,7 @@ const videos: VideoItem[] = [
                 type="button"
                 class="video-play-btn"
                 data-i18n-aria-label="videos.play_label"
-                aria-label="Смотреть видео"
+                aria-label={t("videos.play_label")}
               >
                 <span class="video-play-icon">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
@@ -104,7 +113,7 @@ const videos: VideoItem[] = [
         ))}
       </ul>
       <p class="videos-disclaimer" data-i18n="videos.disclaimer">
-        Результаты индивидуальны. Подробности вам расскажет врач на консультации.
+        {t("videos.disclaimer")}
       </p>
     </div>
   </div>

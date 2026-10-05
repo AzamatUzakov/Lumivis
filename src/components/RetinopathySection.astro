@@ -2,6 +2,14 @@
 // RetinopathySection — dark accent block with key photo IMG_0345.JPG
 import { Image } from "astro:assets";
 import rnImg from "../assets/gallery/IMG_0345.JPG";
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="rn section--dark" id="retinopathy">
@@ -19,41 +27,38 @@ import rnImg from "../assets/gallery/IMG_0345.JPG";
   <div class="container rn__inner">
     <!-- Left: Text -->
     <div class="rn__content reveal-left">
-      <div class="badge badge--teal rn__badge" data-i18n="rn.badge">Уникальная компетенция</div>
+      <div class="badge badge--teal rn__badge" data-i18n="rn.badge">{t("rn.badge")}</div>
 
       <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: «Единственная клиника в Самарканде» — уточнить у владельца,
            нет ли других государственных или частных учреждений с РН-скринингом в городе -->
       <h2 class="rn__title" data-i18n="rn.title">
-        Единственная клиника в Самарканде, где выявляют и ведут ретинопатию недоношенных
+        {t("rn.title")}
       </h2>
 
       <p class="rn__text" data-i18n="rn.text">
-        Ретинопатия недоношенных — опасное состояние, при котором недоразвитые сосуды сетчатки
-        у недоношенного ребёнка могут привести к потере зрения. Раннее выявление — в первые 3–6 недель
-        жизни — позволяет начать лечение до необратимых последствий.
+        {t("rn.text")}
       </p>
 
       <p class="rn__text" data-i18n="rn.text2">
-        Мы работаем совместно с педиатрическими учреждениями Самарканда и принимаем детей
-        с первых недель жизни. Всё необходимое оборудование и опыт — в одном месте.
+        {t("rn.text2")}
       </p>
 
       <!-- Supporting facts -->
       <div class="rn__facts">
         <div class="rn__fact">
           <div class="rn__fact-num">3–6</div>
-          <div class="rn__fact-label" data-i18n="rn.fact1.label">недель — оптимальный<br>срок первого осмотра</div>
+          <div class="rn__fact-label" data-i18n="rn.fact1.label" set:html={t("rn.fact1.label")} />
         </div>
         <div class="rn__fact">
           <div class="rn__fact-num">1</div>
           <!-- ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ: «1 клиника в городе ведёт РН-скрининг» —
                фактическое основание нужно подтвердить у владельца -->
-          <div class="rn__fact-label" data-i18n="rn.fact2.label">клиника в городе<br>ведёт РН-скрининг</div>
+          <div class="rn__fact-label" data-i18n="rn.fact2.label" set:html={t("rn.fact2.label")} />
         </div>
       </div>
 
       <a href="#booking-form-section" class="btn btn--teal rn__cta" data-i18n="rn.cta">
-        Записать ребёнка
+        {t("rn.cta")}
       </a>
     </div>
 
@@ -62,7 +67,7 @@ import rnImg from "../assets/gallery/IMG_0345.JPG";
       <div class="rn__img-frame">
         <Image
           src={rnImg}
-          alt="Врачи проводят офтальмоскопию новорождённому"
+          alt={t("rn.img.alt")}
           data-i18n-alt="rn.img.alt"
           class="rn__img"
           width={800}

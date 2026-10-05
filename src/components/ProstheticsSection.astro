@@ -2,6 +2,14 @@
 // ProstheticsSection.astro — Ocular Prosthetics Before/After cases
 // Native overflow-x scroll container with scroll-snap and JS auto-scroll ticker.
 import { Image } from "astro:assets";
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
 
 /* =========================================================================
    ПОДСТАНОВКА РЕАЛЬНЫХ ФОТО В БУДУЩЕМ:
@@ -17,55 +25,17 @@ import { Image } from "astro:assets";
 
 interface ProstheticCase {
   id: number;
-  titleRu: string;
-  descRu: string;
   beforeImg?: ImageMetadata | null;
   afterImg?: ImageMetadata | null;
 }
 
 const cases: ProstheticCase[] = [
-  {
-    id: 1,
-    titleRu: "Кейс 01 — Субатрофия глазного яблока",
-    descRu: "Индивидуальный тонкостенный протез с точным повторением рисунка радужки здорового глаза",
-    beforeImg: null,
-    afterImg: null,
-  },
-  {
-    id: 2,
-    titleRu: "Кейс 02 — Посттравматический анофтальм",
-    descRu: "Восстановление симметрии глазной щели и естественного объёма конъюнктивальной полости",
-    beforeImg: null,
-    afterImg: null,
-  },
-  {
-    id: 3,
-    titleRu: "Кейс 03 — Врождённая микрофтальмия",
-    descRu: "Ступенчатое протезирование для стимуляции роста орбиты у ребенка",
-    beforeImg: null,
-    afterImg: null,
-  },
-  {
-    id: 4,
-    titleRu: "Кейс 04 — Коррекция формы и посадки",
-    descRu: "Изготовление сложного слоистого протеза с высокой подвижностью",
-    beforeImg: null,
-    afterImg: null,
-  },
-  {
-    id: 5,
-    titleRu: "Кейс 05 — Подбор цвета и склеры",
-    descRu: "Ручная роспись радужки с имитацией сосудистого рисунка склеры",
-    beforeImg: null,
-    afterImg: null,
-  },
-  {
-    id: 6,
-    titleRu: "Кейс 06 — Косметическая реабилитация",
-    descRu: "Полное возвращение уверенности и эстетической гармонии взгляда",
-    beforeImg: null,
-    afterImg: null,
-  },
+  { id: 1, beforeImg: null, afterImg: null },
+  { id: 2, beforeImg: null, afterImg: null },
+  { id: 3, beforeImg: null, afterImg: null },
+  { id: 4, beforeImg: null, afterImg: null },
+  { id: 5, beforeImg: null, afterImg: null },
+  { id: 6, beforeImg: null, afterImg: null },
 ];
 
 // Duplicate cases 3 times so manual and auto scroll have seamless infinite content
@@ -75,85 +45,92 @@ const displayCases = [...cases, ...cases, ...cases];
 <section class="prosthetics section section--surface" id="prosthetics" aria-labelledby="prosthetics-title">
   <div class="container">
     <div class="section-header reveal">
-      <h2 id="prosthetics-title" data-i18n="prosthetics.title">Результаты глазного протезирования</h2>
-      <p data-i18n="prosthetics.subtitle">До и после индивидуального изготовления и подбора глазного протеза по форме и цвету</p>
+      <h2 id="prosthetics-title" data-i18n="prosthetics.title">{t("prosthetics.title")}</h2>
+      <p data-i18n="prosthetics.subtitle">{t("prosthetics.subtitle")}</p>
     </div>
   </div>
 
   <!-- Native overflow-x scroll container with scroll-snap & drag-to-scroll -->
-  <div class="prosthetics__slider-wrapper" aria-label="Карусель результатов протезирования">
+  <div class="prosthetics__slider-wrapper" aria-label={t("prosthetics.title")}>
     <div class="prosthetics__slider" id="prosthetics-slider" data-snap="false">
-      {displayCases.map((item, index) => (
-        <article class="prosthetics-card" aria-label={`${item.titleRu}`}>
-          <div class="prosthetics-card__header">
-            <h3 class="prosthetics-card__title" data-i18n={`prosthetics.case${item.id}.title`}>
-              {item.titleRu}
-            </h3>
-          </div>
+      {displayCases.map((item) => {
+        const titleKey = `prosthetics.case${item.id}.title`;
+        const descKey = `prosthetics.case${item.id}.desc`;
+        const itemTitle = t(titleKey);
+        const itemDesc = t(descKey);
 
-          <!-- Before / After Visual Pair -->
-          <div class="prosthetics-card__comparison">
-            <!-- BEFORE BLOCK -->
-            <div class="prosthetics-media prosthetics-media--before">
-              <span class="prosthetics-media__badge" data-i18n="prosthetics.before">ДО</span>
-              <div class="prosthetics-media__frame">
-                {item.beforeImg ? (
-                  <Image
-                    src={item.beforeImg}
-                    alt={`Фото до — ${item.titleRu}`}
-                    class="prosthetics-media__img"
-                    width={400}
-                    height={300}
-                    format="webp"
-                    quality={80}
-                  />
-                ) : (
-                  <div class="prosthetics-placeholder">
-                    <svg class="prosthetics-placeholder__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/>
-                      <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                    <span class="prosthetics-placeholder__text" data-i18n="prosthetics.placeholder.before">Фото до протезирования</span>
-                  </div>
-                )}
+        return (
+          <article class="prosthetics-card" aria-label={itemTitle}>
+            <div class="prosthetics-card__header">
+              <h3 class="prosthetics-card__title" data-i18n={titleKey}>
+                {itemTitle}
+              </h3>
+            </div>
+
+            <!-- Before / After Visual Pair -->
+            <div class="prosthetics-card__comparison">
+              <!-- BEFORE BLOCK -->
+              <div class="prosthetics-media prosthetics-media--before">
+                <span class="prosthetics-media__badge" data-i18n="prosthetics.before">{t("prosthetics.before")}</span>
+                <div class="prosthetics-media__frame">
+                  {item.beforeImg ? (
+                    <Image
+                      src={item.beforeImg}
+                      alt={`${t("prosthetics.before")} — ${itemTitle}`}
+                      class="prosthetics-media__img"
+                      width={400}
+                      height={300}
+                      format="webp"
+                      quality={80}
+                    />
+                  ) : (
+                    <div class="prosthetics-placeholder">
+                      <svg class="prosthetics-placeholder__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      <span class="prosthetics-placeholder__text" data-i18n="prosthetics.placeholder.before">{t("prosthetics.placeholder.before")}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <!-- AFTER BLOCK -->
+              <div class="prosthetics-media prosthetics-media--after">
+                <span class="prosthetics-media__badge" data-i18n="prosthetics.after">{t("prosthetics.after")}</span>
+                <div class="prosthetics-media__frame">
+                  {item.afterImg ? (
+                    <Image
+                      src={item.afterImg}
+                      alt={`${t("prosthetics.after")} — ${itemTitle}`}
+                      class="prosthetics-media__img"
+                      width={400}
+                      height={300}
+                      format="webp"
+                      quality={80}
+                    />
+                  ) : (
+                    <div class="prosthetics-placeholder">
+                      <svg class="prosthetics-placeholder__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      <span class="prosthetics-placeholder__text" data-i18n="prosthetics.placeholder.after">{t("prosthetics.placeholder.after")}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            <!-- AFTER BLOCK -->
-            <div class="prosthetics-media prosthetics-media--after">
-              <span class="prosthetics-media__badge" data-i18n="prosthetics.after">ПОСЛЕ</span>
-              <div class="prosthetics-media__frame">
-                {item.afterImg ? (
-                  <Image
-                    src={item.afterImg}
-                    alt={`Фото после — ${item.titleRu}`}
-                    class="prosthetics-media__img"
-                    width={400}
-                    height={300}
-                    format="webp"
-                    quality={80}
-                  />
-                ) : (
-                  <div class="prosthetics-placeholder">
-                    <svg class="prosthetics-placeholder__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/>
-                      <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                    <span class="prosthetics-placeholder__text" data-i18n="prosthetics.placeholder.after">Фото после протезирования</span>
-                  </div>
-                )}
-              </div>
+            <!-- Bottom Description -->
+            <div class="prosthetics-card__footer">
+              <p class="prosthetics-card__desc" data-i18n={descKey}>
+                {itemDesc}
+              </p>
             </div>
-          </div>
-
-          <!-- Bottom Description -->
-          <div class="prosthetics-card__footer">
-            <p class="prosthetics-card__desc" data-i18n={`prosthetics.case${item.id}.desc`}>
-              {item.descRu}
-            </p>
-          </div>
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
