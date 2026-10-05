@@ -127,11 +127,20 @@ const ogLocale = lang === "uz" ? "uz_UZ" : lang === "en" ? "en_US" : "ru_UZ";
             localStorage.setItem("lumivis_lang", targetLang);
 
             let hash = window.location.hash;
-            if (!hash) {
+
+            // If hash is explicitly present (and not #hero), retain it regardless of scroll position
+            if (hash && hash !== "#hero") {
+              // keep existing hash
+            } else if (window.scrollY < 150) {
+              // At top of page without explicit section hash: keep clean URL
+              hash = "";
+            } else {
+              // Scrolled down without explicit hash: detect active section
+              hash = "";
               const sections = document.querySelectorAll<HTMLElement>("section[id]");
               const scrollPos = window.scrollY + 200;
               for (const sec of sections) {
-                if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+                if (sec.id !== "hero" && sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
                   hash = "#" + sec.id;
                   break;
                 }
