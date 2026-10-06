@@ -11,17 +11,18 @@ interface Props {
 const { lang = "ru" } = Astro.props;
 const t = useTranslations(lang);
 
-/* =========================================================================
-   ПОДСТАНОВКА РЕАЛЬНЫХ ФОТО В БУДУЩЕМ:
-   1. Добавьте файлы фото в папку src/assets/prosthetics/ (например: case1_before.jpg, case1_after.jpg)
-   2. Заимпортируйте их здесь:
-      import case1Before from "../assets/prosthetics/case1_before.jpg";
-      import case1After from "../assets/prosthetics/case1_after.jpg";
-   3. Укажите в нужном объекте:
-      beforeImg: case1Before,
-      afterImg: case1After,
-   Разметка автоматически отобразит <Image /> вместо серых плейсхолдеров!
-   ========================================================================= */
+import case1Before from "../assets/prosthetics/case1_before.jpg";
+import case1After from "../assets/prosthetics/case1_after.jpg";
+import case2Before from "../assets/prosthetics/case2_before.jpg";
+import case2After from "../assets/prosthetics/case2_after.jpg";
+import case3Before from "../assets/prosthetics/case3_before.jpg";
+import case3After from "../assets/prosthetics/case3_after.jpg";
+import case4Before from "../assets/prosthetics/case4_before.jpg";
+import case4After from "../assets/prosthetics/case4_after.jpg";
+import case5Before from "../assets/prosthetics/case5_before.jpg";
+import case5After from "../assets/prosthetics/case5_after.jpg";
+import case6Before from "../assets/prosthetics/case6_before.jpg";
+import case6After from "../assets/prosthetics/case6_after.jpg";
 
 interface ProstheticCase {
   id: number;
@@ -30,12 +31,12 @@ interface ProstheticCase {
 }
 
 const cases: ProstheticCase[] = [
-  { id: 1, beforeImg: null, afterImg: null },
-  { id: 2, beforeImg: null, afterImg: null },
-  { id: 3, beforeImg: null, afterImg: null },
-  { id: 4, beforeImg: null, afterImg: null },
-  { id: 5, beforeImg: null, afterImg: null },
-  { id: 6, beforeImg: null, afterImg: null },
+  { id: 1, beforeImg: case1Before, afterImg: case1After },
+  { id: 2, beforeImg: case2Before, afterImg: case2After },
+  { id: 3, beforeImg: case3Before, afterImg: case3After },
+  { id: 4, beforeImg: case4Before, afterImg: case4After },
+  { id: 5, beforeImg: case5Before, afterImg: case5After },
+  { id: 6, beforeImg: case6Before, afterImg: case6After },
 ];
 
 // Duplicate cases 3 times so manual and auto scroll have seamless infinite content
@@ -82,6 +83,8 @@ const displayCases = [...cases, ...cases, ...cases];
                       height={300}
                       format="webp"
                       quality={80}
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div class="prosthetics-placeholder">
@@ -108,6 +111,8 @@ const displayCases = [...cases, ...cases, ...cases];
                       height={300}
                       format="webp"
                       quality={80}
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div class="prosthetics-placeholder">
@@ -122,12 +127,7 @@ const displayCases = [...cases, ...cases, ...cases];
               </div>
             </div>
 
-            <!-- Bottom Description -->
-            <div class="prosthetics-card__footer">
-              <p class="prosthetics-card__desc" data-i18n={descKey}>
-                {itemDesc}
-              </p>
-            </div>
+
           </article>
         );
       })}
