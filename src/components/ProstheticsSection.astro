@@ -159,7 +159,7 @@ const displayCases = [...cases, ...cases, ...cases];
 :global(.prosthetics__slider) {
   display: flex !important;
   gap: 20px !important;
-  overflow-x: auto !important;
+  overflow-x: hidden !important;
   touch-action: pan-y !important;
   overscroll-behavior-x: contain !important;
   scrollbar-width: none !important;
@@ -311,6 +311,7 @@ const displayCases = [...cases, ...cases, ...cases];
 
     let animId: number | null = null;
     let isVisibleInViewport = false;
+    let pos = slider.scrollLeft;
     const speed = 0.75; // px per frame — smooth continuous marquee speed
 
     function getSingleSetWidth(): number {
@@ -321,20 +322,28 @@ const displayCases = [...cases, ...cases, ...cases];
       return count * (firstCard.offsetWidth + gap);
     }
 
+    function syncPosition() {
+      if (!slider) return;
+      pos = slider.scrollLeft;
+    }
+
     function tick() {
       if (!slider) return;
 
       const singleSetWidth = getSingleSetWidth();
 
       if (isVisibleInViewport && !document.hidden) {
-        slider.scrollLeft += speed;
+        pos += speed;
+        slider.scrollLeft = pos;
       }
 
       // Seamless loop reset in both scroll directions (forward and backward)
-      if (slider.scrollLeft >= singleSetWidth * 2) {
-        slider.scrollLeft -= singleSetWidth;
-      } else if (slider.scrollLeft <= 5) {
-        slider.scrollLeft += singleSetWidth;
+      if (pos >= singleSetWidth * 2) {
+        pos -= singleSetWidth;
+        slider.scrollLeft = pos;
+      } else if (pos <= 5) {
+        pos += singleSetWidth;
+        slider.scrollLeft = pos;
       }
 
       if (isVisibleInViewport && !document.hidden) {
@@ -346,6 +355,7 @@ const displayCases = [...cases, ...cases, ...cases];
 
     function startAutoScroll() {
       if (!animId && isVisibleInViewport && !document.hidden) {
+        syncPosition();
         animId = requestAnimationFrame(tick);
       }
     }
@@ -356,6 +366,9 @@ const displayCases = [...cases, ...cases, ...cases];
         animId = null;
       }
     }
+
+    // Resync position on window resize or orientation change
+    window.addEventListener('resize', syncPosition, { passive: true });
 
     // ── Performance Optimization 1: IntersectionObserver ──
     // Stop rAF loop entirely when the section is not visible on screen (0% CPU impact when scrolled away)
