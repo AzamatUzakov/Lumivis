@@ -285,6 +285,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "prosthetics.case5.desc": "Индивидуальное моделирование сложнопрофильного протеза при рубцовых изменениях",
     "prosthetics.case6.title": "Кейс 06 — Косметическое протезирование при бельме",
     "prosthetics.case6.desc": "Полное восстановление эстетической гармонии и естественного вида глаза",
+    "prosthetics.case7.title": "Кейс 07 — Сложное индивидуальное протезирование",
+    "prosthetics.case7.desc": "Восстановление симметрии глазной щели и естественного вида при сложном профиле полости",
 
     "footer.tagline": "Современная офтальмологическая клиника в Самарканде. Скрининг ретинопатии недоношенных, диагностика и лечение зрения у детей и взрослых, индивидуальное глазное протезирование.",
     "footer.nav.title": "Навигация по сайту",
@@ -588,6 +590,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "prosthetics.case5.desc": "Custom contoured prosthesis design adapting to severe socket scarring",
     "prosthetics.case6.title": "Case 06 — Cosmetic Shell for Corneal Leukoma",
     "prosthetics.case6.desc": "Complete restoration of confidence and aesthetic gaze harmony",
+    "prosthetics.case7.title": "Кейс 07 — Сложное индивидуальное протезирование",
+    "prosthetics.case7.desc": "Восстановление симметрии глазной щели и естественного вида при сложном профиле полости",
 
     "footer.tagline": "Modern ophthalmology clinic in Samarkand. ROP screening, pediatric & adult vision care, custom ocular prosthetics.",
     "footer.nav.title": "Site Navigation",
@@ -677,8 +681,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "doctor.6.spec": "Shifokor-okulist",
     "doctor.6.alt": "Shifokor-okulist Musinov Abduqayyum Suyunboyevich",
     "doctor.7.name": "Musinov Husniddin Suyunboyevich",
-    "doctor.7.spec": "Okulyarist (Ko'z protezlash mutaxassisi)",
-    "doctor.7.alt": "Okulyarist Musinov Husniddin Suyunboyevich",
+    "doctor.7.spec": "Okularist (Ko'z protezlash mutaxassisi)",
+    "doctor.7.alt": "Okularist Musinov Husniddin Suyunboyevich",
     "doctor.8.name": "Boboyev Siyovush Saidafzalzoda",
     "doctor.8.spec": "Oftalmoxirurg, Ph.D, Lumivis klinikasi maslahatchisi",
     "doctor.8.alt": "Oftalmoxirurg Boboyev Siyovush Saidafzalzoda",
@@ -780,7 +784,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "rn.modal.book": "RN-skriningga yozilish",
     "rn.modal.close": "Yopish",
 
-    "gallery.title": "Lumivis klinikasida qabul qanday o me'morda o'tadi",
+    "gallery.title": "Lumivis klinikasida qabul qanday o'tadi",
     "gallery.subtitle": "Tinch muhit, zamonaviy qulaylik va har bir bemorga e'tibor",
     "gallery.1.alt": "Bolalar ko'rish diagnostikasi jarayoni Lumivis klinikasi Samarqand",
     "gallery.2.alt": "Bolaning ko'rishini zamonaviy apparatda tekshirish",
@@ -891,6 +895,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "prosthetics.case5.desc": "Chandiqli o'zgarishlarda murakkab profilli protezni individual modellashtirish",
     "prosthetics.case6.title": "Keys 06 — Shox parda belmosida kosmetik protezlash",
     "prosthetics.case6.desc": "Ishonchni va ko'z qarashining estetik uyg'unligini to'liq qaytarish",
+    "prosthetics.case7.title": "Кейс 07 — Сложное индивидуальное протезирование",
+    "prosthetics.case7.desc": "Восстановление симметрии глазной щели и естественного вида при сложном профиле полости",
 
     "footer.tagline": "Samarqanddagi zamonaviy ko'z klinikasi. Chala tug'ilgan chaqaloqlar retinopatiyasi skriningi, bolalar va kattalar ko'rishini diagnostika va davolash, individual ko'z protezlash.",
     "footer.nav.title": "Navigatsiya",
@@ -906,7 +912,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
 
     "map.title": "Bizni qanday topish mumkin",
     "map.address.label": "Manzil",
-    "map.address": "Samarqand shahri, Ro'dakiy ko'chasi, 217",
+    "map.address": "Samarqand shahri, Rudakiy ko'chasi, 217",
     "map.hours.label": "Ish tartibi",
     "map.hours": "Dushanba–Shanba: 09:00–17:00",
     "map.phone.label": "Telefon",

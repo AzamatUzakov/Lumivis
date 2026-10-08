@@ -1,0 +1,88 @@
+diff --git a/src/components/ProstheticsSection.astro b/src/components/ProstheticsSection.astro
+index 1234567..89abcdef 100644
+--- a/src/components/ProstheticsSection.astro
++++ b/src/components/ProstheticsSection.astro
+@@ -23,6 +23,8 @@ import case5Before from "../assets/prosthetics/case5_before.jpg";
+ import case5After from "../assets/prosthetics/case5_after.jpg";
+ import case6Before from "../assets/prosthetics/case6_before.jpg";
+ import case6After from "../assets/prosthetics/case6_after.jpg";
++import case7Before from "../assets/prosthetics/case7_before.jpg";
++import case7After from "../assets/prosthetics/case7_after.jpg";
+ 
+ interface ProstheticCase {
+   id: number;
+@@ -36,6 +38,7 @@ const cases: ProstheticCase[] = [
+   { id: 4, beforeImg: case3Before, afterImg: case3After },
+   { id: 5, beforeImg: case5Before, afterImg: case5After },
+   { id: 6, beforeImg: case6Before, afterImg: case6After },
++  { id: 7, beforeImg: case7Before, afterImg: case7After },
+ ];
+ 
+ // Duplicate cases 3 times so manual and auto scroll have seamless infinite content
+@@ -51,7 +54,7 @@ const displayCases = [...cases, ...cases, ...cases];
+ 
+   <!-- Native overflow-x scroll container with scroll-snap & drag-to-scroll -->
+   <div class="prosthetics__slider-wrapper" aria-label={t("prosthetics.title")}>
+-    <div class="prosthetics__slider" id="prosthetics-slider" data-snap="false">
++    <div class="prosthetics__slider" id="prosthetics-slider" data-snap="false" data-case-count={cases.length}>
+       {displayCases.map((item) => {
+         const titleKey = `prosthetics.case${item.id}.title`;
+         const descKey = `prosthetics.case${item.id}.desc`;
+@@ -182,16 +185,9 @@ const displayCases = [...cases, ...cases, ...cases];
+   flex-direction: column;
+   justify-content: space-between;
+   gap: 16px;
+-  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+   user-select: none;
+ }
+ 
+-.prosthetics-card:hover {
+-  transform: translateY(-4px);
+-  box-shadow: 0 10px 28px rgba(11, 42, 107, 0.12);
+-  border-color: rgba(46, 134, 245, 0.35);
+-}
+-
+ .prosthetics-card__header {
+   border-bottom: 1px solid rgba(11, 42, 107, 0.07);
+   padding-bottom: 10px;
+@@ -316,9 +312,10 @@ const displayCases = [...cases, ...cases, ...cases];
+ 
+     function getSingleSetWidth(): number {
+       const firstCard = slider.querySelector('.prosthetics-card') as HTMLElement | null;
+-      if (!firstCard) return 1980;
++      if (!firstCard) return 2310;
++      const count = parseInt(slider.getAttribute('data-case-count') || '7', 10);
+       const gap = parseFloat(window.getComputedStyle(slider).gap) || 20;
+-      return 6 * (firstCard.offsetWidth + gap);
++      return count * (firstCard.offsetWidth + gap);
+     }
+ 
+     function tick() {
+diff --git a/src/i18n/translations.ts b/src/i18n/translations.ts
+index 1234567..89abcdef 100644
+--- a/src/i18n/translations.ts
++++ b/src/i18n/translations.ts
+@@ -286,6 +286,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
+     "prosthetics.case6.title": "Кейс 06 — Косметическое протезирование при бельме",
+     "prosthetics.case6.desc": "Полное восстановление эстетической гармонии и естественного вида глаза",
++    "prosthetics.case7.title": "Кейс 07 — Сложное индивидуальное протезирование",
++    "prosthetics.case7.desc": "Восстановление симметрии глазной щели и естественного вида при сложном профиле полости",
+ 
+     "footer.tagline": "Современная офтальмологическая клиника в Самарканде. Скрининг ретинопатии недоношенных, диагностика и лечение зрения у детей и взрослых, индивидуальное глазное протезирование.",
+     "footer.nav.title": "Навигация по сайту",
+@@ -589,6 +591,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
+     "prosthetics.case6.title": "Case 06 — Cosmetic Shell for Corneal Leukoma",
+     "prosthetics.case6.desc": "Complete restoration of confidence and aesthetic gaze harmony",
++    "prosthetics.case7.title": "Case 07 — Complex Custom Ocular Prosthetics",
++    "prosthetics.case7.desc": "Restoration of palpebral fissure symmetry and natural gaze appearance in complex socket profile",
+ 
+     "footer.tagline": "Modern ophthalmology clinic in Samarkand. ROP screening, pediatric & adult vision care, custom ocular prosthetics.",
+     "footer.nav.title": "Site Navigation",
+@@ -893,6 +897,8 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
+     "prosthetics.case6.title": "Keys 06 — Shox parda belmosida kosmetik protezlash",
+     "prosthetics.case6.desc": "Ishonchni va ko'z qarashining estetik uyg'unligini to'liq qaytarish",
++    "prosthetics.case7.title": "Keys 07 — Murakkab individual protezlash",
++    "prosthetics.case7.desc": "Bo'shliqning murakkab profilida ko'z tirqishi simmetriyasini va tabiiy ko'rinishni tiklash",
+ 
+     "footer.tagline": "Samarqanddagi zamonaviy ko'z klinikasi. Chala tug'ilgan chaqaloqlar retinopatiyasi skriningi, bolalar va kattalar ko'rishini diagnostika va davolash, individual ko'z protezlash.",
+     "footer.nav.title": "Navigatsiya",
