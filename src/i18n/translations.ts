@@ -756,7 +756,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "rn.fact2.label": "shahar klinikasida<br>ChTChR-skrining o'tkaziladi",
     "rn.img.alt": "Yangi tug'ilgan chaqaloqni retinopatiya bo'yicha oftalmologik ko'rigi Lumivis klinikasi Samarqand",
 
-    "rn.modal.trigger": "RN haqida batafsil",
+    "rn.modal.trigger": "ChtChr haqida batafsil",
     "rn.modal.title": "Chala tug‘ilgan chaqaloqlar retinopatiyasi (ChTChR)",
     "rn.modal.subtitle": "Lumivis klinikasining rasmiy tibbiy broshyurasi",
     "rn.modal.p1_title": "Chala tug‘ilgan chaqaloqlar retinopatiyasi nima?",
