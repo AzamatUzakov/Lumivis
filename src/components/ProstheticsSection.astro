@@ -23,6 +23,8 @@ import case5Before from "../assets/prosthetics/case5_before.jpg";
 import case5After from "../assets/prosthetics/case5_after.jpg";
 import case6Before from "../assets/prosthetics/case6_before.jpg";
 import case6After from "../assets/prosthetics/case6_after.jpg";
+import case7Before from "../assets/prosthetics/case7_before.jpg";
+import case7After from "../assets/prosthetics/case7_after.jpg";
 
 interface ProstheticCase {
   id: number;
@@ -37,6 +39,7 @@ const cases: ProstheticCase[] = [
   { id: 4, beforeImg: case4Before, afterImg: case4After },
   { id: 5, beforeImg: case5Before, afterImg: case5After },
   { id: 6, beforeImg: case6Before, afterImg: case6After },
+  { id: 7, beforeImg: case7Before, afterImg: case7After },
 ];
 
 // Duplicate cases 3 times so manual and auto scroll have seamless infinite content
@@ -53,7 +56,7 @@ const displayCases = [...cases, ...cases, ...cases];
 
   <!-- Native overflow-x scroll container with scroll-snap & drag-to-scroll -->
   <div class="prosthetics__slider-wrapper" aria-label={t("prosthetics.title")}>
-    <div class="prosthetics__slider" id="prosthetics-slider" data-snap="false">
+    <div class="prosthetics__slider" id="prosthetics-slider" data-case-count={cases.length}>
       {displayCases.map((item) => {
         const titleKey = `prosthetics.case${item.id}.title`;
         const descKey = `prosthetics.case${item.id}.desc`;
@@ -152,40 +155,29 @@ const displayCases = [...cases, ...cases, ...cases];
   -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
 }
 
-/* ── Native Scroll Container — continuous ticker mode (no snap during auto-scroll) ── */
+/* ── Native Scroll Container — continuous ticker mode ── */
 :global(.prosthetics__slider) {
   display: flex !important;
   gap: 20px !important;
   overflow-x: auto !important;
-  scroll-snap-type: none;
+  touch-action: pan-y !important;
   overscroll-behavior-x: contain !important;
   scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
   padding-inline: var(--pad-x, clamp(1rem, 4vw, 2rem)) !important;
   scroll-padding-inline: var(--pad-x, clamp(1rem, 4vw, 2rem)) !important;
   padding-block: 10px !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  cursor: grab;
-}
-
-/* Enable proximity snap only when user actively touches / interacts */
-:global(.prosthetics__slider[data-snap="true"]) {
-  scroll-snap-type: x proximity !important;
+  cursor: default;
 }
 
 :global(.prosthetics__slider::-webkit-scrollbar) {
   display: none !important;
 }
 
-:global(.prosthetics__slider:active) {
-  cursor: grabbing;
-}
-
 /* ── Card Styling ── */
 :global(.prosthetics-card) {
   flex: 0 0 clamp(310px, 30vw, 420px) !important;
-  scroll-snap-align: start !important;
   background: #ffffff;
   border: 1px solid var(--c-border);
   border-radius: var(--r-lg, 20px);
@@ -195,14 +187,7 @@ const displayCases = [...cases, ...cases, ...cases];
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
-  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
   user-select: none;
-}
-
-.prosthetics-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(11, 42, 107, 0.12);
-  border-color: rgba(46, 134, 245, 0.35);
 }
 
 .prosthetics-card__header {
@@ -325,16 +310,15 @@ const displayCases = [...cases, ...cases, ...cases];
     if (!slider) return;
 
     let animId: number | null = null;
-    let isInteracting = false;
     let isVisibleInViewport = false;
-    let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
     const speed = 0.75; // px per frame — smooth continuous marquee speed
 
     function getSingleSetWidth(): number {
       const firstCard = slider.querySelector('.prosthetics-card') as HTMLElement | null;
-      if (!firstCard) return 1980;
+      if (!firstCard) return 2310;
+      const count = parseInt(slider.getAttribute('data-case-count') || '7', 10);
       const gap = parseFloat(window.getComputedStyle(slider).gap) || 20;
-      return 6 * (firstCard.offsetWidth + gap);
+      return count * (firstCard.offsetWidth + gap);
     }
 
     function tick() {
@@ -342,8 +326,7 @@ const displayCases = [...cases, ...cases, ...cases];
 
       const singleSetWidth = getSingleSetWidth();
 
-      if (!isInteracting && isVisibleInViewport && !document.hidden) {
-        slider.dataset.snap = 'false';
+      if (isVisibleInViewport && !document.hidden) {
         slider.scrollLeft += speed;
       }
 
@@ -373,58 +356,6 @@ const displayCases = [...cases, ...cases, ...cases];
         animId = null;
       }
     }
-
-    // Debounced activity handler: ONLY called by direct user input events (touch, mouse, wheel)
-    function handleUserActivity() {
-      isInteracting = true;
-      if (slider) slider.dataset.snap = 'true';
-
-      if (resumeTimeout) {
-        clearTimeout(resumeTimeout);
-      }
-
-      resumeTimeout = setTimeout(() => {
-        isInteracting = false;
-        if (slider) slider.dataset.snap = 'false';
-      }, 2500);
-    }
-
-    // Direct user interaction listeners (do NOT attach to 'scroll' to avoid feedback loop from programmatic scrollLeft)
-    slider.addEventListener('touchstart', handleUserActivity, { passive: true });
-    slider.addEventListener('touchmove', handleUserActivity, { passive: true });
-    slider.addEventListener('touchend', handleUserActivity, { passive: true });
-    slider.addEventListener('pointerdown', handleUserActivity, { passive: true });
-    slider.addEventListener('pointerup', handleUserActivity, { passive: true });
-    slider.addEventListener('mousedown', handleUserActivity, { passive: true });
-    slider.addEventListener('wheel', handleUserActivity, { passive: true });
-
-    // Desktop Mouse Drag to Scroll (Grab & Drag)
-    let isMouseDown = false;
-    let startX = 0;
-    let scrollLeftStart = 0;
-
-    slider.addEventListener('mousedown', (e) => {
-      isMouseDown = true;
-      handleUserActivity();
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeftStart = slider.scrollLeft;
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isMouseDown) {
-        isMouseDown = false;
-        handleUserActivity();
-      }
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-      if (!isMouseDown) return;
-      handleUserActivity();
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      slider.scrollLeft = scrollLeftStart - walk;
-    });
 
     // ── Performance Optimization 1: IntersectionObserver ──
     // Stop rAF loop entirely when the section is not visible on screen (0% CPU impact when scrolled away)
