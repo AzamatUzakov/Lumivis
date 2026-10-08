@@ -66,7 +66,7 @@ const photos = [
               quality={78}
               format="webp"
               loading="lazy"
-              decoding="async"
+              decoding="sync"
             />
             <div class="gallery__overlay" aria-hidden="true"></div>
             <div class="card-arrow" aria-hidden="true">
@@ -153,6 +153,7 @@ const photos = [
   width: 100%;
   height: auto;
   display: block;
+  -webkit-transform: translateZ(0);
   transition: transform var(--t-slow, 350ms ease), filter var(--t-slow, 350ms ease);
   filter: brightness(0.98) saturate(0.97);
 }
