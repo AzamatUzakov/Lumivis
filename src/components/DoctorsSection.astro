@@ -23,10 +23,10 @@ const doctors = [
   { id: 2, image: doc2, pos: "center 10%" },
   { id: 3, image: doc3, pos: "center 10%" },
   { id: 4, image: doc4, pos: "center 22%" },
+  { id: 8, image: doc8, pos: "center 10%" },
   { id: 5, image: doc5, pos: "center 10%" },
   { id: 6, image: doc6, pos: "center 10%" },
   { id: 7, image: doc7, pos: "center 10%" },
-  { id: 8, image: doc8, pos: "center 10%" },
 ];
 ---
 
@@ -204,7 +204,7 @@ const doctors = [
   flex-direction: column !important;
   justify-content: flex-start;
   gap: 4px;
-  height: 96px;
+  height: 114px;
   flex-shrink: 0;
   flex-grow: 0;
   overflow: hidden;
@@ -213,7 +213,7 @@ const doctors = [
 @media (max-width: 639px) {
   .doctor-card__info {
     padding: 10px 12px 12px;
-    height: 90px;
+    height: 106px;
   }
 }
 
@@ -238,9 +238,9 @@ const doctors = [
   color: var(--c-muted) !important;
   line-height: 1.35;
   margin: 0;
-  /* Clamp to 2 lines max — long specialties truncate with ellipsis */
+  /* Clamp to 3 lines max — long specialties truncate with ellipsis */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
