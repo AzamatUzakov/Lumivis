@@ -16,7 +16,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "nav.reviews": "Отзывы",
     "nav.videos": "Результаты",
 
-    "header.hours": "Пн–Сб 09:00–17:00",
+    "header.hours": "Пн–Сб 08:30–17:00",
     "header.cta": "Записаться на приём",
 
     "hero.badge": "Единственная частная клиника РН‑скрининга в Самарканде",
@@ -87,7 +87,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "equip.2.desc": "Диагностический микроскоп высокого разрешения",
     "equip.2.alt": "Офтальмологическая щелевая лампа Labomed Самарканд",
     "equip.3.name": "Офтальмологический биомикроскоп",
-    "equip.3.desc": "Послойный осмотр внутренних структур глаза",
+    "equip.3.desc": "С аппликационным тонометром и фотокамерой",
     "equip.3.alt": "Офтальмологический биомикроскоп для диагностики глаз",
     "equip.4.name": "Синоптофор",
     "equip.4.desc": "Аппарат для диагностики, лечения косоглазия и восстановления бинокулярного зрения",
@@ -174,7 +174,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "rn.modal.book": "Записаться на РН-скрининг",
     "rn.modal.close": "Закрыть",
 
-    "gallery.title": "Как проходит приём в Lumivis",
+    "gallery.title": "Как проходит лечение в Lumivis",
     "gallery.subtitle": "Спокойная атмосфера, современный комфорт и внимательное отношение к каждому пациенту",
     "gallery.1.alt": "Процесс детской диагностики зрения в клинике Lumivis Самарканд",
     "gallery.2.alt": "Проверка зрения у ребёнка на офтальмологическом оборудовании",
@@ -263,7 +263,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "map.address.label": "Наш адрес",
     "map.address": "г. Самарканд, улица Рудаки, 217",
     "map.hours.label": "Режим работы",
-    "map.hours": "Понедельник–Суббота: 09:00–17:00 (Воскресенье — выходной)",
+    "map.hours": "Понедельник–Суббота: 08:30–17:00 (Воскресенье — выходной)",
     "map.phone.label": "Телефон для записи",
     "map.route": "Построить маршрут на карте",
 
@@ -304,7 +304,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "map.address.label": "Адрес",
     "map.address": "г. Самарканд, улица Рудаки, 217",
     "map.hours.label": "Режим работы",
-    "map.hours": "Понедельник–Суббота: 09:00–17:00",
+    "map.hours": "Понедельник–Суббота: 08:30–17:00",
     "map.phone.label": "Телефон",
     "map.route": "Построить маршрут",
   },
@@ -321,7 +321,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "nav.reviews": "Reviews",
     "nav.videos": "Results",
 
-    "header.hours": "Mon–Sat 09:00–17:00",
+    "header.hours": "Mon–Sat 08:30–17:00",
     "header.cta": "Book Appointment",
 
     "hero.badge": "The only private ROP screening eye clinic in Samarkand",
@@ -392,7 +392,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "equip.2.desc": "High-resolution diagnostic microscope for detailed eye structure analysis",
     "equip.2.alt": "Labomed ophthalmic slit lamp Samarkand",
     "equip.3.name": "Ophthalmic Biomicroscope",
-    "equip.3.desc": "Layer-by-layer examination of internal ocular structures",
+    "equip.3.desc": "With tonometer and camera",
     "equip.3.alt": "Ophthalmic biomicroscope for detailed eye diagnostics",
     "equip.4.name": "Synoptophore",
     "equip.4.desc": "A device that helps diagnose, treat strabismus, and restore binocular vision",
@@ -479,7 +479,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "rn.modal.book": "Book ROP Screening",
     "rn.modal.close": "Close",
 
-    "gallery.title": "The Lumivis Appointment Experience",
+    "gallery.title": "How Treatment Works at Lumivis",
     "gallery.subtitle": "Calm atmosphere, modern comfort, and attentive care for every patient",
     "gallery.1.alt": "Pediatric vision testing process at Lumivis Clinic Samarkand",
     "gallery.2.alt": "Child eye exam on modern ophthalmic diagnostic equipment",
@@ -568,7 +568,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "map.address.label": "Our Address",
     "map.address": "217 Rudaki Street, Samarkand",
     "map.hours.label": "Working Hours",
-    "map.hours": "Monday–Saturday: 09:00–17:00 (Sunday — Closed)",
+    "map.hours": "Monday–Saturday: 08:30–17:00 (Sunday — Closed)",
     "map.phone.label": "Phone for Appointments",
     "map.route": "Get Directions on Map",
 
@@ -609,7 +609,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "map.address.label": "Address",
     "map.address": "217 Rudaki Street, Samarkand",
     "map.hours.label": "Working Hours",
-    "map.hours": "Monday–Saturday: 09:00–17:00",
+    "map.hours": "Monday–Saturday: 08:30–17:00",
     "map.phone.label": "Phone",
     "map.route": "Get Directions",
   },
@@ -626,7 +626,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "nav.reviews": "Sharhlar",
     "nav.videos": "Natijalar",
 
-    "header.hours": "Dush–Shan 09:00–17:00",
+    "header.hours": "Dush–Shan 08:30–17:00",
     "header.cta": "Qabulga yozilish",
 
     "hero.badge": "Samarqandda ChTChR skriningi o'tkazadigan yagona xususiy klinika",
@@ -697,7 +697,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "equip.2.desc": "Yuqori aniqlikdagi diagnostika mikroskopi",
     "equip.2.alt": "Labomed tirqishli lampasi Samarqand",
     "equip.3.name": "Oftalmologik biomikroskop",
-    "equip.3.desc": "Ko'z ichki tuzilmalarini qatlam-qatlam ko'rikdan o'tkazish",
+    "equip.3.desc": "Tonometr va fotokamera bilan",
     "equip.3.alt": "Ko'z diagnostikasi uchun oftalmologik biomikroskop",
     "equip.4.name": "Sinoptofor apparati",
     "equip.4.desc": "G'ilayni aniqlash, davolash va binokulyar ko'rishni tiklashga yordam beradigan apparat",
@@ -784,7 +784,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "rn.modal.book": "RN-skriningga yozilish",
     "rn.modal.close": "Yopish",
 
-    "gallery.title": "Lumivis klinikasida qabul qanday o'tadi",
+    "gallery.title": "Lumivisda davolash qanday o'tadi",
     "gallery.subtitle": "Tinch muhit, zamonaviy qulaylik va har bir bemorga e'tibor",
     "gallery.1.alt": "Bolalar ko'rish diagnostikasi jarayoni Lumivis klinikasi Samarqand",
     "gallery.2.alt": "Bolaning ko'rishini zamonaviy apparatda tekshirish",
@@ -873,7 +873,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "map.address.label": "Bizning manzil",
     "map.address": "Samarqand shahar, Rudakiy ko'chasi, 217",
     "map.hours.label": "Ish vaqti",
-    "map.hours": "Dushanba–Shanba: 09:00–17:00 (Yakshanba — dam olish kuni)",
+    "map.hours": "Dushanba–Shanba: 08:30–17:00 (Yakshanba — dam olish kuni)",
     "map.phone.label": "Yozilish uchun telefon",
     "map.route": "Xaritada marshrut qurish",
 
@@ -914,7 +914,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "map.address.label": "Manzil",
     "map.address": "Samarqand shahri, Rudakiy ko'chasi, 217",
     "map.hours.label": "Ish tartibi",
-    "map.hours": "Dushanba–Shanba: 09:00–17:00",
+    "map.hours": "Dushanba–Shanba: 08:30–17:00",
     "map.phone.label": "Telefon",
     "map.route": "Yo'nalish tuzish",
   },
