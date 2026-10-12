@@ -114,7 +114,7 @@ function startServer(port) {
     // Check 10: Footer / Header Info
     const footerPhone = await page.$eval('.footer-contacts__phone', e => e.textContent.trim());
     const tgLink = await page.$eval('.footer-social__link[href*="t.me"]', e => e.getAttribute('href'));
-    results[lang]['10_footer_info'] = footerPhone.includes('+998') && tgLink.includes('lumivis_health');
+    results[lang]['10_footer_info'] = footerPhone.includes('+998') && tgLink.includes('Lumivis_clinic');
 
     // Check 12: Missing translation keys (e.g. "services.1.title")
     const bodyText = await page.evaluate(() => document.body.innerText);
