@@ -1,0 +1,293 @@
+---
+import { Image } from "astro:assets";
+import lens1 from "../assets/lenses/lens1.png";
+import lens2 from "../assets/lenses/lens2.png";
+import lens3 from "../assets/lenses/lens3.png";
+import lens4 from "../assets/lenses/lens4.png";
+import lens5 from "../assets/lenses/lens5.png";
+import lens6 from "../assets/lenses/lens6-horizontal.png";
+import { useTranslations, type SupportedLang } from "../i18n/utils";
+
+interface Props {
+  lang?: SupportedLang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
+
+// Массив линз: добавление новой линзы сводится к одной записи в этом массиве,
+// одному импорту картинки и трём переводам в translations.ts
+const lenses = [
+  { id: 1, file: lens1 },
+  { id: 2, file: lens2 },
+  { id: 3, file: lens3 },
+  { id: 4, file: lens4 },
+  { id: 5, file: lens5 },
+  { id: 6, file: lens6 },
+];
+
+const subtitle = t("lenses.subtitle");
+const hasSubtitle = Boolean(subtitle && subtitle !== "lenses.subtitle" && subtitle.trim() !== "");
+---
+
+<section class="lenses-section section" id="lenses">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 data-i18n="lenses.title">{t("lenses.title")}</h2>
+      {hasSubtitle && <p data-i18n="lenses.subtitle">{subtitle}</p>}
+    </div>
+  </div>
+
+  <!-- Бесконечная автоматическая лента без взаимодействия -->
+  <div class="lenses-carousel reveal" aria-label={t("lenses.title")}>
+    <div class="lenses-track">
+      <!-- Основной набор карточек -->
+      <div class="lenses-group">
+        {lenses.map((item) => {
+          const isSet = item.id === 6;
+          const nameKey = `lenses.${item.id}.name`;
+          const descKey = `lenses.${item.id}.desc`;
+          const altKey = `lenses.${item.id}.alt`;
+          const lensName = t(nameKey);
+          const lensDesc = t(descKey);
+          const lensAlt = t(altKey);
+
+          return (
+            <div class:list={["lens-card", { "lens-card--set": isSet }]}>
+              <div class="lens-card__thumb">
+                <Image
+                  src={item.file}
+                  alt={lensAlt}
+                  data-i18n-alt={altKey}
+                  loading="eager"
+                  decoding="async"
+                  width={isSet ? 640 : 640}
+                  height={isSet ? 480 : 640}
+                  quality={92}
+                  format="webp"
+                  draggable="false"
+                />
+              </div>
+              <h3 class="lens-card__name" data-i18n={nameKey}>{lensName}</h3>
+              <p class="lens-card__desc" data-i18n={descKey}>{lensDesc}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Точная копия для бесшовного зацикливания -->
+      <div class="lenses-group" aria-hidden="true">
+        {lenses.map((item) => {
+          const isSet = item.id === 6;
+          const nameKey = `lenses.${item.id}.name`;
+          const descKey = `lenses.${item.id}.desc`;
+          const altKey = `lenses.${item.id}.alt`;
+          const lensName = t(nameKey);
+          const lensDesc = t(descKey);
+          const lensAlt = t(altKey);
+
+          return (
+            <div class:list={["lens-card", { "lens-card--set": isSet }]}>
+              <div class="lens-card__thumb">
+                <Image
+                  src={item.file}
+                  alt={lensAlt}
+                  loading="eager"
+                  decoding="async"
+                  width={isSet ? 640 : 640}
+                  height={isSet ? 480 : 640}
+                  quality={92}
+                  format="webp"
+                  draggable="false"
+                />
+              </div>
+              <h3 class="lens-card__name">{lensName}</h3>
+              <p class="lens-card__desc">{lensDesc}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.lenses-section {
+  padding-top: clamp(24px, 4vw, 40px);
+  overflow: hidden;
+}
+
+/* Контейнер карусели */
+.lenses-carousel {
+  --lenses-speed: 35s;
+  --lenses-gap: 20px;
+  --lenses-card-w: 280px;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-block: 8px 16px;
+
+  /* Полное отключение любого взаимодействия */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+/* Движущаяся дорожка */
+.lenses-track {
+  display: flex;
+  width: max-content;
+  animation: lenses-marquee var(--lenses-speed) linear infinite;
+  will-change: transform;
+}
+
+/* Группа карточек: padding-right равен gap, что гарантирует идеальный бесшовный шов при -50% */
+.lenses-group {
+  display: flex;
+  gap: var(--lenses-gap);
+  padding-right: var(--lenses-gap);
+  flex-shrink: 0;
+}
+
+/* Карточка линзы */
+.lens-card {
+  width: var(--lenses-card-w);
+  max-width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 1px solid #d8e5f7;
+  border-radius: 18px;
+  padding: 18px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(11, 42, 107, 0.05);
+}
+
+.lens-card__thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid rgba(11, 42, 107, 0.08);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 14px;
+  padding: 10px;
+}
+
+/* Карточка набора линз: убираем боковые отступы у блока превью и задаём совпадающий светло-серый фон */
+.lens-card--set .lens-card__thumb {
+  padding-inline: 0;
+  background: #d8d8d8;
+}
+
+.lens-card--set .lens-card__thumb img {
+  filter: none;
+}
+
+.lens-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(11, 42, 107, 0.06));
+}
+
+.lens-card__name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0b2a6b;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.lens-card__desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 28ch;
+}
+
+/* Бесшовная анимация справа налево */
+@keyframes lenses-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Планшет (640px - 959px) */
+@media (max-width: 959px) {
+  .lenses-carousel {
+    --lenses-speed: 30s;
+    --lenses-gap: 16px;
+    --lenses-card-w: 260px;
+  }
+}
+
+/* Мобильный экран (<640px) */
+@media (max-width: 639px) {
+  .lenses-carousel {
+    --lenses-speed: 26s;
+    --lenses-gap: 12px;
+    --lenses-card-w: 220px;
+  }
+
+  .lens-card {
+    padding: 14px 10px 16px;
+    border-radius: 16px;
+  }
+
+  .lens-card__thumb {
+    border-radius: 12px;
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+
+  .lens-card__name {
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+  }
+
+  .lens-card__desc {
+    font-size: 0.76rem;
+  }
+}
+
+/* Поддержка режима reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .lenses-carousel {
+    overflow: visible;
+  }
+
+  .lenses-track {
+    animation: none !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .lenses-group[aria-hidden="true"] {
+    display: none !important;
+  }
+
+  .lenses-group {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding-right: 0 !important;
+  }
+}
+</style>

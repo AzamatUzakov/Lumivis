@@ -10,6 +10,10 @@ import eq7 from "../assets/equipment/amo-atos.png";
 import eq8 from "../assets/equipment/Gezatone.png";
 import eq9 from "../assets/equipment/mocular.png";
 import eq10 from "../assets/equipment/huvitz-tono.jpg";
+import eq11 from "../assets/equipment/eq11.jpg";
+import eq12 from "../assets/equipment/eq12.jpg";
+import eq13 from "../assets/equipment/eq13.jpg";
+import eq14 from "../assets/equipment/eq14.jpg";
 import { useTranslations, type SupportedLang } from "../i18n/utils";
 
 interface Props {
@@ -18,18 +22,23 @@ interface Props {
 
 const { lang = "ru" } = Astro.props;
 const t = useTranslations(lang);
+const VISIBLE_COUNT = 10;
 
 const equipment = [
   { id: 1, file: eq1 },
+  { id: 10, file: eq10 },
+  { id: 11, file: eq11 },
   { id: 2, file: eq2 },
   { id: 3, file: eq3 },
+  { id: 13, file: eq13 },
+  { id: 14, file: eq14 },
   { id: 4, file: eq4 },
+  { id: 9, file: eq9 },
   { id: 5, file: eq5 },
+  { id: 12, file: eq12 },
   { id: 6, file: eq6 },
   { id: 7, file: eq7 },
   { id: 8, file: eq8 },
-  { id: 9, file: eq9 },
-  { id: 10, file: eq10 },
 ];
 ---
 
@@ -40,8 +49,22 @@ const equipment = [
       <p data-i18n="equipment.subtitle">{t("equipment.subtitle")}</p>
     </div>
 
-    <div class="equip-wall">
+    <noscript>
+      <style>
+        @media (min-width: 640px) {
+          .equip-wall .equip-cell.equip-cell--collapsed {
+            display: flex !important;
+          }
+        }
+        .equip-more-wrap {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+
+    <div class="equip-wall" id="equipment-wall">
       {equipment.map((item, i) => {
+        const isCollapsed = i >= VISIBLE_COUNT;
         const nameKey = `equip.${item.id}.name`;
         const descKey = `equip.${item.id}.desc`;
         const altKey = `equip.${item.id}.alt`;
@@ -50,7 +73,7 @@ const equipment = [
         const eqAlt = t(altKey);
 
         return (
-          <div class="equip-cell reveal">
+          <div class:list={["equip-cell reveal", { "equip-cell--collapsed": isCollapsed }]}>
             <div class="equip-cell__thumb">
               <span class="equip-cell__index">{String(i + 1).padStart(2, "0")}</span>
               <Image
@@ -71,6 +94,21 @@ const equipment = [
         );
       })}
     </div>
+
+    {equipment.length > VISIBLE_COUNT && (
+      <div class="equip-more-wrap" id="equip-more-wrap">
+        <button
+          type="button"
+          class="btn btn--outline equip-more-btn"
+          id="equip-more-btn"
+          aria-expanded="false"
+          aria-controls="equipment-wall"
+          data-i18n="equip.more"
+        >
+          {t("equip.more")}
+        </button>
+      </div>
+    )}
   </div>
 </section>
 
@@ -228,4 +266,62 @@ const equipment = [
     line-height: 1.35;
   }
 }
+
+@media (min-width: 640px) {
+  .equip-cell--collapsed {
+    display: none !important;
+  }
+}
+
+.equip-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.equip-more-btn {
+  min-width: 260px;
+  cursor: pointer;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 639px) {
+  .equip-more-wrap {
+    display: none;
+  }
+}
 </style>
+
+<script>
+  function initEquipMore() {
+    const btn = document.getElementById("equip-more-btn");
+    const wrap = document.getElementById("equip-more-wrap");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      const collapsedCells = document.querySelectorAll<HTMLElement>(".equip-cell--collapsed");
+      collapsedCells.forEach((cell) => {
+        cell.classList.remove("equip-cell--collapsed");
+        cell.classList.add("is-visible");
+        cell.style.transitionDelay = "0ms";
+      });
+      btn.setAttribute("aria-expanded", "true");
+      if (wrap) {
+        wrap.style.display = "none";
+      } else {
+        btn.style.display = "none";
+      }
+      if (typeof window !== "undefined" && (window as any).lenis?.resize) {
+        (window as any).lenis.resize();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initEquipMore);
+  } else {
+    initEquipMore();
+  }
+</script>

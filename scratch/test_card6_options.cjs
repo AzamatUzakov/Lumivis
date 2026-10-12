@@ -1,0 +1,171 @@
+const fs = require('fs');
+const path = require('path');
+const puppeteer = require('puppeteer-core');
+
+const EDGE_PATHS = [
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\EdgeCore\\152.0.4191.66\\msedge.exe',
+  'C:\\Program Files\\EdgeCore\\msedge.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
+];
+const executablePath = EDGE_PATHS.find(p => fs.existsSync(p));
+
+async function main() {
+  const root = 'c:\\Users\\User\\Desktop\\lumivis lending';
+  const outDir = path.join(root, 'scratch');
+
+  // Let's create an HTML mockup showing cards 5 and 6 with various padding styles
+  const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body {
+    background: #f1f5f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 40px;
+    margin: 0;
+  }
+  .row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .lens-card {
+    width: 280px;
+    background: #ffffff;
+    border: 1px solid #d8e5f7;
+    border-radius: 18px;
+    padding: 18px 14px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(11, 42, 107, 0.05);
+    box-sizing: border-box;
+  }
+  .lens-card__thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid rgba(11, 42, 107, 0.08);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 14px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .lens-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+  .lens-card__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0b2a6b;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .lens-card__desc {
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0;
+    max-width: 28ch;
+  }
+
+  /* Option 1: thumb padding-inline: 0, bg: #d8d8d8 */
+  .card-opt1 .lens-card__thumb {
+    padding-inline: 0;
+    background: #d8d8d8;
+  }
+
+  /* Option 2: thumb padding: 0, bg: #d8d8d8 */
+  .card-opt2 .lens-card__thumb {
+    padding: 0;
+    background: #d8d8d8;
+  }
+
+  /* Option 3: card padding around thumb reduced, thumb padding 0 */
+  .card-opt3 {
+    padding: 18px 8px 20px;
+  }
+  .card-opt3 .lens-card__thumb {
+    padding: 0;
+    background: #d8d8d8;
+  }
+  .card-opt3 .lens-card__name, .card-opt3 .lens-card__desc {
+    padding-inline: 6px;
+  }
+</style>
+</head>
+<body>
+  <h2>Card 5 (Standard) vs Card 6 Variants</h2>
+  <div class="row">
+    <!-- Card 5 -->
+    <div class="lens-card">
+      <div class="lens-card__thumb">
+        <img src="../src/assets/lenses/lens5.png">
+      </div>
+      <h3 class="lens-card__name">Диагностическая линза с зеркалами</h3>
+      <p class="lens-card__desc">Оптическая линза со встроенной системой зеркал для офтальмологического осмотра</p>
+    </div>
+
+    <!-- Card 6 Option 1: padding-inline 0, bg #d8d8d8 -->
+    <div class="lens-card card-opt1">
+      <div class="lens-card__thumb">
+        <img src="../src/assets/lenses/lens6-horizontal.png">
+      </div>
+      <h3 class="lens-card__name">Набор диагностических линз</h3>
+      <p class="lens-card__desc">Комплект линз разного диаметра в футляре для офтальмологического осмотра</p>
+    </div>
+
+    <!-- Card 6 Option 2: padding 0, bg #d8d8d8 -->
+    <div class="lens-card card-opt2">
+      <div class="lens-card__thumb">
+        <img src="../src/assets/lenses/lens6-horizontal.png">
+      </div>
+      <h3 class="lens-card__name">Набор диагностических линз</h3>
+      <p class="lens-card__desc">Комплект линз разного диаметра в футляре для офтальмологического осмотра</p>
+    </div>
+
+    <!-- Card 6 Option 3: card padding 8px, thumb padding 0 -->
+    <div class="lens-card card-opt3">
+      <div class="lens-card__thumb">
+        <img src="../src/assets/lenses/lens6-horizontal.png">
+      </div>
+      <h3 class="lens-card__name">Набор диагностических линз</h3>
+      <p class="lens-card__desc">Комплект линз разного диаметра в футляре для офтальмологического осмотра</p>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+
+  fs.writeFileSync(path.join(outDir, 'compare_card6_options.html'), htmlContent);
+
+  const browser = await puppeteer.launch({
+    executablePath,
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
+
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1440, height: 800 });
+  await page.goto('file:///' + path.join(outDir, 'compare_card6_options.html').replace(/\\/g, '/'), { waitUntil: 'networkidle0' });
+
+  await page.screenshot({ path: path.join(outDir, 'compare_card6_options.png'), fullPage: true });
+
+  await browser.close();
+  console.log('Saved compare_card6_options.png');
+}
+
+main().catch(console.error);
