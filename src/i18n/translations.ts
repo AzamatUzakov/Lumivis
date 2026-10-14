@@ -121,6 +121,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "equip.13.alt": "Офтальмоскоп Keeler Vantage Plus LED в офтальмологической клинике Lumivis Самарканд",
     "equip.14.name": "Портативная фундус-камера MES PFC01",
     "equip.14.desc": "Ручная съёмка глазного дна без расширения зрачка",
+    "equip.15.name": "Факоэмульсификатор CataRhex 3",
+    "equip.15.desc": "Хирургическая система для факоэмульсификации катаракты",
+    "equip.15.alt": "Факоэмульсификатор CataRhex 3 в офтальмологической клинике Lumivis Самарканд",
     "equip.more": "Показать всё оборудование",
 
     "lenses.title": "Диагностические линзы",
@@ -459,6 +462,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "equip.13.alt": "Keeler Vantage Plus LED ophthalmoscope at Lumivis eye clinic Samarkand",
     "equip.14.name": "Portable Fundus Camera MES PFC01",
     "equip.14.desc": "Handheld fundus imaging without pupil dilation",
+    "equip.15.name": "CataRhex 3 Phacoemulsification System",
+    "equip.15.desc": "Surgical system for cataract phacoemulsification",
+    "equip.15.alt": "CataRhex 3 phacoemulsification system at Lumivis eye clinic Samarkand",
     "equip.more": "Show all equipment",
 
     "lenses.title": "Diagnostic Lenses",
@@ -797,6 +803,9 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     "equip.13.alt": "Lumivis Samarqand oftalmologiya klinikasida Keeler Vantage Plus LED oftalmoskopi",
     "equip.14.name": "MES PFC01 portativ fundus-kamerasi",
     "equip.14.desc": "Qorachiqni kengaytirmasdan ko'z tubini qo'lda suratga olish",
+    "equip.15.name": "CataRhex 3 fakoemulsifikatori",
+    "equip.15.desc": "Kataraktani fakoemulsifikatsiya qilish uchun jarrohlik tizimi",
+    "equip.15.alt": "Lumivis Samarqand oftalmologiya klinikasida CataRhex 3 fakoemulsifikatori",
     "equip.more": "Barcha uskunalarni ko'rsatish",
 
     "lenses.title": "Diagnostik linzalar",
