@@ -1,0 +1,1072 @@
+---
+// src/components/PriceSection.astro
+import type { Lang } from "../i18n/translations";
+import { useTranslations } from "../i18n/utils";
+import {
+  formatPrice,
+  DIAGNOSTIC_SERVICES,
+  TREATMENT_SERVICES,
+  PLEOPTICS_SERVICES,
+  STRABISMUS_TABLE,
+  SURGERY_SERVICES,
+  PROSTHETICS_PRICES,
+  EXAMINATION_PACKAGES,
+  FAMILY_DISCOUNTS,
+} from "../data/prices";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "ru" } = Astro.props;
+const t = useTranslations(lang);
+const currency = t("price.currency");
+---
+
+<section id="price" class="price-section section" aria-labelledby="price-title">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header reveal">
+      <span class="badge badge--sky">{t("price.badge")}</span>
+      <h2 id="price-title">{t("price.title")}</h2>
+      <p>{t("price.subtitle")}</p>
+    </div>
+
+    <!-- Accordion Groups -->
+    <div class="price-groups reveal">
+
+      <!-- 1. Комплексные пакеты обследования (Open by default) -->
+      <details class="price-accordion" open>
+        <summary class="price-accordion__summary">
+          <h3 class="price-accordion__title">{t("price.category.packages")}</h3>
+          <span class="price-accordion__icon-wrap" aria-hidden="true">
+            <svg class="price-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+        <div class="price-accordion__content">
+          <div class="packages-grid">
+            {EXAMINATION_PACKAGES.map((pkg) => (
+              <article class="package-card">
+                <header class="package-card__header">
+                  <h4 class="package-card__title">{t(pkg.titleKey)}</h4>
+                  {pkg.total !== null && pkg.total !== undefined ? (
+                    <div class="package-card__total">
+                      <span class="package-card__total-label">{t("price.total")}:</span>
+                      <span class="package-card__total-price">
+                        {formatPrice(pkg.total)}&nbsp;<span class="package-card__total-curr">{currency}</span>
+                      </span>
+                    </div>
+                  ) : null}
+                </header>
+
+                <div class="package-card__body">
+                  <div class="package-card__section-label">{t("price.package_included")}</div>
+                  <ul class="package-card__list">
+                    {pkg.services.map((svc) => (
+                      <li class="package-card__item">
+                        <span class="package-card__item-name">{t(svc.nameKey)}</span>
+                        <span class="package-card__item-price">{formatPrice(svc.price)}&nbsp;{currency}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </details>
+
+      <!-- 2. Диагностические услуги -->
+      <details class="price-accordion">
+        <summary class="price-accordion__summary">
+          <h3 class="price-accordion__title">{t("price.category.diag")}</h3>
+          <span class="price-accordion__icon-wrap" aria-hidden="true">
+            <svg class="price-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+        <div class="price-accordion__content">
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.category.diag")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-service">{t("price.col.service")}</th>
+                  <th scope="col" class="col-price">{t("price.col.one_eye")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.col.both_eyes")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {DIAGNOSTIC_SERVICES.map((item) => {
+                  const serviceName = t(`price.service.${item.id}`);
+                  return (
+                    <tr>
+                      <td class="cell-service">
+                        <span class="service-name">{serviceName}</span>
+                      </td>
+                      {item.singlePrice !== undefined && item.singlePrice !== null ? (
+                        <td colspan="2" class="cell-single-price">
+                          <span class="price-single-label">{t("price.single_price_badge")}:</span>
+                          <span class="num-tabular">{formatPrice(item.singlePrice)}&nbsp;{currency}</span>
+                        </td>
+                      ) : (
+                        <>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.one_eye")}:</span>
+                            {item.oneEye !== null && item.oneEye !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.oneEye)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.both_eyes")}:</span>
+                            {item.bothEyes !== null && item.bothEyes !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.bothEyes)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. Лечебные услуги и физиотерапия -->
+      <details class="price-accordion">
+        <summary class="price-accordion__summary">
+          <h3 class="price-accordion__title">{t("price.category.treatment")}</h3>
+          <span class="price-accordion__icon-wrap" aria-hidden="true">
+            <svg class="price-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+        <div class="price-accordion__content">
+          <!-- B.1-B.7 Основные лечебные процедуры -->
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.category.treatment")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-service">{t("price.col.service")}</th>
+                  <th scope="col" class="col-price">{t("price.col.one_eye")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.col.both_eyes")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {TREATMENT_SERVICES.map((item) => {
+                  const serviceName = t(`price.service.${item.id}`);
+                  return (
+                    <tr>
+                      <td class="cell-service">
+                        <span class="service-name">{serviceName}</span>
+                      </td>
+                      {item.singlePrice !== undefined && item.singlePrice !== null ? (
+                        <td colspan="2" class="cell-single-price">
+                          <span class="price-single-label">{t("price.single_price_badge")}:</span>
+                          <span class="num-tabular">{formatPrice(item.singlePrice)}&nbsp;{currency}</span>
+                        </td>
+                      ) : (
+                        <>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.one_eye")}:</span>
+                            {item.oneEye !== null && item.oneEye !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.oneEye)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.both_eyes")}:</span>
+                            {item.bothEyes !== null && item.bothEyes !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.bothEyes)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- B.8 Плеоптика, ортоптика -->
+          <h4 class="price-subsection-title">{t("price.category.pleoptics")}</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.category.pleoptics")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-service">{t("price.col.service")}</th>
+                  <th scope="col" class="col-price">{t("price.col.one_eye")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.col.both_eyes")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PLEOPTICS_SERVICES.map((item) => {
+                  const serviceName = t(`price.service.${item.id}`);
+                  return (
+                    <tr>
+                      <td class="cell-service">
+                        <span class="service-name">{serviceName}</span>
+                      </td>
+                      {item.singlePrice !== undefined && item.singlePrice !== null ? (
+                        <td colspan="2" class="cell-single-price">
+                          <span class="price-single-label">{t("price.single_price_badge")}:</span>
+                          <span class="num-tabular">{formatPrice(item.singlePrice)}&nbsp;{currency}</span>
+                        </td>
+                      ) : (
+                        <>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.one_eye")}:</span>
+                            {item.oneEye !== null && item.oneEye !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.oneEye)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.both_eyes")}:</span>
+                            {item.bothEyes !== null && item.bothEyes !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.bothEyes)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- 4. Хирургические операции -->
+      <details class="price-accordion">
+        <summary class="price-accordion__summary">
+          <h3 class="price-accordion__title">{t("price.category.surgery")}</h3>
+          <span class="price-accordion__icon-wrap" aria-hidden="true">
+            <svg class="price-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+        <div class="price-accordion__content">
+          <!-- C.1 Косоглазие по числу мышц -->
+          <h4 class="price-subsection-title">{t("price.category.strabismus")}</h4>
+
+          <!-- Desktop Strabismus Table (>= 768px) -->
+          <div class="price-table-wrap strabismus-desktop">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.category.strabismus")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-category">{t("price.col.category")}</th>
+                  <th scope="col" class="col-price">{t("price.strabismus.m1")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.strabismus.m2")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.strabismus.m3")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.strabismus.m4")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {STRABISMUS_TABLE.map((row) => (
+                  <tr>
+                    <td class="cell-category">
+                      <span class="category-name">{t(row.categoryKey)}</span>
+                    </td>
+                    <td class="cell-price"><span class="num-tabular">{formatPrice(row.m1)}</span></td>
+                    <td class="cell-price"><span class="num-tabular">{formatPrice(row.m2)}</span></td>
+                    <td class="cell-price"><span class="num-tabular">{formatPrice(row.m3)}</span></td>
+                    <td class="cell-price"><span class="num-tabular">{formatPrice(row.m4)}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Mobile Strabismus Cards (< 768px) -->
+          <div class="strabismus-mobile">
+            {STRABISMUS_TABLE.map((row) => (
+              <div class="strabismus-mobile-card">
+                <div class="strabismus-mobile-card__title">{t(row.categoryKey)}</div>
+                <div class="strabismus-mobile-card__grid">
+                  <div class="strabismus-mobile-card__item">
+                    <span class="strabismus-mobile-card__label">{t("price.strabismus.m1")}</span>
+                    <span class="num-tabular">{formatPrice(row.m1)}&nbsp;{currency}</span>
+                  </div>
+                  <div class="strabismus-mobile-card__item">
+                    <span class="strabismus-mobile-card__label">{t("price.strabismus.m2")}</span>
+                    <span class="num-tabular">{formatPrice(row.m2)}&nbsp;{currency}</span>
+                  </div>
+                  <div class="strabismus-mobile-card__item">
+                    <span class="strabismus-mobile-card__label">{t("price.strabismus.m3")}</span>
+                    <span class="num-tabular">{formatPrice(row.m3)}&nbsp;{currency}</span>
+                  </div>
+                  <div class="strabismus-mobile-card__item">
+                    <span class="strabismus-mobile-card__label">{t("price.strabismus.m4")}</span>
+                    <span class="num-tabular">{formatPrice(row.m4)}&nbsp;{currency}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- C.2-C.12 Остальные операции -->
+          <h4 class="price-subsection-title">{t("price.category.other_surgery")}</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.category.other_surgery")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-service">{t("price.col.service")}</th>
+                  <th scope="col" class="col-price">{t("price.col.one_eye")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.col.both_eyes")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {SURGERY_SERVICES.map((item) => {
+                  const serviceName = t(`price.service.${item.id}`);
+                  return (
+                    <tr>
+                      <td class="cell-service">
+                        <span class="service-name">{serviceName}</span>
+                      </td>
+                      {item.singlePrice !== undefined && item.singlePrice !== null ? (
+                        <td colspan="2" class="cell-single-price">
+                          <span class="price-single-label">{t("price.single_price_badge")}:</span>
+                          <span class="num-tabular">{formatPrice(item.singlePrice)}&nbsp;{currency}</span>
+                        </td>
+                      ) : (
+                        <>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.one_eye")}:</span>
+                            {item.oneEye !== null && item.oneEye !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.oneEye)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.both_eyes")}:</span>
+                            {item.bothEyes !== null && item.bothEyes !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.bothEyes)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- C.13 Глазное протезирование -->
+          <h4 class="price-subsection-title">{t("price.category.prosthetics")}</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.category.prosthetics")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-service">{t("price.col.service")}</th>
+                  <th scope="col" class="col-price">{t("price.col.one_eye")} ({currency})</th>
+                  <th scope="col" class="col-price">{t("price.col.both_eyes")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PROSTHETICS_PRICES.map((item) => {
+                  const serviceName = t(`price.service.${item.id}`);
+                  return (
+                    <tr>
+                      <td class="cell-service">
+                        <span class="service-name">{serviceName}</span>
+                      </td>
+                      {item.singlePrice !== undefined && item.singlePrice !== null ? (
+                        <td colspan="2" class="cell-single-price">
+                          <span class="price-single-label">{t("price.single_price_badge")}:</span>
+                          <span class="num-tabular">{formatPrice(item.singlePrice)}&nbsp;{currency}</span>
+                        </td>
+                      ) : (
+                        <>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.one_eye")}:</span>
+                            {item.oneEye !== null && item.oneEye !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.oneEye)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                          <td class="cell-price">
+                            <span class="mobile-price-label">{t("price.col.both_eyes")}:</span>
+                            {item.bothEyes !== null && item.bothEyes !== undefined ? (
+                              <span class="num-tabular">{formatPrice(item.bothEyes)}</span>
+                            ) : (
+                              <span class="price-dash">—</span>
+                            )}
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <!-- 5. Скидки и специальные условия -->
+      <details class="price-accordion">
+        <summary class="price-accordion__summary">
+          <h3 class="price-accordion__title">{t("price.category.discounts")}</h3>
+          <span class="price-accordion__icon-wrap" aria-hidden="true">
+            <svg class="price-accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+        <div class="price-accordion__content">
+          <h4 class="price-subsection-title">{t("price.discount.package_title")}</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <caption class="sr-only">{t("price.discount.package_title")}</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="col-service">{t("price.col.people")}</th>
+                  <th scope="col" class="col-price">{t("price.col.discount")}</th>
+                  <th scope="col" class="col-price">{t("price.col.price")} ({currency})</th>
+                </tr>
+              </thead>
+              <tbody>
+                {FAMILY_DISCOUNTS.map((disc) => (
+                  <tr>
+                    <td class="cell-service">
+                      <span class="service-name">{t(`price.discount.person_${disc.count}`)}</span>
+                    </td>
+                    <td class="cell-price">
+                      <span class="mobile-price-label">{t("price.col.discount")}:</span>
+                      {disc.discountPercent ? `${disc.discountPercent}%` : "—"}
+                    </td>
+                    <td class="cell-price">
+                      <span class="mobile-price-label">{t("price.col.price")}:</span>
+                      <span class="num-tabular">{formatPrice(disc.price)}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Special conditions -->
+          <div class="price-conditions">
+            <h4 class="price-conditions__title">{t("price.discount.condition_title")}</h4>
+            <ul class="price-conditions__list">
+              <li class="price-conditions__item">
+                <svg class="price-conditions__check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>{t("price.discount.cond_postop_free")}</span>
+              </li>
+              <li class="price-conditions__item">
+                <svg class="price-conditions__check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>{t("price.discount.cond_postop_pleoptics")}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <!-- CTA to booking form -->
+    <div class="price-cta reveal">
+      <a href="#booking-form-section" class="btn btn--primary price-cta__btn">
+        {t("price.cta")}
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ── Section & Structure ── */
+.price-section {
+  background: var(--c-white);
+  border-top: 1px solid var(--c-border);
+}
+
+.price-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  max-width: 1060px;
+  margin-inline: auto;
+}
+
+/* ── Accordion details/summary ── */
+.price-accordion {
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  background: var(--c-white);
+  overflow: hidden;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.price-accordion[open] {
+  box-shadow: 0 4px 20px rgba(11, 42, 107, 0.05);
+  border-color: #c4d9f6;
+}
+
+.price-accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.5rem;
+  background: var(--c-white);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: background var(--t-fast);
+}
+
+.price-accordion__summary::-webkit-details-marker {
+  display: none;
+}
+
+.price-accordion__summary:hover {
+  background: var(--c-surface);
+}
+
+.price-accordion__summary:focus-visible {
+  outline: 2px solid var(--c-sky);
+  outline-offset: -2px;
+}
+
+.price-accordion[open] > .price-accordion__summary {
+  border-bottom: 1px solid var(--c-border);
+  background: #f8fbff;
+}
+
+.price-accordion__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.price-accordion__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-full);
+  background: var(--c-surface);
+  color: var(--c-sky);
+  flex-shrink: 0;
+  margin-left: var(--s-3);
+  transition: background var(--t-fast), transform var(--t-fast);
+}
+
+.price-accordion__icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 200ms ease;
+}
+
+.price-accordion[open] .price-accordion__icon {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .price-accordion__icon {
+    transition: none;
+  }
+}
+
+.price-accordion__content {
+  padding: 1.5rem;
+  background: var(--c-white);
+}
+
+/* ── Subsection Titles ── */
+.price-subsection-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-top: 1.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.price-subsection-title:first-child {
+  margin-top: 0;
+}
+
+/* ── Tables ── */
+.price-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--font-body);
+}
+
+.price-table th {
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--c-border);
+  white-space: nowrap;
+}
+
+.price-table th.col-service,
+.price-table th.col-category {
+  text-align: left;
+}
+
+.price-table th.col-price {
+  text-align: right;
+}
+
+.price-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 0.9375rem;
+  color: var(--c-text);
+  vertical-align: middle;
+}
+
+.price-table tr:last-child td {
+  border-bottom: none;
+}
+
+.price-table tr:hover td {
+  background: rgba(46, 134, 245, 0.02);
+}
+
+.cell-service {
+  font-weight: 500;
+  color: var(--c-text);
+  line-height: 1.4;
+}
+
+.cell-category {
+  font-weight: 600;
+  color: var(--c-ink);
+  line-height: 1.4;
+}
+
+.cell-price {
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--c-ink);
+}
+
+.cell-single-price {
+  text-align: right;
+  white-space: nowrap;
+  color: var(--c-ink);
+}
+
+.price-single-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--c-muted);
+  margin-right: 0.5rem;
+}
+
+.num-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.price-dash {
+  color: var(--c-muted);
+  font-weight: 400;
+}
+
+.mobile-price-label {
+  display: none;
+}
+
+/* ── Packages Grid ── */
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 1.25rem;
+}
+
+.package-card {
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 1.35rem;
+  background: #fafcff;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.package-card:hover {
+  border-color: #bcd7f8;
+  box-shadow: 0 4px 16px rgba(11, 42, 107, 0.05);
+}
+
+.package-card__header {
+  margin-bottom: 1.15rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.package-card__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-ink);
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+}
+
+.package-card__total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-top: 0.75rem;
+}
+
+.package-card__total-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.package-card__total-price {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--c-sky);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.package-card__total-curr {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+
+.package-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.package-card__section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.package-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+}
+
+.package-card__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed rgba(216, 230, 248, 0.7);
+}
+
+.package-card__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.package-card__item-name {
+  color: var(--c-text);
+  flex: 1;
+}
+
+.package-card__item-price {
+  font-weight: 600;
+  color: var(--c-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  font-size: 0.85rem;
+}
+
+/* ── Strabismus Card Responsive ── */
+.strabismus-desktop {
+  display: block;
+}
+
+.strabismus-mobile {
+  display: none;
+}
+
+.strabismus-mobile-card {
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: #fafcff;
+}
+
+.strabismus-mobile-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--c-ink);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.strabismus-mobile-card__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.strabismus-mobile-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--c-ink);
+}
+
+.strabismus-mobile-card__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--c-muted);
+}
+
+/* ── Special Conditions Block ── */
+.price-conditions {
+  margin-top: 1.75rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--c-surface);
+  border-radius: var(--r-md);
+  border-left: 4px solid var(--c-sky);
+}
+
+.price-conditions__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: 0.75rem;
+}
+
+.price-conditions__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.price-conditions__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--c-text);
+}
+
+.price-conditions__check {
+  width: 18px;
+  height: 18px;
+  color: var(--c-teal);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Section CTA ── */
+.price-cta {
+  text-align: center;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.price-cta__btn {
+  padding: 0.85rem 2.25rem;
+  font-size: 1rem;
+}
+
+/* ── Screen Readers Only ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Mobile Layout (< 768px) ── */
+@media (max-width: 767px) {
+  .price-accordion__summary {
+    padding: 1rem 1.15rem;
+  }
+
+  .price-accordion__content {
+    padding: 1rem;
+  }
+
+  .packages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .strabismus-desktop {
+    display: none;
+  }
+
+  .strabismus-mobile {
+    display: block;
+  }
+
+  /* Table transformation on mobile */
+  .price-table,
+  .price-table tbody,
+  .price-table tr,
+  .price-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .price-table thead {
+    display: none;
+  }
+
+  .price-table tr {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .price-table td {
+    padding: 0.2rem 0;
+    border: none;
+    text-align: left;
+  }
+
+  .price-table td.cell-service {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--c-ink);
+    margin-bottom: 0.35rem;
+  }
+
+  .price-table td.cell-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    padding-block: 0.15rem;
+  }
+
+  .price-table td.cell-single-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    padding-block: 0.15rem;
+    font-weight: 600;
+  }
+
+  .mobile-price-label {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--c-muted);
+  }
+
+  .strabismus-mobile-card__grid {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .strabismus-mobile-card__item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>
+
+<script>
+  function initPriceAccordion() {
+    const accordions = document.querySelectorAll<HTMLDetailsElement>("#price details");
+    accordions.forEach((details) => {
+      details.addEventListener("toggle", () => {
+        if (typeof window !== "undefined" && (window as any).lenis?.resize) {
+          (window as any).lenis.resize();
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPriceAccordion);
+  } else {
+    initPriceAccordion();
+  }
+</script>
+
